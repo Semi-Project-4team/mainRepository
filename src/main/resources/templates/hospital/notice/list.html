@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>공지사항코드</th>
+            <th>공지사항이름</th>
+            <th>공지사항작성날짜</th>
+            <th>공지사항조회수</th>
+        </tr>
+        <tr th:each="notice : ${ noticeList }">
+            <td th:text="${ notice.code }"></td>
+            <td><a th:href="@{/notice/detail/{code}(code=${ notice.code })}" th:text="${ notice.name }"></a></td>
+            <td th:text="${ notice.date }"></td>
+            <td th:text="${ notice.views }"></td>
+        </tr>
+
+    </table>
+    <br>
+    <button onclick="location.href='/'">메인으로</button>
+</body>
+</html>

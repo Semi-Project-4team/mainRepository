@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>개인코드</th>
+            <th>즐겨찾기이름</th>
+        </tr>
+
+        <tr th:each="favorite : ${ favoriteList }">
+            <td th:text="${ favorite.personCode }"></td>
+            <td><a th:href="@{/hospital/favorite/detail/{code}(code=${ favorite.personCode })}" th:text="${ favorite.personCode }"></a></td>
+            <td th:text="${ favorite.favoriteName }"></td>
+        </tr>
+
+    </table>
+
+    <br>
+    <button onclick="location.href='/'">메인으로</button>
+</body>
+</html>

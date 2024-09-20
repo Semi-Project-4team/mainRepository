@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>반려동물</h2>
+    <div>
+        <p>반려동물코드: <span th:text="${ pet.petPersonCode }"></span></p>
+        <p>개인코드: <span th:text="${ pet.personCode }"></span></p>
+        <p>반려동물이름: <span th:text="${ pet.petName }"></span></p>
+        <h3>반려동물종: <span th:text="${ pet.petType }"></span></h3>
+        <h3>반려동물생년월일: <span th:text="${ pet.petBirth }"></span></h3>
+        <h3>반려동물예방접종: <span th:text="${ pet.petVaccination }"></span></h3>
+        <h3>반려동물내장칩: <span th:text="${ pet.petChip }"></span></h3>
+        <h3>반려동물사진: <span th:text="${ pet.petProfile }"></span></h3>
+        <h3>반려동물성별: <span th:text="${ pet.petGender }"></span></h3>
+    </div>
+
+    <!-- 목록으로 돌아가는 버튼 -->
+    <button onclick="location.href='../list'">목록으로</button><br>
+</body>
+</html>

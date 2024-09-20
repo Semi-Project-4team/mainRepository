@@ -1,0 +1,20 @@
+package animal.team.animalhospital.hospital.model.dao;
+
+import animal.team.animalhospital.hospital.model.dto.PersonDTO;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface PersonMapper {
+
+    List<PersonDTO> findAllPerson();
+
+    void insertPerson(PersonDTO person);
+
+    PersonDTO selectPersonByCode(int code);
+
+    void updatePerson(PersonDTO person);
+
+    void deletePerson(int code);
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>개인회원</h2>
+    <div>
+        <p>개인회원코드: <span th:text="${ person.personCode }"></span></p>
+        <p>회원코드: <span th:text="${ person.userCode }"></span></p>
+        <p>개인회원명: <span th:text="${ person.personName }"></span></p>
+        <p>개인회원이메일: <span th:text="${ person.personEmail }"></span></p>
+        <h3>개인회원비밀번호: <span th:text="${ person.personPassword }"></span></h3>
+        <h3>개인회원생년월일: <span th:text="${ person.personBirth }"></span></h3>
+        <h3>개인회원전화번호: <span th:text="${ person.personPhoneNumber }"></span></h3>
+        <h3>정보수집동의확인: <span th:text="${ person.personInformationCollection }"></span></h3>
+    </div>
+
+    <!-- 목록으로 돌아가는 버튼 -->
+    <button onclick="location.href='../list'">목록으로</button><br>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="animal.team.animalhospital.hospital.model.dao.ReviewMapper">
+
+    <resultMap id="reviewResultMap" type="animal.team.animalhospital.hospital.model.dto.ReviewDTO">
+        <result property="personCode" column="person_code"/>
+        <result property="hospitalCode" column="hospital_code"/>
+        <result property="reviewWriteDate" column="review_write_date"/>
+        <result property="reviewModifyDate" column="review_modify_date"/>
+        <result property="reviewScore" column="review_score"/>
+        <result property="reviewPhoto" column="review_photo"/>
+        <result property="reviewExplanation" column="review_explanation"/>
+    </resultMap>
+
+    <select id="findAllReview" resultMap="reviewResultMap">
+    SELECT
+        person_code,
+        hospital_code,
+        review_write_date,
+        review_modify_date,
+        review_score,
+        review_photo,
+        review_explanation
+    FROM
+        tbl_person_review
+    </select>
+
+    <select id="findReviewByCode" parameterType="int" resultMap="reviewResultMap">
+        SELECT
+            person_code,
+            hospital_code,
+            review_write_date,
+            review_modify_date,
+            review_score,
+            review_photo,
+            review_explanation
+        FROM
+            tbl_person_review
+        WHERE
+            person_code = #{personCode}
+    </select>
+
+</mapper>

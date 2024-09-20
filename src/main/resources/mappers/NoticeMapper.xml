@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="animal.team.animalhospital.hospital.model.dao.NoticeMapper">
+
+    <resultMap id="noticeResultMap" type="animal.team.animalhospital.hospital.model.dto.NoticeDTO">
+        <id property="code" column="notice_code"/>
+        <result property="name" column="notice_name"/>
+        <result property="date" column="notice_date"/>
+        <result property="views" column="notice_views"/>
+        <result property="text" column="notice_text"/>
+    </resultMap>
+
+    <select id="findAllNotice" resultMap="noticeResultMap">
+        SELECT
+        notice_code,
+        notice_name,
+        notice_date,
+        notice_views
+        FROM
+        tbl_notice
+    </select>
+
+    <select id="selectNoticeByCode" parameterType="int" resultMap="noticeResultMap">
+        SELECT
+        notice_code,
+        notice_name,
+        notice_date,
+        notice_views,
+        notice_text
+        FROM
+        tbl_notice
+        WHERE
+        notice_code = #{ noticeCode }
+    </select>
+
+    <insert id="insertNotice" parameterType="animal.team.animalhospital.hospital.model.dto.NoticeDTO"
+            useGeneratedKeys="true" keyProperty="code">
+        INSERT INTO
+        tbl_notice
+        (
+        notice_name,
+        notice_date,
+        notice_views,
+        notice_text
+        )
+        VALUES
+        (
+        #{name},
+        #{date},
+        #{views},
+        #{text}
+        )
+    </insert>
+
+    <update id="updateNotice" parameterType="animal.team.animalhospital.hospital.model.dto.NoticeDTO">
+        UPDATE
+        tbl_notice
+        SET
+        notice_name = #{name},
+        notice_date = #{date},
+        notice_views = #{views},
+        notice_text = #{text}
+        WHERE
+        notice_code = #{code}
+    </update>
+
+    <delete id="deleteNotice" parameterType="int">
+        DELETE
+        FROM
+        tbl_notice
+        WHERE
+        notice_code = #{code}
+    </delete>
+
+</mapper>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>개인코드</th>
+            <th>개인회원명</th>
+            <th>개인회원이메일</th>
+            <th>개인회원비밀번호</th>
+            <th>개인회원생년월일</th>
+            <th>개인회원전화번호</th>
+            <th>정보수집동의확인</th>
+        </tr>
+
+        <tr th:each="person : ${ personList }">
+            <td><a th:href="@{/hospital/person/detail/{code}(code=${ person.personCode })}" th:text="${ person.personCode }"></a></td>
+            <td th:text="${ person.personName }"></td>
+            <td th:text="${ person.personEmail }"></td>
+            <td th:text="${ person.personPassword }"></td>
+            <td th:text="${ person.personBirth }"></td>
+            <td th:text="${ person.personPhoneNumber }"></td>
+            <td th:text="${ person.personInformationCollection }"></td>
+        </tr>
+
+    </table>
+
+    <br>
+    <button onclick="location.href='/'">메인으로</button>
+</body>
+</html>

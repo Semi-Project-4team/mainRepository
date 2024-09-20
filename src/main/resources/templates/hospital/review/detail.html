@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h2>예약 상세 정보</h2>
+
+    <div>
+        <p>개인번호: <span th:text="${review.personCode}"></span></p>
+        <p>병원번호: <span th:text="${review.hospitalCode}"></span></p>
+        <p>리뷰작성날짜: <span th:text="${review.reviewWriteDate}"></span></p>
+        <p>리뷰수정날짜: <span th:text="${review.reviewModifyDate}"></span></p>
+        <p>리뷰점수: <span th:text="${review.reviewScore}"></span></p>
+        <p>리뷰사진: <span th:text="${review.reviewPhoto}"></span></p>
+        <p>리뷰내용: <span th:text="${review.reviewExplanation}"></span></p>
+    </div>
+
+    <button onclick="location.href='/review/list'">이전으로</button><br>
+
+</body>
+</html>

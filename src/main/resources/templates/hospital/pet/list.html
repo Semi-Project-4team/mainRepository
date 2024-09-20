@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>반려동물코드</th>
+            <th>개인코드</th>
+            <th>반려동물이름</th>
+            <th>반려동물종</th>
+            <th>반려동물생년월일</th>
+            <th>반려동물예방접종</th>
+            <th>반려동물내장칩</th>
+            <th>반려동물사진</th>
+            <th>반려동물성별</th>
+        </tr>
+
+        <tr th:each="pet : ${ petList }">
+            <td><a th:href="@{/hospital/pet/detail/{code}(code=${ pet.petPersonCode })}" th:text="${ pet.petPersonCode }"></a></td>
+            <td th:text="${ pet.personCode }"></td>
+            <td th:text="${ pet.petName }"></td>
+            <td th:text="${ pet.petType }"></td>
+            <td th:text="${ pet.petBirth }"></td>
+            <td th:text="${ pet.petVaccination }"></td>
+            <td th:text="${ pet.petChip }"></td>
+            <td th:text="${ pet.petProfile }"></td>
+            <td th:text="${ pet.petGender }"></td>
+        </tr>
+
+    </table>
+
+    <br>
+    <button onclick="location.href='/'">메인으로</button>
+</body>
+</html>

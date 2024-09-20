@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h2>예약 상세 정보</h2>
+
+        <div>
+            <p>개인코드: <span th:text="${reserve.personCode}"></span></p>
+            <p>방문시간: <span th:text="${reserve.reserveTime}"></span></p>
+            <p>방문날짜: <span th:text="${reserve.reserveDate}"></span></p>
+            <p>전달사항: <span th:text="${reserve.reserveText}"></span></p>
+            <p>정보수집동의: <span th:text="${reserve.reserveInformationCollection}"></span></p>
+        </div>
+
+<!--        &lt;!&ndash; 수정 버튼(thymeleaf 사용) &ndash;&gt;-->
+<!--        <a th:href="@{/menu/edit/{code}(code=${menu.code})}">수정하기(Thymeleaf)</a>-->
+
+<!--        &lt;!&ndash; 수정 버튼(JavaScript 사용) &ndash;&gt;-->
+<!--        <button id="editButton">수정하기(JavaScript)</button>-->
+
+<!--        &lt;!&ndash; 삭제 버튼 &ndash;&gt;-->
+<!--        <form th:action="@{/menu/delete/{code}(code=${menu.code})}" method="post">-->
+<!--            <button type="submit">삭제하기</button>-->
+<!--        </form>-->
+
+        <!-- 목록으로 돌아가는 버튼 -->
+        <button onclick="location.href='/reserve/list'">이전으로</button><br>
+
+
+
+</body>
+</html>

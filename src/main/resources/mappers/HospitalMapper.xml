@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="animal.team.animalhospital.hospital.model.dao.HospitalMapper">
+    <resultMap id="eupmyeondongMap" type="animal.team.animalhospital.hospital.model.dto.EupmyeondongDTO">
+        <id property="eupmyeondongCode" column="eupmyeondong_code"/>
+        <result property="eupmyeondongName" column="eupmyeondong_name"/>
+        <result property="sigunguCode" column="sigungu_code"/>
+    </resultMap>
+
+    <resultMap id="hospitalMap" type="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
+        <id property="hospitalCode" column="hospital_code"/>
+        <result property="subjectCode" column="subject_code"/>
+        <result property="eupmyeondongCode" column="eupmyeondong_code"/>
+        <result property="name" column="hospital_name"/>
+        <result property="permitNumber" column="hospital_permit_number"/>
+        <result property="email" column="hospital_email"/>
+        <result property="password" column="hospital_password"/>
+        <result property="informationCollection" column="hospital_information_collection"/>
+        <result property="time" column="hospital_time"/>
+        <result property="detailAddress" column="hospital_detail_address"/>
+        <result property="introText" column="hospital_intro_text"/>
+        <result property="photo" column="hospital_photo"/>
+    </resultMap>
+
+    <resultMap id="mainSubjectMap" type="animal.team.animalhospital.hospital.model.dto.MainSubjectDTO">
+        <id property="subjectCode" column="subject_code"/>
+        <result property="personCode" column="person_code"/>
+        <result property="name" column="subject_name"/>
+    </resultMap>
+
+    <resultMap id="sidoMap" type="animal.team.animalhospital.hospital.model.dto.SidoDTO">
+        <id property="sidoCode" column="sido_code"/>
+        <result property="name" column="sido_name"/>
+    </resultMap>
+
+    <resultMap id="sigunguMap" type="animal.team.animalhospital.hospital.model.dto.SigunguDTO">
+        <id property="sigunguCode" column="sigungu_code"/>
+        <result property="sidoCode" column="sido_code"/>
+        <result property="name" column="sigungu_name"/>
+    </resultMap>
+
+    <select id="findAllEupmyeondong" resultMap="eupmyeondongMap">
+        select
+        *
+        from
+        tbl_eupmyeondong;
+    </select>
+
+    <select id="findAllHospital" resultMap="hospitalMap">
+        select
+        *
+        from
+        tbl_hospital;
+    </select>
+
+    <select id="findAllMainSubject" resultMap="mainSubjectMap">
+        select
+        *
+        from
+        tbl_main_subject;
+    </select>
+
+    <select id="findAllSido" resultMap="sidoMap">
+        select
+        *
+        from
+        tbl_sido;
+    </select>
+
+    <select id="findAllSigungu" resultMap="sigunguMap">
+        select
+        *
+        from
+        tbl_sigungu;
+    </select>
+
+</mapper>
