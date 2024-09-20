@@ -1,33 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>동물병원 플러스입니다 :-)</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #58ccff;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        h2, h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #58ccff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 1em;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #50b8e6;
+        }
+
+        .section {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>동물병원 플러스에 방문해주셔서 감사합니다 :-)</h1>
+<h1>동물병원 플러스에 방문해주셔서 감사합니다 :-)</h1>
 
+<div class="section">
     <h3>공지사항 전체 조회</h3>
-    <button onclick="location.href='/notice/list'">공지사항전체조회</button>
+    <button onclick="location.href='/notice/list'">공지사항 전체 조회</button>
+</div>
 
-    <h2>Eupmeyondong 전체 조회</h2>
+<div class="section">
+    <h3>Eupmeyondong 전체 조회</h3>
     <button onclick="location.href='/hospital/eupmyeondongAll'">전체 조회</button>
+</div>
 
-    <h3>1. 전체예약조회</h3>
-    <button onclick="location.href='/reserve/list'">전체 예약 조회</button><br>
+<div class="section">
+    <h3>1. 전체 예약 조회</h3>
+    <button onclick="location.href='/reserve/list'">전체 예약 조회</button>
+</div>
 
-    <h3>2. 전체리뷰조회</h3>
-    <button onclick="location.href='/review/list'">전체 리뷰 조회</button><br>
+<div class="section">
+    <h3>2. 전체 리뷰 조회</h3>
+    <button onclick="location.href='/review/list'">전체 리뷰 조회</button>
+</div>
 
+<div class="section">
     <h3>개인회원 전체 조회</h3>
-    <button onclick="location.href='/hospital/person/list'">개인회원전체조회</button>
+    <button onclick="location.href='/hospital/person/list'">개인회원 전체 조회</button>
+</div>
 
+<div class="section">
     <h3>반려동물 전체 조회</h3>
-    <button onclick="location.href='/hospital/pet/list'">반려동물전체조회</button>
+    <button onclick="location.href='/hospital/pet/list'">반려동물 전체 조회</button>
+</div>
 
+<div class="section">
     <h3>즐겨찾기 전체 조회</h3>
-    <button onclick="location.href='/hospital/favorite/list'">즐겨찾기전체조회</button>
+    <button onclick="location.href='/hospital/favorite/list'">즐겨찾기 전체 조회</button>
+</div>
 
 </body>
 </html>
