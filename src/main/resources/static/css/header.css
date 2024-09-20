@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    justify-content: space-between; /* 왼쪽과 오른쪽을 나눔 */
+    align-items: center; /* 수직 중앙 정렬 */
+    padding: 10px;
+    background-color: #f4f4f4;
+}
+
+/* 로고 영역 */
+.logo {
+    width: auto;
+    height: 50px;
+}
+
+/* 오른쪽 버튼 영역 */
+.user-controls {
+    display: flex;
+    gap: 15px; /* 버튼 사이 간격 */
+}
+
+.user-controls button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-controls button:hover {
+    background-color: #0056b3;
+}
