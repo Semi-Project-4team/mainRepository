@@ -56,14 +56,14 @@
 
     <update id="updateNotice" parameterType="animal.team.animalhospital.hospital.model.dto.NoticeDTO">
         UPDATE
-        tbl_notice
+            tbl_notice
         SET
-        notice_name = #{name},
-        notice_date = #{date},
-        notice_views = #{views},
-        notice_text = #{text}
+            notice_name = #{name},
+            notice_date = #{date},
+            notice_views = #{views},
+            notice_text = #{text}
         WHERE
-        notice_code = #{code}
+            notice_code = #{code}
     </update>
 
     <delete id="deleteNotice" parameterType="int">

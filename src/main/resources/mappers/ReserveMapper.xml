@@ -6,6 +6,8 @@
     
     <resultMap id="reserveResultMap" type="animal.team.animalhospital.hospital.model.dto.ReserveDTO">
         <id property="personCode" column="person_code"/>
+        <result property="hospitalCode" column="hospital_code"/>
+        <result property="petPersonCode" column="pet_person_code"/>
         <result property="reserveTime" column="reserve_time"/>
         <result property="reserveDate" column="reserve_date"/>
         <result property="reserveText" column="reserve_text"/>
@@ -16,6 +18,8 @@
     <select id="findAllReserve" resultMap="reserveResultMap">
         SELECT
             person_code,
+            hospital_code,
+            pet_person_code,
             reserve_time,
             reserve_date,
             reserve_text,
@@ -27,6 +31,8 @@
     <select id="findReserveByCode" parameterType="int" resultMap="reserveResultMap">
         SELECT
             person_code,
+            hospital_code,
+            pet_person_code,
             reserve_time,
             reserve_date,
             reserve_text,
@@ -36,6 +42,33 @@
         WHERE
             person_code = #{personCode}
     </select>
+
+
+    <insert id="registNewReserve" parameterType="animal.team.animalhospital.hospital.model.dto.ReserveDTO"
+            useGeneratedKeys="true" keyProperty="personCode">
+
+        INSERT INTO tbl_reserve
+            (
+            person_code,
+            hospital_code,
+            pet_person_code,
+            reserve_time,
+            reserve_date,
+            reserve_text,
+            reserve_information_collection
+            )
+        VALUES
+            (
+            #{personCode},
+            #{hospitalCode},
+            #{petPersonCode},
+            #{reserveTime},
+            #{reserveDate},
+            #{reserveText},
+            #{reserveInformationCollection}
+            )
+
+    </insert>
 
 </mapper>
 

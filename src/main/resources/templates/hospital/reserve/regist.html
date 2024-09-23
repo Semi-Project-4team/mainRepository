@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>regist</title>
+</head>
+<body>
+
+    <h3>신규 예약 등록</h3>
+    <form action="/reserve/regist" method="post">
+<!--        <label>보호자 이름: </label><input type="text" name="personName"><br>-->
+        반려동물 이름:
+        <select name="petPersonCode" id="petPersonCode"></select><br>
+
+<!--        <input type="text" name="petName"><br>-->
+        <label>방문 시간: </label><input type="time" name="reserveTime"><br>
+        <label>방문 날짜: </label><input type="date" name="reserveDate"><br>
+
+<!--    </form>-->
+
+<!--    <form action="/reserve/regist">-->
+        <label>정보수집동의: </label>
+        <select name="reserveInformationCollection">
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+<!--        <input type="submit" value="전송">-->
+<!--    </form>-->
+
+        <label>전달 사항: </label>
+<!--    <form action="/reserve/regist" method="post">-->
+        <textarea name="reserveText" id="contents" cols="30" rows="10"
+              style="resize:none" maxlength="100">abc</textarea>
+            <br>
+            <button type="submit">전송</button>
+            <button type="reset">초기화</button>
+    </form>
+
+    <script>
+        /* 설명. fetch() 및 then() 메서드는 edit.html 파일 참조. */
+        fetch("/reserve/nameList")
+            .then(res => res.json())
+            .then(data => {
+                const petName = document.getElementById('petPersonCode');
+
+                // 각 카테고리 데이터를 순회
+                for (let index in data) {
+                    // 새로운 <option> 요소를 생성
+                    const $option = document.createElement('option');
+                    // <option> 요소의 값을 카테고리 코드로 설정
+                    // $option.value = data[index].petName;
+                    // <option> 요소의 텍스트를 카테고리 이름으로 설정
+                    $option.textContent = data[index].petPersonCode;
+                    // <option> 요소를 categoryCode <select> 요소에 추가
+                    petName.appendChild($option);
+                }
+            });
+    </script>
+</body>
+</html>

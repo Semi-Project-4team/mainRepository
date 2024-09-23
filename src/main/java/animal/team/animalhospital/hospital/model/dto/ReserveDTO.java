@@ -1,12 +1,19 @@
 package animal.team.animalhospital.hospital.model.dto;
 
-import java.sql.Time;
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalTime;
+import java.util.Date;
 public class ReserveDTO {
 
+
+
     private int personCode;
-    private Time reserveTime;
+    private int hospitalCode;
+    private int petPersonCode;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime reserveTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date reserveDate;
     private String reserveText;
     private String reserveInformationCollection;
@@ -14,15 +21,15 @@ public class ReserveDTO {
     public ReserveDTO() {
     }
 
-    public ReserveDTO( int personCode, Time reserveTime, Date reserveDate, String reserveText, String reserveInformationCollection) {
+    public ReserveDTO(int personCode, int hospitalCode, int petPersonCode, LocalTime reserveTime, Date reserveDate, String reserveText, String reserveInformationCollection) {
         this.personCode = personCode;
+        this.hospitalCode = hospitalCode;
+        this.petPersonCode = petPersonCode;
         this.reserveTime = reserveTime;
         this.reserveDate = reserveDate;
         this.reserveText = reserveText;
         this.reserveInformationCollection = reserveInformationCollection;
     }
-
-
 
     public int getPersonCode() {
         return personCode;
@@ -32,11 +39,27 @@ public class ReserveDTO {
         this.personCode = personCode;
     }
 
-    public Time getReserveTime() {
+    public int getHospitalCode() {
+        return hospitalCode;
+    }
+
+    public void setHospitalCode(int hospitalCode) {
+        this.hospitalCode = hospitalCode;
+    }
+
+    public int getPetPersonCode() {
+        return petPersonCode;
+    }
+
+    public void setPetPersonCode(int petPersonCode) {
+        this.petPersonCode = petPersonCode;
+    }
+
+    public LocalTime getReserveTime() {
         return reserveTime;
     }
 
-    public void setReserveTime(Time reserveTime) {
+    public void setReserveTime(LocalTime reserveTime) {
         this.reserveTime = reserveTime;
     }
 
@@ -67,7 +90,9 @@ public class ReserveDTO {
     @Override
     public String toString() {
         return "ReserveDTO{" +
-                ", personCode=" + personCode +
+                "personCode=" + personCode +
+                ", hospitalCode=" + hospitalCode +
+                ", petPersonCode=" + petPersonCode +
                 ", reserveTime=" + reserveTime +
                 ", reserveDate=" + reserveDate +
                 ", reserveText='" + reserveText + '\'' +

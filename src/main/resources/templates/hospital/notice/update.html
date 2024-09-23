@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>공지사항 수정하기</h2>
+
+    <form th:action="@{/notice/update}" th:object="${notice}" method="post">
+        <input type="hidden" th:field="*{code}"/>
+        <input type="text" id="name" th:field="*{name}" required />
+        <input type="date" id="date" th:field="*{date}" required />
+        <input type="views" id="views" th:field="*{views}" required />
+        <input type="text" id="text" th:field="*{text}" required />
+        <button type="submit">수정하기</button>
+    </form>
+
+    <div>
+        <button onclick="history.back()">취소(button 태그 사용)</button>
+    </div>
+
+</body>
+</html>
