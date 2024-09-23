@@ -49,6 +49,11 @@ public class UserController {
         return resultMV(mv, result, "person");
     }
 
+    @GetMapping("/joinMembership")
+    public String joinTheMembership() {
+        return "/user/joinMembership";
+    }
+
     private ModelAndView resultMV(ModelAndView mv, Integer result, String user) {
         String message = null;
 
