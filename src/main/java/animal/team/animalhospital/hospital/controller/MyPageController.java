@@ -2,6 +2,7 @@ package animal.team.animalhospital.hospital.controller;
 
 import animal.team.animalhospital.hospital.model.dto.FavoriteDTO;
 import animal.team.animalhospital.hospital.model.dto.PersonDTO;
+import animal.team.animalhospital.hospital.model.dto.PetDTO;
 import animal.team.animalhospital.hospital.model.service.FavoriteService;
 import animal.team.animalhospital.hospital.model.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,11 @@ public class MyPageController {
     public String MyInfoList(Model model){
         List<PersonDTO> myInfoList = myPageService.findMyInfo();
         List<FavoriteDTO> myFavoriteList = myPageService.findMyFavorite();
+        List<PetDTO> myPetList = myPageService.findMyPet();
 
-        model.addAttribute("myFavoriteList",myFavoriteList);
         model.addAttribute("myInfoList",myInfoList);
+        model.addAttribute("myFavoriteList",myFavoriteList);
+        model.addAttribute("myPetList",myPetList);
 
         return "hospital/myPage/list";
     }
@@ -42,14 +45,5 @@ public class MyPageController {
         myPageService.deleteFavorite(name);
 
         return "redirect:/myPage/myInfo";
-    }
-
-    @GetMapping("/myPet")
-    public String MyPetList(Model model){
-        List<FavoriteDTO> myFavoriteList = myPageService.findMyFavorite();
-
-        model.addAttribute("myFavoriteList",myFavoriteList);
-
-        return "hospital/myPage/list";
     }
 }

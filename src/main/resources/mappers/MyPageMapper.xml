@@ -15,6 +15,16 @@
         <result property="favoriteName" column="favorite_name"/>
     </resultMap>
 
+    <resultMap id="petResultMap" type="animal.team.animalhospital.hospital.model.dto.PetDTO">
+        <result property="petProfile" column="pet_profile"/>
+        <result property="petName" column="pet_name"/>
+        <result property="petType" column="pet_type"/>
+        <result property="petGender" column="pet_gender"/>
+        <result property="petBirth" column="pet_birth"/>
+        <result property="petVaccination" column="pet_vaccination"/>
+        <result property="petChip" column="pet_chip"/>
+    </resultMap>
+
     <select id="findMyInfo" resultMap="myPageResultMap">
         SELECT
             person_name,
@@ -38,5 +48,18 @@
         WHERE
             favorite_name = #{name}
     </delete>
+
+    <select id="findMyPet" resultMap="petResultMap">
+        SELECT
+            pet_profile,
+            pet_name,
+            pet_type,
+            pet_gender
+            pet_birth,
+            pet_vaccination,
+            pet_chip
+        FROM
+            tbl_pet
+    </select>
 
 </mapper>
