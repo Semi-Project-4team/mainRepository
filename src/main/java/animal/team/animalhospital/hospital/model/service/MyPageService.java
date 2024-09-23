@@ -5,6 +5,7 @@ import animal.team.animalhospital.hospital.model.dto.FavoriteDTO;
 import animal.team.animalhospital.hospital.model.dto.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,5 +24,11 @@ public class MyPageService {
 
     public List<FavoriteDTO> findMyFavorite() {
         return myPageMapper.findMyFavorite();    }
+
+    @Transactional
+    public void deleteFavorite(String name) {
+        myPageMapper.deleteFavorite(name);
+    }
 }
+
 

@@ -28,8 +28,7 @@ public class FavoriteService {
     }
 
     @Transactional
-    public void deleteFavorite(int code) {
-        favoriteMapper.deleteFavorite(code);
+    public void deleteFavorite(int code) { favoriteMapper.deleteFavorite(code);
     }
 
 
