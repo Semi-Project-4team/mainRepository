@@ -10,6 +10,11 @@
         <result property="phoneNumber" column="person_phone_number"/>
     </resultMap>
 
+    <resultMap id="favoriteResultMap" type="animal.team.animalhospital.hospital.model.dto.FavoriteDTO">
+        <id property="personCode" column="person_code"/>
+        <result property="favoriteName" column="favorite_name"/>
+    </resultMap>
+
     <select id="findMyInfo" resultMap="myPageResultMap">
         SELECT
             person_name,
@@ -17,7 +22,13 @@
             person_phone_number
         FROM
             tbl_person
+    </select>
 
+    <select id="findMyFavorite" resultMap="favoriteResultMap">
+        SELECT
+            favorite_name
+        FROM
+            tbl_favorite
     </select>
 
 </mapper>
