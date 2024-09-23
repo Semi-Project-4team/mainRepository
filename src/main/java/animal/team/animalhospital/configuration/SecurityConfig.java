@@ -40,9 +40,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChainConfigure(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/auth/login", "/user/signup", "/auth/fail", "/").permitAll();
-            auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
-            auth.requestMatchers("/user/*").hasAnyAuthority(UserRole.USER.getRole(), UserRole.ADMIN.getRole());
+            auth.requestMatchers("/**").permitAll();
+//            auth.requestMatchers("/auth/login", "/user/signup", "/auth/fail", "/").permitAll();
+//            auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
+//            auth.requestMatchers("/user/*").hasAnyAuthority(UserRole.USER.getRole(), UserRole.ADMIN.getRole());
             auth.anyRequest().authenticated();
         }).formLogin(login -> {
             login.loginPage("/auth/login");
