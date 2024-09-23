@@ -1,12 +1,14 @@
 package animal.team.animalhospital.hospital.model.dto;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class HospitalDTO {
 
     private int hospitalCode;
-    private int subjectCode;
-    private int eupmyeondongCode;
+    private String subjectCode;
+//    private int subjectCode;
+    private String eupmyeondongCode;
     private int userCode;
     private String name;
     private String permitNumber;
@@ -22,7 +24,7 @@ public class HospitalDTO {
     public HospitalDTO() {
     }
 
-    public HospitalDTO(int hospitalCode, int subjectCode, int eupmyeondongCode, int userCode, String name, String permitNumber, String email, String password, String informationCollection, Date time, String detailAddress, String introText, String phoneNumber, String photo) {
+    public HospitalDTO(int hospitalCode, String subjectCode, String eupmyeondongCode, int userCode, String name, String permitNumber, String email, String password, String informationCollection, Date time, String detailAddress, String introText, String phoneNumber, String photo) {
         this.hospitalCode = hospitalCode;
         this.subjectCode = subjectCode;
         this.eupmyeondongCode = eupmyeondongCode;
@@ -55,19 +57,19 @@ public class HospitalDTO {
         this.hospitalCode = hospitalCode;
     }
 
-    public int getSubjectCode() {
+    public String getSubjectCode() {
         return subjectCode;
     }
 
-    public void setSubjectCode(int subjectCode) {
+    public void setSubjectCode(String subjectCode) {
         this.subjectCode = subjectCode;
     }
 
-    public int getEupmyeondongCode() {
+    public String getEupmyeondongCode() {
         return eupmyeondongCode;
     }
 
-    public void setEupmyeondongCode(int eupmyeondongCode) {
+    public void setEupmyeondongCode(String eupmyeondongCode) {
         this.eupmyeondongCode = eupmyeondongCode;
     }
 
@@ -112,7 +114,9 @@ public class HospitalDTO {
     }
 
     public String getInformationCollection() {
-        return informationCollection;
+        if(Objects.equals(informationCollection, "on"))
+            return "Y";
+        return "N";
     }
 
     public void setInformationCollection(String informationCollection) {
