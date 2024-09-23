@@ -12,9 +12,9 @@ public interface NoticeMapper {
 
     NoticeDTO selectNoticeByCode(int code);
 
+    void insertNotice(NoticeDTO newNotice);
+
     void updateNotice(NoticeDTO notice);
 
     void deleteNotice(int code);
-
-    void insertNotice(NoticeDTO newNotice);
 }

@@ -18,13 +18,16 @@
 
         <!--공지사항-->
         <div class="notice">
-            <h3>[공지사항]  <a href="/notice/detail/">"공지사항제목이지나가는자리"</a></h3>
+            <div>
+                <h3><a href="/notice/list">[공지사항] </a><a id="noticeLink" href="/notice/detail/">공지사항 제목 자리</a></h3>
+            </div>
+
         </div>
 
         <!--병원찾기 검색창-->
         <div class="search-hospital">
             <br>
-            <button class="button">지역별 동물병원찾기</button>
+            <button class="button" onclick="location.href='/hospital/eupmyeondongAll'">지역별 동물병원찾기</button>
             <br>
             <br>
             <form action="/search" method="GET">

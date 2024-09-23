@@ -1,32 +1,32 @@
 package animal.team.animalhospital.hospital.model.dto;
 
 public class SigunguDTO {
-    private int sigunguCode;
-    private int sidoCode;
+    private String sigunguCode;
+    private String sidoCode;
     private String name;
 
     public SigunguDTO() {
     }
 
-    public SigunguDTO(int sigunguCode, int sidoCode, String name) {
+    public SigunguDTO(String sigunguCode, String sidoCode, String name) {
         this.sigunguCode = sigunguCode;
         this.sidoCode = sidoCode;
         this.name = name;
     }
 
-    public int getSigunguCode() {
+    public String getSigunguCode() {
         return sigunguCode;
     }
 
-    public void setSigunguCode(int sigunguCode) {
+    public void setSigunguCode(String sigunguCode) {
         this.sigunguCode = sigunguCode;
     }
 
-    public int getSidoCode() {
+    public String getSidoCode() {
         return sidoCode;
     }
 
-    public void setSidoCode(int sidoCode) {
+    public void setSidoCode(String sidoCode) {
         this.sidoCode = sidoCode;
     }
 

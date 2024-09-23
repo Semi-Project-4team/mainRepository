@@ -30,6 +30,7 @@ public class UserController {
     public ModelAndView hospitalSignup(ModelAndView mv,
                                @ModelAttribute HospitalDTO newUserInfo) {
         System.out.println(newUserInfo.toString());
+        System.out.println(newUserInfo.getInformationCollection());
         Integer result = userService.hospitalSignup(newUserInfo);
 
         return resultMV(mv, result, "hospital");
@@ -41,6 +42,8 @@ public class UserController {
     @PostMapping("/signupPerson")
     public ModelAndView personSignup(ModelAndView mv,
                                        @ModelAttribute PersonDTO newUserInfo) {
+        System.out.println(newUserInfo.toString());
+        System.out.println(newUserInfo.getInformationCollection());
         Integer result = userService.personSignup(newUserInfo);
 
         return resultMV(mv, result, "person");
@@ -63,7 +66,7 @@ public class UserController {
             message = "회원가입이 성공적으로 완료되었습니다.";
             System.out.println(message);
 
-            mv.setViewName("auth/login");
+            mv.setViewName("/common/main");
         } else {
             message = "알 수 없는 오류가 발생했습니다. 다시 시도해보시거나 관리자에게 문의해주세요.";
             System.out.println(message);

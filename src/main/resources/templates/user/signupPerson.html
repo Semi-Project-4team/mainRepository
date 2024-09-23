@@ -2,34 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>회원가입(기업)</title>
+    <title>회원가입(개인)</title>
 </head>
 <body>
 
-    <h1>회원가입(기업) 페이지</h1>
+    <h1>회원가입(개인) 페이지</h1>
 
     <form th:action="@{ /user/signupPerson }" method="post">
-        이메일 : <input type="text" name="hospitalEmail"/><br>
-        비밀번호 : <input type="password" name="hospitalPassword1"/><br>
-        비밀번호 : <input type="password" name="hospitalPassword2"/><br>
+        이메일 : <input type="text" name="email"/><br>
+        비밀번호 : <input type="password" name="password"/><br>
 
-        상호명 : <input type="text" name="hospitalName"/><br>
+        보호자 이름 : <input type="text" name="name"/><br>
 
-        진료과목 :
-        <select name="role">
-            <option value="Ophthalmology">안과</option>
-            <option value="Dermatology">피부과</option>
-            <option value="InternalMedicine">내과</option>
-            <option value="OrthopedicSurgery">정형외과</option>
-            <option value="Dentistry">치과</option>
-            <option value="Urology">비뇨기과</option>
-        </select><br>
+        생년월일 : <input type="date" name="birth"/><br>
 
-        인허가번호 : <input type="text" name="hospitalPermitNumber"/><br>
-        전화번호 : <input type="text" name="hospitalPhoneNumber"/><br>
+        전화번호 : <input type="text" name="phoneNumber"/><br>
 
         <label for="option">개인정보 수집에 동의하십니까?</label>
-        <input type="checkbox" id="option" name="hospitalInformationCollection">
+        <input type="checkbox" id="option" name="informationCollection">
         <br>
         <button>회원가입</button>
     </form>

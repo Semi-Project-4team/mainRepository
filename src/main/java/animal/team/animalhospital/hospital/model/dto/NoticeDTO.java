@@ -1,11 +1,14 @@
 package animal.team.animalhospital.hospital.model.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class NoticeDTO {
 
     private int code;
     private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private int views;
     private String text;

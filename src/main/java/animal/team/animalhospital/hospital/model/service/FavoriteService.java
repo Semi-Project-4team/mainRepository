@@ -28,12 +28,9 @@ public class FavoriteService {
     }
 
     @Transactional
-    public void updateFavorite(FavoriteDTO favorite) {
-        favoriteMapper.updateFavorite(favorite);
-    }
-
-    @Transactional
     public void deleteFavorite(int code) {
         favoriteMapper.deleteFavorite(code);
     }
+
+
 }

@@ -9,27 +9,33 @@
     <h1>회원가입(기업) 페이지</h1>
 
     <form th:action="@{ /user/signupHospital }" method="post">
-        이메일 : <input type="text" name="hospitalEmail"/><br>
-        비밀번호 : <input type="password" name="hospitalPassword1"/><br>
+        이메일 : <input type="text" name="email"/><br>
+        비밀번호 : <input type="password" name="password"/><br>
 <!--        비밀번호 : <input type="password" name="hospitalPassword2"/><br>-->
 
-        상호명 : <input type="text" name="hospitalName"/><br>
+        상호명 : <input type="text" name="name"/><br>
 
         진료과목 :
-        <select name="role">
-            <option value="Ophthalmology">안과</option>
-            <option value="Dermatology">피부과</option>
-            <option value="InternalMedicine">내과</option>
-            <option value="OrthopedicSurgery">정형외과</option>
-            <option value="Dentistry">치과</option>
-            <option value="Urology">비뇨기과</option>
+        <select name="subjectCode">
+<!--            <option value="Ophthalmology">안과</option>-->
+            <option value="1">안과</option>
+<!--            <option value="Dermatology">피부과</option>-->
+            <option value="2">피부과</option>
+<!--            <option value="InternalMedicine">내과</option>-->
+            <option value="3">내과</option>
+<!--            <option value="OrthopedicSurgery">정형외과</option>-->
+            <option value="4">정형외과</option>
+<!--            <option value="Dentistry">치과</option>-->
+            <option value="5">치과</option>
+<!--            <option value="Urology">비뇨기과</option>-->
+            <option value="6">비뇨기과</option>
         </select><br>
 
-        인허가번호 : <input type="text" name="hospitalPermitNumber"/><br>
-        전화번호 : <input type="text" name="hospitalPhoneNumber"/><br>
+        인허가번호 : <input type="text" name="permitNumber"/><br>
+        전화번호 : <input type="text" name="phoneNumber"/><br>
 
         <label for="option">개인정보 수집에 동의하십니까?</label>
-        <input type="checkbox" id="option" name="hospitalInformationCollection">
+        <input type="checkbox" id="option" name="informationCollection">
         <br>
         <button>회원가입</button>
     </form>
