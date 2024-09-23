@@ -31,4 +31,12 @@
             tbl_favorite
     </select>
 
+    <delete id="deleteFavorite" parameterType="String">
+        DELETE
+        FROM
+            tbl_favorite
+        WHERE
+            favorite_name = #{name}
+    </delete>
+
 </mapper>

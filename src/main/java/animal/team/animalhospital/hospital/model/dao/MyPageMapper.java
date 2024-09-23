@@ -12,4 +12,6 @@ public interface MyPageMapper {
     List<PersonDTO> findMyInfo();
 
     List<FavoriteDTO> findMyFavorite();
+
+    void deleteFavorite(String name);
 }
