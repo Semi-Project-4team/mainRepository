@@ -24,7 +24,7 @@ public class AuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        UserDTO foundUser = userService.findByUsername(username);
+        UserDTO foundUser = userService.findByHospitalName(username);
 
         if (Objects.isNull(foundUser)) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");

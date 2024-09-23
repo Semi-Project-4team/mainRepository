@@ -1,7 +1,9 @@
 package animal.team.animalhospital.hospital.model.service;
 
-import animal.team.animalhospital.hospital.model.dao.UserMapper;
-import animal.team.animalhospital.hospital.model.dto.SignupDTO;
+import animal.team.animalhospital.hospital.model.dao.HospitalMapper;
+import animal.team.animalhospital.hospital.model.dao.PersonMapper;
+import animal.team.animalhospital.hospital.model.dto.HospitalDTO;
+import animal.team.animalhospital.hospital.model.dto.PersonDTO;
 import animal.team.animalhospital.hospital.model.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -16,16 +18,42 @@ import java.util.Objects;
 public class UserService {
 
     private PasswordEncoder encoder;
-    private UserMapper userMapper;
+    private HospitalMapper hospitalMapper;
+    private PersonMapper personMapper;
 
     @Autowired
-    public UserService(PasswordEncoder encoder, UserMapper userMapper) {
+    public UserService(PasswordEncoder encoder, HospitalMapper userMapper, PersonMapper personMapper) {
         this.encoder = encoder;
-        this.userMapper = userMapper;
+        this.hospitalMapper = userMapper;
+        this.personMapper = personMapper;
     }
 
     @Transactional
-    public Integer regist(SignupDTO newUserInfo) {
+    public Integer hospitalSignup(HospitalDTO newUserInfo) {
+
+        System.out.println(newUserInfo.toString());
+        System.out.println("평문 : " + newUserInfo.getPassword());
+        newUserInfo.setPassword(encoder.encode(newUserInfo.getPassword()));
+        System.out.println("암호문 : " + newUserInfo.getPassword());
+
+        Integer result = null;
+
+        try {
+            result = hospitalMapper.hospitalSignup(newUserInfo);
+        } catch (DuplicateKeyException e) {     // 데이터 무결성 위반(중복 키) 발생 시 처리
+            result = 0;
+            e.printStackTrace();
+        } catch (BadSqlGrammarException e) {
+            result = 0;
+            e.printStackTrace();
+        }
+        System.out.println("(기업) 회원가입 처리 결과 => " + result);
+
+        return result;
+    }
+
+    @Transactional
+    public Integer personSignup(PersonDTO newUserInfo) {
 
         System.out.println("평문 : " + newUserInfo.getPassword());
         newUserInfo.setPassword(encoder.encode(newUserInfo.getPassword()));
@@ -34,7 +62,7 @@ public class UserService {
         Integer result = null;
 
         try {
-            result = userMapper.regist(newUserInfo);
+            result = personMapper.personSignup(newUserInfo);
         } catch (DuplicateKeyException e) {     // 데이터 무결성 위반(중복 키) 발생 시 처리
             result = 0;
             e.printStackTrace();
@@ -42,17 +70,24 @@ public class UserService {
             result = 0;
             e.printStackTrace();
         }
-        System.out.println("회원가입 처리 결과 => " + result);
+        System.out.println("(개인) 회원가입 처리 결과 => " + result);
 
         return result;
     }
 
-    public UserDTO findByUsername(String username) {
+    public UserDTO findByHospitalName(String hospitalName) {
+        UserDTO foundHospitalName = hospitalMapper.findByHospitalName(hospitalName);
+        if (!Objects.isNull(foundHospitalName)) {
+            return foundHospitalName;
+        } else {
+            return null;
+        }
+    }
 
-        UserDTO foundUser = userMapper.findByUsername(username);
-
-        if (!Objects.isNull(foundUser)) {
-            return foundUser;
+    public UserDTO findByPersonName(String personName) {
+        UserDTO foundPersonName = personMapper.findByPersonName(personName);
+        if (!Objects.isNull(foundPersonName)) {
+            return foundPersonName;
         } else {
             return null;
         }
