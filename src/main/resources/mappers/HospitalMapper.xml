@@ -21,6 +21,7 @@
         <result property="time" column="hospital_time"/>
         <result property="detailAddress" column="hospital_detail_address"/>
         <result property="introText" column="hospital_intro_text"/>
+        <result property="phoneNumber" column="hospital_phone_number"/>
         <result property="photo" column="hospital_photo"/>
     </resultMap>
 
@@ -75,5 +76,42 @@
         from
         tbl_sigungu;
     </select>
+
+    <insert id="hospitalSignup" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
+        INSERT INTO
+            tbl_person
+            (
+                hospital_code,
+                subject_code,
+                eupmyeondong_code,
+                hospital_name,
+                hospital_permit_number,
+                hospital_email,
+                hospital_password,
+                hospital_information_collection,
+                hospital_time,
+                hospital_detail_address,
+                hospital_intro_text,
+                hospital_phone_number,
+                hospital_photo,
+            )
+            values
+            (
+                null,
+                subjectCode,
+                eupmyeondongCode,
+                name,
+                permitNumber,
+                email,
+                password,
+                informationCollection,
+                time,
+                detailAddress,
+                introText,
+                phoneNumber,
+                photo,
+            )
+
+    </insert>
 
 </mapper>

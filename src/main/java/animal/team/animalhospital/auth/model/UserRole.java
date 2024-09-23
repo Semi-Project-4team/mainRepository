@@ -2,8 +2,8 @@ package animal.team.animalhospital.auth.model;
 
 public enum UserRole {
 
-    USER("USER"),
-    ADMIN("ADMIN");
+    USER_PERSON("USER_PERSON"),
+    ADMIN_HOSPITAL("USER_HOSPITAL");
 
     private String role;
 
@@ -19,6 +19,6 @@ public enum UserRole {
     public String toString() {
         return "UserRole{" +
                 "role='" + role + '\'' +
-                "} " + super.toString();
+                '}';
     }
 }

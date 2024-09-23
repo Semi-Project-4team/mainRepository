@@ -1,9 +1,6 @@
 package animal.team.animalhospital.hospital.model.dao;
 
-import animal.team.animalhospital.hospital.model.dto.EupmyeondongDTO;
-import animal.team.animalhospital.hospital.model.dto.HospitalDTO;
-import animal.team.animalhospital.hospital.model.dto.MainSubjectDTO;
-import animal.team.animalhospital.hospital.model.dto.SidoDTO;
+import animal.team.animalhospital.hospital.model.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,4 +16,9 @@ public interface HospitalMapper {
     List<HospitalDTO> findAllHospital();
 
     List<EupmyeondongDTO> findAllEupmyeondong();
+
+    int hospitalSignup(HospitalDTO newUserInfo);
+
+    UserDTO findByHospitalName(String username);
+
 }

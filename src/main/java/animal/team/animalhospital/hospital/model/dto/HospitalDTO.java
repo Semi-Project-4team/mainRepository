@@ -16,12 +16,13 @@ public class HospitalDTO {
     private Date time;
     private String detailAddress;
     private String introText;
+    private String phoneNumber;
     private String photo;
 
     public HospitalDTO() {
     }
 
-    public HospitalDTO(int hospitalCode, int subjectCode, int eupmyeondongCode, int userCode, String name, String permitNumber, String email, String password, String informationCollection, Date time, String detailAddress, String introText, String photo) {
+    public HospitalDTO(int hospitalCode, int subjectCode, int eupmyeondongCode, int userCode, String name, String permitNumber, String email, String password, String informationCollection, Date time, String detailAddress, String introText, String phoneNumber, String photo) {
         this.hospitalCode = hospitalCode;
         this.subjectCode = subjectCode;
         this.eupmyeondongCode = eupmyeondongCode;
@@ -34,7 +35,16 @@ public class HospitalDTO {
         this.time = time;
         this.detailAddress = detailAddress;
         this.introText = introText;
+        this.phoneNumber = phoneNumber;
         this.photo = photo;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getHospitalCode() {
