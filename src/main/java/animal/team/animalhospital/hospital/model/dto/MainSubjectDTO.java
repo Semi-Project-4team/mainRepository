@@ -1,7 +1,7 @@
 package animal.team.animalhospital.hospital.model.dto;
 
 public class MainSubjectDTO {
-    private int subjectCode;
+    private String subjectCode;
     private int reserveCode;
     private int personCode;
     private int userCode;
@@ -11,7 +11,7 @@ public class MainSubjectDTO {
     }
 
 
-    public MainSubjectDTO(int subjectCode, int reserveCode, int personCode, int userCode, String name) {
+    public MainSubjectDTO(String subjectCode, int reserveCode, int personCode, int userCode, String name) {
         this.subjectCode = subjectCode;
         this.reserveCode = reserveCode;
         this.personCode = personCode;
@@ -19,11 +19,11 @@ public class MainSubjectDTO {
         this.name = name;
     }
 
-    public int getSubjectCode() {
+    public String getSubjectCode() {
         return subjectCode;
     }
 
-    public void setSubjectCode(int subjectCode) {
+    public void setSubjectCode(String subjectCode) {
         this.subjectCode = subjectCode;
     }
 
