@@ -31,7 +31,7 @@ public class UserService {
     @Transactional
     public Integer hospitalSignup(HospitalDTO newUserInfo) {
 
-        System.out.println(newUserInfo.toString());
+//        System.out.println(newUserInfo.toString());
         System.out.println("평문 : " + newUserInfo.getPassword());
         newUserInfo.setPassword(encoder.encode(newUserInfo.getPassword()));
         System.out.println("암호문 : " + newUserInfo.getPassword());
