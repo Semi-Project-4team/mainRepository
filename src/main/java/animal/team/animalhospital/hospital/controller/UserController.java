@@ -42,6 +42,8 @@ public class UserController {
     @PostMapping("/signupPerson")
     public ModelAndView personSignup(ModelAndView mv,
                                        @ModelAttribute PersonDTO newUserInfo) {
+        System.out.println(newUserInfo.toString());
+        System.out.println(newUserInfo.getInformationCollection());
         Integer result = userService.personSignup(newUserInfo);
 
         return resultMV(mv, result, "person");

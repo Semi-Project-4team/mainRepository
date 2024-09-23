@@ -1,5 +1,7 @@
 package animal.team.animalhospital.hospital.model.dto;
 
+import java.util.Objects;
+
 public class PersonDTO {
 
     private int personCode;
@@ -21,7 +23,7 @@ public class PersonDTO {
         this.password = password;
         this.birth = birth;
         this.phoneNumber = phoneNumber;
-        informationCollection = informationCollection;
+        this.informationCollection = informationCollection;
     }
 
     public int getPersonCode() {
@@ -73,11 +75,13 @@ public class PersonDTO {
     }
 
     public String getInformationCollection() {
-        return informationCollection;
+        if(Objects.equals(informationCollection, "on"))
+            return "Y";
+        return "N";
     }
 
     public void setInformationCollection(String informationCollection) {
-        informationCollection = informationCollection;
+        this.informationCollection = informationCollection;
     }
 
     @Override
