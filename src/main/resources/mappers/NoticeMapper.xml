@@ -14,45 +14,55 @@
 
     <select id="findAllNotice" resultMap="noticeResultMap">
         SELECT
-        notice_code,
-        notice_name,
-        notice_date,
-        notice_views
+            notice_code,
+            notice_name,
+            notice_date,
+            notice_views
         FROM
-        tbl_notice
+            tbl_notice
     </select>
 
     <select id="selectNoticeByCode" parameterType="int" resultMap="noticeResultMap">
         SELECT
-        notice_code,
-        notice_name,
-        notice_date,
-        notice_views,
-        notice_text
+            notice_code,
+            notice_name,
+            notice_date,
+            notice_views,
+            notice_text
         FROM
-        tbl_notice
+            tbl_notice
         WHERE
-        notice_code = #{ noticeCode }
+            notice_code = #{ noticeCode }
     </select>
 
     <insert id="insertNotice" parameterType="animal.team.animalhospital.hospital.model.dto.NoticeDTO"
             useGeneratedKeys="true" keyProperty="code">
         INSERT INTO
-        tbl_notice
-        (
-        notice_name,
-        notice_date,
-        notice_views,
-        notice_text
-        )
+            tbl_notice
+                (
+                notice_name,
+                notice_date,
+                notice_views,
+                notice_text
+                )
         VALUES
-        (
-        #{name},
-        #{date},
-        #{views},
-        #{text}
-        )
+            (
+            #{name},
+            #{date},
+            #{views},
+            #{text}
+            )
     </insert>
+
+    <!-- 조회수 증가 -->
+    <update id="updateNoticeViews" parameterType="int">
+        UPDATE
+            tbl_notice
+        SET
+            notice_views = notice_views + 1
+        WHERE
+            notice_code = #{noticeCode}
+    </update>
 
     <update id="updateNotice" parameterType="animal.team.animalhospital.hospital.model.dto.NoticeDTO">
         UPDATE
