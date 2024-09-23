@@ -1,10 +1,10 @@
 package animal.team.animalhospital.hospital.model.service;
 
 import animal.team.animalhospital.hospital.model.dao.ReserveMapper;
-import animal.team.animalhospital.hospital.model.dao.ReviewMapper;
 import animal.team.animalhospital.hospital.model.dto.ReserveDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,20 +12,29 @@ import java.util.List;
 public class ReserveService {
 
     private final ReserveMapper reserveMapper;
-    private final ReviewMapper reviewMapper;
 
     @Autowired
-    public ReserveService(ReserveMapper reserveMapper, ReviewMapper reviewMapper) {
+    public ReserveService(ReserveMapper reserveMapper) {
         this.reserveMapper = reserveMapper;
-        this.reviewMapper = reviewMapper;
     }
 
 
     public List<ReserveDTO> findAllReserve() {
+
         return reserveMapper.findAllReserve();
     }
 
     public ReserveDTO findReserveByCode(int code) {
+
         return reserveMapper.findReserveByCode(code);
+    }
+
+    @Transactional
+    public void registNewReserve(ReserveDTO newReserve) {
+
+        System.out.println("service start");
+        reserveMapper.registNewReserve(newReserve);
+        System.out.println("service end");
+
     }
 }
