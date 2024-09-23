@@ -6,6 +6,20 @@
 </head>
 <body>
     <h2>공지사항</h2>
+
+
+
+    <!--삭제버튼-->
+    <form th:action="@{/notice/delete/{code}(code=${notice.code})}" method="post">
+        <button type="submit">삭제하기</button>
+    </form>
+
+    <!--수정버튼-->
+    <!--    <a th:href="@{/notice/update/{code}(code=${notice.code})}">수정하기</a>-->
+    <form th:action="@{/notice/update/{code}(code=${notice.code})}" method="get">
+        <button type="submit">수정하기</button>
+    </form>
+
     <div>
         <p>공지사항코드: <span th:text="${ notice.code }"></span></p>
         <p>공지사항이름: <span th:text="${ notice.name }"></span></p>
