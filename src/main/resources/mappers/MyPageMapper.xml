@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="animal.team.animalhospital.hospital.model.dao.MyPageMapper">
+
+    <resultMap id="myPageResultMap" type="animal.team.animalhospital.hospital.model.dto.PersonDTO">
+        <id property="name" column="person_name"/>
+        <result property="email" column="person_email"/>
+        <result property="phoneNumber" column="person_phone_number"/>
+    </resultMap>
+
+    <select id="findMyInfo" resultMap="myPageResultMap">
+        SELECT
+            person_name,
+            person_email,
+            person_phone_number
+        FROM
+            tbl_person
+
+    </select>
+
+</mapper>

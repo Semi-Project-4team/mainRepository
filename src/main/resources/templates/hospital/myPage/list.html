@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>개인회원명</th>
+    <th>개인회원이메일</th>
+    <th>개인회원전화번호</th>
+  </tr>
+
+    <tr th:each="myInfo : ${ myInfoList }">
+    <td th:text="${ myInfo.name }"></td>
+    <td th:text="${ myInfo.email }"></td>
+    <td th:text="${ myInfo.phoneNumber }"></td>
+  </tr>
+
+</table>
+
+<br>
+<button onclick="location.href='/'">메인으로</button>
+</body>
+</html>
