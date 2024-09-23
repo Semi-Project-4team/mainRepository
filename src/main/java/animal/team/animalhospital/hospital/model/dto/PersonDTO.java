@@ -3,15 +3,27 @@ package animal.team.animalhospital.hospital.model.dto;
 public class PersonDTO {
 
     private int personCode;
-    private int userCode;
-    private String personName;
-    private String personEmail;
-    private String personPassword;
-    private String personBirth;
-    private String personPhoneNumber;
-    private String personInformationCollection;
+    private String name;
+    private String email;
+    private String password;
+    private String birth;
+    private String phoneNumber;
+    private String informationCollection;
 
     // Getter and Setter methods (camelCase)
+    public PersonDTO() {
+    }
+
+    public PersonDTO(int personCode, String name, String email, String password, String birth, String phoneNumber, String informationCollection) {
+        this.personCode = personCode;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.birth = birth;
+        this.phoneNumber = phoneNumber;
+        informationCollection = informationCollection;
+    }
+
     public int getPersonCode() {
         return personCode;
     }
@@ -20,73 +32,64 @@ public class PersonDTO {
         this.personCode = personCode;
     }
 
-    public int getUserCode() {
-        return userCode;
+    public String getName() {
+        return name;
     }
 
-    public void setUserCode(int userCode) {
-        this.userCode = userCode;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPersonName() {
-        return personName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPersonEmail() {
-        return personEmail;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPersonEmail(String personEmail) {
-        this.personEmail = personEmail;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getPersonPassword() {
-        return personPassword;
+    public String getBirth() {
+        return birth;
     }
 
-    public void setPersonPassword(String personPassword) {
-        this.personPassword = personPassword;
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
-    public String getPersonBirth() {
-        return personBirth;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPersonBirth(String personBirth) {
-        this.personBirth = personBirth;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getPersonPhoneNumber() {
-        return personPhoneNumber;
+    public String getInformationCollection() {
+        return informationCollection;
     }
 
-    public void setPersonPhoneNumber(String personPhoneNumber) {
-        this.personPhoneNumber = personPhoneNumber;
-    }
-
-    public String getPersonInformationCollection() {
-        return personInformationCollection;
-    }
-
-    public void setPersonInformationCollection(String personInformationCollection) {
-        this.personInformationCollection = personInformationCollection;
+    public void setInformationCollection(String informationCollection) {
+        informationCollection = informationCollection;
     }
 
     @Override
     public String toString() {
         return "PersonDTO{" +
                 "personCode=" + personCode +
-                ", userCode=" + userCode +
-                ", personName='" + personName + '\'' +
-                ", personEmail='" + personEmail + '\'' +
-                ", personPassword='" + personPassword + '\'' +
-                ", personBirth='" + personBirth + '\'' +
-                ", personPhoneNumber='" + personPhoneNumber + '\'' +
-                ", personInformationCollection='" + personInformationCollection + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", birth='" + birth + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", InformationCollection='" + informationCollection + '\'' +
                 '}';
     }
 }

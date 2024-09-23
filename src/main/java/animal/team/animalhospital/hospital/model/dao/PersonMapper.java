@@ -1,6 +1,7 @@
 package animal.team.animalhospital.hospital.model.dao;
 
 import animal.team.animalhospital.hospital.model.dto.PersonDTO;
+import animal.team.animalhospital.hospital.model.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface PersonMapper {
     void updatePerson(PersonDTO person);
 
     void deletePerson(int code);
+
+    int personSignup(PersonDTO newUserInfo);
+
+    UserDTO findByPersonName(String username);
 }

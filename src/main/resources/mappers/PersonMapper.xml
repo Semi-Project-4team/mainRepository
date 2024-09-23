@@ -6,15 +6,13 @@
 
     <resultMap id="personResultMap" type="animal.team.animalhospital.hospital.model.dto.PersonDTO">
         <id property="personCode" column="person_code"/>
-        <result property="personName" column="person_name"/>
-        <result property="personEmail" column="person_email"/>
-        <result property="personPassword" column="person_password"/>
-        <result property="personBirth" column="person_birth"/>
-        <result property="personPhoneNumber" column="person_phone_number"/>
-        <result property="personInformationCollection" column="person_information_collection"/>
+        <result property="name" column="person_name"/>
+        <result property="email" column="person_email"/>
+        <result property="password" column="person_password"/>
+        <result property="birth" column="person_birth"/>
+        <result property="phoneNumber" column="person_phone_number"/>
+        <result property="informationCollection" column="person_information_collection"/>
     </resultMap>
-
-
 
     <select id="findAllPerson" resultMap="personResultMap">
         SELECT
@@ -43,6 +41,30 @@
         WHERE
             person_code = #{ personCode }
     </select>
+
+    <insert id="personRegist" parameterType="animal.team.animalhospital.hospital.model.dto.PersonDTO">
+        INSERT INTO
+            tbl_person
+            (
+                person_code,
+                person_name,
+                person_email,
+                person_password,
+                person_birth,
+                person_phone_number,
+                person_information_collection
+            )
+        values
+            (
+                null,
+                #{ name },
+                #{ email },
+                #{ password },
+                #{ birth },
+                #{ phoneNumber },
+                #{ informationCollection }
+            )
+    </insert>
 
 
 
