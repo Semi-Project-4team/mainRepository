@@ -18,7 +18,7 @@ public interface NoticeMapper {
 
     void deleteNotice(int code);
 
-//    조회수 증가
+    // 조회수 증가
     void updateNoticeViews(int code);
 
 }

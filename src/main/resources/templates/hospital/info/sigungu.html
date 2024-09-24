@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SigunguAll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 전체 높이를 중앙 정렬을 위해 사용 */
+        }
+        .table-container {
+            width: 80%; /* 테이블 너비 설정 */
+            max-width: 800px; /* 최대 너비 설정 */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #58ccff;
+            color: white;
+            font-size: 18px;
+        }
+        td {
+            font-size: 16px;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #58ccff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background-color: #58ccff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #3ca8d7;
+        }
+        .back-button {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="table-container">
+    <table>
+        <tr>
+            <th>SidoCode</th>
+            <th>SigunguCode</th>
+            <th>sigunguName</th>
+        </tr>
+        <tr th:each="sigungu : ${ sigunguList }">
+            <td th:text="${ sigungu.sidoCode}"></td>
+            <td th:text="${ sigungu.sigunguCode }"></td>
+            <td>
+                <a th:href="@{'/hospital/info/eupmyeondong/' + ${sigungu.sigunguCode}}" th:text="${ sigungu.name }"></a>
+            </td>
+        </tr>
+    </table>
+
+    <!--뒤로가기 버튼-->
+    <div class="back-button">
+        <button onclick="history.back()">뒤로가기</button>
+    </div>
+</div>
+</body>
+</html>

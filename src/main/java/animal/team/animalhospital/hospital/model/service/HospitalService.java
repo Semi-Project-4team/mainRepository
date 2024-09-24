@@ -1,10 +1,7 @@
 package animal.team.animalhospital.hospital.model.service;
 
 import animal.team.animalhospital.hospital.model.dao.HospitalMapper;
-import animal.team.animalhospital.hospital.model.dto.EupmyeondongDTO;
-import animal.team.animalhospital.hospital.model.dto.HospitalDTO;
-import animal.team.animalhospital.hospital.model.dto.MainSubjectDTO;
-import animal.team.animalhospital.hospital.model.dto.SidoDTO;
+import animal.team.animalhospital.hospital.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +17,16 @@ public class HospitalService {
         this.hospitalMapper = nameMapper;
     }
 
-    public List<EupmyeondongDTO> findAllEupmyeondong() {
-        return hospitalMapper.findAllEupmyeondong();
+    public List<EupmyeondongDTO> findAllEupmyeondong(int sigunguCode) {
+        return hospitalMapper.findAllEupmyeondong(sigunguCode);
     }
 
     public List<HospitalDTO> findAllHospital() {
         return hospitalMapper.findAllHospital();
+    }
+
+    public HospitalDTO findByHospitalCode(int code) {
+        return hospitalMapper.findByHospitalCode(code);
     }
 
     public List<MainSubjectDTO> findAllMainSubject() {
@@ -36,7 +37,7 @@ public class HospitalService {
         return hospitalMapper.findAllSido();
     }
 
-    public List<SidoDTO> findAllSigungu() {
-        return hospitalMapper.findAllSigungu();
+    public List<SigunguDTO> findAllSigungu(int sidoCode) {
+        return hospitalMapper.findAllSigungu(sidoCode);
     }
 }

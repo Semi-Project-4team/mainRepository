@@ -1,9 +1,6 @@
 package animal.team.animalhospital.hospital.controller;
 
-import animal.team.animalhospital.hospital.model.dto.EupmyeondongDTO;
-import animal.team.animalhospital.hospital.model.dto.FavoriteDTO;
-import animal.team.animalhospital.hospital.model.dto.PersonDTO;
-import animal.team.animalhospital.hospital.model.dto.PetDTO;
+import animal.team.animalhospital.hospital.model.dto.*;
 import animal.team.animalhospital.hospital.model.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,13 +28,41 @@ public class HospitalController {
         this.favoriteService = favoriteService;
     }
 
-    @GetMapping("/eupmyeondongAll")
-    public String allEupmyeondong(Model model) {
-        List<EupmyeondongDTO> eupmyeondongList = hospitalService.findAllEupmyeondong();
+    @GetMapping("/sidoAll")
+    public String allSido(Model model) {
+        List<SidoDTO> sidoList = hospitalService.findAllSido();
+        model.addAttribute("sidoList", sidoList);
+        return "/hospital/info/sidoAll";
+    }
 
+    @GetMapping("/info/list")
+    public String hospitalList(Model model) {
+        List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
+        model.addAttribute("hospitalList", hospitalList); // 모델에 추가
+        return "/hospital/info/list"; // 뷰 이름
+    }
+
+    @GetMapping("/info/detail/{code}")
+    public String detailHospital(@PathVariable("code") int code, Model model) {
+        HospitalDTO hospital = hospitalService.findByHospitalCode(code);
+        model.addAttribute("hospital", hospital); // 모델에 추가
+        return "/hospital/info/detail"; // 뷰 이름
+    }
+
+    @GetMapping("/info/sigungu/{sidoCode}")
+    public String allSigungu(@PathVariable("sidoCode") int sidoCode, Model model) {
+        List<SigunguDTO> sigunguList = hospitalService.findAllSigungu(sidoCode);
+        model.addAttribute("sigunguList", sigunguList);
+        model.addAttribute("sidoCode", sidoCode);  // 코드 값을 뷰에 전달
+        return "hospital/info/sigungu";  // 템플릿 경로는 고정
+    }
+
+    @GetMapping("/info/eupmyeondong/{sigunguCode}")
+    public String allEupmyeondong(@PathVariable("sigunguCode") int sigunguCode, Model model) {
+        List<EupmyeondongDTO> eupmyeondongList = hospitalService.findAllEupmyeondong(sigunguCode);
         model.addAttribute("eupmyeondongList", eupmyeondongList);
-
-        return "/hospital/info/eupmyeondongAll";
+        model.addAttribute("sigunguCode", sigunguCode);  // 코드 값을 뷰에 전달
+        return "hospital/info/eupmyeondong";  // 템플릿 경로는 고정
     }
 
     @GetMapping("person/list")
