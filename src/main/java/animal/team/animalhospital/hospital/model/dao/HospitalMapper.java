@@ -19,6 +19,6 @@ public interface HospitalMapper {
 
     int hospitalSignup(HospitalDTO newUserInfo);
 
-    UserDTO findByHospitalName(String username);
+    HospitalDTO findByHospitalName(String hospitalEmail);
 
 }
