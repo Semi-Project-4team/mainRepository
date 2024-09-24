@@ -42,4 +42,9 @@ public class ReserveService {
 
         reserveMapper.deleteReserve(code);
     }
+
+    @Transactional
+    public void updateReserve(ReserveDTO reserve) {
+        reserveMapper.updateReserve(reserve);
+    }
 }
