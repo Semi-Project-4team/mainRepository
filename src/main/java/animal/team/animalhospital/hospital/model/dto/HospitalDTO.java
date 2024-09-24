@@ -113,8 +113,8 @@ public class HospitalDTO implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return List.of();
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-//        authorities.add(() -> userRole.getRole());
-        System.out.println("병원 권한을 요구함 : " + authorities);
+        authorities.add(UserRole.ADMIN_HOSPITAL::getRole);
+        System.out.println("병원 권한을 부여함 : " + authorities);
         return authorities;
     }
 
@@ -126,7 +126,7 @@ public class HospitalDTO implements UserDetails {
 
     @Override
     public String getUsername() {
-        System.out.println("병원 아이디 요구함 : " + this.email);
+        System.out.println("병원 이메일 요구함 : " + this.email);
         return this.email;
     }
 
