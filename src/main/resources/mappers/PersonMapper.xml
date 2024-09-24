@@ -41,6 +41,14 @@
         WHERE
             person_code = #{ personCode }
     </select>
+    <select id="findByPersonName" resultMap="personResultMap">
+        select
+            *
+        from
+            tbl_person
+        where
+            person_email = #{ personEmail };
+    </select>
 
     <insert id="personRegist" parameterType="animal.team.animalhospital.hospital.model.dto.PersonDTO">
         INSERT INTO

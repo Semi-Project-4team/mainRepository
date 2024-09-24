@@ -90,8 +90,14 @@ public class UserService {
         }
     }
 
-    public UserDTO findByPersonName(String personName) {
-        UserDTO foundPersonName = personMapper.findByPersonName(personName);
+    public PersonDTO findByPersonName(String personEmail) {
+
+        System.out.println("findByPersonName1 : " + personEmail);
+
+        PersonDTO foundPersonName = personMapper.findByPersonName(personEmail);
+
+        System.out.println("findByPersonName2 = " + personEmail);
+
         if (!Objects.isNull(foundPersonName)) {
             return foundPersonName;
         } else {
