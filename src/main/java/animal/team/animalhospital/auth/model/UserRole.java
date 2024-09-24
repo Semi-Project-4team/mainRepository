@@ -3,7 +3,8 @@ package animal.team.animalhospital.auth.model;
 public enum UserRole {
 
     USER_PERSON("USER_PERSON"),
-    ADMIN_HOSPITAL("USER_HOSPITAL");
+    ADMIN_HOSPITAL("USER_HOSPITAL"),
+    MASTER("MASTER");
 
     private String role;
 
