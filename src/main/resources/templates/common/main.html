@@ -1,47 +1,197 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <title>동물병원플러스입니다.</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/header.css">
-
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            color: #58ccff;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .label {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 
-    <div th:insert="~{common/header.html}"></div>
+<div th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
-    <div class="background">
-        <!--배경이미지-->
-        <img src="images/mainbackground.jpg" style="width:100%">
+<div class="background">
+    <img src="images/mainbackground.jpg" style="width:100%">
 
-        <!--공지사항-->
-        <div class="notice">
-            <div>
-                <h3><a href="/notice/list">[공지사항] </a><a id="noticeLink" href="/notice/detail/">공지사항 제목 자리</a></h3>
+    <!--공지사항-->
+    <div class="notice">
+        <h3><a href="/notice/list">[공지사항] </a><a id="noticeLink" href="/notice/detail/">공지사항 제목 자리</a></h3>
+    </div>
+
+
+    <div class="search-hospital">
+        <br>
+        <button class="button" onclick="location.href='/hospital/sidoAll'">지역별 동물병원찾기</button>
+        <button class="button" onclick="location.href='/reserve/regist'">백중윤 테스트 중</button>
+        <br>
+        <br>
+        <form action="/search" method="GET">
+            <input type="text" id="search" name="query" placeholder="지역 또는 병원이름을 직접 검색">
+            <br>
+            <br>
+            <button type="submit">검색</button>
+        </form>
+        <br>
+        <br>
+
+        <button id="searchHospitalBtn">병원 찾기</button>
+        <div id="selectedRegion" class="label"></div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" style="cursor: pointer;">&times;</span>
+                <h2>병원 찾기</h2>
+                <select id="sido" name="sido">
+<!--                    <option value="0"> 시/도 </option>-->
+                    <!-- 시/도 목록은 서버에서 동적으로 생성 -->
+                </select>
+<!--                <select id="sido" onchange="loadSigungu(this.value)">-->
+<!--                    <option value="0"> 시/도 </option>-->
+<!--                    &lt;!&ndash; 시/도 목록은 서버에서 동적으로 생성 &ndash;&gt;-->
+<!--                </select>-->
+                <select id="sigungu" onchange="loadEupMyeonDong(this.value)" disabled>
+                    <option value=""> 시/군/구 </option>
+                </select>
+                <select id="eupmyeondong" disabled>
+                    <option value=""> 읍/면/동 </option>
+                </select>
+                <button onclick="updateLabel()">선택</button>
             </div>
-
         </div>
 
-        <!--병원찾기 검색창-->
-        <div class="search-hospital">
-            <br>
-            <button class="button" onclick="location.href='/hospital/sidoAll'">지역별 동물병원찾기</button>
-            <button class="button" onclick="location.href='/reserve/regist'">백중윤 테스트 중</button>
-            <br>
-            <br>
-            <form action="/search" method="GET">
-                <input type="text" id="search" name="query" placeholder="지역 또는 병원이름을 직접 검색">
-                <br>
-                <br>
-                <button type="submit">검색</button>
-            </form>
-            <br>
-            <br>
+    </div>
 
-        </div>
+    <script>
+        // fetch("/hospital/sidoAll")
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         const sidoName = document.getElementById('searchHospitalBtn');
+        //
+        //         for (let index in data) {
+        //             // 새로운 <option> 요소를 생성
+        //             const $option = document.createElement('option');
+        //             // <option> 요소의 값을 카테고리 코드로 설정
+        //             // $option.value = data[index].petName;
+        //             // <option> 요소의 텍스트를 카테고리 이름으로 설정
+        //             $option.textContent = data[index].name;
+        //             // <option> 요소를 categoryCode <select> 요소에 추가
+        //             petName.appendChild($option);
+        //         }
+        //     });
+        document.getElementById("searchHospitalBtn").onclick = function() {
+            document.getElementById("myModal").style.display = "flex";
+        }
 
-<!--    <script src="main.js"></script>-->
+        document.getElementsByClassName("close")[0].onclick = function() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myModal")) {
+                document.getElementById("myModal").style.display = "none";
+            }
+        }
+
+        // function loadSido() {
+            fetch("/hospital/sidoList")
+                .then(res => res.json())
+                .then(data => {
+                    const sidoSelect = document.getElementById("sido");
+
+                    // 각 카테고리 데이터를 순회
+                    for (let index in data) {
+                        const $option = document.createElement('option');
+                        // $option.value = data[index].petName;
+                        $option.textContent = data[index].name;
+                        sidoSelect.appendChild($option);
+                    }
+                });
+        // }
+
+        function loadSigungu(sidoCode) {
+            if (sidoCode) {
+                fetch(`/hospital/sidoAll`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const sigunguSelect = document.getElementById("sigungu");
+                        sigunguSelect.innerHTML = '<option value="">-- 시/군/구 선택 --</option>';
+                        data.forEach(sigungu => {
+                            const option = document.createElement("option");
+                            // option.value = sigungu.sigunguCode;
+                            option.textContent = sigungu.name;
+                            sigunguSelect.appendChild(option);
+                        });
+                        sigunguSelect.disabled = false;
+                    });
+            } else {
+                document.getElementById("sigungu").disabled = true;
+                document.getElementById("eupmyeondong").disabled = true;
+            }
+        }
+
+        function loadEupMyeonDong(sigunguCode) {
+            if (sigunguCode) {
+                fetch(`/api/eupmyeondong/${sigunguCode}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const eupmyeondongSelect = document.getElementById("eupmyeondong");
+                        eupmyeondongSelect.innerHTML = '<option value="">-- 읍/면/동 선택 --</option>';
+                        data.forEach(eupmyeondong => {
+                            const option = document.createElement("option");
+                            option.value = eupmyeondong.eupmyeondongCode;
+                            option.textContent = eupmyeondong.eupmyeondongName;
+                            eupmyeondongSelect.appendChild(option);
+                        });
+                        eupmyeondongSelect.disabled = false;
+                    });
+            } else {
+                document.getElementById("eupmyeondong").disabled = true;
+            }
+        }
+
+        function updateLabel() {
+            const sidoName = document.getElementById("sido").selectedOptions[0].text;
+            const sigunguName = document.getElementById("sigungu").selectedOptions[0]?.text || '';
+            const eupmyeondongName = document.getElementById("eupmyeondong").selectedOptions[0]?.text || '';
+
+            const selectedRegionLabel = `${sidoName} > ${sigunguName} > ${eupmyeondongName}`;
+            document.getElementById("selectedRegion").textContent = selectedRegionLabel;
+
+            // 병원 찾기 로직을 추가할 수 있습니다.
+            // findHospitals();
+        }
+    </script>
+</div>
 </body>
 </html>
