@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS tbl_person
     person_birth DATE NOT NULL COMMENT '개인회원생년월일',
     person_phone_number VARCHAR(15) NOT NULL COMMENT '개인회원전화번호',
     person_information_collection VARCHAR(1) NOT NULL COMMENT '정보수집동의확인',
-    person_role varchar(50) NOT NULL COMMENT '개인권한',
 
     CONSTRAINT pk_person_code PRIMARY KEY (person_code)
 ) ENGINE=INNODB COMMENT '개인회원';
@@ -100,7 +99,6 @@ CREATE TABLE IF NOT EXISTS tbl_hospital
     hospital_intro_text varchar(50) COMMENT '병원소개글',
     hospital_phone_number varchar(10) NOT NULL COMMENT '병원전화번호', --
     hospital_photo varchar(10) COMMENT '병원사진',
-    hospital_role varchar(50) NOT NULL COMMENT '병원권한',
     -- table level constraints
     CONSTRAINT pk_hospital_code PRIMARY KEY (hospital_code),
     CONSTRAINT fk_eupmyeondong_code FOREIGN KEY (eupmyeondong_code) REFERENCES tbl_eupmyeondong (eupmyeondong_code),
@@ -258,8 +256,8 @@ INSERT INTO
     tbl_person (person_code, person_name, person_email, person_password, person_birth, person_phone_number, person_information_collection)
 VALUES
     (1, '이나라', 'dlskfk0513@naver.com', 'dlskfk01', now(), '010-0000-0000', 'Y'),
-    (2, '백중윤', 'qorwnddbs@naver.com', 'qorwnddbs01', now(), '010-1111-1111', 'Y'),
-    (3, '빵빵이', 'bbang@naver.com', 'bbang', now(), '010-2222-2222', 'Y');
+    (2, '백중윤', 'qorwnddbs@naver.com', 'qorwnddbs01', now(), '010-1111-1111', 'Y');
+#     (3, '빵빵이', 'bbang@naver.com', 'bbang', now(), '010-2222-2222', 'Y');
 
 INSERT INTO
     tbl_reserve
@@ -296,12 +294,12 @@ INSERT INTO
     tbl_pet (pet_person_code, person_code, pet_name, pet_type, pet_birth, pet_vaccination, pet_chip, pet_profile, pet_gender)
 VALUES
     (1, 1, '꼼이', '갱얼쥐', '000000', 'N', '000000', 'KHGFKF', '여'),
-    (2, 2, '오곡', '고앵이', '000000', 'Y', '000000', 'KHGFKF', '남'),
-    (3, 3, '모밀이', '갱얼쥐', '000000', 'Y', '000000', 'KHGFKF', '남');
+    (2, 2, '오곡', '고앵이', '000000', 'Y', '000000', 'KHGFKF', '남');
+#     (3, 3, '모밀이', '갱얼쥐', '000000', 'Y', '000000', 'KHGFKF', '남');
 
 INSERT INTO
     tbl_favorite (person_code, favorite_name)
 VALUES
     (1, '꼼이건강검진병원'),
-    (2, '오곡이'),
-    (3, '모밀이병원');
+    (2, '오곡이');
+#     (3, '모밀이병원');
