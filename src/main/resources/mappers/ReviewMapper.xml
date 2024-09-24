@@ -42,4 +42,29 @@
             person_code = #{personCode}
     </select>
 
+    <insert id="registNewReview" parameterType="animal.team.animalhospital.hospital.model.dto.ReviewDTO"
+            useGeneratedKeys="true" keyProperty="personCode">
+        INSERT INTO
+            tbl_person_review
+            (
+            person_code,
+            hospital_code,
+            review_write_date,
+            review_modify_date,
+            review_score,
+            review_photo,
+            review_explanation
+            )
+        VALUES
+            (
+            #{personCode},
+            #{hospitalCode},
+            #{reviewWriteDate},
+            #{reviewModifyDate},
+            #{reviewScore},
+            #{reviewPhoto},
+            #{reviewExplanation}
+            )
+    </insert>
+
 </mapper>
