@@ -26,6 +26,10 @@ public class NoticeService {
     }
 
     public NoticeDTO selectNoticeByCode(int code) {
+        // 1. 조회수 증가
+        noticeMapper.updateNoticeViews(code);
+
+        // 2. 공지사항 조회
         return noticeMapper.selectNoticeByCode(code);
     }
 
