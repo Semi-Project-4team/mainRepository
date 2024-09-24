@@ -67,8 +67,17 @@
             #{reserveText},
             #{reserveInformationCollection}
             )
-
     </insert>
+
+    <delete id="deleteReserve" parameterType="int">
+        DELETE
+        FROM
+            tbl_reserve
+        WHERE
+            person_code = #{personCode}
+    </delete>
+
+
 
 </mapper>
 

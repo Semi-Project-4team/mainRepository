@@ -7,7 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface ReviewMapper {
+
+    
     List<ReviewDTO> findAllReview();
 
     ReviewDTO findReviewByCode(int code);
+
+    void registNewReview(ReviewDTO newReview);
+
+    void deleteReview(int code);
 }

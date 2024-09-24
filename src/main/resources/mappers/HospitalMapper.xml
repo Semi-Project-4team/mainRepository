@@ -14,6 +14,7 @@
         <result property="subjectCode" column="subject_code"/>
         <result property="eupmyeondongCode" column="eupmyeondong_code"/>
         <result property="name" column="hospital_name"/>
+<!--        <result property="username" column="hospital_name"/>-->
         <result property="permitNumber" column="hospital_permit_number"/>
         <result property="email" column="hospital_email"/>
         <result property="password" column="hospital_password"/>
@@ -89,6 +90,15 @@
         tbl_sigungu
         where
         sido_code = #{sidoCode};
+    </select>
+
+    <select id="findByHospitalName" resultMap="hospitalMap">
+        select
+            *
+        from
+            tbl_hospital
+        where
+            hospital_email = #{ hospitalEmail };
     </select>
 
     <insert id="hospitalSignup" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">

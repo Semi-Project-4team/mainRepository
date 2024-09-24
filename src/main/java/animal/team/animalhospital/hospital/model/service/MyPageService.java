@@ -18,12 +18,13 @@ public class MyPageService {
     public MyPageService(MyPageMapper myPageMapper) {
         this.myPageMapper = myPageMapper;}
 
-    public List<PersonDTO> findMyInfo() {
-        return myPageMapper.findMyInfo();
+    public List<PersonDTO> findMyInfo(String userEmail) {
+        return myPageMapper.findMyInfo(userEmail);
     }
 
-    public List<FavoriteDTO> findMyFavorite() {
-        return myPageMapper.findMyFavorite();    }
+    public List<FavoriteDTO> findMyFavorite(String userEmail) {
+        return myPageMapper.findMyFavorite(userEmail);
+    }
 
     @Transactional
     public void deleteFavorite(String name) {

@@ -1,5 +1,7 @@
 package animal.team.animalhospital.auth.model.service;
 
+import animal.team.animalhospital.hospital.model.dto.HospitalDTO;
+import animal.team.animalhospital.hospital.model.dto.PersonDTO;
 import animal.team.animalhospital.hospital.model.dto.UserDTO;
 import animal.team.animalhospital.hospital.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +23,34 @@ public class AuthService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username)
+    public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
-        UserDTO foundUser = userService.findByHospitalName(username);
+        System.out.println("loadUserByUserEmail : " + email);
 
-        if (Objects.isNull(foundUser)) {
-            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        HospitalDTO hospitalFoundUser = userService.findByHospitalName(email);
+
+
+        System.out.println("hospital before return = " + hospitalFoundUser);
+
+        if(!Objects.isNull(hospitalFoundUser)){
+            return hospitalFoundUser;
         }
 
-        return foundUser;
+        ////////////////////////////////////////
+
+        PersonDTO personFoundUser = userService.findByPersonName(email);
+
+        System.out.println("person before return1 = " + personFoundUser);
+
+        if (Objects.isNull(personFoundUser)) {
+            throw new UsernameNotFoundException("(개인) 회원 정보가 존재하지 않습니다.");
+        }
+//        } else if (Objects.isNull(hospitalFoundUser)) {
+//            throw new UsernameNotFoundException("(기업) 회원 정보가 존재하지 않습니다.");
+//        }
+        System.out.println("person before return2 = " + personFoundUser);
+
+        return personFoundUser;
     }
 }

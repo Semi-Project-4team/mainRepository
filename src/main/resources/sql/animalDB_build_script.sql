@@ -256,8 +256,8 @@ INSERT INTO
     tbl_person (person_code, person_name, person_email, person_password, person_birth, person_phone_number, person_information_collection)
 VALUES
     (1, '이나라', 'dlskfk0513@naver.com', 'dlskfk01', now(), '010-0000-0000', 'Y'),
-    (2, '백중윤', 'qorwnddbs@naver.com', 'qorwnddbs01', now(), '010-1111-1111', 'Y'),
-    (3, '빵빵이', 'bbang@naver.com', 'bbang', now(), '010-2222-2222', 'Y');
+    (2, '백중윤', 'qorwnddbs@naver.com', 'qorwnddbs01', now(), '010-1111-1111', 'Y');
+#     (3, '빵빵이', 'bbang@naver.com', 'bbang', now(), '010-2222-2222', 'Y');
 
 INSERT INTO
     tbl_reserve
@@ -294,12 +294,12 @@ INSERT INTO
     tbl_pet (pet_person_code, person_code, pet_name, pet_type, pet_birth, pet_vaccination, pet_chip, pet_profile, pet_gender)
 VALUES
     (1, 1, '꼼이', '갱얼쥐', '000000', 'N', '000000', 'KHGFKF', '여'),
-    (2, 2, '오곡', '고앵이', '000000', 'Y', '000000', 'KHGFKF', '남'),
-    (3, 3, '모밀이', '갱얼쥐', '000000', 'Y', '000000', 'KHGFKF', '남');
+    (2, 2, '오곡', '고앵이', '000000', 'Y', '000000', 'KHGFKF', '남');
+#     (3, 3, '모밀이', '갱얼쥐', '000000', 'Y', '000000', 'KHGFKF', '남');
 
 INSERT INTO
     tbl_favorite (person_code, favorite_name)
 VALUES
     (1, '꼼이건강검진병원'),
-    (2, '오곡이'),
-    (3, '모밀이병원');
+    (2, '오곡이');
+#     (3, '모밀이병원');
