@@ -73,7 +73,7 @@
         DELETE
         FROM
             tbl_reserve
-        WH
+        WHERE
             person_code = #{personCode}
     </delete>
 
