@@ -5,6 +5,8 @@ import animal.team.animalhospital.hospital.model.dto.PersonDTO;
 import animal.team.animalhospital.hospital.model.service.FavoriteService;
 import animal.team.animalhospital.hospital.model.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +30,17 @@ public class MyPageController {
 
     @GetMapping("/myInfo")
     public String MyInfoList(Model model){
-        List<PersonDTO> myInfoList = myPageService.findMyInfo();
-        List<FavoriteDTO> myFavoriteList = myPageService.findMyFavorite();
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
+        System.out.println("userEmail = " + userEmail);
+
+        List<PersonDTO> myInfoList = myPageService.findMyInfo(userEmail);
+        List<FavoriteDTO> myFavoriteList = myPageService.findMyFavorite(userEmail);
+
+        System.out.println("myInfoList = " + myInfoList);
+        System.out.println("myFavoriteList = " + myFavoriteList);
 
         model.addAttribute("myFavoriteList",myFavoriteList);
         model.addAttribute("myInfoList",myInfoList);
@@ -44,12 +55,12 @@ public class MyPageController {
         return "redirect:/myPage/myInfo";
     }
 
-    @GetMapping("/myPet")
-    public String MyPetList(Model model){
-        List<FavoriteDTO> myFavoriteList = myPageService.findMyFavorite();
-
-        model.addAttribute("myFavoriteList",myFavoriteList);
-
-        return "hospital/myPage/list";
-    }
+//    @GetMapping("/myPet")
+//    public String MyPetList(Model model){
+//        List<FavoriteDTO> myFavoriteList = myPageService.findMyFavorite();
+//
+//        model.addAttribute("myFavoriteList",myFavoriteList);
+//
+//        return "hospital/myPage/list";
+//    }
 }

@@ -16,7 +16,13 @@
             <div sec:authorize="hasAnyAuthority('MASTER')">
                 <button>회원관리</button>
             </div>
-            <label sec:authentication="name">안녕하세요, [[${#authentication.name}]]님</label>
+            <div sec:authorize="hasAnyAuthority('USER_PERSON')">
+                <a>개인회원</a>
+            </div>
+            <div sec:authorize="hasAnyAuthority('USER_HOSPITAL')">
+                <a>기업회원</a>
+            </div>
+            <label sec:authentication="">안녕하세요, [[${#authentication.name}]]님</label>
             <button onclick="location.href='/auth/logout'">로그아웃</button>
             <button onclick="location.href='/myPage/myInfo'">마이페이지</button>
         </div>

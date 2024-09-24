@@ -9,9 +9,9 @@ import java.util.List;
 @Mapper
 public interface MyPageMapper {
 
-    List<PersonDTO> findMyInfo();
+    List<PersonDTO> findMyInfo(String userEmail);
 
-    List<FavoriteDTO> findMyFavorite();
+    List<FavoriteDTO> findMyFavorite(String userEmail);
 
     void deleteFavorite(String name);
 }
