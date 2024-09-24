@@ -95,10 +95,33 @@ public class ReserveController {
 
         reserveService.deleteReserve(code);
 
-        rAttr.addFlashAttribute("successMessage", "메뉴가 성공적으로 삭제되었습니다.");
+//        rAttr.addFlashAttribute("successMessage", "예약이 성공적으로 삭제되었습니다.");
 
         return "redirect:/reserve/list";
 
+    }
+
+    @GetMapping("/update/{code}")
+    public String updatePage(@PathVariable("code") int code,
+                                   Model model) {
+
+        ReserveDTO reserve = reserveService.findReserveByCode(code);
+
+        model.addAttribute("reserve", reserve);
+
+        return "hospital/reserve/update";
+    }
+
+
+    @PostMapping("/update")
+    public String updateReserve(ReserveDTO reserve, RedirectAttributes rAttr){
+
+        reserveService.updateReserve(reserve);
+
+        rAttr.addFlashAttribute("successMessage", "메뉴가 성공적으로 수정되었습니다.");
+
+
+        return "redirect:/reserve/detail/" + reserve.getPersonCode();
     }
 
 

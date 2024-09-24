@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>예약 수정하기</h2>
+
+    <form th:action="@{/reserve/update}" th:object="${reserve}" method="post">
+
+        <!-- Hidden input for PersonCode -->
+        <input type="hidden" th:field="*{personCode}" />
+
+        <!-- Reserve Time input -->
+        <label for="reserveTime">예약 시간:</label>
+        <input type="time" id="reserveTime" th:field="*{reserveTime}" required />
+
+        <!-- Reserve Date input -->
+        <label for="reserveDate">예약 날짜:</label>
+        <input type="date" id="reserveDate" th:field="*{reserveDate}" required />
+
+        <!-- Information Collection Agreement -->
+        <label for="reserveInformationCollection">정보수집동의:</label>
+        <select id="reserveInformationCollection" th:field="*{reserveInformationCollection}">
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select>
+
+        <!-- Textarea for additional notes -->
+        <br>
+        <label for="contents">전달 사항:</label>
+        <br>
+        <textarea name="reserveText" id="contents" cols="30" rows="10"
+                  style="resize:none" maxlength="100" th:field="*{reserveText}"></textarea>
+        <br>
+
+        <!-- Submit and Reset buttons -->
+        <button type="submit">수정하기</button>
+        <button type="reset">초기화</button>
+    </form>
+
+
+
+    <div>
+        <button onclick="history.back()">취소</button>
+    </div>
+
+
+</body>
+</html>

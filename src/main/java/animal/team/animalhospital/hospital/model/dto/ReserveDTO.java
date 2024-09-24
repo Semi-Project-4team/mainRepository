@@ -21,6 +21,7 @@ public class ReserveDTO {
     public ReserveDTO() {
     }
 
+
     public ReserveDTO(int personCode, int hospitalCode, int petPersonCode, LocalTime reserveTime, Date reserveDate, String reserveText, String reserveInformationCollection) {
         this.personCode = personCode;
         this.hospitalCode = hospitalCode;
@@ -30,6 +31,7 @@ public class ReserveDTO {
         this.reserveText = reserveText;
         this.reserveInformationCollection = reserveInformationCollection;
     }
+
 
     public int getPersonCode() {
         return personCode;
@@ -99,4 +101,5 @@ public class ReserveDTO {
                 ", reserveInformationCollection='" + reserveInformationCollection + '\'' +
                 '}';
     }
+
 }

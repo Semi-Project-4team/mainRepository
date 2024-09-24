@@ -17,10 +17,15 @@
         </div>
 
 <!--        &lt;!&ndash; 수정 버튼(thymeleaf 사용) &ndash;&gt;-->
-<!--        <a th:href="@{/menu/edit/{code}(code=${menu.code})}">수정하기(Thymeleaf)</a>-->
+<!--        <a th:href="@{/reserve/edit/{code}(code=${reserve.personCode})}">수정하기(Thymeleaf)</a>-->
 
 <!--        &lt;!&ndash; 수정 버튼(JavaScript 사용) &ndash;&gt;-->
 <!--        <button id="editButton">수정하기(JavaScript)</button>-->
+
+
+        <form th:action="@{/reserve/update/{code}(code=${reserve.personCode})}" method="get">
+            <button type="submit">수정하기</button>
+        </form>
 
         <form th:action="@{/reserve/delete/{code}(code=${reserve.personCode})}" method="post">
             <button type="submit">삭제하기</button>
