@@ -67,4 +67,12 @@
             )
     </insert>
 
+    <delete id="deleteReview" parameterType="int">
+        DELETE
+        FROM
+        tbl_person_review
+        WHERE
+        person_code = #{personCode}
+    </delete>
+
 </mapper>

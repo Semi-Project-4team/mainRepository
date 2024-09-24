@@ -68,5 +68,16 @@ public class ReviewController {
 
     }
 
+    @PostMapping("/delete/{code}")
+    public String deleteReview(@PathVariable("code") int code,
+                               RedirectAttributes rAttr)    {
+
+        reviewService.deleteReview(code);
+//        rAttr.addFlashAttribute("successMessage", "리뷰가 성공적으로 삭제되었습니다.");
+
+        return "redirect:/review/list";
+
+    }
+
 }
 
