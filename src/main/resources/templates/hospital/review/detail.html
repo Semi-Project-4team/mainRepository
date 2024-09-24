@@ -18,6 +18,10 @@
         <p>리뷰내용: <span th:text="${review.reviewExplanation}"></span></p>
     </div>
 
+
+    <form th:action="@{/review/delete/{code}(code=${review.personCode})}" method="post">
+        <button type="submit">삭제하기</button>
+    </form>
     <button onclick="location.href='/review/list'">이전으로</button><br>
 
 </body>

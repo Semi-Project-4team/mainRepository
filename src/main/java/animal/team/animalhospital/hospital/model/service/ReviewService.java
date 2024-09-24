@@ -40,5 +40,9 @@ public class ReviewService {
     }
 
 
+    @Transactional
+    public void deleteReview(int code) {
 
+            reviewMapper.deleteReview(code);
+    }
 }
