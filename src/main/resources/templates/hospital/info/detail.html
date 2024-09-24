@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>병원정보안내</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .info p {
+            margin: 15px 0;
+        }
+
+        .info span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .info p label {
+            color: #58ccff;
+            font-weight: bold;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #58ccff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #47b4e0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .info {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>선택한 병원 정보</h1>
+    <div class="info">
+        <p><label>병원코드:</label> <span th:text="${ hospital.hospitalCode }"></span></p>
+        <p><label>병원명:</label> <span th:text="${ hospital.name }"></span></p>
+        <p><label>진료시간:</label> <span th:text="${ hospital.time }"></span></p>
+        <p><label>주소:</label> <span th:text="${ hospital.detailAddress }"></span></p>
+        <p><label>소개:</label> <span th:text="${ hospital.introText }"></span></p>
+        <p><label>사진:</label> <img th:src="${ hospital.photo }" alt="병원 사진" style="max-width: 100%; height: auto;"></p>
+        <p><label>전화번호:</label> <span th:text="${ hospital.phoneNumber }"></span></p>
+    </div>
+
+    <!-- 목록으로 돌아가는 버튼 -->
+    <button onclick="location.href='../list'">목록으로</button>
+</div>
+
+</body>
+</html>

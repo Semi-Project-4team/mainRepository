@@ -49,6 +49,11 @@ public class UserController {
         return resultMV(mv, result, "person");
     }
 
+    @GetMapping("/joinMembership")
+    public String joinTheMembership() {
+        return "/user/joinMembership";
+    }
+
     private ModelAndView resultMV(ModelAndView mv, Integer result, String user) {
         String message = null;
 
@@ -66,7 +71,7 @@ public class UserController {
             message = "회원가입이 성공적으로 완료되었습니다.";
             System.out.println(message);
 
-            mv.setViewName("/common/main");
+            mv.setViewName("/auth/login");
         } else {
             message = "알 수 없는 오류가 발생했습니다. 다시 시도해보시거나 관리자에게 문의해주세요.";
             System.out.println(message);

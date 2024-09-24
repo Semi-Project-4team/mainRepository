@@ -17,4 +17,8 @@ public interface NoticeMapper {
     void updateNotice(NoticeDTO notice);
 
     void deleteNotice(int code);
+
+    // 조회수 증가
+    void updateNoticeViews(int code);
+
 }

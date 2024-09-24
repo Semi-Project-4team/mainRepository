@@ -59,10 +59,6 @@ public class ReserveController {
     }
 
 
-    @GetMapping("/regist")
-    public String registPage() {
-        return "/hospital/reserve/regist";
-    }
 
     @GetMapping(value="nameList", produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -71,21 +67,19 @@ public class ReserveController {
         return petService.findAllPet();
     }
 
+    @GetMapping("/regist")
+    public String registPage() {
+
+        return "/hospital/reserve/regist";
+    }
+
+
     @PostMapping("/regist")
     public String registReserve(ReserveDTO newReserve, RedirectAttributes rAttr, Locale locale) {
 
-        System.out.println("controller start");
-
-        System.out.println("newReserve = " + newReserve);
-
-//        newReserve.setPersonCode(2);
-//        newReserve.setHospitalCode(2);
-
-        System.out.println("newReserve = " + newReserve);
 
         reserveService.registNewReserve(newReserve);
 
-        System.out.println("controller end");
 
 //        logger.info("Locale : {}", locale);
 
@@ -93,6 +87,41 @@ public class ReserveController {
 //        rAttr.addFlashAttribute("successMessage", messageSource.getMessage("registReserve", null, locale));
 
         return "redirect:/hospital/reserve/list";
+    }
+
+    @PostMapping("/delete/{code}")
+    public String deleteReserve(@PathVariable("code") int code,
+                                RedirectAttributes rAttr)   {
+
+        reserveService.deleteReserve(code);
+
+//        rAttr.addFlashAttribute("successMessage", "예약이 성공적으로 삭제되었습니다.");
+
+        return "redirect:/reserve/list";
+
+    }
+
+    @GetMapping("/update/{code}")
+    public String updatePage(@PathVariable("code") int code,
+                                   Model model) {
+
+        ReserveDTO reserve = reserveService.findReserveByCode(code);
+
+        model.addAttribute("reserve", reserve);
+
+        return "hospital/reserve/update";
+    }
+
+
+    @PostMapping("/update")
+    public String updateReserve(ReserveDTO reserve, RedirectAttributes rAttr){
+
+        reserveService.updateReserve(reserve);
+
+        rAttr.addFlashAttribute("successMessage", "메뉴가 성공적으로 수정되었습니다.");
+
+
+        return "redirect:/reserve/detail/" + reserve.getPersonCode();
     }
 
 

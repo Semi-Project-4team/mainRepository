@@ -67,8 +67,29 @@
             #{reserveText},
             #{reserveInformationCollection}
             )
-
     </insert>
+
+    <delete id="deleteReserve" parameterType="int">
+        DELETE
+        FROM
+            tbl_reserve
+        WHERE
+            person_code = #{personCode}
+    </delete>
+
+
+    <update id="updateReserve" parameterType="animal.team.animalhospital.hospital.model.dto.ReserveDTO">
+        UPDATE tbl_reserve
+        SET
+            reserve_time = #{reserveTime},
+            reserve_date = #{reserveDate},
+            reserve_text = #{reserveText},
+            reserve_information_collection = #{reserveInformationCollection}
+        WHERE
+            person_code = #{personCode}
+    </update>
+
+
 
 </mapper>
 

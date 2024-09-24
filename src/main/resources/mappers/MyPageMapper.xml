@@ -32,13 +32,18 @@
             person_phone_number
         FROM
             tbl_person
+        where
+            person_email = #{ userEmail };
     </select>
 
     <select id="findMyFavorite" resultMap="favoriteResultMap">
         SELECT
-            favorite_name
+            b.favorite_name
         FROM
-            tbl_favorite
+            tbl_person a
+        Join tbl_favorite b ON a.person_code = b.person_code
+        WHERE
+            a.person_email = #{ userEmail };
     </select>
 
     <delete id="deleteFavorite" parameterType="String">

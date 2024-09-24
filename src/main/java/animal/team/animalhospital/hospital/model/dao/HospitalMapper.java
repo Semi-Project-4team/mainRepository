@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface HospitalMapper {
-    List<SidoDTO> findAllSigungu();
+    List<SigunguDTO> findAllSigungu(int sidoCode);
 
     List<SidoDTO> findAllSido();
 
@@ -15,10 +15,12 @@ public interface HospitalMapper {
 
     List<HospitalDTO> findAllHospital();
 
-    List<EupmyeondongDTO> findAllEupmyeondong();
+    HospitalDTO findByHospitalCode(int code);
+
+    List<EupmyeondongDTO> findAllEupmyeondong(int sigunguCode);
 
     int hospitalSignup(HospitalDTO newUserInfo);
 
-    UserDTO findByHospitalName(String username);
+    HospitalDTO findByHospitalName(String hospitalEmail);
 
 }

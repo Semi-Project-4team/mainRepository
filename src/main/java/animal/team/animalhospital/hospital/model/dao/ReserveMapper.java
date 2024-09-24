@@ -14,4 +14,7 @@ public interface ReserveMapper {
 
     void registNewReserve(ReserveDTO newReserve);
 
+    void deleteReserve(int code);
+
+    void updateReserve(ReserveDTO reserve);
 }

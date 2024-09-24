@@ -15,6 +15,7 @@ public class ReserveService {
 
     @Autowired
     public ReserveService(ReserveMapper reserveMapper) {
+
         this.reserveMapper = reserveMapper;
     }
 
@@ -32,9 +33,18 @@ public class ReserveService {
     @Transactional
     public void registNewReserve(ReserveDTO newReserve) {
 
-        System.out.println("service start");
         reserveMapper.registNewReserve(newReserve);
-        System.out.println("service end");
 
+    }
+
+    @Transactional
+    public void deleteReserve(int code) {
+
+        reserveMapper.deleteReserve(code);
+    }
+
+    @Transactional
+    public void updateReserve(ReserveDTO reserve) {
+        reserveMapper.updateReserve(reserve);
     }
 }
