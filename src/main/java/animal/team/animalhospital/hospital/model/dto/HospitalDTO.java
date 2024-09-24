@@ -1,9 +1,12 @@
 package animal.team.animalhospital.hospital.model.dto;
 
-import java.util.Date;
-import java.util.Objects;
+import animal.team.animalhospital.auth.model.UserRole;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class HospitalDTO {
+import java.util.*;
+
+public class HospitalDTO implements UserDetails {
 
     private int hospitalCode;
     private String subjectCode;
@@ -11,6 +14,7 @@ public class HospitalDTO {
     private String eupmyeondongCode;
     private int userCode;
     private String name;
+//    private String username;
     private String permitNumber;
     private String email;
     private String password;
@@ -39,6 +43,14 @@ public class HospitalDTO {
         this.introText = introText;
         this.phoneNumber = phoneNumber;
         this.photo = photo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhoneNumber() {
@@ -81,14 +93,6 @@ public class HospitalDTO {
         this.userCode = userCode;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPermitNumber() {
         return permitNumber;
     }
@@ -105,8 +109,25 @@ public class HospitalDTO {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return List.of();
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(() -> userRole.getRole());
+        System.out.println("병원 권한을 요구함 : " + authorities);
+        return authorities;
+    }
+
+    @Override
     public String getPassword() {
-        return password;
+        System.out.println("병원 비밀번호 요구함 : " + this.password);
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        System.out.println("병원 아이디 요구함 : " + this.email);
+        return this.email;
     }
 
     public void setPassword(String password) {
@@ -142,7 +163,6 @@ public class HospitalDTO {
     public String getIntroText() {
         return introText;
     }
-
     public void setIntroText(String introText) {
         this.introText = introText;
     }
@@ -157,10 +177,10 @@ public class HospitalDTO {
 
     @Override
     public String toString() {
-        return "hospitalDTO{" +
+        return "HospitalDTO{" +
                 "hospitalCode=" + hospitalCode +
-                ", subjectCode=" + subjectCode +
-                ", eupmyeondongCode=" + eupmyeondongCode +
+                ", subjectCode='" + subjectCode + '\'' +
+                ", eupmyeondongCode='" + eupmyeondongCode + '\'' +
                 ", userCode=" + userCode +
                 ", name='" + name + '\'' +
                 ", permitNumber='" + permitNumber + '\'' +
@@ -170,6 +190,7 @@ public class HospitalDTO {
                 ", time=" + time +
                 ", detailAddress='" + detailAddress + '\'' +
                 ", introText='" + introText + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", photo='" + photo + '\'' +
                 '}';
     }

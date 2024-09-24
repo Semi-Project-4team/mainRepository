@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS tbl_person
     person_birth DATE NOT NULL COMMENT '개인회원생년월일',
     person_phone_number VARCHAR(15) NOT NULL COMMENT '개인회원전화번호',
     person_information_collection VARCHAR(1) NOT NULL COMMENT '정보수집동의확인',
+    person_role varchar(50) NOT NULL COMMENT '개인권한',
 
     CONSTRAINT pk_person_code PRIMARY KEY (person_code)
 ) ENGINE=INNODB COMMENT '개인회원';
@@ -99,6 +100,7 @@ CREATE TABLE IF NOT EXISTS tbl_hospital
     hospital_intro_text varchar(50) COMMENT '병원소개글',
     hospital_phone_number varchar(10) NOT NULL COMMENT '병원전화번호', --
     hospital_photo varchar(10) COMMENT '병원사진',
+    hospital_role varchar(50) NOT NULL COMMENT '병원권한',
     -- table level constraints
     CONSTRAINT pk_hospital_code PRIMARY KEY (hospital_code),
     CONSTRAINT fk_eupmyeondong_code FOREIGN KEY (eupmyeondong_code) REFERENCES tbl_eupmyeondong (eupmyeondong_code),

@@ -75,8 +75,14 @@ public class UserService {
         return result;
     }
 
-    public UserDTO findByHospitalName(String hospitalName) {
-        UserDTO foundHospitalName = hospitalMapper.findByHospitalName(hospitalName);
+    public HospitalDTO findByHospitalName(String hospitalEmail) {
+
+        System.out.println("findByHospitalName : " + hospitalEmail);
+
+        HospitalDTO foundHospitalName = hospitalMapper.findByHospitalName(hospitalEmail);
+
+        System.out.println("foundHospitalName = " + foundHospitalName);
+
         if (!Objects.isNull(foundHospitalName)) {
             return foundHospitalName;
         } else {
