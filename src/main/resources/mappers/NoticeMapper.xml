@@ -54,6 +54,15 @@
             )
     </insert>
 
+    <select id="selectNoticeName">
+        SELECT
+            notice_name
+        FROM
+            tbl_notice
+        WHERE
+            notice_code = 1
+    </select>
+
     <!-- 조회수 증가 -->
     <update id="updateNoticeViews" parameterType="int">
         UPDATE
