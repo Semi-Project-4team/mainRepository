@@ -92,16 +92,37 @@ public class UserController {
     public void hospitalFindId() {}
 
     @PostMapping("/findIdHospital")
-    public String hospitalFindId(Model mv,
+    public String hospitalFindEmail(Model mv,
                                  @ModelAttribute HospitalDTO newUserInfo) {
 //        System.out.println(newUserInfo.toString());
 //        System.out.println(newUserInfo.getInformationCollection());
-        HospitalDTO resultList = userService.hospitalFindId(newUserInfo);
+        HospitalDTO resultList = userService.hospitalFindEmail(newUserInfo);
 
         mv.addAttribute("resultList", resultList);
 
-        return "/user/findIdHospitalList";
+        return "/user/findIdList";
 
+    }
+
+    @GetMapping("/findIdPerson")
+    public void personFindEmail() {}
+
+    @PostMapping("/findIdPerson")
+    public String personFindEmail(Model mv,
+                                 @ModelAttribute PersonDTO newUserInfo) {
+//        System.out.println(newUserInfo.toString());
+//        System.out.println(newUserInfo.getInformationCollection());
+        PersonDTO resultList = userService.personFindEmail(newUserInfo);
+
+        mv.addAttribute("resultList", resultList);
+
+        return "/user/findIdList";
+
+    }
+
+    @GetMapping("/joinFindPassword")
+    public String joinFindPassword() {
+        return "/user/joinFindPassword";
     }
 
 }
