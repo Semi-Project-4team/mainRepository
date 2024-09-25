@@ -6,6 +6,7 @@ import animal.team.animalhospital.hospital.model.dto.SignupDTO;
 import animal.team.animalhospital.hospital.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -80,6 +81,27 @@ public class UserController {
         }
 
         return mv;
+    }
+
+    @GetMapping("/joinFindId")
+    public String joinFindId() {
+        return "/user/joinFindId";
+    }
+
+    @GetMapping("/findIdHospital")
+    public void hospitalFindId() {}
+
+    @PostMapping("/findIdHospital")
+    public String hospitalFindId(Model mv,
+                                 @ModelAttribute HospitalDTO newUserInfo) {
+//        System.out.println(newUserInfo.toString());
+//        System.out.println(newUserInfo.getInformationCollection());
+        HospitalDTO resultList = userService.hospitalFindId(newUserInfo);
+
+        mv.addAttribute("resultList", resultList);
+
+        return "/user/findIdHospitalList";
+
     }
 
 }

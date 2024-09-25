@@ -100,6 +100,15 @@
         where
             hospital_email = #{ hospitalEmail };
     </select>
+    <select id="hospitalFindId" resultMap="hospitalMap">
+        select
+            hospital_email
+        from
+            tbl_hospital
+        where
+            hospital_name = #{ name }
+            and hospital_phone_number = #{ phoneNumber };
+    </select>
 
     <insert id="hospitalSignup" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
         INSERT INTO
