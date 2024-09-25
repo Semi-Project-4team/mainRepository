@@ -1,15 +1,15 @@
 <header class="header" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <!-- 로고 왼쪽 -->
     <div class="logo-div">
-        <img src="/images/logo.png" class="logo"/>
+        <img src="/images/logo.png" class="logo" onclick="location.href='/'"/>
     </div>
 
     <!-- 회원관리, 로그인 버튼 오른쪽 -->
     <div class="user-controls-div">
         <!--로그인을 안했을 경우-->
-        <div sec:authorize="!isAuthenticated()">
-            <button onclick="location.href='/auth/login'">로그인</button>
-            <button onclick="location.href='/user/joinMembership'">회원가입</button>
+        <div class="headerBtn" sec:authorize="!isAuthenticated()">
+            <button onclick="location.href='/auth/login'" class="loginBtn">로그인</button>
+            <button onclick="location.href='/user/joinMembership'" class="joinBtn">회원가입</button>
         </div>
         <!--로그인을 했을 경우-->
         <div sec:authorize="isAuthenticated()">
