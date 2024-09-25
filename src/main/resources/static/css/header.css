@@ -1,9 +1,13 @@
 .header {
+    position: absolute; /* 화면 상단에 고정 */
+    top: 0; /* 페이지의 최상단에 위치 */
+    left: 0;
+    width: 100%; /* 화면의 전체 너비로 설정 */
     display: flex;
     justify-content: space-between; /* 왼쪽과 오른쪽을 나눔 */
     align-items: center; /* 수직 중앙 정렬 */
     padding: 10px;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
 }
 
 /* 로고 영역 */
@@ -15,7 +19,6 @@
 /* 오른쪽 버튼 영역 */
 .user-controls {
     display: flex;
-    gap: 15px; /* 버튼 사이 간격 */
 }
 
 .user-controls button {
