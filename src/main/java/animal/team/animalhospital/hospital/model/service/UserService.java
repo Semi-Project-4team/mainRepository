@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.annotation.Target;
 import java.util.Objects;
 
 @Service
@@ -153,6 +154,20 @@ public class UserService {
         }
     }
 
+    public boolean findByPersonEmail(String email) {
+        System.out.println("findByPersonEmail : " + email);
+
+        String personEmail = personMapper.findByPersonEmail(email);
+
+        System.out.println("findByPersonEmail = " + personEmail);
+
+        if (!Objects.isNull(personEmail)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Transactional
     public Integer updatePasswordHospital(HospitalDTO newUserInfo) {
 
@@ -175,5 +190,28 @@ public class UserService {
 
         return result;
 
+    }
+
+    @Transactional
+    public Integer updatePasswordPerson(PersonDTO newUserInfo) {
+
+        System.out.println("비밀번호 변경 평문 : " + newUserInfo.getPassword());
+        newUserInfo.setPassword(encoder.encode(newUserInfo.getPassword()));
+        System.out.println("비밀번호 변경 암호문 : " + newUserInfo.getPassword());
+
+        Integer result = null;
+
+        try {
+            result = personMapper.updatePasswordPerson(newUserInfo);
+        } catch (DuplicateKeyException e) {     // 데이터 무결성 위반(중복 키) 발생 시 처리
+            result = 0;
+            e.printStackTrace();
+        } catch (BadSqlGrammarException e) {
+            result = 0;
+            e.printStackTrace();
+        }
+        System.out.println("(개인) 비밀번호 처리 결과 => " + result);
+
+        return result;
     }
 }

@@ -14,6 +14,15 @@
         <result property="informationCollection" column="person_information_collection"/>
     </resultMap>
 
+    <update id="updatePasswordPerson" parameterType="animal.team.animalhospital.hospital.model.dto.PersonDTO">
+        update
+            tbl_person
+        set
+            person_password = #{ password }
+        where
+            person_email = #{ email };
+    </update>
+
     <select id="findByPersonCode" resultType="int">
         select
             person_code
@@ -66,6 +75,15 @@
         where
             person_name = #{ name }
             and person_phone_number = #{ phoneNumber };
+    </select>
+
+    <select id="findByPersonEmail" resultType="String">
+        select
+            person_email
+        from
+            tbl_person
+        where
+            person_email = #{ email };
     </select>
 
     <insert id="personRegist" parameterType="animal.team.animalhospital.hospital.model.dto.PersonDTO">
