@@ -19,6 +19,7 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         h1 {
@@ -47,9 +48,15 @@
             font-weight: bold;
         }
 
+        /* 수정하기 버튼을 상자의 오른쪽 위에 위치 */
+        .edit-button {
+            position: absolute;
+            top: 10px;
+            right: 100px;
+        }
+
         button {
             display: block;
-            width: 100%;
             padding: 12px;
             background-color: #58ccff;
             color: white;
@@ -62,6 +69,13 @@
 
         button:hover {
             background-color: #47b4e0;
+        }
+
+        /* 예약하기와 목록으로 버튼을 오른쪽으로 정렬 */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
         }
 
         @media (max-width: 768px) {
@@ -81,6 +95,11 @@
 </head>
 <body>
 
+<!--수정버튼-->
+<form th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">
+    <button class="edit-button" type="submit">동물병원 정보 수정하기</button>
+</form>
+
 <div class="container">
     <h1>선택한 병원 정보</h1>
     <div class="info">
@@ -93,8 +112,11 @@
         <p><label>전화번호:</label> <span th:text="${ hospital.phoneNumber }"></span></p>
     </div>
 
-    <!-- 목록으로 돌아가는 버튼 -->
-    <button onclick="location.href='../list'">목록으로</button>
+    <!-- 예약하기와 목록으로 돌아가는 버튼 -->
+    <div class="action-buttons">
+        <button class="button" onclick="location.href='/reserve/regist'">예약하기</button>
+        <button onclick="location.href='../list'">목록으로</button>
+    </div>
 </div>
 
 </body>

@@ -23,5 +23,8 @@ public interface PersonMapper {
 
     PersonDTO findByPersonName(String personEmail);
 
+
+    int findByPersonCode(String userEmail);
+
     PersonDTO personFindEmail(PersonDTO newUserInfo);
 }

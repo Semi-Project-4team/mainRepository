@@ -78,7 +78,7 @@
             tbl_notice
         SET
             notice_name = #{name},
-            notice_date = #{date},
+<!--            notice_date = #{date},-->
             notice_views = #{views},
             notice_text = #{text}
         WHERE

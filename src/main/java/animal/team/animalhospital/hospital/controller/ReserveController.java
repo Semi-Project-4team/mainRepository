@@ -2,17 +2,24 @@ package animal.team.animalhospital.hospital.controller;
 
 import animal.team.animalhospital.hospital.model.dto.PetDTO;
 import animal.team.animalhospital.hospital.model.dto.ReserveDTO;
+import animal.team.animalhospital.hospital.model.service.PersonService;
 import animal.team.animalhospital.hospital.model.service.PetService;
 import animal.team.animalhospital.hospital.model.service.ReserveService;
+import animal.team.animalhospital.hospital.model.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,12 +32,16 @@ public class ReserveController {
     private final ReserveService reserveService;
     private final MessageSource messageSource;
     private final PetService petService;
+    private final UserService userService;
+    private final PersonService personService;
 
     @Autowired
-    public ReserveController(ReserveService reserveService, MessageSource messageSource, PetService petService) {
+    public ReserveController(ReserveService reserveService, MessageSource messageSource, PetService petService, UserService userService, PersonService personService) {
         this.reserveService = reserveService;
         this.messageSource = messageSource;
         this.petService = petService;
+        this.userService = userService;
+        this.personService = personService;
     }
 
 
@@ -75,8 +86,19 @@ public class ReserveController {
 
 
     @PostMapping("/regist")
-    public String registReserve(ReserveDTO newReserve, RedirectAttributes rAttr, Locale locale) {
+    public String registReserve(ReserveDTO newReserve, RedirectAttributes rAttr) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String userEmail = userDetails.getUsername();
+
+        int userCode = personService.findByPersonCode(userEmail);
+
+
+        newReserve.setPersonCode(userCode);
+
+        newReserve.setHospitalCode(7);              // 병원코드 강제주입구문(임시)
 
         reserveService.registNewReserve(newReserve);
 
@@ -86,7 +108,7 @@ public class ReserveController {
 //        rAttr.addFlashAttribute("successMessage", "신규 예약 등록에 성공하셨습니다.");
 //        rAttr.addFlashAttribute("successMessage", messageSource.getMessage("registReserve", null, locale));
 
-        return "redirect:/hospital/reserve/list";
+        return "redirect:/reserve/list";
     }
 
     @PostMapping("/delete/{code}")
@@ -118,7 +140,7 @@ public class ReserveController {
 
         reserveService.updateReserve(reserve);
 
-        rAttr.addFlashAttribute("successMessage", "메뉴가 성공적으로 수정되었습니다.");
+        rAttr.addFlashAttribute("successMessage", "예약이 성공적으로 수정되었습니다.");
 
 
         return "redirect:/reserve/detail/" + reserve.getPersonCode();
