@@ -111,6 +111,15 @@
             and hospital_phone_number = #{ phoneNumber };
     </select>
 
+    <select id="findByHospitalEmail" resultType="String">
+        select
+            hospital_email
+        from
+            tbl_hospital
+        where
+            hospital_email = #{ email };
+    </select>
+
     <insert id="hospitalSignup" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
         INSERT INTO
             tbl_hospital
@@ -160,6 +169,15 @@
             hospital_photo = #{photo}
         WHERE
             hospital_code = #{hospitalCode}
+    </update>
+
+    <update id="updatePasswordHospital" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
+        update
+            tbl_hospital
+        set
+            hospital_password = #{ password }
+        where
+            hospital_email = #{ email };
     </update>
 
 </mapper>
