@@ -6,14 +6,19 @@
     display: flex;
     justify-content: space-between; /* 왼쪽과 오른쪽을 나눔 */
     align-items: center; /* 수직 중앙 정렬 */
-    padding: 10px;
     background-color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 /* 로고 영역 */
 .logo {
     width: auto;
     height: 50px;
+}
+
+.logo:hover {
+    cursor: pointer;
 }
 
 /* 오른쪽 버튼 영역 */
@@ -33,4 +38,30 @@
 
 .user-controls button:hover {
     background-color: #0056b3;
+}
+
+.headerBtn {
+    margin-right: 20px;
+}
+
+.logo-div {
+    margin-left: 20px;
+}
+
+.loginBtn {
+    color: white;
+    background: #58ccff;
+    font-size: large;
+    padding: 5px;
+    border: solid white;
+    border-radius: 10px;
+}
+
+.joinBtn {
+    color: white;
+    background: #58ccff;
+    font-size: large;
+    padding: 5px;
+    border: solid white;
+    border-radius: 10px;
 }
