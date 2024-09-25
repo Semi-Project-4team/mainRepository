@@ -117,6 +117,21 @@ public class UserService {
 
         if (!Objects.isNull(foundHospitalInfo)) {
             return foundHospitalInfo;
+          
+        } else {
+            return null;
+        }
+    }
+
+    public PersonDTO personFindEmail(PersonDTO newUserInfo) {
+        System.out.println("personFindEmail : " + newUserInfo);
+
+        PersonDTO foundPersonInfo = personMapper.personFindEmail(newUserInfo);
+
+        System.out.println("personFindEmail = " + foundPersonInfo);
+
+        if (!Objects.isNull(foundPersonInfo)) {
+            return foundPersonInfo;
         } else {
             return null;
         }

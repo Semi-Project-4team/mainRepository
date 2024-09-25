@@ -25,4 +25,5 @@ public interface HospitalMapper {
 
     HospitalDTO findByHospitalName(String hospitalEmail);
 
+    void updateHospital(HospitalDTO hospital);
 }

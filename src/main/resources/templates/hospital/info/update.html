@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>동물병원 정보 수정</title>
+</head>
+<body>
+    <h1>동물병원 정보 수정하기</h1>
+
+    <form th:action="@{/hospital/info/update}" th:object="${hospital}" method="post">
+        <input type="hidden" th:field="*{hospitalCode}"/>
+        <label>병원명: </label><input type="text" id="name" th:field="*{name}" required />
+        <label>진료시간: </label><input type="text" id="time" th:field="*{time}" required />
+        <label>주소: </label><input type="text" id="detailAddress" th:field="*{detailAddress}" required />
+        <label>소개: </label><input type="text" id="introText" th:field="*{introText}" required />
+        <label>사진: </label><input type="text" id="photo" th:field="*{photo}" required />
+        <label>전화번호: </label><input type="text" id="phoneNumber" th:field="*{phoneNumber}" required />
+        <button type="submit">수정하기</button>
+    </form>
+
+    <div>
+        <button onclick="history.back()">수정취소</button>
+    </div>
+
+</body>
+</html>
