@@ -2,11 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>공지사항</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f8fb;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #58ccff;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #58ccff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #58ccff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #58ccff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #3bb2e0;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .button-container button {
+            margin: 0 10px;
+        }
+
+    </style>
 </head>
 <body>
 
-    <button onclick="location.href='/notice/insert'">새 공지사항 등록하기</button>
+<h3>Notice</h3>
+<hr>
+
+<div class="container">
+
+    <div class="button-container">
+        <button onclick="location.href='/notice/insert'">새 공지사항 등록하기</button>
+        <button onclick="location.href='/'">메인으로</button>
+    </div>
+
     <table>
         <tr>
             <th>공지사항코드</th>
@@ -20,9 +106,8 @@
             <td th:text="${ notice.date }"></td>
             <td th:text="${ notice.views }"></td>
         </tr>
-
     </table>
-    <br>
-    <button onclick="location.href='/'">메인으로</button>
+</div>
+
 </body>
 </html>
