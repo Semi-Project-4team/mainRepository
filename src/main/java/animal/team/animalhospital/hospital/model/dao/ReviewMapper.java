@@ -16,4 +16,6 @@ public interface ReviewMapper {
     void registNewReview(ReviewDTO newReview);
 
     void deleteReview(int code);
+
+    void updateReview(ReviewDTO review);
 }
