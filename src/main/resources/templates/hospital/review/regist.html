@@ -10,7 +10,6 @@
         <form action="/review/regist" method="post">
             파일: <input type="file" name="singleFile"><br>
 
-        </form>
 
         <label>리뷰점수: </label>
         <select name="reviewScore">
@@ -23,11 +22,12 @@
         <br>
         리뷰내용:
         <br>
-        <textarea name="reserveText" id="contents" cols="30" rows="10"
+        <textarea name="reviewExplanation" id="contents" cols="30" rows="10"
                       style="resize:none" maxlength="100">abc</textarea>
 
-        <input type="submit" value="업로드">
+        <button type="submit">전송</button>
 
+        </form>
 
 </body>
 </html>
