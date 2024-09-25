@@ -21,6 +21,22 @@
   </tr>
 </table>
 
+<h3>예약내역</h3>
+<table>
+  <tr>
+    <th>병원명</th>
+    <th>예약날짜</th>
+    <th>예약시간</th>
+<!--    <th>예약상태</th>-->
+  </tr>
+
+  <tr th:each="myHospital : ${ myHospitalList }">
+    <td th:text="${ myHospital.name }"></td>
+    <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveDate }"></td>
+    <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveTime }"></td>
+  </tr>
+</table>
+
 <h3>즐겨찾기</h3>
 <table>
   <tr>
