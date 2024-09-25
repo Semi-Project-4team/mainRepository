@@ -104,4 +104,18 @@ public class UserService {
             return null;
         }
     }
+
+    public HospitalDTO hospitalFindId(HospitalDTO newUserInfo) {
+        System.out.println("hospitalFindId : " + newUserInfo);
+
+        HospitalDTO foundHospitalName = hospitalMapper.hospitalFindId(newUserInfo);
+
+        System.out.println("hospitalFindId = " + foundHospitalName);
+
+        if (!Objects.isNull(foundHospitalName)) {
+            return foundHospitalName;
+        } else {
+            return null;
+        }
+    }
 }
