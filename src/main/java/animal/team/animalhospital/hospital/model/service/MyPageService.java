@@ -23,11 +23,12 @@ public class MyPageService {
         return myPageMapper.findMyInfo(userEmail);
     }
 
-    public List<FavoriteDTO> findMyFavorite() { return myPageMapper.findMyFavorite(); }
-
-    public List<PetDTO> findMyPet() { return myPageMapper.findMyPet();}
     public List<FavoriteDTO> findMyFavorite(String userEmail) {
         return myPageMapper.findMyFavorite(userEmail);
+    }
+
+    public List<PetDTO> findMyPet(String userEmail) {
+        return myPageMapper.findMyPet(userEmail);
     }
 
     @Transactional
@@ -35,6 +36,8 @@ public class MyPageService {
         myPageMapper.deleteFavorite(name);
     }
 
+    public void insertMyPet(PetDTO newPet) {
+    }
+
+
 }
-
-

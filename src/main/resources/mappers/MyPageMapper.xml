@@ -4,28 +4,34 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="animal.team.animalhospital.hospital.model.dao.MyPageMapper">
 
-    <resultMap id="myPageResultMap" type="animal.team.animalhospital.hospital.model.dto.PersonDTO">
-        <id property="name" column="person_name"/>
+    <resultMap id="personMap" type="animal.team.animalhospital.hospital.model.dto.PersonDTO">
+        <id property="personCode" column="person_code"/>
+        <result property="name" column="person_name"/>
         <result property="email" column="person_email"/>
+        <result property="password" column="person_password"/>
+        <result property="birth" column="person_phone_birth"/>
         <result property="phoneNumber" column="person_phone_number"/>
+        <result property="informationCollection" column="person_information_collection"/>
     </resultMap>
 
-    <resultMap id="favoriteResultMap" type="animal.team.animalhospital.hospital.model.dto.FavoriteDTO">
+    <resultMap id="favoriteMap" type="animal.team.animalhospital.hospital.model.dto.FavoriteDTO">
         <id property="personCode" column="person_code"/>
         <result property="favoriteName" column="favorite_name"/>
     </resultMap>
 
-    <resultMap id="petResultMap" type="animal.team.animalhospital.hospital.model.dto.PetDTO">
-        <result property="petProfile" column="pet_profile"/>
+    <resultMap id="petMap" type="animal.team.animalhospital.hospital.model.dto.PetDTO">
+        <id property="petPersonCode" column="pet_person_code"/>
+        <id property="PersonCode" column="person_code"/>
         <result property="petName" column="pet_name"/>
         <result property="petType" column="pet_type"/>
-        <result property="petGender" column="pet_gender"/>
         <result property="petBirth" column="pet_birth"/>
         <result property="petVaccination" column="pet_vaccination"/>
         <result property="petChip" column="pet_chip"/>
+        <result property="petProfile" column="pet_profile"/>
+        <result property="petGender" column="pet_gender"/>
     </resultMap>
 
-    <select id="findMyInfo" resultMap="myPageResultMap">
+    <select id="findMyInfo" resultMap="personMap">
         SELECT
             person_name,
             person_email,
@@ -36,7 +42,7 @@
             person_email = #{ userEmail };
     </select>
 
-    <select id="findMyFavorite" resultMap="favoriteResultMap">
+    <select id="findMyFavorite" resultMap="favoriteMap">
         SELECT
             b.favorite_name
         FROM
@@ -54,7 +60,7 @@
             favorite_name = #{name}
     </delete>
 
-    <select id="findMyPet" resultMap="petResultMap">
+    <select id="findMyPet" resultMap="petMap">
         SELECT
             pet_profile,
             pet_name,
@@ -64,7 +70,10 @@
             pet_vaccination,
             pet_chip
         FROM
-            tbl_pet
+            tbl_pet a
+        Join tbl_person b ON a.person_code = b.person_code
+        WHERE
+            b.person_email = #{ userEmail };
     </select>
 
 </mapper>

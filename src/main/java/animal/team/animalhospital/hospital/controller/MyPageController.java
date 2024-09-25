@@ -2,6 +2,7 @@ package animal.team.animalhospital.hospital.controller;
 
 import animal.team.animalhospital.hospital.model.dto.FavoriteDTO;
 import animal.team.animalhospital.hospital.model.dto.PersonDTO;
+import animal.team.animalhospital.hospital.model.dto.PetDTO;
 import animal.team.animalhospital.hospital.model.service.FavoriteService;
 import animal.team.animalhospital.hospital.model.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,12 @@ public class MyPageController {
     private final MyPageService myPageService;
 
     @Autowired
-    public MyPageController(MyPageService myPageService, FavoriteService favoriteService) {
+    public MyPageController(MyPageService myPageService) {
         this.myPageService = myPageService;
     }
 
     @GetMapping("/myInfo")
-    public String MyInfoList(Model model){
+    public String MyInfoList(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
@@ -38,12 +39,15 @@ public class MyPageController {
 
         List<PersonDTO> myInfoList = myPageService.findMyInfo(userEmail);
         List<FavoriteDTO> myFavoriteList = myPageService.findMyFavorite(userEmail);
+        List<PetDTO> myPetList = myPageService.findMyPet(userEmail);
 
         System.out.println("myInfoList = " + myInfoList);
         System.out.println("myFavoriteList = " + myFavoriteList);
+        System.out.println("myPetList = " + myPetList);
 
-        model.addAttribute("myFavoriteList",myFavoriteList);
-        model.addAttribute("myInfoList",myInfoList);
+        model.addAttribute("myFavoriteList", myFavoriteList);
+        model.addAttribute("myInfoList", myInfoList);
+        model.addAttribute("myPetList",myPetList);
 
         return "hospital/myPage/list";
     }
@@ -55,12 +59,13 @@ public class MyPageController {
         return "redirect:/myPage/myInfo";
     }
 
-//    @GetMapping("/myPet")
-//    public String MyPetList(Model model){
-//        List<FavoriteDTO> myFavoriteList = myPageService.findMyFavorite();
-//
-//        model.addAttribute("myFavoriteList",myFavoriteList);
-//
-//        return "hospital/myPage/list";
-//    }
+    @GetMapping("/insert")
+    public String insertPage() {return "/hospital/myPage/insert";}
+
+    @PostMapping("/insert")
+    public String insertMyPet(PetDTO newPet) {
+        myPageService.insertMyPet(newPet);
+        return "redirect:/myPage/myInfo";
+    }
+
 }

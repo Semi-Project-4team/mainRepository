@@ -14,7 +14,7 @@ public interface MyPageMapper {
 
     List<FavoriteDTO> findMyFavorite(String userEmail);
 
-    List<PetDTO> findMyPet();
+    List<PetDTO> findMyPet(String userEmail);
 
     void deleteFavorite(String name);
 
