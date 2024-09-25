@@ -2,8 +2,10 @@ package animal.team.animalhospital.hospital.model.dao;
 
 import animal.team.animalhospital.hospital.model.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface HospitalMapper {
@@ -26,4 +28,8 @@ public interface HospitalMapper {
     HospitalDTO findByHospitalName(String hospitalEmail);
 
     void updateHospital(HospitalDTO hospital);
+
+    String findByHospitalEmail(String email);
+
+    int updatePasswordHospital(HospitalDTO newUserInfo);
 }

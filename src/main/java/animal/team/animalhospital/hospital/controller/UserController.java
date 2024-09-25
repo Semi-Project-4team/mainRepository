@@ -7,10 +7,7 @@ import animal.team.animalhospital.hospital.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -124,5 +121,58 @@ public class UserController {
     public String joinFindPassword() {
         return "/user/joinFindPassword";
     }
+
+
+    @GetMapping("/findPasswordHospital")
+    public String findPasswordHospital() {
+        return "/user/findPasswordHospital";
+    }
+
+    @GetMapping("/findPasswordHospitalForm")
+    public String findPasswordHospitalForm(@RequestParam("email") String email, Model mv) {
+        // 입력된 email db에 있는 지 확인
+
+        boolean isResult = userService.findByHospitalEmail(email);
+
+        System.out.println("isResult = " + isResult);
+
+        if(!isResult) {
+            mv.addAttribute("error", "검색된 아이디가 없습니다.");
+            return "/auth/error";
+        }
+
+        mv.addAttribute("email", email);
+
+        return "/user/resetHospitalPassword";
+    }
+
+    @PostMapping("/updatePasswordHospital")
+    public String updatePasswordHospital(Model mv,
+                                         @RequestParam("email") String email,  // 이메일 값 받기
+                                         @RequestParam("newPassword") String newPassword,
+                                         @RequestParam("confirmPassword") String confirmPassword) {
+
+        if(!newPassword.equals(confirmPassword)) {
+            mv.addAttribute("error", "패스워드가 같지 않습니다.");
+            mv.addAttribute("email", email);
+            return "/user/resetHospitalPassword";
+        }
+
+        System.out.println("email = " + email);
+        System.out.println("newPassword = " + newPassword);
+        System.out.println("confirmPassword = " + confirmPassword);
+
+        HospitalDTO newUserInfo = new HospitalDTO();
+        newUserInfo.setEmail(email);
+        newUserInfo.setPassword(newPassword);
+
+
+        userService.updatePasswordHospital(newUserInfo);
+
+
+        return "/auth/login";
+
+    }
+
 
 }
