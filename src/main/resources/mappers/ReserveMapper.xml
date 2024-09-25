@@ -41,6 +41,7 @@
             tbl_reserve
         WHERE
             person_code = #{personCode}
+        LIMIT 1
     </select>
 
 

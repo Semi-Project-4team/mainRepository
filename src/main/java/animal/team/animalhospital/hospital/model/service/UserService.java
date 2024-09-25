@@ -1,10 +1,10 @@
 package animal.team.animalhospital.hospital.model.service;
 
+import animal.team.animalhospital.hospital.controller.UserController;
 import animal.team.animalhospital.hospital.model.dao.HospitalMapper;
 import animal.team.animalhospital.hospital.model.dao.PersonMapper;
 import animal.team.animalhospital.hospital.model.dto.HospitalDTO;
 import animal.team.animalhospital.hospital.model.dto.PersonDTO;
-import animal.team.animalhospital.hospital.model.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -17,6 +17,7 @@ import java.util.Objects;
 @Service
 public class UserService {
 
+//    private final UserController userController;
     private PasswordEncoder encoder;
     private HospitalMapper hospitalMapper;
     private PersonMapper personMapper;
@@ -26,6 +27,7 @@ public class UserService {
         this.encoder = encoder;
         this.hospitalMapper = userMapper;
         this.personMapper = personMapper;
+//        this.userController = userController;
     }
 
     @Transactional
@@ -118,4 +120,6 @@ public class UserService {
             return null;
         }
     }
+
+
 }

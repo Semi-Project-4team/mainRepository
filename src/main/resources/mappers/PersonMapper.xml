@@ -14,6 +14,15 @@
         <result property="informationCollection" column="person_information_collection"/>
     </resultMap>
 
+    <select id="findByPersonCode" resultType="int">
+        select
+            person_code
+        from
+            tbl_person
+        where
+            person_email = #{ userEmail }
+    </select>
+
     <select id="findAllPerson" resultMap="personResultMap">
         SELECT
             person_code,

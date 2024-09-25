@@ -36,4 +36,15 @@ public class PersonService {
     public void deletePerson(int code) {
         personMapper.deletePerson(code);
     }
+
+
+    public int findByPersonCode(String userEmail) {
+        System.out.println("findByPersonCode : " + userEmail);
+
+        int foundPersonCode = personMapper.findByPersonCode(userEmail);
+
+        System.out.println("findByPersonCode = " + foundPersonCode);
+
+        return foundPersonCode;
+    }
 }
