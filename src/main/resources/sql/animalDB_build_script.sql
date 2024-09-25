@@ -269,7 +269,9 @@ INSERT INTO
     reserve_text,
     reserve_information_collection)
 VALUES
-    (1,1,now(),now(),'hi','Y');
+    (1,1,now(),now(),'hi','Y'),
+    (2,2,now(),now(),'qwe','Y'),
+    (3,3,now(),now(),'ert','Y');
 
 INSERT INTO
     tbl_person_review

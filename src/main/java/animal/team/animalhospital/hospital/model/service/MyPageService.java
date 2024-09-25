@@ -1,9 +1,7 @@
 package animal.team.animalhospital.hospital.model.service;
 
 import animal.team.animalhospital.hospital.model.dao.MyPageMapper;
-import animal.team.animalhospital.hospital.model.dto.FavoriteDTO;
-import animal.team.animalhospital.hospital.model.dto.PersonDTO;
-import animal.team.animalhospital.hospital.model.dto.PetDTO;
+import animal.team.animalhospital.hospital.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +19,14 @@ public class MyPageService {
 
     public List<PersonDTO> findMyInfo(String userEmail) {
         return myPageMapper.findMyInfo(userEmail);
+    }
+
+    public List<ReserveDTO> findMyReserve(String userEmail) {
+        return myPageMapper.findMyReserve(userEmail);
+    }
+
+    public List<HospitalDTO> findMyHospital(String userEmail) {
+        return myPageMapper.findMyHospital(userEmail);
     }
 
     public List<FavoriteDTO> findMyFavorite(String userEmail) {
