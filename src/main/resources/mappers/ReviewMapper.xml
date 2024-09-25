@@ -44,8 +44,7 @@
 
     <insert id="registNewReview" parameterType="animal.team.animalhospital.hospital.model.dto.ReviewDTO"
             useGeneratedKeys="true" keyProperty="personCode">
-        INSERT INTO
-            tbl_person_review
+        INSERT INTO tbl_person_review
             (
             person_code,
             hospital_code,

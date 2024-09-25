@@ -1,12 +1,16 @@
 package animal.team.animalhospital.hospital.model.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ReviewDTO {
 
     private int personCode;
     private int hospitalCode;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date reviewWriteDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date reviewModifyDate;
     private int reviewScore;
     private String reviewPhoto;

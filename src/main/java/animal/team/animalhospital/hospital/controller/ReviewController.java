@@ -1,7 +1,7 @@
 package animal.team.animalhospital.hospital.controller;
 
-import animal.team.animalhospital.hospital.model.dao.ReviewMapper;
 import animal.team.animalhospital.hospital.model.dto.ReviewDTO;
+import animal.team.animalhospital.hospital.model.service.PersonService;
 import animal.team.animalhospital.hospital.model.service.ReviewService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/review")
@@ -27,10 +29,14 @@ public class ReviewController {
     private static final Logger logger = LogManager.getLogger(ReserveController.class);
 
     private final ReviewService reviewService;
+    private final PersonService personService;
+
 
     @Autowired
-    public ReviewController(ReviewService reviewService, MessageSource messageSource) {
+    public ReviewController(ReviewService reviewService, MessageSource messageSource,PersonService personService) {
         this.reviewService = reviewService;
+        this.personService = personService;
+
     }
 
     @GetMapping("/list")
@@ -61,15 +67,34 @@ public class ReviewController {
     }
 
 
-    @PostMapping("/list/regist")
+    @PostMapping("/regist")
     public String registReview(ReviewDTO newReview,RedirectAttributes rAttr) {
 
+
+        System.out.println("userDetails123 = ");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userEmail = authentication.getName();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        System.out.println("userDetails = " + userDetails);
+
+        String userEmail = userDetails.getUsername();
+
+        int userCode = personService.findByPersonCode(userEmail);
+
+        System.out.println("userCode = " + userCode);
+
+
+        newReview.setPersonCode(userCode);
+
+        newReview.setHospitalCode(7);              // 병원코드 강제주입구문(임시)
+
+        Date currentDate = new Date();
+        newReview.setReviewWriteDate(currentDate);
+        newReview.setReviewModifyDate(currentDate);
 
         reviewService.registNewReview(newReview);
 
-        return "redirect:/hospital/review/list";
+        return "redirect:/review/list";
 
     }
 
