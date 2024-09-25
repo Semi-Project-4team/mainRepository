@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS tbl_person_review(
                                                 review_write_date DATE NOT NULL COMMENT '리뷰작성일자',
                                                 review_modify_date DATE NOT NULL COMMENT '리뷰수정일자',
                                                 review_score int NOT NULL COMMENT '리뷰점수',
-                                                review_photo VARCHAR(10) NOT NULL COMMENT '리뷰사진',
+                                                review_photo VARCHAR(10) NULL COMMENT '리뷰사진',
                                                 review_explanation VARCHAR(100) NOT NULL COMMENT '리뷰내용',
 
     -- 복합 기본키 설정
@@ -126,6 +126,7 @@ CREATE TABLE IF NOT EXISTS tbl_person_review(
 CREATE TABLE IF NOT EXISTS tbl_reserve (
                                            person_code int NOT NULL COMMENT '개인코드',
                                            hospital_code int NOT NULL COMMENT '병원코드',
+                                           pet_person_code int NOT NULL COMMENT '반려동물코드',
                                            reserve_time TIME NOT NULL COMMENT '방문시간',
                                            reserve_date DATE NOT NULL COMMENT '방문날짜',
                                            reserve_text VARCHAR(100) NULL COMMENT '전달사항',
@@ -264,12 +265,13 @@ INSERT INTO
 (
     person_code,
     hospital_code,
+    pet_person_code,
     reserve_time,
     reserve_date,
     reserve_text,
     reserve_information_collection)
 VALUES
-    (1,1,now(),now(),'hi','Y');
+    (1,1,1,now(),now(),'hi','Y');
 
 INSERT INTO
     tbl_person_review
