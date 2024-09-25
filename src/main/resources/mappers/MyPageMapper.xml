@@ -74,7 +74,7 @@
         FROM
             tbl_person a
         Join tbl_favorite b ON a.person_code = b.person_code
-        WHERE
+        where
             a.person_email = #{ userEmail };
     </select>
 
@@ -102,30 +102,18 @@
     </select>
 
     <select id="findMyHospital" resultMap="hospitalMap">
-        <!--        SELECT-->
-        <!--            c.hospital_name,-->
-        <!--            b.reserve_date,-->
-        <!--            b.reserve_time-->
-        <!--        from-->
-        <!--            tbl_hospital c-->
-        <!--        WHERE-->
-        <!--            c.hospital_code = (SELECT-->
-        <!--                                b.hospital_code-->
-        <!--                                FROM-->
-        <!--                                tbl_person a-->
-        <!--                                join tbl_reserve b ON a.person_code = b.person_code);-->
         SELECT
-        c.hospital_name,
-        b.reserve_date,
-        b.reserve_time
+            c.hospital_name,
+            b.reserve_date,
+            b.reserve_time
         FROM
-        tbl_hospital c
+            tbl_hospital c
         JOIN
-        tbl_reserve b ON c.hospital_code = b.hospital_code
+            tbl_reserve b ON c.hospital_code = b.hospital_code
         JOIN
-        tbl_person a ON a.person_code = b.person_code
+            tbl_person a ON a.person_code = b.person_code
         WHERE
-        a.person_email = #{ userEmail };
+            a.person_email = #{ userEmail };
     </select>
 
     <select id="findMyPet" resultMap="petMap">
