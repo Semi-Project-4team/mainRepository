@@ -107,15 +107,30 @@ public class UserService {
         }
     }
 
-    public HospitalDTO hospitalFindId(HospitalDTO newUserInfo) {
-        System.out.println("hospitalFindId : " + newUserInfo);
+    public HospitalDTO hospitalFindEmail(HospitalDTO newUserInfo) {
 
-        HospitalDTO foundHospitalName = hospitalMapper.hospitalFindId(newUserInfo);
+        System.out.println("hospitalFindEmail : " + newUserInfo);
 
-        System.out.println("hospitalFindId = " + foundHospitalName);
+        HospitalDTO foundHospitalInfo = hospitalMapper.hospitalFindEmail(newUserInfo);
 
-        if (!Objects.isNull(foundHospitalName)) {
-            return foundHospitalName;
+        System.out.println("hospitalFindEmail = " + foundHospitalInfo);
+
+        if (!Objects.isNull(foundHospitalInfo)) {
+            return foundHospitalInfo;
+        } else {
+            return null;
+        }
+    }
+
+    public PersonDTO personFindEmail(PersonDTO newUserInfo) {
+        System.out.println("personFindEmail : " + newUserInfo);
+
+        PersonDTO foundPersonInfo = personMapper.personFindEmail(newUserInfo);
+
+        System.out.println("personFindEmail = " + foundPersonInfo);
+
+        if (!Objects.isNull(foundPersonInfo)) {
+            return foundPersonInfo;
         } else {
             return null;
         }

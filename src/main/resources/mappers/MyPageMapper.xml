@@ -21,7 +21,7 @@
 
     <resultMap id="petMap" type="animal.team.animalhospital.hospital.model.dto.PetDTO">
         <id property="petPersonCode" column="pet_person_code"/>
-        <id property="PersonCode" column="person_code"/>
+        <result property="PersonCode" column="person_code"/>
         <result property="petName" column="pet_name"/>
         <result property="petType" column="pet_type"/>
         <result property="petBirth" column="pet_birth"/>
@@ -29,6 +29,32 @@
         <result property="petChip" column="pet_chip"/>
         <result property="petProfile" column="pet_profile"/>
         <result property="petGender" column="pet_gender"/>
+    </resultMap>
+
+    <resultMap id="reserveMap" type="animal.team.animalhospital.hospital.model.dto.ReserveDTO">
+        <id property="personCode" column="person_code"/>
+        <result property="hospitalCode" column="hospital_code"/>
+        <result property="petPersonCode" column="pet_person_code"/>
+        <result property="reserveTime" column="reserve_time"/>
+        <result property="reserveDate" column="reserve_date"/>
+        <result property="reserveText" column="reserve_text"/>
+        <result property="reserveInformationCollection" column="reserve_information_collection"/>
+    </resultMap>
+
+    <resultMap id="hospitalMap" type="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
+        <id property="hospitalCode" column="hospital_code"/>
+        <result property="subjectCode" column="subject_code"/>
+        <result property="eupmyeondongCode" column="eupmyeondong_code"/>
+        <result property="name" column="hospital_name"/>
+        <result property="permitNumber" column="permit_number"/>
+        <result property="email" column="hospital_email"/>
+        <result property="password" column="hospital_password"/>
+        <result property="informationCollection" column="hospital_information_collection"/>
+        <result property="time" column="hospital_time"/>
+        <result property="detailAddress" column="detail_address"/>
+        <result property="introText" column="intro_text"/>
+        <result property="phoneNumber" column="hospital_phone_number"/>
+        <result property="photo" column="hospital_photo"/>
     </resultMap>
 
     <select id="findMyInfo" resultMap="personMap">
@@ -60,6 +86,48 @@
             favorite_name = #{name}
     </delete>
 
+    <select id="findMyReserve" resultMap="reserveMap">
+        SELECT
+            c.hospital_name,
+            b.reserve_date,
+            b.reserve_time
+        FROM
+            tbl_hospital c
+        JOIN
+            tbl_reserve b ON c.hospital_code = b.hospital_code
+        JOIN
+            tbl_person a ON a.person_code = b.person_code
+        WHERE
+            a.person_email = #{ userEmail };
+    </select>
+
+    <select id="findMyHospital" resultMap="hospitalMap">
+        <!--        SELECT-->
+        <!--            c.hospital_name,-->
+        <!--            b.reserve_date,-->
+        <!--            b.reserve_time-->
+        <!--        from-->
+        <!--            tbl_hospital c-->
+        <!--        WHERE-->
+        <!--            c.hospital_code = (SELECT-->
+        <!--                                b.hospital_code-->
+        <!--                                FROM-->
+        <!--                                tbl_person a-->
+        <!--                                join tbl_reserve b ON a.person_code = b.person_code);-->
+        SELECT
+        c.hospital_name,
+        b.reserve_date,
+        b.reserve_time
+        FROM
+        tbl_hospital c
+        JOIN
+        tbl_reserve b ON c.hospital_code = b.hospital_code
+        JOIN
+        tbl_person a ON a.person_code = b.person_code
+        WHERE
+        a.person_email = #{ userEmail };
+    </select>
+
     <select id="findMyPet" resultMap="petMap">
         SELECT
             pet_profile,
@@ -70,10 +138,14 @@
             pet_vaccination,
             pet_chip
         FROM
-            tbl_pet a
+         tbl_pet a
         Join tbl_person b ON a.person_code = b.person_code
         WHERE
             b.person_email = #{ userEmail };
     </select>
+
+
+
+
 
 </mapper>

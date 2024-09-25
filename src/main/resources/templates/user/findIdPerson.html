@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기(개인)</title>
+</head>
+<body>
+    <h1>아이디 찾기(개인) 페이지</h1>
+
+    <form th:action="@{ /user/findIdPerson }" method="post">
+          이름 : <input type="text" name="name"/><br>
+          전화번호 : <input type="text" name="phoneNumber"/><br>
+          <button>찾기</button>
+    </form>
+</body>
+</html>

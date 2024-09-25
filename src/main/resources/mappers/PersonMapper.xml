@@ -58,6 +58,15 @@
         where
             person_email = #{ personEmail };
     </select>
+    <select id="personFindEmail" resultMap="personResultMap">
+        select
+            person_email
+        from
+            tbl_person
+        where
+            person_name = #{ name }
+            and person_phone_number = #{ phoneNumber };
+    </select>
 
     <insert id="personRegist" parameterType="animal.team.animalhospital.hospital.model.dto.PersonDTO">
         INSERT INTO
