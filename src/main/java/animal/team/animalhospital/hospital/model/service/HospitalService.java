@@ -25,8 +25,8 @@ public class HospitalService {
         return hospitalMapper.findAllHospital();
     }
 
-    public HospitalDTO findByHospitalCode(int code) {
-        return hospitalMapper.findByHospitalCode(code);
+    public HospitalDTO findByHospitalCode(int hospitalCode) {
+        return hospitalMapper.findByHospitalCode(hospitalCode);
     }
 
     public List<MainSubjectDTO> findAllMainSubject() {
@@ -39,5 +39,9 @@ public class HospitalService {
 
     public List<SigunguDTO> findAllSigungu(int sidoCode) {
         return hospitalMapper.findAllSigungu(sidoCode);
+    }
+
+    public void updateHospital(HospitalDTO hospital) {
+        hospitalMapper.updateHospital(hospital);
     }
 }

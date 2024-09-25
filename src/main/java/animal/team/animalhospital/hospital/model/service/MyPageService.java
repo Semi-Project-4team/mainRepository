@@ -1,8 +1,7 @@
 package animal.team.animalhospital.hospital.model.service;
 
 import animal.team.animalhospital.hospital.model.dao.MyPageMapper;
-import animal.team.animalhospital.hospital.model.dto.FavoriteDTO;
-import animal.team.animalhospital.hospital.model.dto.PersonDTO;
+import animal.team.animalhospital.hospital.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,14 +21,29 @@ public class MyPageService {
         return myPageMapper.findMyInfo(userEmail);
     }
 
+    public List<ReserveDTO> findMyReserve(String userEmail) {
+        return myPageMapper.findMyReserve(userEmail);
+    }
+
+    public List<HospitalDTO> findMyHospital(String userEmail) {
+        return myPageMapper.findMyHospital(userEmail);
+    }
+
     public List<FavoriteDTO> findMyFavorite(String userEmail) {
         return myPageMapper.findMyFavorite(userEmail);
+    }
+
+    public List<PetDTO> findMyPet(String userEmail) {
+        return myPageMapper.findMyPet(userEmail);
     }
 
     @Transactional
     public void deleteFavorite(String name) {
         myPageMapper.deleteFavorite(name);
     }
+
+    public void insertMyPet(PetDTO newPet) {
+    }
+
+
 }
-
-

@@ -7,6 +7,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,6 +64,9 @@ public class ReviewController {
     @PostMapping("/list/regist")
     public String registReview(ReviewDTO newReview,RedirectAttributes rAttr) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
         reviewService.registNewReview(newReview);
 
         return "redirect:/hospital/review/list";
@@ -76,6 +81,27 @@ public class ReviewController {
 //        rAttr.addFlashAttribute("successMessage", "리뷰가 성공적으로 삭제되었습니다.");
 
         return "redirect:/review/list";
+
+    }
+
+    @GetMapping("update/{code}")
+    public String updatePage(@PathVariable("code") int code,
+                             Model model) {
+        ReviewDTO review = reviewService.findReviewByCode(code);
+
+        model.addAttribute("review", review);
+
+        return "hospital/review/update";
+    }
+
+    @PostMapping("/update")
+    public String updateReview(ReviewDTO review, RedirectAttributes rAttr) {
+
+        reviewService.updateReview(review);
+
+        rAttr.addFlashAttribute("successMessage", "리뷰가 성공적으로 수정되었습니다.");
+
+        return "redirect:/review/detail/" + review.getPersonCode();
 
     }
 

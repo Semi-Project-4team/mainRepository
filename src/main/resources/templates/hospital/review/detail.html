@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <h2>예약 상세 정보</h2>
+    <h2>리뷰 상세 정보</h2>
 
     <div>
         <p>개인번호: <span th:text="${review.personCode}"></span></p>
@@ -19,9 +19,14 @@
     </div>
 
 
+    <form th:action="@{/review/update/{code}(code=${review.personCode})}" method="get">
+        <button type="submit">수정하기</button>
+    </form>
+
     <form th:action="@{/review/delete/{code}(code=${review.personCode})}" method="post">
         <button type="submit">삭제하기</button>
     </form>
+
     <button onclick="location.href='/review/list'">이전으로</button><br>
 
 </body>

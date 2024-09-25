@@ -100,7 +100,8 @@
         where
             hospital_email = #{ hospitalEmail };
     </select>
-    <select id="hospitalFindId" resultMap="hospitalMap">
+
+    <select id="hospitalFindEmail" resultMap="hospitalMap">
         select
             hospital_email
         from
@@ -145,5 +146,20 @@
                 #{ photo }
             )
     </insert>
+
+    <update id="updateHospital" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
+        UPDATE
+            tbl_hospital
+        SET
+            subject_code = #{subjectCode},
+            hospital_name = #{name},
+            hospital_time = #{time},
+            hospital_detail_address = # {detailAddress},
+            hospital_intro_text = #{introText},
+            hospital_phone_number = #{phoneNumber},
+            hospital_photo = #{photo}
+        WHERE
+            hospital_code = #{hospitalCode}
+    </update>
 
 </mapper>

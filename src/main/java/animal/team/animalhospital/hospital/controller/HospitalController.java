@@ -5,10 +5,7 @@ import animal.team.animalhospital.hospital.model.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -55,6 +52,20 @@ public class HospitalController {
         HospitalDTO hospital = hospitalService.findByHospitalCode(code);
         model.addAttribute("hospital", hospital); // 모델에 추가
         return "/hospital/info/detail"; // 뷰 이름
+    }
+
+    @GetMapping("/info/update/{hospitalCode}")
+    public String updatePage(@PathVariable("hospitalCode") int hospitalCode, Model model) {
+        HospitalDTO hospital = hospitalService.findByHospitalCode(hospitalCode);
+        model.addAttribute("hospital", hospital);
+        model.addAttribute("hospitalCode", hospitalCode);
+        return "/hospital/info/update";
+    }
+
+    @PostMapping("/info/update")
+    public String updateHospital(HospitalDTO hospital) {
+        hospitalService.updateHospital(hospital);
+        return "redirect:/hospital/info/detail/" + hospital.getHospitalCode();
     }
 
     @GetMapping("/info/sigungu/{sidoCode}")

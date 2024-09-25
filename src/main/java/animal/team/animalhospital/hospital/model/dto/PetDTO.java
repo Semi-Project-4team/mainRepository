@@ -4,7 +4,6 @@ public class PetDTO {
 
     private int petPersonCode;
     private int personCode;
-    private int userCode;
     private String petName;
     private String petType;
     private String petBirth;
@@ -16,10 +15,9 @@ public class PetDTO {
     public PetDTO() {
     }
 
-    public PetDTO(int petPersonCode, int personCode, int userCode, String petName, String petType, String petBirth, String petVaccination, String petChip, String petProfile, String petGender) {
+    public PetDTO(int petPersonCode, int personCode, String petName, String petType, String petBirth, String petVaccination, String petChip, String petProfile, String petGender) {
         this.petPersonCode = petPersonCode;
         this.personCode = personCode;
-        this.userCode = userCode;
         this.petName = petName;
         this.petType = petType;
         this.petBirth = petBirth;
@@ -43,14 +41,6 @@ public class PetDTO {
 
     public void setPersonCode(int personCode) {
         this.personCode = personCode;
-    }
-
-    public int getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(int userCode) {
-        this.userCode = userCode;
     }
 
     public String getPetName() {
@@ -114,7 +104,6 @@ public class PetDTO {
         return "PetDTO{" +
                 "petPersonCode=" + petPersonCode +
                 ", personCode=" + personCode +
-                ", userCode=" + userCode +
                 ", petName='" + petName + '\'' +
                 ", petType='" + petType + '\'' +
                 ", petBirth='" + petBirth + '\'' +
