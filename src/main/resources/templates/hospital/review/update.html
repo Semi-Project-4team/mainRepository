@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h2>리뷰 수정하기</h2>
+
+
+    <form th:action="@{/review/update}" th:object="${review}" method="post">
+
+        <!-- Hidden input for PersonCode -->
+        <input type="hidden" th:field="*{personCode}" />
+
+        파일: <input type="file" name="singleFile"><br>
+
+        <br>
+
+        <label>리뷰점수: </label>
+        <select name="reviewScore">
+            <option value="5"selected>5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="2">1</option>
+        </select>
+        <br>
+
+
+        <!-- Textarea for additional notes -->
+        <br>
+        <label for="contents">리뷰내용:</label>
+        <br>
+        <textarea name="reserveText" id="contents" cols="30" rows="10"
+                  style="resize:none" maxlength="100" th:field="*{reviewExplanation}"></textarea>
+        <br>
+
+        <!-- Submit and Reset buttons -->
+        <button type="submit">수정하기</button>
+        <button type="reset">초기화</button>
+    </form>
+
+
+</body>
+</html>

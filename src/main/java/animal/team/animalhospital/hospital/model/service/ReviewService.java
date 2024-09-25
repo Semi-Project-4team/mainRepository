@@ -45,4 +45,9 @@ public class ReviewService {
 
             reviewMapper.deleteReview(code);
     }
+
+    @Transactional
+    public void updateReview(ReviewDTO review) {
+        reviewMapper.updateReview(review);
+    }
 }

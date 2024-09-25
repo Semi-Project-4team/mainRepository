@@ -100,7 +100,8 @@
         where
             hospital_email = #{ hospitalEmail };
     </select>
-    <select id="hospitalFindId" resultMap="hospitalMap">
+
+    <select id="hospitalFindEmail" resultMap="hospitalMap">
         select
             hospital_email
         from

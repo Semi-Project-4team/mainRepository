@@ -21,7 +21,8 @@ public interface HospitalMapper {
 
     int hospitalSignup(HospitalDTO newUserInfo);
 
+    HospitalDTO hospitalFindEmail(HospitalDTO hospitalEmail);
+
     HospitalDTO findByHospitalName(String hospitalEmail);
 
-    HospitalDTO hospitalFindId(HospitalDTO newUserInfo);
 }
