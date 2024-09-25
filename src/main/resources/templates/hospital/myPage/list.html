@@ -2,40 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 정보</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    h3 {
+      color: #58ccff;
+      border-bottom: 2px solid #58ccff;
+      padding-bottom: 5px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    table {
+      /*width: 48%; !* 두 개의 테이블이 나란히 배치되도록 설정 *!*/
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #58ccff;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    button {
+      background-color: #58ccff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #4ba3d4;
+    }
+  </style>
 </head>
 <body>
 
-<h3>회원 정보</h3>
-<table>
-  <tr>
-    <th>개인회원명</th>
-    <th>개인회원이메일</th>
-    <th>개인회원전화번호</th>
-  </tr>
+<div class="container">
+  <div>
+    <h3>회원 정보</h3>
+    <table>
+      <tr>
+        <th>항목</th>
+        <th>정보</th>
+      </tr>
+      <tr th:each="myInfo : ${ myInfoList }">
+        <td>개인회원명</td>
+        <td th:text="${ myInfo.name }"></td>
+      </tr>
+      <tr th:each="myInfo : ${ myInfoList }">
+        <td>개인회원이메일</td>
+        <td th:text="${ myInfo.email }"></td>
+      </tr>
+      <tr th:each="myInfo : ${ myInfoList }">
+        <td>개인회원전화번호</td>
+        <td th:text="${ myInfo.phoneNumber }"></td>
+      </tr>
+    </table>
+  </div>
 
-    <tr th:each="myInfo : ${ myInfoList }">
-    <td th:text="${ myInfo.name }"></td>
-    <td th:text="${ myInfo.email }"></td>
-    <td th:text="${ myInfo.phoneNumber }"></td>
-  </tr>
-</table>
-
-<h3>예약내역</h3>
-<table>
-  <tr>
-    <th>병원명</th>
-    <th>예약날짜</th>
-    <th>예약시간</th>
-<!--    <th>예약상태</th>-->
-  </tr>
-
-  <tr th:each="myHospital : ${ myHospitalList }">
-    <td th:text="${ myHospital.name }"></td>
-    <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveDate }"></td>
-    <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveTime }"></td>
-  </tr>
-</table>
+  <div>
+    <h3>예약내역</h3>
+    <table>
+      <tr>
+        <th>병원명</th>
+        <th>예약날짜</th>
+        <th>예약시간</th>
+      </tr>
+      <tr th:each="myHospital : ${ myHospitalList }">
+        <td th:text="${ myHospital.name }"></td>
+        <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveDate }"></td>
+        <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveTime }"></td>
+      </tr>
+    </table>
+  </div>
+</div>
 
 <h3>즐겨찾기</h3>
 <table>
@@ -44,39 +112,37 @@
     <th>병원명</th>
     <th>삭제</th>
   </tr>
-
   <tr th:each="myFavorite : ${ myFavoriteList }">
     <td>사진링크</td>
     <td th:text="${ myFavorite.favoriteName }"></td>
     <td>
-    <form th:action="@{/myPage/delete/{name}(name=${myFavorite.favoriteName})}" method="post">
+      <form th:action="@{/myPage/delete/{name}(name=${myFavorite.favoriteName})}" method="post">
         <button type="submit">삭제하기</button>
-    </form>
+      </form>
     </td>
   </tr>
 </table>
 
 <h3>반려동물정보</h3>
 <table>
-    <tr>
-      <th>프로필</th>
-      <th>이름</th>
-      <th>종</th>
-      <th>성별</th>
-      <th>생년월일</th>
-      <th>예방접종여부</th>
-      <th>내장칩여부</th>
-    </tr>
-
-    <tr th:each="myPet : ${ myPetList }">
-      <td th:text="${ myPet.petProfile }"></td>
-      <td th:text="${ myPet.petName }"></td>
-      <td th:text="${ myPet.petType }"></td>
-      <td th:text="${ myPet.petGender }"></td>
-      <td th:text="${ myPet.petBirth }"></td>
-      <td th:text="${ myPet.petVaccination }"></td>
-      <td th:text="${ myPet.petChip }"></td>
-    </tr>
+  <tr>
+    <th>프로필</th>
+    <th>이름</th>
+    <th>종</th>
+    <th>성별</th>
+    <th>생년월일</th>
+    <th>예방접종여부</th>
+    <th>내장칩여부</th>
+  </tr>
+  <tr th:each="myPet : ${ myPetList }">
+    <td th:text="${ myPet.petProfile }"></td>
+    <td th:text="${ myPet.petName }"></td>
+    <td th:text="${ myPet.petType }"></td>
+    <td th:text="${ myPet.petGender }"></td>
+    <td th:text="${ myPet.petBirth }"></td>
+    <td th:text="${ myPet.petVaccination }"></td>
+    <td th:text="${ myPet.petChip }"></td>
+  </tr>
 </table>
 
 <br>
