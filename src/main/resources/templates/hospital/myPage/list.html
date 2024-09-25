@@ -21,7 +21,6 @@
   </tr>
 </table>
 
-
 <h3>즐겨찾기</h3>
 <table>
   <tr>
@@ -39,6 +38,29 @@
     </form>
     </td>
   </tr>
+</table>
+
+<h3>반려동물정보</h3>
+<table>
+    <tr>
+      <th>프로필</th>
+      <th>이름</th>
+      <th>종</th>
+      <th>성별</th>
+      <th>생년월일</th>
+      <th>예방접종여부</th>
+      <th>내장칩여부</th>
+    </tr>
+
+    <tr th:each="myPet : ${ myPetList }">
+      <td th:text="${ myPet.petProfile }"></td>
+      <td th:text="${ myPet.petName }"></td>
+      <td th:text="${ myPet.petType }"></td>
+      <td th:text="${ myPet.petGender }"></td>
+      <td th:text="${ myPet.petBirth }"></td>
+      <td th:text="${ myPet.petVaccination }"></td>
+      <td th:text="${ myPet.petChip }"></td>
+    </tr>
 </table>
 
 <br>

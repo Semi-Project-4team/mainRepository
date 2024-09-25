@@ -294,12 +294,12 @@ INSERT INTO
     tbl_pet (pet_person_code, person_code, pet_name, pet_type, pet_birth, pet_vaccination, pet_chip, pet_profile, pet_gender)
 VALUES
     (1, 1, '꼼이', '갱얼쥐', '000000', 'N', '000000', 'KHGFKF', '여'),
-    (2, 2, '오곡', '고앵이', '000000', 'Y', '000000', 'KHGFKF', '남');
-#     (3, 3, '모밀이', '갱얼쥐', '000000', 'Y', '000000', 'KHGFKF', '남');
+    (2, 2, '오곡', '고앵이', '000000', 'Y', '000000', 'KHGFKF', '남'),
+    (3, 3, '모밀이', '갱얼쥐', '000000', 'Y', '000000', 'KHGFKF', '남');
 
 INSERT INTO
     tbl_favorite (person_code, favorite_name)
 VALUES
     (1, '꼼이건강검진병원'),
-    (2, '오곡이');
-#     (3, '모밀이병원');
+    (2, '오곡이'),
+    (3, '모밀이병원');
