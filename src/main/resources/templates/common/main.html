@@ -5,51 +5,60 @@
     <title>동물병원플러스입니다.</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/header.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            color: #58ccff;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .label {
-            margin-bottom: 10px;
-            font-size: 1.2em;
-            color: #333;
-        }
-    </style>
+
 </head>
 <body>
 
 <div th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
-<div class="background">
-    <img src="images/mainbackground.jpg" style="width:100%">
-
     <!--공지사항-->
-    <div class="notice">
-        <h3><a href="/notice/list">[공지사항] </a><a id="noticeLink" href="/notice/detail/">공지사항 제목 자리</a></h3>
-    </div>
+<div class="notice">
+    <h3>
+        <a id="noticeList" href="/notice/list">[공지사항] </a>
+        <a id="noticeLink" class="noticeLink" th:attr="data-code=${noticeList[0].code}" th:text="${noticeList[0].name}"></a>
+    </h3>
+</div>
+
+<!-- Thymeleaf에서 JSON으로 변환된 noticeList를 JavaScript에 전달 -->
+
+<script th:inline="javascript">
+    // noticeList를 JSON 배열로 변환하여 JavaScript로 전달
+    const noticeList = /*[[${noticeList}]]*/ [];
+
+    const noticeLinks = [];
+
+    // 공지사항 목록을 배열에 저장
+    noticeList.forEach((notice) => {
+        noticeLinks.push({
+            code: notice.code,  // 공지사항 코드
+            text: notice.name   // 공지사항 이름
+        });
+    });
+
+    let currentIndex = 0;
+
+    // 처음 제목을 즉시 표시
+    mainNotice();
+
+    // 공지사항을 5초마다 변경
+    const intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % noticeLinks.length; // 인덱스 증가 및 순환
+        mainNotice();
+    }, 5000);
+
+    function mainNotice() {
+        // 현재 인덱스에 해당하는 공지사항 정보를 가져옴
+        const notice = noticeLinks[currentIndex];
+
+        // 링크 텍스트와 href를 업데이트
+        document.getElementById('noticeLink').textContent = notice.text; // 제목 변경
+        document.getElementById('noticeLink').href = `/notice/detail/${notice.code}`; // 링크 변경
+
+    }
+</script>
 
 
+    <!--병원찾기-->
     <div class="search-hospital">
         <br>
         <button class="button" onclick="location.href='/hospital/sidoAll'">지역별 동물병원찾기</button>

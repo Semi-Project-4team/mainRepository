@@ -3,11 +3,13 @@ USE mysql;
 
 
 -- 2) 데이터베이스 생성(securitydb)
+DROP DATABASE animaldb;
 CREATE DATABASE animaldb;
 SHOW DATABASES;
 
 
 -- 3) 유저 생성 (springsecurity/springsecurity)
+DROP USER 'animal';
 CREATE USER 'animal'@'%' IDENTIFIED BY 'animal';
 SELECT * FROM user;
 
