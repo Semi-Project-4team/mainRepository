@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -58,14 +59,34 @@ public class HospitalController {
     public String updatePage(@PathVariable("hospitalCode") int hospitalCode, Model model) {
         HospitalDTO hospital = hospitalService.findByHospitalCode(hospitalCode);
         model.addAttribute("hospital", hospital);
-        model.addAttribute("hospitalCode", hospitalCode);
+        model.addAttribute("hospitalCode", hospital.getHospitalCode());
         return "/hospital/info/update";
     }
 
     @PostMapping("/info/update")
     public String updateHospital(HospitalDTO hospital) {
-        hospitalService.updateHospital(hospital);
-        return "redirect:/info/detail/";
+        System.out.println("hospital = " + hospital);
+
+        HospitalDTO hospitalDTO = hospitalService.findByHospitalCode(hospital.getHospitalCode());
+
+        hospitalDTO.setName(hospital.getName());
+        hospitalDTO.setStartTime(LocalTime.parse("09:00"));
+        hospitalDTO.setEndTime(LocalTime.parse("18:00"));
+        hospitalDTO.setLunchStartTime(LocalTime.parse("12:30"));
+        hospitalDTO.setLunchEndTime(LocalTime.parse("13:30"));
+//        hospitalDTO.setStartTime(LocalTime.parse(hospital.getStartTime());
+//        hospitalDTO.setEndTime(hospital.getEndTime());
+//        hospitalDTO.setLunchStartTime(hospital.getLunchStartTime());
+//        hospitalDTO.setLunchEndTime(hospital.getLunchEndTime());
+        hospitalDTO.setDetailAddress(hospital.getDetailAddress());
+        hospitalDTO.setIntroText(hospital.getIntroText());
+        hospitalDTO.setPhoto(hospital.getPhoto());
+
+        System.out.println("hospitalDTO = " + hospitalDTO);
+
+
+        hospitalService.updateHospital(hospitalDTO);
+        return "redirect:/info/detail/" + hospitalDTO.getUserCode();
     }
 
     @GetMapping("/info/sigungu/{sidoCode}")

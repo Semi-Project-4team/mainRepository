@@ -19,7 +19,10 @@
         <result property="email" column="hospital_email"/>
         <result property="password" column="hospital_password"/>
         <result property="informationCollection" column="hospital_information_collection"/>
-        <result property="time" column="hospital_time"/>
+        <result property="startTime" column="hospital_startTime"/>
+        <result property="endTime" column="hospital_endTime"/>
+        <result property="lunchStartTime" column="hospital_lunchStartTime"/>
+        <result property="lunchEndTime" column="hospital_lunchEndTime"/>
         <result property="detailAddress" column="hospital_detail_address"/>
         <result property="introText" column="hospital_intro_text"/>
         <result property="phoneNumber" column="hospital_phone_number"/>
@@ -54,9 +57,9 @@
 
     <select id="findAllHospital" resultMap="hospitalMap">
         select
-        *
+            *
         from
-        tbl_hospital;
+            tbl_hospital;
     </select>
 
 
@@ -132,7 +135,10 @@
                 hospital_email,
                 hospital_password,
                 hospital_information_collection,
-                hospital_time,
+                hospital_startTime,
+                hospital_endTime,
+                hospital_lunchStartTime,
+                hospital_lunchEndTime,
                 hospital_detail_address,
                 hospital_intro_text,
                 hospital_phone_number,
@@ -148,7 +154,10 @@
                 #{ email },
                 #{ password },
                 #{ informationCollection },
-                #{ time },
+                #{ startTime },
+                #{ endTime },
+                #{ lunchStartTime },
+                #{ lunchEndTime },
                 #{ detailAddress },
                 #{ introText },
                 #{ phoneNumber },

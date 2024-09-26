@@ -105,7 +105,10 @@
     <div class="info">
         <p><label>병원코드:</label> <span th:text="${ hospital.hospitalCode }"></span></p>
         <p><label>병원명:</label> <span th:text="${ hospital.name }"></span></p>
-        <p><label>진료시간:</label> <span th:text="${ hospital.time }"></span></p>
+        <p><label>진료시작:</label> <span th:text="${ hospital.startTime }"></span></p>
+        <p><label>진료종료:</label> <span th:text="${ hospital.endTime }"></span></p>
+        <p><label>점심시작:</label> <span th:text="${ hospital.lunchStartTime }"></span></p>
+        <p><label>점심종료:</label> <span th:text="${ hospital.lunchEndTime }"></span></p>
         <p><label>주소:</label> <span th:text="${ hospital.detailAddress }"></span></p>
         <p><label>소개:</label> <span th:text="${ hospital.introText }"></span></p>
         <p><label>사진:</label> <img th:src="${ hospital.photo }" alt="병원 사진" style="max-width: 100%; height: auto;"></p>

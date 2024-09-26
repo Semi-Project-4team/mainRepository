@@ -46,7 +46,7 @@
             border: 1px solid #ccc;
             border-radius: 6px; /* Increased border radius */
             box-sizing: border-box;
-            font-size: 16px; /* Increased font size */
+            font-size: 10px; /* Increased font size */
         }
 
         button {
@@ -81,14 +81,23 @@
 <div class="form-container">
     <h1>동물병원 정보 수정하기</h1>
 
-    <form th:action="@{/info/update}" th:object="${hospital}" method="post">
+    <form th:action="@{/hospital/info/update}" th:object="${hospital}" method="post">
         <input type="hidden" th:field="*{hospitalCode}"/>
 
         <label for="name">병원명:</label>
         <input type="text" id="name" th:field="*{name}" required />
 
-        <label for="time">진료시간:</label>
-        <input type="text" id="time" th:field="*{time}" required />
+        <label for="startTime">진료시작:</label>
+        <input type="text" id="startTime" th:field="*{startTime}" required />
+
+        <label for="endTime">진료종료:</label>
+        <input type="text" id="endTime" th:field="*{endTime}" required />
+
+        <label for="lunchStartTime">점심시작:</label>
+        <input type="text" id="lunchStartTime" th:field="*{lunchStartTime}" required />
+
+        <label for="lunchEndTime">점심종료:</label>
+        <input type="text" id="lunchEndTime" th:field="*{lunchEndTime}" required />
 
         <label for="detailAddress">주소:</label>
         <input type="text" id="detailAddress" th:field="*{detailAddress}" required />

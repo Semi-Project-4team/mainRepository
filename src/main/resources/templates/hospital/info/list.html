@@ -76,7 +76,10 @@
         <th>병원코드</th>
         <th>병원명</th>
         <th>인가번호</th>
-        <th>진료시간</th>
+        <th>진료시작</th>
+        <th>진료종료</th>
+        <th>점심시작</th>
+        <th>점심종료</th>
         <th>주소</th>
         <th>전화번호</th>
     </tr>
@@ -84,7 +87,10 @@
         <td th:text="${ hospital.hospitalCode }"></td>
         <td><a th:href="@{/hospital/info/detail/{code}(code=${ hospital.hospitalCode })}" th:text="${ hospital.name }"></a></td>
         <td th:text="${ hospital.permitNumber }"></td>
-        <td th:text="${ hospital.time }"></td>
+        <td th:text="${ hospital.startTime }"></td>
+        <td th:text="${ hospital.endTime }"></td>
+        <td th:text="${ hospital.lunchStartTime }"></td>
+        <td th:text="${ hospital.lunchEndTime }"></td>
         <td th:text="${ hospital.detailAddress }"></td>
         <td th:text="${ hospital.phoneNumber }"></td>
     </tr>

@@ -1,9 +1,11 @@
 package animal.team.animalhospital.hospital.model.dto;
 
 import animal.team.animalhospital.auth.model.UserRole;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalTime;
 import java.util.*;
 
 public class HospitalDTO implements UserDetails {
@@ -19,7 +21,16 @@ public class HospitalDTO implements UserDetails {
     private String email;
     private String password;
     private String informationCollection;
-    private Date time;
+
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime startTime;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime endTime;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime lunchStartTime;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime lunchEndTime;
+
     private String detailAddress;
     private String introText;
     private String phoneNumber;
@@ -28,7 +39,7 @@ public class HospitalDTO implements UserDetails {
     public HospitalDTO() {
     }
 
-    public HospitalDTO(int hospitalCode, String subjectCode, String eupmyeondongCode, int userCode, String name, String permitNumber, String email, String password, String informationCollection, Date time, String detailAddress, String introText, String phoneNumber, String photo) {
+    public HospitalDTO(int hospitalCode, String subjectCode, String eupmyeondongCode, int userCode, String name, String permitNumber, String email, String password, String informationCollection, LocalTime startTime, LocalTime endTime, LocalTime lunchStartTime, LocalTime lunchEndTime, String detailAddress, String introText, String phoneNumber, String photo) {
         this.hospitalCode = hospitalCode;
         this.subjectCode = subjectCode;
         this.eupmyeondongCode = eupmyeondongCode;
@@ -38,11 +49,46 @@ public class HospitalDTO implements UserDetails {
         this.email = email;
         this.password = password;
         this.informationCollection = informationCollection;
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.lunchStartTime = lunchStartTime;
+        this.lunchEndTime = lunchEndTime;
         this.detailAddress = detailAddress;
         this.introText = introText;
         this.phoneNumber = phoneNumber;
         this.photo = photo;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public LocalTime getLunchStartTime() {
+        return lunchStartTime;
+    }
+
+    public void setLunchStartTime(LocalTime lunchStartTime) {
+        this.lunchStartTime = lunchStartTime;
+    }
+
+    public LocalTime getLunchEndTime() {
+        return lunchEndTime;
+    }
+
+    public void setLunchEndTime(LocalTime lunchEndTime) {
+        this.lunchEndTime = lunchEndTime;
     }
 
     public String getName() {
@@ -144,14 +190,6 @@ public class HospitalDTO implements UserDetails {
         this.informationCollection = informationCollection;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
     public String getDetailAddress() {
         return detailAddress;
     }
@@ -187,7 +225,10 @@ public class HospitalDTO implements UserDetails {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", informationCollection='" + informationCollection + '\'' +
-                ", time=" + time +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", lunchStartTime=" + lunchStartTime +
+                ", lunchEndTime=" + lunchEndTime +
                 ", detailAddress='" + detailAddress + '\'' +
                 ", introText='" + introText + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
