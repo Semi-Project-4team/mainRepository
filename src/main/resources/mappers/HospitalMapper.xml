@@ -171,7 +171,10 @@
         SET
             subject_code = #{subjectCode},
             hospital_name = #{name},
-            hospital_startTime = #{time},
+            hospital_startTime = #{startTime},
+            hospital_endTime = #{endTime},
+            hospital_lunchStartTime = #{lunchStartTime},
+            hospital_lunchEndTime = #{lunchEndTime},
             hospital_detail_address = # {detailAddress},
             hospital_intro_text = #{introText},
             hospital_phone_number = #{phoneNumber},

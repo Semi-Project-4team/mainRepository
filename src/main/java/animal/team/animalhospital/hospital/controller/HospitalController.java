@@ -65,28 +65,20 @@ public class HospitalController {
 
     @PostMapping("/info/update")
     public String updateHospital(HospitalDTO hospital) {
-        System.out.println("hospital = " + hospital);
 
         HospitalDTO hospitalDTO = hospitalService.findByHospitalCode(hospital.getHospitalCode());
 
         hospitalDTO.setName(hospital.getName());
-        hospitalDTO.setStartTime(LocalTime.parse("09:00"));
-        hospitalDTO.setEndTime(LocalTime.parse("18:00"));
-        hospitalDTO.setLunchStartTime(LocalTime.parse("12:30"));
-        hospitalDTO.setLunchEndTime(LocalTime.parse("13:30"));
-//        hospitalDTO.setStartTime(LocalTime.parse(hospital.getStartTime());
-//        hospitalDTO.setEndTime(hospital.getEndTime());
-//        hospitalDTO.setLunchStartTime(hospital.getLunchStartTime());
-//        hospitalDTO.setLunchEndTime(hospital.getLunchEndTime());
+        hospitalDTO.setStartTime(hospital.getStartTime());
+        hospitalDTO.setEndTime(hospital.getEndTime());
+        hospitalDTO.setLunchStartTime(hospital.getLunchStartTime());
+        hospitalDTO.setLunchEndTime(hospital.getLunchEndTime());
         hospitalDTO.setDetailAddress(hospital.getDetailAddress());
         hospitalDTO.setIntroText(hospital.getIntroText());
         hospitalDTO.setPhoto(hospital.getPhoto());
 
-        System.out.println("hospitalDTO = " + hospitalDTO);
-
-
         hospitalService.updateHospital(hospitalDTO);
-        return "redirect:/info/detail/" + hospitalDTO.getUserCode();
+        return "redirect:/hospital/info/detail/" + hospitalDTO.getHospitalCode();
     }
 
     @GetMapping("/info/sigungu/{sidoCode}")
