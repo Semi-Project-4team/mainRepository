@@ -41,9 +41,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChainConfigure(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(auth -> {
-//            auth.requestMatchers("/**").permitAll();
-            auth.requestMatchers("/auth/login", "/user/signup", "/auth/fail", "/").permitAll();
-            auth.requestMatchers("/**").hasAnyAuthority(UserRole.MASTER.getRole()); // 마스터는 모든 권한 가짐
+            auth.requestMatchers("/**").permitAll();
+//            auth.requestMatchers("/auth/login", "/user/signup", "/auth/fail", "/", "/user/*").permitAll();
+//            auth.requestMatchers("/**").hasAnyAuthority(UserRole.MASTER.getRole()); // 마스터는 모든 권한 가짐
 //            auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
 //            auth.requestMatchers("/user/*").hasAnyAuthority(UserRole.USER.getRole(), UserRole.ADMIN.getRole());
             auth.anyRequest().authenticated();

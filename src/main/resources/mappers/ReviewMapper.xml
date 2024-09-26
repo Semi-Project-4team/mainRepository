@@ -40,6 +40,7 @@
             tbl_person_review
         WHERE
             person_code = #{personCode}
+        LIMIT 1
     </select>
 
     <insert id="registNewReview" parameterType="animal.team.animalhospital.hospital.model.dto.ReviewDTO"
