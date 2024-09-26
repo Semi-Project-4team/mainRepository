@@ -86,7 +86,7 @@ public class ReviewController {
 
         newReview.setPersonCode(userCode);
 
-        newReview.setHospitalCode(7);              // 병원코드 강제주입구문(임시)
+        newReview.setHospitalCode(9);              // 병원코드 강제주입구문(임시)
 
         Date currentDate = new Date();
         newReview.setReviewWriteDate(currentDate);
