@@ -2,34 +2,174 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>탭을 이용한 테이블 보기</title>
+    <style>
+        /* 탭 스타일 */
+        .tab {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px 50px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 2px solid transparent;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #e0f7ff;
+            border-color: #58ccff;
+        }
+
+        .active-tab {
+            border-top-color: #58ccff;
+        }
+
+        /* 테이블 컨테이너 */
+        .table-container {
+            display: none; /* 기본적으로 숨김 */
+            margin-top: 20px;
+            /*width: 70%;*/
+        }
+
+        .active-table {
+            display: block; /* 활성화된 테이블만 표시 */
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #58ccff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e0f7ff;
+        }
+
+        /* 메인 버튼 스타일 */
+        button {
+            background-color: #58ccff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45b5e6;
+        }
+
+        /*personTable {*/
+        /*    width: 70%;*/
+        /*}*/
+
+        /*hospitalTable {*/
+        /*    width: 70%;*/
+        /*}*/
+    </style>
 </head>
 <body>
 
+<!-- 탭 네비게이션 -->
+<div>
+    <span id="personTab" class="tab active-tab" onclick="showTable('personTable', 'personTab')">일반회원 목록</span>
+    <span id="hospitalTab" class="tab" onclick="showTable('hospitalTable', 'hospitalTab')">병원회원 목록</span>
+</div>
+<hr>
+
+<!-- 회원 테이블 -->
+<div id="personTable" class="table-container active-table">
     <table>
         <tr>
-            <th>개인코드</th>
-            <th>개인회원명</th>
-            <th>개인회원이메일</th>
-            <th>개인회원비밀번호</th>
-            <th>개인회원생년월일</th>
-            <th>개인회원전화번호</th>
+            <th>회원코드</th>
+            <th>회원명</th>
+            <th>이메일</th>
+            <th>생년월일</th>
+            <th>전화번호</th>
             <th>정보수집동의확인</th>
         </tr>
-
-        <tr th:each="person : ${ personList }">
-            <td><a th:href="@{/hospital/person/detail/{code}(code=${ person.personCode })}" th:text="${ person.personCode }"></a></td>
-            <td th:text="${ person.personName }"></td>
-            <td th:text="${ person.personEmail }"></td>
-            <td th:text="${ person.personPassword }"></td>
-            <td th:text="${ person.personBirth }"></td>
-            <td th:text="${ person.personPhoneNumber }"></td>
-            <td th:text="${ person.personInformationCollection }"></td>
+        <tr th:each="person : ${personList}">
+            <td th:text="${person.personCode}"></td>
+            <td th:text="${person.name}"></td>
+            <td th:text="${person.email}"></td>
+            <td th:text="${person.birth}"></td>
+            <td th:text="${person.phoneNumber}"></td>
+            <td th:text="${person.informationCollection}"></td>
         </tr>
-
     </table>
+</div>
 
-    <br>
-    <button onclick="location.href='/'">메인으로</button>
+<!-- 병원 테이블 -->
+<div id="hospitalTable" class="table-container">
+    <table>
+        <tr>
+            <th>병원코드</th>
+            <th>진료과목코드</th>
+            <th>병원명</th>
+            <th>인가번호</th>
+            <th>이메일</th>
+            <th>진료시간</th>
+            <th>소재지</th>
+            <th>소개글</th>
+            <th>사진</th>
+            <th>전화번호</th>
+        </tr>
+        <tr th:each="hospital : ${hospitalList}">
+            <td th:text="${hospital.hospitalCode}"></td>
+            <td th:text="${hospital.subjectCode}"></td>
+            <td th:text="${hospital.name}"></td>
+            <td th:text="${hospital.permitNumber}"></td>
+            <td th:text="${hospital.email}"></td>
+            <td th:text="${hospital.time}"></td>
+            <td th:text="${hospital.detailAddress}"></td>
+            <td th:text="${hospital.introText}"></td>
+            <td th:text="${hospital.photo}"></td>
+            <td th:text="${hospital.phoneNumber}"></td>
+        </tr>
+    </table>
+</div>
+
+<br>
+<button onclick="location.href='/'">메인으로</button>
+
+<!-- JavaScript -->
+<script>
+    function showTable(tableId, tabId) {
+        // 모든 테이블을 숨김
+        document.getElementById('personTable').classList.remove('active-table');
+        document.getElementById('hospitalTable').classList.remove('active-table');
+
+        // 모든 탭에서 active-tab 클래스 제거
+        document.getElementById('personTab').classList.remove('active-tab');
+        document.getElementById('hospitalTab').classList.remove('active-tab');
+
+        // 선택된 테이블만 표시
+        document.getElementById(tableId).classList.add('active-table');
+
+        // 선택된 탭에 active-tab 클래스 추가
+        document.getElementById(tabId).classList.add('active-tab');
+    }
+</script>
+
 </body>
 </html>

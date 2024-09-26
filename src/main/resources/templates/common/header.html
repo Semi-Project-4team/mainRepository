@@ -13,6 +13,15 @@
         </div>
         <!--로그인을 했을 경우-->
         <div sec:authorize="isAuthenticated()">
+            <div sec:authorize="hasAnyAuthority('MASTER')">
+                <button onclick="location.href='/hospital/person/list'">회원관리</button>
+            </div>
+            <div sec:authorize="hasAnyAuthority('USER_PERSON')">
+                <a>개인회원</a>
+            </div>
+            <div sec:authorize="hasAnyAuthority('USER_HOSPITAL')">
+                <a>기업회원</a>
+            </div>
             <a sec:authorize="hasAnyAuthority('USER_PERSON')">[개인회원]</a>
             <a sec:authorize="hasAnyAuthority('USER_HOSPITAL')">[기업회원]</a>
             <label sec:authentication="">안녕하세요, [[${#authentication.name}]]님</label>
