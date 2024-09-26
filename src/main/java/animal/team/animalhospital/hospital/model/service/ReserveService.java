@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReserveService {
@@ -37,6 +38,10 @@ public class ReserveService {
 
     }
 
+//    public String resistNewReserve(int code) {
+//        return reserveMapper.resistNewReserve(code);
+//    }
+
     @Transactional
     public void deleteReserve(int code) {
 
@@ -46,5 +51,13 @@ public class ReserveService {
     @Transactional
     public void updateReserve(ReserveDTO reserve) {
         reserveMapper.updateReserve(reserve);
+    }
+
+    public ReserveDTO findReserveByCode1(Map<String, Object> params) {
+        return reserveMapper.findReserveByCode1(params);
+    }
+
+    public void updateReserve1(ReserveDTO reserve) {
+        reserveMapper.updateReserve1(reserve);
     }
 }

@@ -44,6 +44,23 @@
         LIMIT 1
     </select>
 
+    <select id="findReserveByCode1" parameterType="map" resultMap="reserveResultMap">
+        SELECT
+            person_code,
+            hospital_code,
+            pet_person_code,
+            reserve_time,
+            reserve_date,
+            reserve_text,
+            reserve_information_collection
+        FROM
+            tbl_reserve
+        WHERE
+            person_code = #{personCode}
+            and hospital_code = #{hospitalCode}
+        LIMIT 1;
+    </select>
+
 
     <insert id="registNewReserve" parameterType="animal.team.animalhospital.hospital.model.dto.ReserveDTO"
             useGeneratedKeys="true" keyProperty="personCode">
@@ -88,6 +105,18 @@
             reserve_information_collection = #{reserveInformationCollection}
         WHERE
             person_code = #{personCode}
+    </update>
+
+    <update id="updateReserve1" parameterType="animal.team.animalhospital.hospital.model.dto.ReserveDTO">
+        UPDATE tbl_reserve
+        SET
+            reserve_time = #{reserveTime},
+            reserve_date = #{reserveDate},
+            reserve_text = #{reserveText},
+            reserve_information_collection = #{reserveInformationCollection}
+        WHERE
+        person_code = #{personCode}
+        and hospital_code = #{hospitalCode}
     </update>
 
 

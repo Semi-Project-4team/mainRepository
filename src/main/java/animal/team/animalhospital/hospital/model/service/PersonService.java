@@ -46,11 +46,11 @@ public class PersonService {
 
 
     public int findByPersonCode(String userEmail) {
-        System.out.println("findByPersonCode : " + userEmail);
+        System.out.println("findByPersonCode1 : " + userEmail);
 
         int foundPersonCode = personMapper.findByPersonCode(userEmail);
 
-        System.out.println("findByPersonCode = " + foundPersonCode);
+        System.out.println("findByPersonCode2 = " + foundPersonCode);
 
         return foundPersonCode;
     }
