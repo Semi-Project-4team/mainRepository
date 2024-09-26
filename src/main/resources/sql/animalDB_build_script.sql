@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS tbl_person
     person_email VARCHAR(20) NOT NULL COMMENT '개인회원이메일',
     person_password VARCHAR(100) NOT NULL COMMENT '개인회원비밀번호',
     person_birth DATE NOT NULL COMMENT '개인회원생년월일',
-    person_phone_number VARCHAR(15) NOT NULL COMMENT '개인회원전화번호',
+    person_phone_number VARCHAR(20) NOT NULL COMMENT '개인회원전화번호',
     person_information_collection VARCHAR(1) NOT NULL COMMENT '정보수집동의확인',
 
     CONSTRAINT pk_person_code PRIMARY KEY (person_code)
@@ -93,11 +93,14 @@ CREATE TABLE IF NOT EXISTS tbl_hospital
     hospital_email varchar(30) NOT NULL COMMENT '병원이메일', --
     hospital_password varchar(100) NOT NULL COMMENT '병원비밀번호', --
     hospital_information_collection varchar(1) NOT NULL COMMENT '정보수집동의확인', --
-    hospital_time DATE COMMENT '병원진료시간',
-    hospital_detail_address varchar(10) COMMENT '병원세부소재지',
-    hospital_intro_text varchar(50) COMMENT '병원소개글',
-    hospital_phone_number varchar(10) NOT NULL COMMENT '병원전화번호', --
-    hospital_photo varchar(10) COMMENT '병원사진',
+    hospital_startTime TIME COMMENT '병원진료시작시간',
+    hospital_endTime TIME COMMENT '병원진료종료시간',
+    hospital_lunchStartTime TIME COMMENT '점심시작시간',
+    hospital_lunchEndTime TIME COMMENT '점심종료시간',
+    hospital_detail_address varchar(30) COMMENT '병원세부소재지',
+    hospital_intro_text varchar(255) COMMENT '병원소개글',
+    hospital_phone_number varchar(20) NOT NULL COMMENT '병원전화번호', --
+    hospital_photo varchar(255) COMMENT '병원사진',
     -- table level constraints
     CONSTRAINT pk_hospital_code PRIMARY KEY (hospital_code),
     CONSTRAINT fk_eupmyeondong_code FOREIGN KEY (eupmyeondong_code) REFERENCES tbl_eupmyeondong (eupmyeondong_code),
@@ -110,7 +113,7 @@ CREATE TABLE IF NOT EXISTS tbl_person_review(
                                                 review_write_date DATE NOT NULL COMMENT '리뷰작성일자',
                                                 review_modify_date DATE NOT NULL COMMENT '리뷰수정일자',
                                                 review_score int NOT NULL COMMENT '리뷰점수',
-                                                review_photo VARCHAR(10) NULL COMMENT '리뷰사진',
+                                                review_photo VARCHAR(255) NULL COMMENT '리뷰사진',
                                                 review_explanation VARCHAR(100) NOT NULL COMMENT '리뷰내용',
 
     -- 복합 기본키 설정
@@ -214,8 +217,7 @@ VALUES
     ('5', '치과'),
     ('6','비뇨기과');
 
-INSERT INTO
-    tbl_hospital
+INSERT INTO tbl_hospital
 (
     hospital_code,
     subject_code,
@@ -225,23 +227,26 @@ INSERT INTO
     hospital_email,
     hospital_password,
     hospital_information_collection,
-    hospital_time,
+    hospital_starttime,
+    hospital_endtime,
+    hospital_lunchstarttime,
+    hospital_lunchendtime,
     hospital_detail_address,
     hospital_intro_text,
     hospital_phone_number,
     hospital_photo
 )
 VALUES
-    -- 예제 데이터 삽입 (기본값을 VARCHAR로 변경)
-    (NULL, '1', 1, '눈편한병원', '123456789', 'eye@gmail.com', 'eye1234', 'Y', '2024-01-01', '개포동 660-4', '눈이 편해지는 병원입니다.', '02-000-000', '/Users'),
-    (NULL, '2', 2, '피부케어병원', '987654321', 'skin1@gmail.com', 'skin1234', 'Y', '2024-01-01', '논현동 660-4', '피부를 건강하게!', '02-000-000', '/Users'),
-    (NULL, '3', 3, '피부케어병원', '123987456', 'skin2@gmail.com', 'skin1234', 'Y', '2024-01-01', '대치동 660-4', '피부를 건강하게!', '02-000-000', '/Users'),
-    (NULL, '3', 4, '내과병원', '456123789', 'internal1@gmail.com', 'internal1234', 'Y', '2024-01-01', '신길동 660-4', '내과 진료 전문 병원.', '02-000-000', '/Users'),
-    (NULL, '3', 5, '내과병원', '789456123', 'internal2@gmail.com', 'internal1234', 'Y', '2024-01-01', '양평동 660-4', '내과 진료 전문 병원.', '02-000-000', '/Users'),
-    (NULL, '4', 6, '뼈튼튼병원', '321654987', 'orthopedics1@gmail.com', 'ortho1234', 'Y', '2024-01-01', '영등포동 660-4', '뼈 건강 전문 병원.', '02-000-000', '/Users'),
-    (NULL, '4', 7, '뼈튼튼병원', '654789321', 'orthopedics2@gmail.com', 'ortho1234', 'Y', '2024-01-01', '망원동 660-4', '뼈 건강 전문 병원.', '02-000-000', '/Users'),
-    (NULL, '5', 8, '튼튼이치과', '789321654', 'dental1@gmail.com', 'dental1234', 'Y', '2024-01-01', '마포동 660-4', '튼튼한 치아를 위해.', '02-000-000', '/Users'),
-    (NULL, '6', 9, '소변건강병원', '456987321', 'urology1@gmail.com', 'urology1234', 'Y', '2024-01-01', '상암동 660-4', '비뇨기 건강 전문 병원.', '02-000-000', '/Users');
+    -- 예제 데이터 삽입 (시간 정보, 상세주소 추가)
+    (NULL, '1', 1, '눈편한병원', '123456789', 'eye@gmail.com', 'eye1234', 'Y', '08:00', '18:00', '12:00', '13:00', '개포동 660-4', '눈이 편해지는 병원입니다.', '02-000-0000', '/Users/eye.jpg'),
+    (NULL, '2', 2, '피부케어병원', '987654321', 'skin1@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '논현동 660-4', '피부를 건강하게!', '02-111-1111', '/Users/skin1.jpg'),
+    (NULL, '3', 3, '피부케어병원', '123987456', 'skin2@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '대치동 660-4', '피부를 건강하게!', '02-222-2222', '/Users/skin2.jpg'),
+    (NULL, '3', 4, '내과병원', '456123789', 'internal1@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '신길동 660-4', '내과 진료 전문 병원.', '02-333-3333', '/Users/internal1.jpg'),
+    (NULL, '3', 5, '내과병원', '789456123', 'internal2@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '양평동 660-4', '내과 진료 전문 병원.', '02-444-4444', '/Users/internal2.jpg'),
+    (NULL, '4', 6, '뼈튼튼병원', '321654987', 'orthopedics1@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '영등포동 660-4', '뼈 건강 전문 병원.', '02-555-5555', '/Users/ortho1.jpg'),
+    (NULL, '4', 7, '뼈튼튼병원', '654789321', 'orthopedics2@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '망원동 660-4', '뼈 건강 전문 병원.', '02-666-6666', '/Users/ortho2.jpg'),
+    (NULL, '5', 8, '튼튼이치과', '789321654', 'dental1@gmail.com', 'dental1234', 'Y', '09:00', '18:00', '12:00', '13:00', '마포동 660-4', '튼튼한 치아를 위해.', '02-777-7777', '/Users/dental1.jpg'),
+    (NULL, '6', 9, '소변건강병원', '456987321', 'urology1@gmail.com', 'urology1234', 'Y', '08:30', '17:00', '12:00', '13:00', '상암동 660-4', '비뇨기 건강 전문 병원.', '02-888-8888', '/Users/urology1.jpg');
 #         (NULL, 7, 10, '수술전문병원', '321789654', 'surgery1@gmail.com', 'surgery1234', 'Y', '2024-01-01', '능동 660-4', '외과 수술 전문 병원.', '/Users'),
 #         (NULL, 7, 11, '수술전문병원', '987321654', 'surgery2@gmail.com', 'surgery1234', 'Y', '2024-01-01', '반송동 660-4', '외과 수술 전문 병원.', '/Users'),
 #         (NULL, 8, 12, '산부인과병원', '654123987', 'obgyn1@gmail.com', 'obgyn1234', 'Y', '2024-01-01', '기안동 660-4', '산부인과 진료 전문.', '/Users'),
