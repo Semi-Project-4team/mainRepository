@@ -65,7 +65,7 @@ public class HospitalController {
     @PostMapping("/info/update")
     public String updateHospital(HospitalDTO hospital) {
         hospitalService.updateHospital(hospital);
-        return "redirect:/hospital/info/detail/" + hospital.getHospitalCode();
+        return "redirect:/info/detail/";
     }
 
     @GetMapping("/info/sigungu/{sidoCode}")
