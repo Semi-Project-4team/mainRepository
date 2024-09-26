@@ -84,14 +84,14 @@ public class HospitalController {
         return "hospital/info/eupmyeondong";  // 템플릿 경로는 고정
     }
 
-    @GetMapping("person/list")
+    @GetMapping("/person/list")
     public String PersonList(Model model) {
-
         List<PersonDTO> personList = personService.findAllPerson();
+        List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
 
+        model.addAttribute("hospitalList", hospitalList);
         model.addAttribute("personList", personList);
-
-        return "hospital/person/list";
+        return "/hospital/person/list";
     }
 
     @GetMapping("/person/detail/{personCode}")

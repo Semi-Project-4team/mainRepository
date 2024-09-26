@@ -1,6 +1,8 @@
 package animal.team.animalhospital.hospital.model.service;
 
+import animal.team.animalhospital.hospital.model.dao.HospitalMapper;
 import animal.team.animalhospital.hospital.model.dao.PersonMapper;
+import animal.team.animalhospital.hospital.model.dto.HospitalDTO;
 import animal.team.animalhospital.hospital.model.dto.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +14,16 @@ import java.util.List;
 public class PersonService {
 
     private final PersonMapper personMapper;
+    private final HospitalMapper hospitalMapper;
 
     @Autowired
-    public PersonService(PersonMapper personMapper) { this.personMapper = personMapper; }
+    public PersonService(PersonMapper personMapper, HospitalMapper hospitalMapper) {
+        this.personMapper = personMapper;
+        this.hospitalMapper = hospitalMapper; }
 
     public List<PersonDTO> findAllPerson() { return personMapper.findAllPerson(); }
+
+    public List<HospitalDTO> findAllHospital() { return hospitalMapper.findAllHospital(); }
 
     @Transactional
     public void insertPerson(PersonDTO newPerson) {
@@ -47,4 +54,5 @@ public class PersonService {
 
         return foundPersonCode;
     }
+
 }
