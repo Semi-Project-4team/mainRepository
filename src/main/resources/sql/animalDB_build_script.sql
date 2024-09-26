@@ -1,16 +1,15 @@
-DROP TABLE IF EXISTS tbl_person CASCADE;
 DROP TABLE IF EXISTS tbl_pet CASCADE;
-
 DROP TABLE IF EXISTS tbl_person_review CASCADE;
-DROP TABLE IF EXISTS tbl_main_subject CASCADE;
-DROP TABLE IF EXISTS tbl_sido CASCADE;
-DROP TABLE IF EXISTS tbl_sigungu CASCADE;
-DROP TABLE IF EXISTS tbl_eupmyeondong CASCADE;
-DROP TABLE IF EXISTS tbl_hospital CASCADE;
 DROP TABLE IF EXISTS tbl_reserve CASCADE;
+DROP TABLE IF EXISTS tbl_favorite CASCADE;
+DROP TABLE IF EXISTS tbl_person CASCADE;
+DROP TABLE IF EXISTS tbl_hospital CASCADE;
+DROP TABLE IF EXISTS tbl_main_subject CASCADE;
+DROP TABLE IF EXISTS tbl_eupmyeondong CASCADE;
+DROP TABLE IF EXISTS tbl_sigungu CASCADE;
+DROP TABLE IF EXISTS tbl_sido CASCADE;
 DROP TABLE IF EXISTS tbl_notice CASCADE;
 
-DROP TABLE IF EXISTS tbl_favorite CASCADE;
 
 -- 2. 테이블 생성
 CREATE TABLE IF NOT EXISTS tbl_person
@@ -256,8 +255,9 @@ VALUES
 INSERT INTO
     tbl_person (person_code, person_name, person_email, person_password, person_birth, person_phone_number, person_information_collection)
 VALUES
-    (1, '이나라', 'dlskfk0513@naver.com', 'dlskfk01', now(), '010-0000-0000', 'Y'),
-    (2, '백중윤', 'qorwnddbs@naver.com', 'qorwnddbs01', now(), '010-1111-1111', 'Y');
+    (1, 'admin', 'admin', '$2a$10$MeOhW/3tL/yfSQiYkHwC0OH5w1wKrpcLXQK6a5Ir8V7ZyuQrDbxbG', now(), '010-0000-0000', 'Y'),
+    (2, '이나라', 'dlskfk0513@naver.com', 'dlskfk01', now(), '010-0000-0000', 'Y'),
+    (3, '백중윤', 'qorwnddbs@naver.com', 'qorwnddbs01', now(), '010-1111-1111', 'Y');
 #     (3, '빵빵이', 'bbang@naver.com', 'bbang', now(), '010-2222-2222', 'Y');
 
 INSERT INTO
