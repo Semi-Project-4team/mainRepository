@@ -5,8 +5,9 @@
 </head>
 <body>
 
-    <h3>신규 예약 등록</h3>
-    <form action="/reserve/regist" method="post">
+    <h3>신규 예약 등록1</h3>
+<!--    <form action="/reserve/regist" method="post">-->
+    <form th:action="@{/reserve/registform/{code}(code=${code})}" method="post">
 <!--        <label>보호자 이름: </label><input type="text" name="personName"><br>-->
         반려동물 이름:
         <select name="petPersonCode" id="petPersonCode"></select><br>

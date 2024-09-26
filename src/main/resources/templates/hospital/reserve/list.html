@@ -25,7 +25,7 @@
             <th>정보수집동의</th>
         </tr>
         <tr th:each="reserve : ${ reserveList }">
-            <td><a th:href="@{/reserve/detail/{code}(code=${ reserve.personCode })}" th:text="${reserve.personCode}"></a></td>
+            <td><a th:href="@{/reserve/detail/{personCode}/{hospitalCode}(personCode=${reserve.personCode}, hospitalCode=${reserve.hospitalCode})}" th:text="${reserve.personCode}"></a></td>
             <td th:text="${ reserve.reserveTime }"></td>
             <td th:text="${ reserve.reserveDate }"></td>
             <td th:text="${ reserve.reserveText }"></td>

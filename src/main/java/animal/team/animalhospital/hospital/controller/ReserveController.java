@@ -18,7 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/reserve")
@@ -55,11 +57,16 @@ public class ReserveController {
 
     }
 
-    @GetMapping("/detail/{code}")
+    @GetMapping("/detail/{code}/{hospitalCode}")
     public String findReserveDetail(@PathVariable("code") int code,
+                                 @PathVariable("hospitalCode") int hospitalCode,
                                  Model model) {
 
-        ReserveDTO reserve = reserveService.findReserveByCode(code);
+        Map<String, Object> params = new HashMap<>();
+        params.put("personCode", code);
+        params.put("hospitalCode", hospitalCode);
+
+        ReserveDTO reserve = reserveService.findReserveByCode1(params);
 
         model.addAttribute("reserve", reserve);
 
@@ -75,27 +82,54 @@ public class ReserveController {
         return petService.findAllPet();
     }
 
-    @GetMapping("/regist")
-    public String registPage() {
+//    @GetMapping("/registform/{code}")
+//    public String registform(@PathVariable("code") int code) {
+//        return "redirect:/reserve/regist/" + code;
+//    }
 
+    @GetMapping("/regist/{code}")
+    public String registPage(@PathVariable("code") int code, Model model) {
+
+        System.out.println("code = " + code);
+
+
+        ReserveDTO reserveDTO = new ReserveDTO();
+        reserveDTO.setHospitalCode(code);
+
+//        model.addAttribute("code", code);
+
+//        ReserveDTO reserve = reserveService.registNewReserve(reserveDTO);
+//        reserveService.registNewReserve(reserveDTO);
+        model.addAttribute("hospital", code);
+        model.addAttribute("reserve", reserveService);
         return "/hospital/reserve/regist";
     }
 
 
-    @PostMapping("/regist")
-    public String registReserve(ReserveDTO newReserve, RedirectAttributes rAttr) {
+    @PostMapping("/registform/{code}")
+    public String registReserve(ReserveDTO newReserve,
+                                @PathVariable("code") int hospitalCode) {
+
+        System.out.println("hospitalCode123 = " + hospitalCode);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         String userEmail = userDetails.getUsername();
 
+        System.out.println("userEmail = " + userEmail);
+        System.out.println("hospitalCode = " + hospitalCode);
+
         int userCode = personService.findByPersonCode(userEmail);
+
+        System.out.println("userCode = " + userCode);
 
 
         newReserve.setPersonCode(userCode);
 
-        newReserve.setHospitalCode(7);              // 병원코드 강제주입구문(임시)
+        newReserve.setHospitalCode(hospitalCode);              // 병원코드 강제주입구문(임시)
+
+        System.out.println("newReserve = " + newReserve);
 
         reserveService.registNewReserve(newReserve);
 
@@ -112,6 +146,7 @@ public class ReserveController {
     public String deleteReserve(@PathVariable("code") int code,
                                 RedirectAttributes rAttr)   {
 
+
         reserveService.deleteReserve(code);
 
 //        rAttr.addFlashAttribute("successMessage", "예약이 성공적으로 삭제되었습니다.");
@@ -120,28 +155,75 @@ public class ReserveController {
 
     }
 
-    @GetMapping("/update/{code}")
+//    @GetMapping("/update/{code}/{hospitalCode}")
+//    public String updatePage(@PathVariable("code") int code,
+//                                   @PathVariable("hospitalCode") int hospitalCode,
+//                                   Model model) {
+//
+//        System.out.println("updatePage1 = " + code);
+//        System.out.println("updatePage1 = " + hospitalCode);
+//
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("personCode", code);
+//        params.put("hospitalCode", hospitalCode);
+//
+//        ReserveDTO reserve = reserveService.findReserveByCode1(params);
+//
+//        System.out.println("updatePage2 = " + reserve);
+//        model.addAttribute("reserve", reserve);
+//
+//        return "hospital/reserve/update";
+//    }
+
+    @GetMapping("/update/{code}/{hospitalCode}")
     public String updatePage(@PathVariable("code") int code,
-                                   Model model) {
+                            @PathVariable("hospitalCode") int hospitalCode,
+                            Model model) {
 
-        ReserveDTO reserve = reserveService.findReserveByCode(code);
 
+        System.out.println("code1 = " + code);
+        System.out.println("hospitalCode1 = " + hospitalCode);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("personCode", code);
+        params.put("hospitalCode", hospitalCode);
+
+        System.out.println("params = " + params);
+
+        ReserveDTO reserve = reserveService.findReserveByCode1(params);
+        System.out.println("reserve1 = " + reserve);
         model.addAttribute("reserve", reserve);
 
-        return "hospital/reserve/update";
+        return "hospital/reserve/update"; // 뷰의 이름
     }
-
 
     @PostMapping("/update")
-    public String updateReserve(ReserveDTO reserve, RedirectAttributes rAttr){
+    public String updateReserve(@ModelAttribute ReserveDTO reserve,
+                                RedirectAttributes rAttr) {
 
-        reserveService.updateReserve(reserve);
+        System.out.println("reserve22 = " + reserve);
+
+        reserveService.updateReserve1(reserve);
 
         rAttr.addFlashAttribute("successMessage", "예약이 성공적으로 수정되었습니다.");
-
-
-        return "redirect:/reserve/detail/" + reserve.getPersonCode();
+        return "redirect:/reserve/detail/" + reserve.getPersonCode() + "/" + reserve.getHospitalCode();
     }
+
+//    @PostMapping("/update")
+//    public String updateReserve(@ModelAttribute ReserveDTO reserve,
+//                            RedirectAttributes rAttr){
+//
+//        System.out.println("updateReserve1 = " + reserve);
+//        reserveService.updateReserve(reserve);
+//
+//        rAttr.addFlashAttribute("successMessage", "예약이 성공적으로 수정되었습니다.");
+//        System.out.println("updateReserve2 = " + reserve);
+//
+//
+//        return "redirect:/reserve/detail/" + reserve.getPersonCode();
+//    }
+
+
 
 
 
