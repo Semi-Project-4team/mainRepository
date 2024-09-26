@@ -2,6 +2,7 @@ package animal.team.animalhospital.configuration;
 
 import animal.team.animalhospital.auth.model.UserRole;
 import animal.team.animalhospital.exception.AuthFailHandler;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -40,8 +41,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChainConfigure(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/**").permitAll();
-//            auth.requestMatchers("/auth/login", "/user/signup", "/auth/fail", "/").permitAll();
+//            auth.requestMatchers("/**").permitAll();
+            auth.requestMatchers("/auth/login", "/user/signup", "/auth/fail", "/").permitAll();
+            auth.requestMatchers("/**").hasAnyAuthority(UserRole.MASTER.getRole()); // 마스터는 모든 권한 가짐
 //            auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
 //            auth.requestMatchers("/user/*").hasAnyAuthority(UserRole.USER.getRole(), UserRole.ADMIN.getRole());
             auth.anyRequest().authenticated();

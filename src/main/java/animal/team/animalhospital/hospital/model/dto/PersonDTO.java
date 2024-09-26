@@ -60,7 +60,13 @@ public class PersonDTO implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return List.of();
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(UserRole.USER_PERSON::getRole);
+        if(!getUsername().equals("admin")) {
+            // 개인회원 권한 부여
+            authorities.add(UserRole.USER_PERSON::getRole);
+        } else {
+            // MASTER 권한 부여
+            authorities.add(UserRole.MASTER::getRole);
+        }
         System.out.println("개인 권한을 부여함 : " + authorities);
         return authorities;
     }
