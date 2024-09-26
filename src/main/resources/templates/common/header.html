@@ -7,23 +7,17 @@
     <!-- 회원관리, 로그인 버튼 오른쪽 -->
     <div class="user-controls-div">
         <!--로그인을 안했을 경우-->
-        <div class="headerBtn" sec:authorize="!isAuthenticated()">
-            <button onclick="location.href='/auth/login'" class="loginBtn">로그인</button>
-            <button onclick="location.href='/user/joinMembership'" class="joinBtn">회원가입</button>
+        <div sec:authorize="!isAuthenticated()">
+            <button onclick="location.href='/auth/login'" class="headerBtn">로그인</button>
+            <button onclick="location.href='/user/joinMembership'" class="headerBtn">회원가입</button>
         </div>
         <!--로그인을 했을 경우-->
         <div sec:authorize="isAuthenticated()">
-            <div sec:authorize="hasAnyAuthority('MASTER')">
-                <button>회원관리</button>
-            </div>
-            <div sec:authorize="hasAnyAuthority('USER_PERSON')">
-                <a>개인회원</a>
-            </div>
-            <div sec:authorize="hasAnyAuthority('USER_HOSPITAL')">
-                <a>기업회원</a>
-            </div>
+            <a sec:authorize="hasAnyAuthority('USER_PERSON')">[개인회원]</a>
+            <a sec:authorize="hasAnyAuthority('USER_HOSPITAL')">[기업회원]</a>
             <label sec:authentication="">안녕하세요, [[${#authentication.name}]]님</label>
-            <button onclick="location.href='/auth/logout'">로그아웃</button>
-            <button onclick="location.href='/myPage/myInfo'">마이페이지</button>
+            <button sec:authorize="hasAnyAuthority('MASTER')" class="headerBtn" id="memberBtn">회원관리</button>
+            <button class="headerBtn" id="logoutBtn" onclick="location.href='/auth/logout'">로그아웃</button>
+            <button class="headerBtn" id="myPageBtn" onclick="location.href='/myPage/myInfo'">마이페이지</button>
         </div>
 </header>
