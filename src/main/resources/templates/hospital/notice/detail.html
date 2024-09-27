@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>공지사항 상세 페이지</title>
@@ -98,12 +98,12 @@
 
     <div class="button-container">
         <!-- 삭제 버튼 -->
-        <form th:action="@{/notice/delete/{code}(code=${notice.code})}" method="post">
+        <form sec:authorize="hasAnyAuthority('MASTER')" th:action="@{/notice/delete/{code}(code=${notice.code})}" method="post">
             <button type="submit">삭제하기</button>
         </form>
 
         <!-- 수정 버튼 -->
-        <form th:action="@{/notice/update/{code}(code=${notice.code})}" method="get">
+        <form sec:authorize="hasAnyAuthority('MASTER')" th:action="@{/notice/update/{code}(code=${notice.code})}" method="get">
             <button type="submit">수정하기</button>
         </form>
 

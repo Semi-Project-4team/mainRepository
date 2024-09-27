@@ -109,16 +109,17 @@
         <p><label>진료종료:</label> <span th:text="${ hospital.endTime }"></span></p>
         <p><label>점심시작:</label> <span th:text="${ hospital.lunchStartTime }"></span></p>
         <p><label>점심종료:</label> <span th:text="${ hospital.lunchEndTime }"></span></p>
-        <p><label>주소:</label> <span th:text="${ hospital.detailAddress }"></span></p>
-        <p><label>소개:</label> <span th:text="${ hospital.introText }"></span></p>
-        <p><label>사진:</label> <img th:src="${ hospital.photo }" alt="병원 사진" style="max-width: 100%; height: auto;"></p>
-        <p><label>전화번호:</label> <span th:text="${ hospital.phoneNumber }"></span></p>
+        <!-- 설명. 2024-09-27 오후 발표 끝난 후 주석 풀 예정 -->
+<!--        <p><label>주소:</label> <span th:text="${ hospital.detailAddress }"></span></p>-->
+<!--        <p><label>소개:</label> <span th:text="${ hospital.introText }"></span></p>-->
+<!--        <p><label>사진:</label> <img th:src="${ hospital.photo }" alt="병원 사진" style="max-width: 100%; height: auto;"></p>-->
+<!--        <p><label>전화번호:</label> <span th:text="${ hospital.phoneNumber }"></span></p>-->
     </div>
 
     <!-- 예약하기와 목록으로 돌아가는 버튼 -->
     <div class="action-buttons">
         <button onclick="location.href='/review/list'">전체 리뷰 조회</button>
-        <form th:action="@{/reserve/regist/{code}(code=${ hospital.hospitalCode})}" method="get">
+        <form sec:authorize="hasAnyAuthority('USER_PERSON')" th:action="@{/reserve/regist/{code}(code=${ hospital.hospitalCode})}" method="get">
             <button class="button"> 예약하기</button>
         </form>
         <button onclick="location.href='../list'">목록으로</button>
