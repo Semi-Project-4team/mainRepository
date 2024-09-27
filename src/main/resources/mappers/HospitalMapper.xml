@@ -19,10 +19,10 @@
         <result property="email" column="hospital_email"/>
         <result property="password" column="hospital_password"/>
         <result property="informationCollection" column="hospital_information_collection"/>
-        <result property="startTime" column="hospital_startTime"/>
-        <result property="endTime" column="hospital_endTime"/>
-        <result property="lunchStartTime" column="hospital_lunchStartTime"/>
-        <result property="lunchEndTime" column="hospital_lunchEndTime"/>
+        <result property="startTime" column="hospital_start_time"/>
+        <result property="endTime" column="hospital_end_time"/>
+        <result property="lunchStartTime" column="hospital_lunch_start_time"/>
+        <result property="lunchEndTime" column="hospital_lunch_end_time"/>
         <result property="detailAddress" column="hospital_detail_address"/>
         <result property="introText" column="hospital_intro_text"/>
         <result property="phoneNumber" column="hospital_phone_number"/>
@@ -135,10 +135,10 @@
                 hospital_email,
                 hospital_password,
                 hospital_information_collection,
-                hospital_startTime,
-                hospital_endTime,
-                hospital_lunchStartTime,
-                hospital_lunchEndTime,
+                hospital_start_time,
+                hospital_end_time,
+                hospital_lunch_start_time,
+                hospital_lunch_end_time,
                 hospital_detail_address,
                 hospital_intro_text,
                 hospital_phone_number,
@@ -171,11 +171,11 @@
         SET
             subject_code = #{subjectCode},
             hospital_name = #{name},
-            hospital_startTime = #{startTime},
-            hospital_endTime = #{endTime},
-            hospital_lunchStartTime = #{lunchStartTime},
-            hospital_lunchEndTime = #{lunchEndTime},
-            hospital_detail_address = # {detailAddress},
+            hospital_start_time = #{startTime},
+            hospital_end_time = #{endTime},
+            hospital_lunch_start_time = #{lunchStartTime},
+            hospital_lunch_end_time = #{lunchEndTime},
+            hospital_detail_address = #{detailAddress},
             hospital_intro_text = #{introText},
             hospital_phone_number = #{phoneNumber},
             hospital_photo = #{photo}
