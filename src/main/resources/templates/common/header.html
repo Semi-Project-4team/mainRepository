@@ -13,10 +13,21 @@
         </div>
         <!--로그인을 했을 경우-->
         <div sec:authorize="isAuthenticated()">
+            <!--  설명. 2024-09-27 오후 발표 끝난 후 주석 풀 예정 -->
+<!--            <div sec:authorize="hasAnyAuthority('MASTER')">-->
+<!--                <button onclick="location.href='/hospital/person/list'">회원관리</button>-->
+<!--            </div>-->
+<!--            <div sec:authorize="hasAnyAuthority('USER_PERSON')">-->
+<!--                <a>개인회원</a>-->
+<!--            </div>-->
+<!--            <div sec:authorize="hasAnyAuthority('USER_HOSPITAL')">-->
+<!--                <a>기업회원</a>-->
+<!--            </div>-->
             <a sec:authorize="hasAnyAuthority('USER_PERSON')">[개인회원]</a>
             <a sec:authorize="hasAnyAuthority('USER_HOSPITAL')">[기업회원]</a>
             <label sec:authentication="">안녕하세요, [[${#authentication.name}]]님</label>
-            <button sec:authorize="hasAnyAuthority('MASTER')" onclick="location.href='/hospital/person/list'" class="headerBtn" id="memberBtn">회원관리</button>
+                <!--  설명. 2024-09-27 오후 발표 끝난 후 주석 풀 예정 -->
+<!--            <button sec:authorize="hasAnyAuthority('MASTER')" class="headerBtn" id="memberBtn">회원관리</button>-->
             <button class="headerBtn" id="logoutBtn" onclick="location.href='/auth/logout'">로그아웃</button>
             <button class="headerBtn" id="myPageBtn" onclick="location.href='/myPage/myInfo'">마이페이지</button>
         </div>

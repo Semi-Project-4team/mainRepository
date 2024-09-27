@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>공지사항</title>
@@ -89,7 +89,7 @@
 <div class="container">
 
     <div class="button-container">
-        <button onclick="location.href='/notice/insert'">새 공지사항 등록하기</button>
+        <button sec:authorize="hasAnyAuthority('MASTER')" onclick="location.href='/notice/insert'">새 공지사항 등록하기</button>
         <button onclick="location.href='/'">메인으로</button>
     </div>
 
