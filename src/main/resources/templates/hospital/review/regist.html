@@ -1,36 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>리뷰 등록</title>
     <link rel="stylesheet" href="/css/header.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7; /* 배경색 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 50%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        select, textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        button {
+            background-color: #58ccff;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #4da8cc;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
+<div class="container">
     <h3>리뷰 등록</h3>
-        <form action="/review/regist" method="post">
-            파일: <input type="file" name="singleFile"><br>
+    <form action="/review/regist" method="post">
+        <label for="file">파일:</label>
+        <input type="file" name="singleFile" id="file">
 
-
-        <label>리뷰점수: </label>
-        <select name="reviewScore">
-            <option value="5"selected>5</option>
+        <label for="score">리뷰점수:</label>
+        <select name="reviewScore" id="score">
+            <option value="5" selected>5</option>
             <option value="4">4</option>
             <option value="3">3</option>
             <option value="2">2</option>
-            <option value="2">1</option>
+            <option value="1">1</option>
         </select>
-        <br>
-        리뷰내용:
-        <br>
-        <textarea name="reviewExplanation" id="contents" cols="30" rows="10"
-                      style="resize:none" maxlength="100">abc</textarea>
+
+        <label for="contents">리뷰내용:</label>
+        <textarea name="reviewExplanation" id="contents" maxlength="100">abc</textarea>
 
         <button type="submit">전송</button>
-
-        </form>
+    </form>
+</div>
 
 </body>
 </html>

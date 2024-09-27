@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin-top: 100px;
             background-color: #f9f9f9; /* 배경색 */
         }
 
@@ -16,9 +16,9 @@
         }
 
         table {
-            width: 100%;
+            width: 60%;
             border-collapse: collapse; /* 테이블 간격 제거 */
-            margin-top: 20px; /* 위쪽 여백 */
+            margin: 20px auto; /* 위쪽 여백 및 수평 중앙 정렬 */
         }
 
         th, td {
@@ -49,18 +49,19 @@
             text-decoration: underline; /* 링크 호버 시 밑줄 */
         }
 
-        button {
+        #mainBtn {
             background-color: #58ccff; /* 버튼 배경색 */
             color: white; /* 버튼 텍스트 색 */
             border: none; /* 테두리 제거 */
             padding: 10px 20px; /* 패딩 */
             text-align: center;
             text-decoration: none; /* 텍스트 밑줄 제거 */
-            display: inline-block; /* 버튼을 인라인 블록으로 표시 */
+            display: flex; /* 버튼을 인라인 블록으로 표시 */
             font-size: 16px; /* 글자 크기 */
             margin-top: 20px; /* 위쪽 여백 */
             cursor: pointer; /* 커서 모양 */
             border-radius: 5px; /* 모서리 둥글게 */
+            justify-content: flex-end;
         }
 
         button:hover {
@@ -78,7 +79,7 @@
     <tr>
         <th>병원코드</th>
         <th>병원명</th>
-        <th>인가번호</th>
+<!--        <th>인가번호</th>-->
         <th>진료시작</th>
         <th>진료종료</th>
         <th>점심시작</th>
@@ -89,7 +90,7 @@
     <tr th:each="hospital : ${ hospitalList }">
         <td th:text="${ hospital.hospitalCode }"></td>
         <td><a th:href="@{/hospital/info/detail/{code}(code=${ hospital.hospitalCode })}" th:text="${ hospital.name }"></a></td>
-        <td th:text="${ hospital.permitNumber }"></td>
+<!--        <td th:text="${ hospital.permitNumber }"></td>-->
         <td th:text="${ hospital.startTime }"></td>
         <td th:text="${ hospital.endTime }"></td>
         <td th:text="${ hospital.lunchStartTime }"></td>
@@ -99,6 +100,6 @@
     </tr>
 </table>
 <br>
-<button onclick="location.href='/'">메인으로</button>
+<button id="mainBtn" onclick="location.href='/'">메인으로</button>
 </body>
 </html>
