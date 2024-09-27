@@ -16,6 +16,7 @@
 
         <!-- Hidden input for PersonCode -->
         <input type="hidden" th:field="*{personCode}" />
+        <input type="hidden" th:field="*{hospitalCode}" />
 
         파일: <input type="file" name="singleFile"><br>
 
@@ -44,6 +45,11 @@
         <button type="submit">수정하기</button>
         <button type="reset">초기화</button>
     </form>
+
+
+    <div>
+        <button onclick="history.back()">취소</button>
+    </div>
 
 
 </body>

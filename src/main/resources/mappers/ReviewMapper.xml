@@ -86,4 +86,16 @@
             person_code = #{personCode}
     </update>
 
+    <update id="updateReview1" parameterType="animal.team.animalhospital.hospital.model.dto.ReviewDTO">
+        UPDATE tbl_person_review
+        SET
+        <!--            review_modify_date = #{reviewModifyDate},-->
+            review_score = #{reviewScore},
+            review_photo = #{reviewPhoto},
+            review_explanation = #{reviewExplanation}
+        WHERE
+        person_code = #{personCode}
+        and hospital_code = #{hospitalCode}
+    </update>
+
 </mapper>
