@@ -237,10 +237,18 @@
         <th>예약날짜</th>
         <th>예약시간</th>
       </tr>
-      <tr th:each="myHospital : ${ myHospitalList }">
+<!--      <tr th:each="myHospital : ${ myHospitalList }">-->
+<!--        <td th:text="${ myHospital.name }"></td>-->
+<!--        <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveDate }"></td>-->
+<!--        <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveTime }"></td>-->
+<!--      </tr>-->
+      <tr th:each="myHospital, myIndex : ${ myHospitalList }"
+          th:data-index="${ myIndex }">
         <td th:text="${ myHospital.name }"></td>
-        <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveDate }"></td>
-        <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveTime }"></td>
+<!--        <td th:each="myReserve : ${ myReserveList[myIndex][5] }" th:text="${ myReserve.reserveDate }"></td>-->
+        <td th:text="${ myReserveList[myIndex.index].reserveDate }"></td>
+        <td th:text="${ myReserveList[myIndex.index].reserveTime }"></td>
+<!--        <td th:text="${ myReserveList }"></td>-->
       </tr>
     </table>
   </div>
@@ -301,5 +309,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  // 페이지 로드 후 모든 tr 요소에서 인덱스를 콘솔에 출력
+  document.querySelectorAll('tr[data-index]').forEach(function(tr) {
+    console.log('Index:', tr.dataset.index);
+  });
+</script>
 </body>
 </html>
