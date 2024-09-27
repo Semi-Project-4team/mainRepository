@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,7 +96,7 @@
 <body>
 
 <!--수정버튼-->
-<form th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">
+<form sec:authorize="hasAnyAuthority('USER_HOSPITAL')" th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">
     <button class="edit-button" type="submit">동물병원 정보 수정하기</button>
 </form>
 
