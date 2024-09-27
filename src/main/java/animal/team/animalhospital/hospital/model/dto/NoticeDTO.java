@@ -2,6 +2,7 @@ package animal.team.animalhospital.hospital.model.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class NoticeDTO {
@@ -9,14 +10,14 @@ public class NoticeDTO {
     private int code;
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private LocalDate date;
     private int views;
     private String text;
 
     public NoticeDTO() {
     }
 
-    public NoticeDTO(int code, String name, Date date, int views, String text) {
+    public NoticeDTO(int code, String name, LocalDate date, int views, String text) {
 
         this.code = code;
         this.name = name;
@@ -41,11 +42,11 @@ public class NoticeDTO {
         this.name = name;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -7,7 +7,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f8fb;
-            margin: 0;
+            margin-top: 100px;
             padding: 20px;
         }
 
@@ -80,17 +80,18 @@
         }
 
     </style>
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
 
-<h3>Notice</h3>
-<hr>
+<div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+
+<h1>공지사항</h1>
 
 <div class="container">
 
     <div class="button-container">
         <button sec:authorize="hasAnyAuthority('MASTER')" onclick="location.href='/notice/insert'">새 공지사항 등록하기</button>
-        <button onclick="location.href='/'">메인으로</button>
     </div>
 
     <table>
@@ -107,6 +108,10 @@
             <td th:text="${ notice.views }"></td>
         </tr>
     </table>
+</div>
+
+<div class="button-container">
+    <button onclick="location.href='/'">메인으로</button>
 </div>
 
 </body>

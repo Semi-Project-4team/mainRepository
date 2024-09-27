@@ -1,105 +1,118 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 상세 정보</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 19px;
-            background-color: #f8f9f9; /* 배경색 */
+            margin-top: 100px;
+            padding: 20px;
+            background-color: #f8f9f9;
         }
 
-        h0 {
+        h2 {
             text-align: center;
-            color: #332;
+            color: #333;
+            margin-bottom: 20px;
         }
 
-        table {
-            width: 99%;
-            border-collapse: collapse; /* 테이블 간격 제거 */
-            margin-top: 19px; /* 위쪽 여백 */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        th, td {
-            padding: 11px;
-            text-align: left;
-            border: 0px solid #ddd; /* 셀 테두리 */
+        .info {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
         }
 
-        th {
-            background-color: #57ccff; /* 헤더 배경색 */
-            color: white; /* 헤더 텍스트 색 */
+        .info p {
+            margin: 10px 0;
         }
 
-        tr:nth-child(even) {
-            background-color: #f1f2f2; /* 짝수 행 배경색 */
+        .info span {
+            font-weight: bold;
+            color: #333;
         }
 
-        tr:hover {
-            background-color: #e0e0e0; /* 마우스 오버 색상 */
+        .info p label {
+            color: #58ccff;
+            font-weight: bold;
         }
 
-        a {
-            color: #57ccff; /* 링크 색상 */
-            text-decoration: none; /* 링크 밑줄 제거 */
+        button, .form-button {
+            background-color: #58ccff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        a:hover {
-            text-decoration: underline; /* 링크 호버 시 밑줄 */
+        button:hover, .form-button:hover {
+            background-color: #3da8cc;
         }
 
-        button {
-            background-color: #57ccff; /* 버튼 배경색 */
-            color: white; /* 버튼 텍스트 색 */
-            border: none; /* 테두리 제거 */
-            padding: 9px 20px; /* 패딩 */
-            text-align: center;
-            text-decoration: none; /* 텍스트 밑줄 제거 */
-            display: inline-block; /* 버튼을 인라인 블록으로 표시 */
-            font-size: 15px; /* 글자 크기 */
-            margin-top: 19px; /* 위쪽 여백 */
-            cursor: pointer; /* 커서 모양 */
-            border-radius: 4px; /* 모서리 둥글게 */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
 
-        button:hover {
-            background-color: #3da8cc; /* 버튼 호버 시 색상 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            button, .form-button {
+                font-size: 14px;
+            }
         }
     </style>
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
 
+<div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+
+
+<div class="container">
     <h2>예약 상세 정보</h2>
+    <div class="info">
+        <p><label>개인코드:</label> <span th:text="${reserve.personCode}"></span></p>
+        <p><label>병원코드:</label> <span th:text="${reserve.hospitalCode}"></span></p>
+        <p><label>방문시간:</label> <span th:text="${reserve.reserveTime}"></span></p>
+        <p><label>방문날짜:</label> <span th:text="${reserve.reserveDate}"></span></p>
+        <p><label>전달사항:</label> <span th:text="${reserve.reserveText}"></span></p>
+        <p><label>정보수집동의:</label> <span th:text="${reserve.reserveInformationCollection}"></span></p>
+    </div>
 
-        <div>
-            <p>개인코드: <span th:text="${reserve.personCode}"></span></p>
-            <p>병원코드: <span th:text="${reserve.hospitalCode}"></span></p>
-            <p>방문시간: <span th:text="${reserve.reserveTime}"></span></p>
-            <p>방문날짜: <span th:text="${reserve.reserveDate}"></span></p>
-            <p>전달사항: <span th:text="${reserve.reserveText}"></span></p>
-            <p>정보수집동의: <span th:text="${reserve.reserveInformationCollection}"></span></p>
-        </div>
-
-<!--        &lt;!&ndash; 수정 버튼(thymeleaf 사용) &ndash;&gt;-->
-<!--        <a th:href="@{/reserve/edit/{code}(code=${reserve.personCode})}">수정하기(Thymeleaf)</a>-->
-
-<!--        &lt;!&ndash; 수정 버튼(JavaScript 사용) &ndash;&gt;-->
-<!--        <button id="editButton">수정하기(JavaScript)</button>-->
-
-
+    <!-- Action buttons (수정하기, 삭제하기, 목록으로) -->
+    <div class="action-buttons">
         <form th:action="@{/reserve/update/{personCode}/{hospitalCode}(personCode=${reserve.personCode}, hospitalCode=${reserve.hospitalCode})}" method="get">
-            <button type="submit">수정하기</button>
+            <button type="submit" class="form-button">수정하기</button>
         </form>
 
         <form th:action="@{/reserve/delete/{code}(code=${reserve.personCode})}" method="post">
-            <button type="submit">삭제하기</button>
+            <button type="submit" class="form-button">삭제하기</button>
         </form>
 
-        <!-- 목록으로 돌아가는 버튼 -->
-        <button onclick="location.href='/reserve/list'">이전으로</button><br>
-
-
+        <button onclick="location.href='/reserve/list'">이전으로</button>
+    </div>
+</div>
 
 </body>
 </html>
