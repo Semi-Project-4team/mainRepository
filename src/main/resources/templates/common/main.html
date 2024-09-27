@@ -60,7 +60,16 @@
     <!--병원찾기-->
     <div class="search-hospital">
         <br>
-        <button class="button" onclick="location.href='/hospital/sidoAll'">지역별 동물병원찾기</button>
+<!--        <button class="button" onclick="location.href='/hospital/sidoAll'">지역별 동물병원찾기</button>-->
+        <button class="button" onclick="openPopup()">지역별 동물병원찾기</button>
+        <br>
+        <br>
+        <button class="button" onclick="location.href='/hospital/info/list'">동물병원 전체목록</button>
+        <script>
+            function openPopup() {
+                window.open('hospital/sidoAll', 'hospital/info/sigungu/', 'width=600,height=400,scrollbars=yes');
+            }
+        </script>
         <br>
         <br>
         <!--  설명. 2024-09-27 오후 발표 끝난 후 주석 풀 예정 -->

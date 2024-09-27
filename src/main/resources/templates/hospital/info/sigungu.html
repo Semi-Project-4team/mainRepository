@@ -6,17 +6,25 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
+            background-color: #f4f4f4;
             margin: 0;
-            padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh; /* 전체 높이를 중앙 정렬을 위해 사용 */
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
         }
         .table-container {
-            width: 80%; /* 테이블 너비 설정 */
-            max-width: 800px; /* 최대 너비 설정 */
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 테이블에 그림자 추가 */
+            padding: 20px;
+            background-color: white; /* 테이블 컨테이너 배경 */
+            border-radius: 10px; /* 모서리 둥글게 */
         }
         table {
             width: 100%;
@@ -26,10 +34,10 @@
         th, td {
             padding: 12px;
             border: 1px solid #ddd;
-            text-align: left;
+            text-align: center; /* 중앙 정렬 */
         }
         th {
-            background-color: #58ccff;
+            background-color: #58ccff; /* 포인트 색상 */
             color: white;
             font-size: 18px;
         }
@@ -37,15 +45,15 @@
             font-size: 16px;
         }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #f2f2f2; /* 짝수 행 배경색 */
         }
         a {
-            color: #58ccff;
+            color: #58ccff; /* 링크 색상 */
             text-decoration: none;
             font-weight: bold;
         }
         a:hover {
-            text-decoration: underline;
+            text-decoration: underline; /* 링크 호버 시 밑줄 */
         }
         button {
             background-color: #58ccff;
@@ -60,26 +68,19 @@
             background-color: #3ca8d7;
         }
         .back-button {
-            text-align: right;
+            text-align: right; /* 버튼을 오른쪽 정렬 */
         }
     </style>
-    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
 
-<div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 <div class="table-container">
+    <h1>시/군/구</h1>
+
     <table>
-        <tr>
-            <th>SidoCode</th>
-            <th>SigunguCode</th>
-            <th>sigunguName</th>
-        </tr>
-        <tr th:each="sigungu : ${ sigunguList }">
-            <td th:text="${ sigungu.sidoCode}"></td>
-            <td th:text="${ sigungu.sigunguCode }"></td>
+        <tr th:each="sigungu : ${sigunguList}">
             <td>
-                <a th:href="@{'/hospital/info/eupmyeondong/' + ${sigungu.sigunguCode}}" th:text="${ sigungu.name }"></a>
+                <a th:href="@{'/hospital/info/eupmyeondong/' + ${sigungu.sigunguCode}}" th:text="${sigungu.name}"></a>
             </td>
         </tr>
     </table>
@@ -89,5 +90,6 @@
         <button onclick="history.back()">뒤로가기</button>
     </div>
 </div>
+
 </body>
 </html>
