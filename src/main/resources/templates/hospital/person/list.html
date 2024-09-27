@@ -128,6 +128,10 @@
             <th>병원명</th>
             <th>인가번호</th>
             <th>이메일</th>
+            <th>진료시작시간</th>
+            <th>진료종료시간</th>
+            <th>점심시작시간</th>
+            <th>점심종료시간</th>
             <th>진료시간</th>
             <th>소재지</th>
             <th>소개글</th>
@@ -140,7 +144,10 @@
             <td th:text="${hospital.name}"></td>
             <td th:text="${hospital.permitNumber}"></td>
             <td th:text="${hospital.email}"></td>
-            <td th:text="${hospital.time}"></td>
+            <td th:text="${hospital.startTime}"></td>
+            <td th:text="${hospital.endTime}"></td>
+            <td th:text="${hospital.lunchStartTime}"></td>
+            <td th:text="${hospital.lunchEndTime}"></td>
             <td th:text="${hospital.detailAddress}"></td>
             <td th:text="${hospital.introText}"></td>
             <td th:text="${hospital.photo}"></td>

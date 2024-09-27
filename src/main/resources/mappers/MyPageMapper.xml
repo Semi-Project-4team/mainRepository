@@ -50,7 +50,10 @@
         <result property="email" column="hospital_email"/>
         <result property="password" column="hospital_password"/>
         <result property="informationCollection" column="hospital_information_collection"/>
-        <result property="time" column="hospital_time"/>
+        <result property="startTime" column="hospital_start_time"/>
+        <result property="endTime" column="hospital_end_time"/>
+        <result property="lunchStartTime" column="hospital_lunch_start_time"/>
+        <result property="lunchEndTime" column="hospital_lunch_end_time"/>
         <result property="detailAddress" column="detail_address"/>
         <result property="introText" column="intro_text"/>
         <result property="phoneNumber" column="hospital_phone_number"/>
