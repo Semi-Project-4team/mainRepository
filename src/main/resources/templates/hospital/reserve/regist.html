@@ -1,123 +1,139 @@
 <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>regist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신규 예약 등록</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin-top: 100px;
+            padding: 20px;
             background-color: #f9f9f9; /* 배경색 */
         }
 
         h1 {
             text-align: center;
             color: #333;
+            margin-bottom: 30px;
         }
 
-        table {
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label, select, input, textarea {
+            display: block;
             width: 100%;
-            border-collapse: collapse; /* 테이블 간격 제거 */
-            margin-top: 20px; /* 위쪽 여백 */
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
         }
 
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd; /* 셀 테두리 */
+        select, input, textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+            font-size: 16px;
         }
 
-        th {
-            background-color: #58ccff; /* 헤더 배경색 */
-            color: white; /* 헤더 텍스트 색 */
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #58ccff;
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2; /* 짝수 행 배경색 */
-        }
-
-        tr:hover {
-            background-color: #e0e0e0; /* 마우스 오버 색상 */
-        }
-
-        a {
-            color: #58ccff; /* 링크 색상 */
-            text-decoration: none; /* 링크 밑줄 제거 */
-        }
-
-        a:hover {
-            text-decoration: underline; /* 링크 호버 시 밑줄 */
+        textarea {
+            resize: none;
+            height: 100px;
         }
 
         button {
-            background-color: #58ccff; /* 버튼 배경색 */
-            color: white; /* 버튼 텍스트 색 */
-            border: none; /* 테두리 제거 */
-            padding: 10px 20px; /* 패딩 */
-            text-align: center;
-            text-decoration: none; /* 텍스트 밑줄 제거 */
-            display: inline-block; /* 버튼을 인라인 블록으로 표시 */
-            font-size: 16px; /* 글자 크기 */
-            margin-top: 20px; /* 위쪽 여백 */
-            cursor: pointer; /* 커서 모양 */
-            border-radius: 5px; /* 모서리 둥글게 */
+            background-color: #58ccff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 48%;
         }
 
         button:hover {
-            background-color: #4da8cc; /* 버튼 호버 시 색상 */
+            background-color: #4da8cc;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                padding: 15px;
+            }
+
+            button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
     </style>
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
 
-    <h3>신규 예약 등록1</h3>
-<!--    <form action="/reserve/regist" method="post">-->
-    <form th:action="@{/reserve/registform/{code}(code=${code})}" method="post">
-<!--        <label>보호자 이름: </label><input type="text" name="personName"><br>-->
-        반려동물 이름:
-        <select name="petPersonCode" id="petPersonCode"></select><br>
-
-<!--        <input type="text" name="petName"><br>-->
-        <label>방문 시간: </label><input type="time" name="reserveTime"><br>
-        <label>방문 날짜: </label><input type="date" name="reserveDate"><br>
+<div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
 
-<!--    <form action="/reserve/regist">-->
-        <label>정보수집동의: </label>
-        <select name="reserveInformationCollection">
-            <option value="Y">Y</option>
-            <option value="N">N</option>
-        </select>
+<h1>신규 예약 등록</h1>
 
-        <br>
-        전달 사항:
-        <br>
+<form th:action="@{/reserve/registform/{code}(code=${code})}" method="post">
+    <label for="petPersonCode">반려동물 이름:</label>
+    <select name="petPersonCode" id="petPersonCode"></select>
 
-        <textarea name="reserveText" id="contents" cols="30" rows="10"
-              style="resize:none" maxlength="100">abc</textarea>
-            <br>
-            <button type="submit">전송</button>
-            <button type="reset">초기화</button>
-    </form>
+    <label for="reserveTime">방문 시간:</label>
+    <input type="time" name="reserveTime" id="reserveTime">
 
-    <script>
-        /* 설명. fetch() 및 then() 메서드는 edit.html 파일 참조. */
-        fetch("/reserve/nameList")
-            .then(res => res.json())
-            .then(data => {
-                const petName = document.getElementById('petPersonCode');
+    <label for="reserveDate">방문 날짜:</label>
+    <input type="date" name="reserveDate" id="reserveDate">
 
-                // 각 카테고리 데이터를 순회
-                for (let index in data) {
-                    // 새로운 <option> 요소를 생성
-                    const $option = document.createElement('option');
-                    // <option> 요소의 값을 카테고리 코드로 설정
-                    // $option.value = data[index].petName;
-                    // <option> 요소의 텍스트를 카테고리 이름으로 설정
-                    $option.textContent = data[index].petPersonCode;
-                    // <option> 요소를 categoryCode <select> 요소에 추가
-                    petName.appendChild($option);
-                }
+    <label for="reserveInformationCollection">정보수집동의:</label>
+    <select name="reserveInformationCollection" id="reserveInformationCollection">
+        <option value="Y">Y</option>
+        <option value="N">N</option>
+    </select>
+
+    <label for="contents">전달 사항:</label>
+    <textarea name="reserveText" id="contents" maxlength="100">abc</textarea>
+
+    <div class="button-group">
+        <button type="submit">전송</button>
+        <button type="reset">초기화</button>
+    </div>
+</form>
+
+<script>
+    // Fetch petPersonCode data and populate the select element
+    fetch("/reserve/nameList")
+        .then(res => res.json())
+        .then(data => {
+            const petPersonCodeSelect = document.getElementById('petPersonCode');
+
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.petPersonCode;
+                option.textContent = item.petPersonCode;
+                petPersonCodeSelect.appendChild(option);
             });
-    </script>
+        });
+</script>
+
 </body>
 </html>
