@@ -76,6 +76,10 @@ public class HospitalController {
         hospitalDTO.setDetailAddress(hospital.getDetailAddress());
         hospitalDTO.setIntroText(hospital.getIntroText());
         hospitalDTO.setPhoto(hospital.getPhoto());
+        hospitalDTO.setPhoneNumber(hospital.getPhoneNumber());
+
+        System.out.println("Detail Address: " + hospitalDTO.getDetailAddress());
+        System.out.println("Intro Text: " + hospitalDTO.getIntroText());
 
         hospitalService.updateHospital(hospitalDTO);
         return "redirect:/hospital/info/detail/" + hospitalDTO.getHospitalCode();

@@ -201,6 +201,7 @@ public class HospitalDTO implements UserDetails {
     public String getIntroText() {
         return introText;
     }
+
     public void setIntroText(String introText) {
         this.introText = introText;
     }

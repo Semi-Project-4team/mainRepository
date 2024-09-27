@@ -93,10 +93,10 @@ CREATE TABLE IF NOT EXISTS tbl_hospital
     hospital_email varchar(30) NOT NULL COMMENT '병원이메일', --
     hospital_password varchar(100) NOT NULL COMMENT '병원비밀번호', --
     hospital_information_collection varchar(1) NOT NULL COMMENT '정보수집동의확인', --
-    hospital_startTime TIME COMMENT '병원진료시작시간',
-    hospital_endTime TIME COMMENT '병원진료종료시간',
-    hospital_lunchStartTime TIME COMMENT '점심시작시간',
-    hospital_lunchEndTime TIME COMMENT '점심종료시간',
+    hospital_start_time TIME COMMENT '병원진료시작시간',
+    hospital_end_time TIME COMMENT '병원진료종료시간',
+    hospital_lunch_start_time TIME COMMENT '점심시작시간',
+    hospital_lunch_end_time TIME COMMENT '점심종료시간',
     hospital_detail_address varchar(30) COMMENT '병원세부소재지',
     hospital_intro_text varchar(255) COMMENT '병원소개글',
     hospital_phone_number varchar(20) NOT NULL COMMENT '병원전화번호', --
@@ -227,10 +227,10 @@ INSERT INTO tbl_hospital
     hospital_email,
     hospital_password,
     hospital_information_collection,
-    hospital_starttime,
-    hospital_endtime,
-    hospital_lunchstarttime,
-    hospital_lunchendtime,
+    hospital_start_time,
+    hospital_end_time,
+    hospital_lunch_start_time,
+    hospital_lunch_end_time,
     hospital_detail_address,
     hospital_intro_text,
     hospital_phone_number,
