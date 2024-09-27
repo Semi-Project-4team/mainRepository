@@ -20,6 +20,7 @@ public class AuthController {
         return mv;
     }
 
+
     @GetMapping("/login")
     public void login() {}
 }
