@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReviewService {
@@ -49,5 +50,14 @@ public class ReviewService {
     @Transactional
     public void updateReview(ReviewDTO review) {
         reviewMapper.updateReview(review);
+    }
+
+
+    public ReviewDTO findReviewByCode1(Map<String, Object> params) {
+        return reviewMapper.findReviewByCode1(params);
+    }
+
+    public void updateReview1(ReviewDTO review) {
+        reviewMapper.updateReview1(review);
     }
 }

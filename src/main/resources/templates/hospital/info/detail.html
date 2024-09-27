@@ -132,7 +132,9 @@
 
     <!-- 예약하기와 목록으로 돌아가는 버튼 -->
     <div class="action-buttons">
-        <button onclick="location.href='/review/list'">전체 리뷰 조회</button>
+        <form sec:authorize="hasAnyAuthority('USER_PERSON')" th:action="@{/review/regist/{code}(code=${ hospital.hospitalCode})}" method="get">
+            <button class="button"> 리뷰등록</button>
+        </form>
         <form sec:authorize="hasAnyAuthority('USER_PERSON')" th:action="@{/reserve/regist/{code}(code=${ hospital.hospitalCode})}" method="get">
             <button class="button"> 예약하기</button>
         </form>

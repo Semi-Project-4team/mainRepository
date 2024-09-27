@@ -11,38 +11,6 @@
 
     <h2>예약 수정하기</h2>
 
-<!--    <form th:action="@{/reserve/update}" th:object="${reserve}" method="post">-->
-
-<!--        &lt;!&ndash; Hidden input for PersonCode &ndash;&gt;-->
-<!--        <input type="hidden" th:field="*{personCode}" />-->
-
-<!--        &lt;!&ndash; Reserve Time input &ndash;&gt;-->
-<!--        <label for="reserveTime">예약 시간:</label>-->
-<!--        <input type="time" id="reserveTime" th:field="*{reserveTime}" required />-->
-
-<!--        &lt;!&ndash; Reserve Date input &ndash;&gt;-->
-<!--        <label for="reserveDate">예약 날짜:</label>-->
-<!--        <input type="date" id="reserveDate" th:field="*{reserveDate}" required />-->
-
-<!--        &lt;!&ndash; Information Collection Agreement &ndash;&gt;-->
-<!--        <label for="reserveInformationCollection">정보수집동의:</label>-->
-<!--        <select id="reserveInformationCollection" th:field="*{reserveInformationCollection}">-->
-<!--            <option value="Y">Y</option>-->
-<!--            <option value="N">N</option>-->
-<!--        </select>-->
-
-<!--        &lt;!&ndash; Textarea for additional notes &ndash;&gt;-->
-<!--        <br>-->
-<!--        <label for="contents">전달 사항:</label>-->
-<!--        <br>-->
-<!--        <textarea name="reserveText" id="contents" cols="30" rows="10"-->
-<!--                  style="resize:none" maxlength="100" th:field="*{reserveText}"></textarea>-->
-<!--        <br>-->
-
-<!--        &lt;!&ndash; Submit and Reset buttons &ndash;&gt;-->
-<!--        <button type="submit">수정하기</button>-->
-<!--        <button type="reset">초기화</button>-->
-<!--    </form>-->
 
     <form th:action="@{/reserve/update}" th:object="${reserve}" method="post">
 

@@ -82,10 +82,6 @@ public class ReserveController {
         return petService.findAllPet();
     }
 
-//    @GetMapping("/registform/{code}")
-//    public String registform(@PathVariable("code") int code) {
-//        return "redirect:/reserve/regist/" + code;
-//    }
 
     @GetMapping("/regist/{code}")
     public String registPage(@PathVariable("code") int code, Model model) {
@@ -134,10 +130,6 @@ public class ReserveController {
         reserveService.registNewReserve(newReserve);
 
 
-//        logger.info("Locale : {}", locale);
-
-//        rAttr.addFlashAttribute("successMessage", "신규 예약 등록에 성공하셨습니다.");
-//        rAttr.addFlashAttribute("successMessage", messageSource.getMessage("registReserve", null, locale));
 
         return "redirect:/reserve/list";
     }
@@ -155,25 +147,6 @@ public class ReserveController {
 
     }
 
-//    @GetMapping("/update/{code}/{hospitalCode}")
-//    public String updatePage(@PathVariable("code") int code,
-//                                   @PathVariable("hospitalCode") int hospitalCode,
-//                                   Model model) {
-//
-//        System.out.println("updatePage1 = " + code);
-//        System.out.println("updatePage1 = " + hospitalCode);
-//
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("personCode", code);
-//        params.put("hospitalCode", hospitalCode);
-//
-//        ReserveDTO reserve = reserveService.findReserveByCode1(params);
-//
-//        System.out.println("updatePage2 = " + reserve);
-//        model.addAttribute("reserve", reserve);
-//
-//        return "hospital/reserve/update";
-//    }
 
     @GetMapping("/update/{code}/{hospitalCode}")
     public String updatePage(@PathVariable("code") int code,
@@ -181,47 +154,27 @@ public class ReserveController {
                             Model model) {
 
 
-        System.out.println("code1 = " + code);
-        System.out.println("hospitalCode1 = " + hospitalCode);
 
         Map<String, Object> params = new HashMap<>();
         params.put("personCode", code);
         params.put("hospitalCode", hospitalCode);
 
-        System.out.println("params = " + params);
 
         ReserveDTO reserve = reserveService.findReserveByCode1(params);
-        System.out.println("reserve1 = " + reserve);
         model.addAttribute("reserve", reserve);
 
         return "hospital/reserve/update"; // 뷰의 이름
     }
 
     @PostMapping("/update")
-    public String updateReserve(@ModelAttribute ReserveDTO reserve,
-                                RedirectAttributes rAttr) {
+    public String updateReserve(@ModelAttribute ReserveDTO reserve) {
 
-        System.out.println("reserve22 = " + reserve);
 
         reserveService.updateReserve1(reserve);
 
-        rAttr.addFlashAttribute("successMessage", "예약이 성공적으로 수정되었습니다.");
         return "redirect:/reserve/detail/" + reserve.getPersonCode() + "/" + reserve.getHospitalCode();
     }
 
-//    @PostMapping("/update")
-//    public String updateReserve(@ModelAttribute ReserveDTO reserve,
-//                            RedirectAttributes rAttr){
-//
-//        System.out.println("updateReserve1 = " + reserve);
-//        reserveService.updateReserve(reserve);
-//
-//        rAttr.addFlashAttribute("successMessage", "예약이 성공적으로 수정되었습니다.");
-//        System.out.println("updateReserve2 = " + reserve);
-//
-//
-//        return "redirect:/reserve/detail/" + reserve.getPersonCode();
-//    }
 
 
 

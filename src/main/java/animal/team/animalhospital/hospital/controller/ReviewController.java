@@ -12,15 +12,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/review")
@@ -60,15 +59,22 @@ public class ReviewController {
         return "/hospital/review/detail";
     }
 
-    @GetMapping("/regist")
-    public String registPage() {
+    @GetMapping("/regist/{code}")
+    public String registPage(@PathVariable("code") int code, Model model) {
+
+        ReviewDTO reviewDTO = new ReviewDTO();
+        reviewDTO.setHospitalCode(code);
+
+        model.addAttribute("hospital", code);
+        model.addAttribute("review", reviewService);
 
         return "/hospital/review/regist";
     }
 
 
-    @PostMapping("/regist")
-    public String registReview(ReviewDTO newReview,RedirectAttributes rAttr) {
+    @PostMapping("/registform/{code}")
+    public String registReview(ReviewDTO newReview,
+                               @PathVariable("code") int hospitalCode) {
 
 
         System.out.println("userDetails123 = ");
@@ -86,7 +92,8 @@ public class ReviewController {
 
         newReview.setPersonCode(userCode);
 
-        newReview.setHospitalCode(9);              // 병원코드 강제주입구문(임시)
+        newReview.setHospitalCode(hospitalCode);
+//        newReview.setHospitalCode(9);              // 병원코드 강제주입구문(임시)
 
         Date currentDate = new Date();
         newReview.setReviewWriteDate(currentDate);
@@ -109,24 +116,29 @@ public class ReviewController {
 
     }
 
-    @GetMapping("update/{code}")
+    @GetMapping("/update/{code}/{hospitalCode}")
     public String updatePage(@PathVariable("code") int code,
+                             @PathVariable("hospitalCode") int hospitalCode,
                              Model model) {
-        ReviewDTO review = reviewService.findReviewByCode(code);
 
+        Map<String, Object> params = new HashMap<>();
+        params.put("personCode", code);
+        params.put("hospitalCode",hospitalCode);
+
+
+        ReviewDTO review = reviewService.findReviewByCode1(params);
         model.addAttribute("review", review);
 
         return "hospital/review/update";
     }
 
     @PostMapping("/update")
-    public String updateReview(ReviewDTO review, RedirectAttributes rAttr) {
+    public String updateReview(@ModelAttribute ReviewDTO review) {
 
-        reviewService.updateReview(review);
+        reviewService.updateReview1(review);
 
-        rAttr.addFlashAttribute("successMessage", "리뷰가 성공적으로 수정되었습니다.");
 
-        return "redirect:/review/detail/" + review.getPersonCode();
+        return "redirect:/review/detail/" + review.getPersonCode() + "/" + review.getHospitalCode();
 
     }
 
