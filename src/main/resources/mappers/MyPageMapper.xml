@@ -62,6 +62,7 @@
 
     <select id="findMyInfo" resultMap="personMap">
         SELECT
+            person_code,
             person_name,
             person_email,
             person_phone_number
@@ -70,6 +71,26 @@
         where
             person_email = #{ userEmail };
     </select>
+
+    <select id="selectMyInfoByEmail" resultMap="personMap">
+        SELECT *
+        FROM
+            tbl_person
+        WHERE
+            person_email = #{ userEmail };
+    </select>
+
+    <update id="updateMyInfo" parameterType="animal.team.animalhospital.hospital.model.dto.PersonDTO">
+        UPDATE
+            tbl_person
+        SET
+            person_code = #{personCode},
+            person_name = #{name},
+            person_phone_number = #{phoneNumber}
+        WHERE
+            person_code = #{personCode}
+    </update>
+
 
     <select id="findMyFavorite" resultMap="favoriteMap">
         SELECT
@@ -80,6 +101,7 @@
         where
             a.person_email = #{ userEmail };
     </select>
+
 
     <delete id="deleteFavorite" parameterType="String">
         DELETE
@@ -106,6 +128,8 @@
 
     <select id="findMyHospital" resultMap="hospitalMap">
         SELECT
+            c.hospital_code,
+            c.subject_code,
             c.hospital_name,
             b.reserve_date,
             b.reserve_time
@@ -124,7 +148,7 @@
             pet_profile,
             pet_name,
             pet_type,
-            pet_gender
+            pet_gender,
             pet_birth,
             pet_vaccination,
             pet_chip

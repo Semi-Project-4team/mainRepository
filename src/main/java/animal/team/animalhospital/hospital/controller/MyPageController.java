@@ -8,10 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -55,6 +52,27 @@ public class MyPageController {
 
         return "hospital/myPage/list";
     }
+
+    @GetMapping("/update")
+    public String updatePage(Model model) {
+        // 현재 사용자 이메일을 가져옵니다.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
+        // 사용자 정보를 조회하여 모델에 추가합니다.
+        PersonDTO updateMyInfo = myPageService.selectMyInfoByEmail(userEmail);
+        model.addAttribute("updateMyInfo", updateMyInfo); // 정보 추가
+
+        return "hospital/myPage/update"; // update.html 페이지로 이동
+    }
+
+    @PostMapping("/update")
+    public String updateMyInfo(@ModelAttribute PersonDTO person) {
+        System.out.println("person = " + person);
+        myPageService.updateMyInfo(person);
+        return "redirect:/myPage/myInfo";// 수정 후 myInfo 페이지로 리다이렉트
+    }
+
 
     @PostMapping("/delete/{name}")
     public String deleteFavorite(@PathVariable("name") String name) {
