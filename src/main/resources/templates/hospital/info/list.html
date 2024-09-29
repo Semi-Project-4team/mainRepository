@@ -69,10 +69,12 @@
         }
     </style>
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+
 <h1>동물병원 전체보기</h1>
 
 <table>
@@ -101,5 +103,9 @@
 </table>
 <br>
 <button id="mainBtn" onclick="location.href='/'">메인으로</button>
+
+<div th:insert="~{common/footer.html}"></div> <!-- 푸터 포함 -->
+
+
 </body>
 </html>

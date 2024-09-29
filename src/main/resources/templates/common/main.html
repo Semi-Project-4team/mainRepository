@@ -11,6 +11,10 @@
 <div th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
     <!--공지사항-->
+<div class="main">
+    <div class="search-wrap">
+
+
 <div class="notice">
     <h3>
         <a id="noticeList" href="/notice/list">[공지사항] </a>
@@ -84,6 +88,9 @@
         <button id="searchHospitalBtn">병원 찾기</button>
         <div id="selectedRegion" class="label"></div>
 
+
+
+
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close" style="cursor: pointer;">&times;</span>
@@ -107,6 +114,11 @@
         </div>
 
     </div>
+    </div>
+</div>
+
+<div th:insert="~{common/footer.html}"></div> <!-- 푸터 포함 -->
+
 
     <script>
         // fetch("/hospital/sidoAll")
