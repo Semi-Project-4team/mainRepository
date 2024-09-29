@@ -46,4 +46,13 @@ public class MyPageService {
     }
 
 
+    public PersonDTO selectMyInfoByEmail(String userEmail) {return myPageMapper.selectMyInfoByEmail(userEmail);
+    }
+
+    @Transactional
+    public void updateMyInfo(PersonDTO person) {
+        myPageMapper.updateMyInfo(person);
+    }
+
+
 }

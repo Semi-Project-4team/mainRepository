@@ -19,4 +19,8 @@ public interface MyPageMapper {
     List<ReserveDTO> findMyReserve(String userEmail);
 
     List<HospitalDTO> findMyHospital(String userEmail);
+
+    PersonDTO selectMyInfoByEmail(String email);
+
+    void updateMyInfo(PersonDTO person);
 }
