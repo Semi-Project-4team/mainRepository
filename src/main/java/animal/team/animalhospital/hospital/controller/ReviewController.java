@@ -48,11 +48,16 @@ public class ReviewController {
         return "/hospital/review/list";
     }
 
-    @GetMapping("/detail/{code}")
+    @GetMapping("/detail/{code}/{hospitalCode}")
     public String findReviewDetail(@PathVariable("code") int code,
+                                    @PathVariable("hospitalCode") int hospitalCode,
                                     Model model) {
 
-        ReviewDTO review = reviewService.findReviewByCode(code);
+        Map<String, Object> params = new HashMap<>();
+        params.put("personCode",code);
+        params.put("hospitalCode",hospitalCode);
+
+        ReviewDTO review = reviewService.findReviewByCode1(params);
 
         model.addAttribute("review", review);
 
@@ -95,7 +100,7 @@ public class ReviewController {
         newReview.setHospitalCode(hospitalCode);
 //        newReview.setHospitalCode(9);              // 병원코드 강제주입구문(임시)
 
-        Date currentDate = new Date();
+        LocalDate currentDate = LocalDate.now();
         newReview.setReviewWriteDate(currentDate);
         newReview.setReviewModifyDate(currentDate);
 
