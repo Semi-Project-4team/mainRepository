@@ -90,4 +90,26 @@ public class MyPageController {
         return "redirect:/myPage/myInfo";
     }
 
+
+    @GetMapping("/updatePet")
+    public String updatePetPage(Model model) {
+        // 현재 인증된 사용자 정보 가져오기 (예: SecurityContextHolder 사용)
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // 인증된 사용자로부터 사용자의 코드를 추출하는 로직
+        String userEmail = authentication.getName(); // 기본적으로 사용자명 또는 이메일을 얻음
+
+        // 사용자명(이메일)을 통해 personCode를 조회하는 서비스 호출 (별도 서비스에서 처리)
+        int personCode = myPageService.findPersonCodeByUserEmail(userEmail);
+        System.out.println("personCode = " + personCode);
+        // 사용자 코드를 사용하여 반려동물 정보를 가져옴
+        PetDTO updateMyPet = myPageService.selectMyPetByPetPersonCode(personCode);
+
+        // 반려동물 정보를 모델에 추가하여 뷰로 전달
+        model.addAttribute("updateMyPet", updateMyPet);
+        System.out.println("updateMyPet = " + updateMyPet);
+        return "hospital/myPage/updatePet";
+    }
+
+
 }

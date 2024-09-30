@@ -15,7 +15,8 @@ public class MyPageService {
 
     @Autowired
     public MyPageService(MyPageMapper myPageMapper) {
-        this.myPageMapper = myPageMapper;}
+        this.myPageMapper = myPageMapper;
+    }
 
     public List<PersonDTO> findMyInfo(String userEmail) {
         return myPageMapper.findMyInfo(userEmail);
@@ -46,7 +47,8 @@ public class MyPageService {
     }
 
 
-    public PersonDTO selectMyInfoByEmail(String userEmail) {return myPageMapper.selectMyInfoByEmail(userEmail);
+    public PersonDTO selectMyInfoByEmail(String userEmail) {
+        return myPageMapper.selectMyInfoByEmail(userEmail);
     }
 
     @Transactional
@@ -54,5 +56,13 @@ public class MyPageService {
         myPageMapper.updateMyInfo(person);
     }
 
+    public int findPersonCodeByUserEmail(String userEmail) {
+        int personCode = myPageMapper.findPersonCodeByUserEmail(userEmail);
+        return personCode;
+    }
 
+
+    public PetDTO selectMyPetByPetPersonCode(int personCode) {
+        return myPageMapper.selectMyPetByPetPersonCode(personCode);
+    }
 }

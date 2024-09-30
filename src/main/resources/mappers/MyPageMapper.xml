@@ -159,8 +159,36 @@
             b.person_email = #{ userEmail };
     </select>
 
+    <select id="findPersonCodeByUserEmail" resultType="int">
+        SELECT
+            person_code
+        FROM
+            tbl_person
+        WHERE
+            person_email = #{ userEmail };
+    </select>
 
+    <select id="selectMyPetByPetPersonCode" resultMap="petMap">
+        SELECT *
+        FROM
+            tbl_pet
+        WHERE
+            person_code = #{ personCode }
+    </select>
 
-
+    <update id="updateMyPet" parameterType="animal.team.animalhospital.hospital.model.dto.PetDTO">
+        UPDATE
+            tbl_pet
+        SET
+            person_code = #{personCode},
+            pet_name = #{petName}
+            pet_type = #{petType}
+            pet_birth = #{petBirth}
+            pet_vaccination = #{petVaccination}
+            pet_chip = #{petChip}
+            pet_gender = #{petGender}
+        WHERE
+            person_code = #{personCode}
+    </update>
 
 </mapper>

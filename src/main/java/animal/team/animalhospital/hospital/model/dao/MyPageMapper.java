@@ -23,4 +23,8 @@ public interface MyPageMapper {
     PersonDTO selectMyInfoByEmail(String email);
 
     void updateMyInfo(PersonDTO person);
+
+    int findPersonCodeByUserEmail(String userEmail);
+
+    PetDTO selectMyPetByPetPersonCode(int personCode);
 }
