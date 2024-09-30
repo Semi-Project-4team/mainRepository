@@ -77,19 +77,12 @@
         </script>
         <br>
         <br>
-        <form action="/search" method="GET">
-            <input type="text" id="search" name="query" placeholder="지역 또는 병원이름을 직접 검색">
-            <br>
-            <br>
+        <form action="/hospital/search" method="GET">
+            <input type="text" id="query" name="query" placeholder="지역 또는 병원이름을 직접 검색">
             <button type="submit">검색</button>
         </form>
         <br>
         <br>
-
-        <button id="searchHospitalBtn">병원 찾기</button>
-        <div id="selectedRegion" class="label"></div>
-
-
 
 
         <div id="myModal" class="modal">

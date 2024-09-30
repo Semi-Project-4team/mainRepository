@@ -60,6 +60,10 @@ public class HospitalService {
     public void deleteHospital(int code) {
         hospitalMapper.deleteHospital(code);
     }
+
+    public List<HospitalDTO> searchHospital(String query) {
+        return hospitalMapper.searchHospital(query);
+    }
 }
 
 

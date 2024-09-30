@@ -40,4 +40,5 @@ public interface HospitalMapper {
 
     void deleteHospital(int code);
 
+    List<HospitalDTO> searchHospital(String query);
 }

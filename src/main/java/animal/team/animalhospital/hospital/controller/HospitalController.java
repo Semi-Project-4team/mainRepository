@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping("/hospital")
@@ -53,6 +53,16 @@ public class HospitalController {
         List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
         model.addAttribute("hospitalList", hospitalList); // 모델에 추가
         return "/hospital/info/list"; // 뷰 이름
+    }
+
+    @GetMapping("/search")
+    public String searchHospital(@RequestParam(value = "query", required = false) String query, Model model) {
+        // 임시 병원 리스트 (DB 연결을 대신하는 부분)
+        List<HospitalDTO> hospitalList = hospitalService.searchHospital(query);
+
+        // 결과를 모델에 담기
+        model.addAttribute("hospitalList", hospitalList);
+        return "hospital/info/list";
     }
 
     @GetMapping("/info/detail/{code}")
