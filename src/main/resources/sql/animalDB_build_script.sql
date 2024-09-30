@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS tbl_pet
     pet_birth VARCHAR(10) NOT NULL COMMENT '반려동물생년월일',
     pet_vaccination VARCHAR(1) NOT NULL COMMENT '반려동물예방접종',
     pet_chip VARCHAR(10) NOT NULL COMMENT '반려동물내장칩',
-    pet_profile VARCHAR(10) NOT NULL COMMENT '반려동물사진',
+    pet_profile VARCHAR(255) NOT NULL COMMENT '반려동물사진',
     pet_gender VARCHAR(5) COMMENT '반려동물성별',
 
     CONSTRAINT pk_pet_person_code PRIMARY KEY (pet_person_code),
@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS tbl_hospital
     hospital_intro_text varchar(255) COMMENT '병원소개글',
     hospital_phone_number varchar(20) NOT NULL COMMENT '병원전화번호', --
     hospital_photo varchar(255) COMMENT '병원사진',
+    hospital_status varchar(10) NOT NULL COMMENT '병원상태', --
     -- table level constraints
     CONSTRAINT pk_hospital_code PRIMARY KEY (hospital_code),
     CONSTRAINT fk_eupmyeondong_code FOREIGN KEY (eupmyeondong_code) REFERENCES tbl_eupmyeondong (eupmyeondong_code),
@@ -156,6 +157,7 @@ CREATE TABLE IF NOT EXISTS tbl_notice
     notice_date date NOT NULL COMMENT '공지사항작성날짜',
     notice_views INT NOT NULL COMMENT '공지사항조회수',
     notice_text VARCHAR(255) NOT NULL COMMENT '공지사항내용',
+    notice_status VARCHAR(10) NOT NULL COMMENT '공지사항상태',
 
     CONSTRAINT pk_notice_code PRIMARY KEY (notice_code)
 ) ENGINE=INNODB COMMENT '공지사항';
@@ -234,19 +236,20 @@ INSERT INTO tbl_hospital
     hospital_detail_address,
     hospital_intro_text,
     hospital_phone_number,
-    hospital_photo
+    hospital_photo,
+    hospital_status
 )
 VALUES
     -- 예제 데이터 삽입 (시간 정보, 상세주소 추가)
-    (NULL, '1', 1, '눈편한병원', '123456789', 'eye@gmail.com', 'eye1234', 'Y', '08:00', '18:00', '12:00', '13:00', '개포동 660-4', '눈이 편해지는 병원입니다.', '02-000-0000', '/Users/eye.jpg'),
-    (NULL, '2', 2, '피부케어병원', '987654321', 'skin1@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '논현동 660-4', '피부를 건강하게!', '02-111-1111', '/Users/skin1.jpg'),
-    (NULL, '3', 3, '피부케어병원', '123987456', 'skin2@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '대치동 660-4', '피부를 건강하게!', '02-222-2222', '/Users/skin2.jpg'),
-    (NULL, '3', 4, '내과병원', '456123789', 'internal1@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '신길동 660-4', '내과 진료 전문 병원.', '02-333-3333', '/Users/internal1.jpg'),
-    (NULL, '3', 5, '내과병원', '789456123', 'internal2@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '양평동 660-4', '내과 진료 전문 병원.', '02-444-4444', '/Users/internal2.jpg'),
-    (NULL, '4', 6, '뼈튼튼병원', '321654987', 'orthopedics1@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '영등포동 660-4', '뼈 건강 전문 병원.', '02-555-5555', '/Users/ortho1.jpg'),
-    (NULL, '4', 7, '뼈튼튼병원', '654789321', 'orthopedics2@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '망원동 660-4', '뼈 건강 전문 병원.', '02-666-6666', '/Users/ortho2.jpg'),
-    (NULL, '5', 8, '튼튼이치과', '789321654', 'dental1@gmail.com', 'dental1234', 'Y', '09:00', '18:00', '12:00', '13:00', '마포동 660-4', '튼튼한 치아를 위해.', '02-777-7777', '/Users/dental1.jpg'),
-    (NULL, '6', 9, '소변건강병원', '456987321', 'urology1@gmail.com', 'urology1234', 'Y', '08:30', '17:00', '12:00', '13:00', '상암동 660-4', '비뇨기 건강 전문 병원.', '02-888-8888', '/Users/urology1.jpg');
+    (NULL, '1', 1, '눈편한병원', '123456789', 'eye@gmail.com', 'eye1234', 'Y', '08:00', '18:00', '12:00', '13:00', '개포동 660-4', '눈이 편해지는 병원입니다.', '02-000-0000', '/Users/eye.jpg', 'Y'),
+    (NULL, '2', 2, '피부케어병원', '987654321', 'skin1@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '논현동 660-4', '피부를 건강하게!', '02-111-1111', '/Users/skin1.jpg', 'Y'),
+    (NULL, '3', 3, '피부케어병원', '123987456', 'skin2@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '대치동 660-4', '피부를 건강하게!', '02-222-2222', '/Users/skin2.jpg', 'Y'),
+    (NULL, '3', 4, '내과병원', '456123789', 'internal1@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '신길동 660-4', '내과 진료 전문 병원.', '02-333-3333', '/Users/internal1.jpg', 'Y'),
+    (NULL, '3', 5, '내과병원', '789456123', 'internal2@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '양평동 660-4', '내과 진료 전문 병원.', '02-444-4444', '/Users/internal2.jpg', 'Y'),
+    (NULL, '4', 6, '뼈튼튼병원', '321654987', 'orthopedics1@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '영등포동 660-4', '뼈 건강 전문 병원.', '02-555-5555', '/Users/ortho1.jpg', 'Y'),
+    (NULL, '4', 7, '뼈튼튼병원', '654789321', 'orthopedics2@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '망원동 660-4', '뼈 건강 전문 병원.', '02-666-6666', '/Users/ortho2.jpg', 'Y'),
+    (NULL, '5', 8, '튼튼이치과', '789321654', 'dental1@gmail.com', 'dental1234', 'Y', '09:00', '18:00', '12:00', '13:00', '마포동 660-4', '튼튼한 치아를 위해.', '02-777-7777', '/Users/dental1.jpg','N'),
+    (NULL, '6', 9, '소변건강병원', '456987321', 'urology1@gmail.com', 'urology1234', 'Y', '08:30', '17:00', '12:00', '13:00', '상암동 660-4', '비뇨기 건강 전문 병원.', '02-888-8888', '/Users/urology1.jpg', 'Y');
 #         (NULL, 7, 10, '수술전문병원', '321789654', 'surgery1@gmail.com', 'surgery1234', 'Y', '2024-01-01', '능동 660-4', '외과 수술 전문 병원.', '/Users'),
 #         (NULL, 7, 11, '수술전문병원', '987321654', 'surgery2@gmail.com', 'surgery1234', 'Y', '2024-01-01', '반송동 660-4', '외과 수술 전문 병원.', '/Users'),
 #         (NULL, 8, 12, '산부인과병원', '654123987', 'obgyn1@gmail.com', 'obgyn1234', 'Y', '2024-01-01', '기안동 660-4', '산부인과 진료 전문.', '/Users'),
@@ -286,18 +289,18 @@ VALUES
     (1,1,now(),now(),5,'abcd','abcd');
 
 INSERT INTO
-    tbl_notice (notice_name, notice_date, notice_views, notice_text)
+    tbl_notice (notice_name, notice_date, notice_views, notice_text, notice_status)
 VALUES
-    ('추석 연휴 안내', '2024-09-01', 123, '추석 연휴 기간 동안 병원 휴무일을 안내드립니다. 자세한 일정은 홈페이지를 참고해 주세요.'),
-    ('정기 시스템 점검', '2024-09-02', 156, '시스템 점검으로 인해 9월 5일 00:00부터 02:00까지 서비스 이용이 제한됩니다. 불편을 끼쳐 드려 죄송합니다.'),
-    ('신규 의료 장비 도입', '2024-09-03', 98, '최신 의료 장비가 도입되었습니다. 더 나은 진료 서비스를 제공하기 위해 항상 노력하겠습니다.'),
-    ('의료 상담 시간 변경', '2024-09-04', 76, '의료 상담 시간이 10월 1일부터 변경됩니다. 오전 상담 시간이 9시로 조정되니 예약에 참고해 주시기 바랍니다.'),
-    ('9월 진료 일정 안내', '2024-09-05', 45, '9월 한 달간의 진료 일정을 안내드립니다. 자세한 사항은 공지사항을 확인해 주세요.'),
-    ('코로나19 예방 접종 안내', '2024-09-06', 189, '코로나19 예방 접종이 가능합니다. 사전 예약을 통해 접종 일정을 잡아 주시기 바랍니다.'),
-    ('정기 세미나 개최', '2024-09-07', 34, '다음 주에 정기 세미나가 개최됩니다. 이번 세미나는 반려동물 건강 관리에 관한 내용입니다. 많은 관심 부탁드립니다.'),
-    ('병원 이전 안내', '2024-09-08', 212, '저희 병원이 새로운 장소로 이전합니다. 새 주소는 다음과 같으며, 10월 1일부터 새롭게 진료를 시작합니다.'),
-    ('온라인 상담 시스템 도입', '2024-09-09', 67, '비대면 진료 및 상담을 위한 온라인 시스템이 도입되었습니다. 자세한 이용 방법은 홈페이지를 참고해 주세요.'),
-    ('설 연휴 진료 안내', '2024-09-10', 150, '설 연휴 기간 중 진료 일정을 안내드립니다. 긴급 상황 발생 시에는 응급 진료가 가능합니다.');
+    ('추석 연휴 안내', '2024-09-01', 123, '추석 연휴 기간 동안 병원 휴무일을 안내드립니다. 자세한 일정은 홈페이지를 참고해 주세요.', 'Y'),
+    ('정기 시스템 점검', '2024-09-02', 156, '시스템 점검으로 인해 9월 5일 00:00부터 02:00까지 서비스 이용이 제한됩니다. 불편을 끼쳐 드려 죄송합니다.', 'Y'),
+    ('신규 의료 장비 도입', '2024-09-03', 98, '최신 의료 장비가 도입되었습니다. 더 나은 진료 서비스를 제공하기 위해 항상 노력하겠습니다.', 'N'),
+    ('의료 상담 시간 변경', '2024-09-04', 76, '의료 상담 시간이 10월 1일부터 변경됩니다. 오전 상담 시간이 9시로 조정되니 예약에 참고해 주시기 바랍니다.', 'Y'),
+    ('9월 진료 일정 안내', '2024-09-05', 45, '9월 한 달간의 진료 일정을 안내드립니다. 자세한 사항은 공지사항을 확인해 주세요.', 'Y'),
+    ('코로나19 예방 접종 안내', '2024-09-06', 189, '코로나19 예방 접종이 가능합니다. 사전 예약을 통해 접종 일정을 잡아 주시기 바랍니다.', 'Y'),
+    ('정기 세미나 개최', '2024-09-07', 34, '다음 주에 정기 세미나가 개최됩니다. 이번 세미나는 반려동물 건강 관리에 관한 내용입니다. 많은 관심 부탁드립니다.', 'Y'),
+    ('병원 이전 안내', '2024-09-08', 212, '저희 병원이 새로운 장소로 이전합니다. 새 주소는 다음과 같으며, 10월 1일부터 새롭게 진료를 시작합니다.', 'Y'),
+    ('온라인 상담 시스템 도입', '2024-09-09', 67, '비대면 진료 및 상담을 위한 온라인 시스템이 도입되었습니다. 자세한 이용 방법은 홈페이지를 참고해 주세요.', 'Y'),
+    ('설 연휴 진료 안내', '2024-09-10', 150, '설 연휴 기간 중 진료 일정을 안내드립니다. 긴급 상황 발생 시에는 응급 진료가 가능합니다.', 'Y');
 
 INSERT INTO
     tbl_pet (pet_person_code, person_code, pet_name, pet_type, pet_birth, pet_vaccination, pet_chip, pet_profile, pet_gender)

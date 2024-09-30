@@ -27,6 +27,17 @@
         <result property="introText" column="hospital_intro_text"/>
         <result property="phoneNumber" column="hospital_phone_number"/>
         <result property="photo" column="hospital_photo"/>
+        <result property="status" column="hospital_status"/>
+    </resultMap>
+
+    <resultMap id="reviewResultMap" type="animal.team.animalhospital.hospital.model.dto.ReviewDTO">
+        <result property="personCode" column="person_code"/>
+        <result property="hospitalCode" column="hospital_code"/>
+        <result property="reviewWriteDate" column="review_write_date"/>
+        <result property="reviewModifyDate" column="review_modify_date"/>
+        <result property="reviewScore" column="review_score"/>
+        <result property="reviewPhoto" column="review_photo"/>
+        <result property="reviewExplanation" column="review_explanation"/>
     </resultMap>
 
     <resultMap id="mainSubjectMap" type="animal.team.animalhospital.hospital.model.dto.MainSubjectDTO">
@@ -48,20 +59,46 @@
 
     <select id="findAllEupmyeondong" resultMap="eupmyeondongMap">
         select
-        *
+            *
         from
-        tbl_eupmyeondong
+            tbl_eupmyeondong
         where
-        sigungu_code = #{sogunguCode};
+            sigungu_code = #{sogunguCode};
+
     </select>
 
     <select id="findAllHospital" resultMap="hospitalMap">
         select
             *
         from
-            tbl_hospital;
+            tbl_hospital
+        where
+            hospital_status = 'Y';
     </select>
 
+    <select id="getHospitalsByEupmyeondong" resultMap="hospitalMap">
+        select
+        *
+        from
+        tbl_hospital
+        where
+        eupmyeondong_code = #{eupmyeondongCode}
+    </select>
+
+    <select id="findReviewByCode1" parameterType="int" resultMap="reviewResultMap">
+        SELECT
+            person_code,
+            hospital_code,
+            review_write_date,
+            review_modify_date,
+            review_score,
+            review_photo,
+            review_explanation
+        FROM
+        tbl_person_review
+        WHERE
+            hospital_code = #{hospitalCode};
+    </select>
 
     <select id="findByHospitalCode" resultMap="hospitalMap">
         select
@@ -142,7 +179,8 @@
                 hospital_detail_address,
                 hospital_intro_text,
                 hospital_phone_number,
-                hospital_photo
+                hospital_photo,
+                hospital_status
             )
             values
             (
@@ -161,7 +199,8 @@
                 #{ detailAddress },
                 #{ introText },
                 #{ phoneNumber },
-                #{ photo }
+                #{ photo },
+                'Y'
             )
     </insert>
 
@@ -190,6 +229,15 @@
             hospital_password = #{ password }
         where
             hospital_email = #{ email };
+    </update>
+
+    <update id="deleteHospital" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
+        UPDATE
+            tbl_hospital
+        SET
+            hospital_status = 'N'
+        WHERE
+            hospital_code = #{ hospitalCode }
     </update>
 
 </mapper>

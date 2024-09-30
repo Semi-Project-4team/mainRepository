@@ -110,12 +110,16 @@ public class ReviewController {
 
     }
 
-    @PostMapping("/delete/{code}")
+    @PostMapping("/delete/{code}/{hospitalCode}")
     public String deleteReview(@PathVariable("code") int code,
-                               RedirectAttributes rAttr)    {
+                               @PathVariable("hospitalCode") int hospitalCode,
+                               Model model)    {
 
-        reviewService.deleteReview(code);
-//        rAttr.addFlashAttribute("successMessage", "리뷰가 성공적으로 삭제되었습니다.");
+        Map<String, Object> params = new HashMap<>();
+        params.put("personCode", code);
+        params.put("hospitalCode", hospitalCode);
+
+        reviewService.deleteReview1(params);
 
         return "redirect:/review/list";
 

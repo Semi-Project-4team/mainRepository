@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SigunguAll</title>
+    <title>시군구</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -80,7 +80,8 @@
     <table>
         <tr th:each="sigungu : ${sigunguList}">
             <td>
-                <a th:href="@{'/hospital/info/eupmyeondong/' + ${sigungu.sigunguCode}}" th:text="${sigungu.name}"></a>
+                <a th:href="@{'/hospital/info/eupmyeondong/' + ${sigungu.sigunguCode}}"
+                   th:text="${sigungu.name}"></a>
             </td>
         </tr>
     </table>

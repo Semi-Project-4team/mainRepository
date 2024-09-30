@@ -24,7 +24,9 @@ public interface MyPageMapper {
 
     void updateMyInfo(PersonDTO person);
 
-    int findPersonCodeByUserEmail(String userEmail);
+    PetDTO findMyPetAlone(String userEmail);
 
-    PetDTO selectMyPetByPetPersonCode(int personCode);
+    void updateMyPet(PetDTO petDTO);
+
+    void insertMyPet(PetDTO newPet);
 }

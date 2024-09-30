@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>반려동물 정보 등록</h1>
+
+<form th:action="@{/myPage/insertMyPet/{personCode}(personCode=${personCode})}" method="post">
+
+    <label for="name">이름: </label>
+    <input type="text" id="name" name="petName" required><br>
+
+    <label for="type">종: </label>
+    <input type="text" id="type" name="petType" required><br>
+
+    <label for="gender">성별: </label>
+    <input type="text" id="gender" name="petGender" required><br>
+
+    <label for="birth">생년월일: </label>
+    <input type="text" id="birth" name="petBirth" required><br>
+
+    <label for="vaccination">예방접종여부: </label>
+    <input type="text" id="vaccination" name="petVaccination" required><br>
+
+    <label for="chip">내장칩여부: </label>
+    <input type="text" id="chip" name="petChip" required><br>
+
+    <input type="submit" value="등록">
+</form>
+</body>
+</html>

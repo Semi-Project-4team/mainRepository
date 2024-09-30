@@ -4,14 +4,20 @@ import animal.team.animalhospital.hospital.model.dto.*;
 import animal.team.animalhospital.hospital.model.service.FavoriteService;
 import animal.team.animalhospital.hospital.model.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/myPage")
@@ -23,6 +29,9 @@ public class MyPageController {
     public MyPageController(MyPageService myPageService) {
         this.myPageService = myPageService;
     }
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @GetMapping("/myInfo")
     public String MyInfoList(Model model) {
@@ -90,26 +99,91 @@ public class MyPageController {
         return "redirect:/myPage/myInfo";
     }
 
+    @GetMapping("/petUpdate")
+    public String petUpdate(Model model) {
 
-    @GetMapping("/updatePet")
-    public String updatePetPage(Model model) {
-        // 현재 인증된 사용자 정보 가져오기 (예: SecurityContextHolder 사용)
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
 
-        // 인증된 사용자로부터 사용자의 코드를 추출하는 로직
-        String userEmail = authentication.getName(); // 기본적으로 사용자명 또는 이메일을 얻음
+        PetDTO myPet = myPageService.findMyPetAlone(userEmail);
 
-        // 사용자명(이메일)을 통해 personCode를 조회하는 서비스 호출 (별도 서비스에서 처리)
-        int personCode = myPageService.findPersonCodeByUserEmail(userEmail);
-        System.out.println("personCode = " + personCode);
-        // 사용자 코드를 사용하여 반려동물 정보를 가져옴
-        PetDTO updateMyPet = myPageService.selectMyPetByPetPersonCode(personCode);
+        System.out.println("petUpdate myPet = " + myPet);
 
-        // 반려동물 정보를 모델에 추가하여 뷰로 전달
-        model.addAttribute("updateMyPet", updateMyPet);
-        System.out.println("updateMyPet = " + updateMyPet);
-        return "hospital/myPage/updatePet";
+        model.addAttribute("myPet", myPet);
+
+        return "/hospital/myPage/petUpdate";
     }
 
+    @PostMapping("/petUpdate")
+    public String petPostUpdate(@RequestParam MultipartFile singleProFile,
+                                RedirectAttributes rAttr,
+                                PetDTO newPet) throws IOException {
+
+        System.out.println("singleProFile = " + singleProFile);
+        System.out.println("newPet = " + newPet);
+
+        Resource resource = resourceLoader.getResource("classpath:static/images/uploadedFiles");
+        System.out.println("resource 경로 확인 = " + resource);
+
+        String filePath = null;
+        if(!resource.exists()) {
+            // 경로가 존재하지 않을 때
+            String root = "src/main/resource/static/images/uploadedFiles";
+
+            File file = new File(root);
+            file.mkdirs();
+
+            filePath = file.getAbsolutePath();
+        } else {
+            // 경로가 이미 존재할 때
+            filePath = resourceLoader.getResource("classpath:static/images/uploadedFiles").getFile().getAbsolutePath();
+        }
+
+        System.out.println("filePath = " + filePath);
+
+        String originalFileName = singleProFile.getOriginalFilename();
+        System.out.println("originalFileName = " + originalFileName);
+
+        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        System.out.println("extension = " + extension);
+
+        String savedName = UUID.randomUUID().toString().replace("-", "") + extension;
+        System.out.println("savedName = " + savedName);
+
+        try {
+
+            singleProFile.transferTo(new File(filePath + "/" + savedName));
+
+//            System.out.println("filePath = " + filePath);
+//            System.out.println("savedName = " + savedName);
+//            System.out.println("total = " + filePath + savedName);
+//            System.out.println("singleProFile = " + singleProFile);
+
+            /* 설명. 원래는 이 위치에서 DB에 INSERT하는 서비스(비즈니스 로직)을 수행해야 한다.*/
+            newPet.setPetProfile("/images/uploadedFiles/" + savedName);
+            myPageService.updateMyPet(newPet);
+
+            rAttr.addFlashAttribute("message", "[Success] 단일 파일 업로드 성공!");
+            rAttr.addFlashAttribute("img", "static/images/uploadedFiles" + "/" + savedName);
+            // 서버측 로그 남기기
+            System.out.println("[Success] 단일 파일 업로드 성공!"); // System
+
+        } catch (IOException e) {
+
+
+            // 트랜잭션 처리 도중 예외가 발생할
+            new File(filePath + "/" + savedName).delete();
+
+            e.printStackTrace();
+
+            // 리다이렉트 후, 데이터 공유를 위한 RedirectAttributes에 값 저장.
+            rAttr.addFlashAttribute("message", "[Failed] 단일 파일 업로드 실패!"); // 브라우저
+
+            // 서버측 로그 남기기
+            System.out.println("[Failed] 단일 파일 업로드 실패!"); // System
+        }
+
+        return "redirect:/myPage/myInfo";
+    }
 
 }

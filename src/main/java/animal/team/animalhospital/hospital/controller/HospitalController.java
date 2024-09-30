@@ -41,6 +41,13 @@ public class HospitalController {
         return "/hospital/info/sidoAll";
     }
 
+    @GetMapping("/info/list/{eupmyeondongCode}")
+    public String getHospitalsByEupmyeondong(@PathVariable int eupmyeondongCode, Model model) {
+        List<HospitalDTO> hospitalList = hospitalService.getHospitalsByEupmyeondong(eupmyeondongCode);
+        model.addAttribute("hospitalList", hospitalList);
+        return "/hospital/info/list";
+    }
+
     @GetMapping("/info/list")
     public String hospitalList(Model model) {
         List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
@@ -51,7 +58,14 @@ public class HospitalController {
     @GetMapping("/info/detail/{code}")
     public String detailHospital(@PathVariable("code") int code, Model model) {
         HospitalDTO hospital = hospitalService.findByHospitalCode(code);
+
+        // 나의 person_code, 병원 hospital_code
+        List<ReviewDTO> reviewList = hospitalService.findReviewByCode1(code);
+
+        System.out.println("reviewList = " + reviewList);
+
         model.addAttribute("hospital", hospital); // 모델에 추가
+        model.addAttribute("reviewList", reviewList);
         return "/hospital/info/detail"; // 뷰 이름
     }
 
@@ -99,6 +113,12 @@ public class HospitalController {
         model.addAttribute("eupmyeondongList", eupmyeondongList);
         model.addAttribute("sigunguCode", sigunguCode);  // 코드 값을 뷰에 전달
         return "hospital/info/eupmyeondong";  // 템플릿 경로는 고정
+    }
+
+    @PostMapping("/info/delete/{code}")
+    public String deleteHospital(@PathVariable("code") int code) {
+        hospitalService.deleteHospital(code);
+        return "redirect:/hospital/info/list";
     }
 
     @GetMapping("/person/list")
@@ -150,4 +170,5 @@ public class HospitalController {
 
         return "hospital/favorite/list";
     }
+
 }
