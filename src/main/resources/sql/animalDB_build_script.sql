@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS tbl_pet
     pet_birth VARCHAR(10) NOT NULL COMMENT '반려동물생년월일',
     pet_vaccination VARCHAR(1) NOT NULL COMMENT '반려동물예방접종',
     pet_chip VARCHAR(10) NOT NULL COMMENT '반려동물내장칩',
-    pet_profile VARCHAR(10) NOT NULL COMMENT '반려동물사진',
+    pet_profile VARCHAR(255) NOT NULL COMMENT '반려동물사진',
     pet_gender VARCHAR(5) COMMENT '반려동물성별',
 
     CONSTRAINT pk_pet_person_code PRIMARY KEY (pet_person_code),

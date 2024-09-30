@@ -43,6 +43,7 @@ public class MyPageService {
     }
 
     public void insertMyPet(PetDTO newPet) {
+        myPageMapper.insertMyPet(newPet);
     }
 
 
@@ -50,9 +51,18 @@ public class MyPageService {
     }
 
     @Transactional
-    public void updateMyInfo(PersonDTO person) {
-        myPageMapper.updateMyInfo(person);
+    public void updateMyPet(PetDTO petDTO) {
+        System.out.println("updateMyPet petDTO = " + petDTO);
+        myPageMapper.updateMyPet(petDTO);
     }
 
 
+    public PetDTO findMyPetAlone(String userEmail) {
+        return myPageMapper.findMyPetAlone(userEmail);
+    }
+
+    @Transactional
+    public void updateMyInfo(PersonDTO person) {
+        myPageMapper.updateMyInfo(person);
+    }
 }

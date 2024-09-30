@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>회원 정보 수정</h1>
+<form action="/myPage/petUpdate" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="petPersonCode" th:value="${myPet.petPersonCode}"/>
+  <input type="hidden" name="personCode" th:value="${myPet.personCode}"/>
+  <label for="petName">이름:</label>
+  <input type="text" name="petName" id="petName" th:value="${myPet.petName}"/>
+  <br>
+
+  <label for="petType">종류:</label>
+  <input type="text" name="petType" id="petType" th:value="${myPet.petType}"/>
+  <br>
+  <label for="petBirth">생일:</label>
+  <input type="text" name="petBirth" id="petBirth" th:value="${myPet.petBirth}"/>
+  <br>
+
+  <label for="petVaccination">예방접종:</label>
+  <input type="text" name="petVaccination" id="petVaccination" th:value="${myPet.petVaccination}"/>
+  <br>
+
+  <label for="petChip">내장칩:</label>
+  <input type="text" name="petChip" id="petChip" th:value="${myPet.petChip}"/>
+  <br>
+
+  <label for="singleProFile">프로필사진:</label>
+  <input type="file" name="singleProFile" id="singleProFile"/>
+  <br>
+
+  <label for="petGender">전화번호:</label>
+  <input type="text" name="petGender" id="petGender" th:value="${myPet.petGender}"/>
+  <br>
+  <button type="submit">수정하기</button>
+</form>
+</body>
+</body>
+</html>
