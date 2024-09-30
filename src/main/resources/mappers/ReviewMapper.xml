@@ -84,12 +84,13 @@
             )
     </insert>
 
-    <delete id="deleteReview" parameterType="int">
+    <delete id="deleteReview1" parameterType="int">
         DELETE
         FROM
-        tbl_person_review
+            tbl_person_review
         WHERE
-        person_code = #{personCode}
+            person_code = #{personCode}
+        and hospital_code = #{hospitalCode}
     </delete>
 
     <update id="updateReview" parameterType="animal.team.animalhospital.hospital.model.dto.ReviewDTO">

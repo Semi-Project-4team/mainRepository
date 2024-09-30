@@ -41,11 +41,11 @@ public class ReviewService {
     }
 
 
-    @Transactional
-    public void deleteReview(int code) {
-
-            reviewMapper.deleteReview(code);
-    }
+//    @Transactional
+//    public void deleteReview(int code) {
+//
+//            reviewMapper.deleteReview(code);
+//    }
 
     @Transactional
     public void updateReview(ReviewDTO review) {
@@ -59,5 +59,9 @@ public class ReviewService {
 
     public void updateReview1(ReviewDTO review) {
         reviewMapper.updateReview1(review);
+    }
+
+    public void deleteReview1(Map<String, Object> params) {
+        reviewMapper.deleteReview1(params);
     }
 }
