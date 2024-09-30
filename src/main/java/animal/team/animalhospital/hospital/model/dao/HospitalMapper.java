@@ -34,4 +34,6 @@ public interface HospitalMapper {
     int updatePasswordHospital(HospitalDTO newUserInfo);
 
     List<HospitalDTO> getHospitalsByEupmyeondong(int eupmyeondongCode);
+
+    void deleteHospital(int code);
 }
