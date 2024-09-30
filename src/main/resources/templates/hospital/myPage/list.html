@@ -283,16 +283,19 @@
 <h3>반려동물정보</h3>
 
 <div class="pet-container">
-  <div class="pet-image-container">
-    <img src="사진경로" alt="동물 사진" class="pet-image"> <!-- 프로필 사진 -->
-    <div class="image-upload-container">
-      <button class="upload-button">사진 등록 버튼</button> <!-- 사진 등록 버튼 -->
-    </div>
-  </div>
+<!--  <div class="pet-image-container">-->
+<!--    &lt;!&ndash; 고정 위치 사진 &ndash;&gt;-->
+<!--&lt;!&ndash;    <img src="/images/uploadedFiles/193fbe42a3ec4a098912b4134f653d51.jpeg" alt="동물 사진" class="pet-image"> &lt;!&ndash; 프로필 사진 &ndash;&gt;&ndash;&gt;-->
+<!--    <img src="/images/uploadedFiles/193fbe42a3ec4a098912b4134f653d51.jpeg" alt="동물 사진" class="pet-image"> &lt;!&ndash; 프로필 사진 &ndash;&gt;-->
+<!--    <div class="image-upload-container">-->
+<!--      <button class="upload-button">사진 등록 버튼</button> &lt;!&ndash; 사진 등록 버튼 &ndash;&gt;-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="pet-info-container">
     <table class="pet-table2">
       <tr>
+        <th>사진</th>
         <th>이름</th>
         <th>종</th>
         <th>성별</th>
@@ -301,6 +304,9 @@
         <th>내장칩여부</th>
       </tr>
       <tr th:each="myPet : ${ myPetList }">
+        <td>
+          <img th:src="${ myPet.petProfile }" alt="동물 사진" class="pet-image"> <!-- 프로필 사진 -->
+        </td>
         <td th:text="${ myPet.petName }"></td>
         <td th:text="${ myPet.petType }"></td>
         <td th:text="${ myPet.petGender }"></td>
@@ -310,7 +316,7 @@
       </tr>
     </table>
     <div class="edit-button-container">
-      <button class="edit-button">수정 및 등록</button>
+      <button class="edit-button" onclick="location.href='/myPage/petUpdate'">수정 및 등록</button>
     </div>
   </div>
 </div>

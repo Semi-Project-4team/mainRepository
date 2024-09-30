@@ -21,7 +21,7 @@
 
     <resultMap id="petMap" type="animal.team.animalhospital.hospital.model.dto.PetDTO">
         <id property="petPersonCode" column="pet_person_code"/>
-        <result property="PersonCode" column="person_code"/>
+        <result property="personCode" column="person_code"/>
         <result property="petName" column="pet_name"/>
         <result property="petType" column="pet_type"/>
         <result property="petBirth" column="pet_birth"/>
@@ -59,6 +59,7 @@
         <result property="phoneNumber" column="hospital_phone_number"/>
         <result property="photo" column="hospital_photo"/>
     </resultMap>
+<!--    <insert id="insertMyPet"></insert>-->
 
     <select id="findMyInfo" resultMap="personMap">
         SELECT
@@ -89,6 +90,22 @@
             person_phone_number = #{phoneNumber}
         WHERE
             person_code = #{personCode}
+    </update>
+
+    <update id="updateMyPet" parameterType="animal.team.animalhospital.hospital.model.dto.PetDTO">
+        UPDATE
+            tbl_pet
+        SET
+            pet_name = #{ petName },
+            pet_type = #{ petType },
+            pet_birth = #{ petBirth },
+            pet_vaccination = #{ petVaccination },
+            pet_chip = #{ petChip },
+            pet_profile = #{ petProfile },
+            pet_gender = #{ petGender }
+        WHERE
+            person_code = #{ personCode }
+            and pet_person_code = #{ petPersonCode };
     </update>
 
 
@@ -145,22 +162,31 @@
 
     <select id="findMyPet" resultMap="petMap">
         SELECT
-            pet_profile,
-            pet_name,
-            pet_type,
-            pet_gender,
-            pet_birth,
-            pet_vaccination,
-            pet_chip
+            a.pet_profile,
+            a.person_code,
+            a.pet_name,
+            a.pet_type,
+            a.pet_gender,
+            a.pet_birth,
+            a.pet_vaccination,
+            a.pet_chip
         FROM
          tbl_pet a
         Join tbl_person b ON a.person_code = b.person_code
         WHERE
             b.person_email = #{ userEmail };
     </select>
-
-
-
+    <select id="findMyPetAlone" resultMap="petMap">
+        SELECT *
+        FROM tbl_pet
+        WHERE
+        person_code = (SELECT
+                            tbl_person.person_code
+                        from
+                            tbl_person
+                        WHERE
+                            person_email = #{ userEmail } );
+    </select>
 
 
 </mapper>
