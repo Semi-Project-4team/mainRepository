@@ -160,6 +160,22 @@
             hospital_email = #{ email };
     </select>
 
+    <select id="searchHospital" parameterType="String" resultMap="hospitalMap">
+        SELECT
+            *
+        FROM
+            tbl_eupmyeondong a
+        JOIN
+            tbl_hospital b
+            ON a.eupmyeondong_code = b.eupmyeondong_code
+        WHERE
+            (b.hospital_name LIKE CONCAT('%', #{ query }, '%')
+            OR
+            a.eupmyeondong_name LIKE CONCAT('%', #{ query }, '%'))
+            AND
+            b.hospital_status = 'Y';
+    </select>
+
     <insert id="hospitalSignup" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
         INSERT INTO
             tbl_hospital
