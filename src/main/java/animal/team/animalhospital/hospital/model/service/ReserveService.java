@@ -48,10 +48,10 @@ public class ReserveService {
         reserveMapper.deleteReserve(code);
     }
 
-    @Transactional
-    public void updateReserve(ReserveDTO reserve) {
-        reserveMapper.updateReserve(reserve);
-    }
+//    @Transactional
+//    public void updateReserve(ReserveDTO reserve) {
+//        reserveMapper.updateReserve(reserve);
+//    }
 
     public ReserveDTO findReserveByCode1(Map<String, Object> params) {
         return reserveMapper.findReserveByCode1(params);
@@ -59,5 +59,9 @@ public class ReserveService {
 
     public void updateReserve1(ReserveDTO reserve) {
         reserveMapper.updateReserve1(reserve);
+    }
+
+    public void deleteReserve1(Map<String, Object> params) {
+        reserveMapper.deleteReserve1(params);
     }
 }

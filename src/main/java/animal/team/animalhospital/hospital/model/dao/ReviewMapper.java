@@ -23,4 +23,6 @@ public interface ReviewMapper {
     void updateReview1(ReviewDTO review);
 
     ReviewDTO findReviewByCode1(Map<String, Object> params);
+
+    void deleteReview1(Map<String, Object> params);
 }

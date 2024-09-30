@@ -91,7 +91,7 @@
             <button type="submit" class="form-button">수정하기</button>
         </form>
 
-        <form th:action="@{/review/delete/{code}(code=${review.personCode})}" method="post">
+        <form th:action="@{/review/delete/{personCode}/{hospitalCode}(personCode=${review.personCode}, hospitalCode=${review.hospitalCode})}" method="post">
             <button type="submit" class="form-button">삭제하기</button>
         </form>
 

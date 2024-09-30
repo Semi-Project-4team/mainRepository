@@ -105,7 +105,7 @@
             <button type="submit" class="form-button">수정하기</button>
         </form>
 
-        <form th:action="@{/reserve/delete/{code}(code=${reserve.personCode})}" method="post">
+        <form th:action="@{/reserve/delete/{personCode}/{hospitalCode}(personCode=${reserve.personCode}, hospitalCode=${reserve.hospitalCode})}" method="post">
             <button type="submit" class="form-button">삭제하기</button>
         </form>
 
