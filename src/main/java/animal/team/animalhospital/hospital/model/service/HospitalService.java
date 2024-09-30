@@ -44,4 +44,12 @@ public class HospitalService {
     public void updateHospital(HospitalDTO hospital) {
         hospitalMapper.updateHospital(hospital);
     }
+
+    public List<ReviewDTO> findReviewByCode(int code) {
+        return hospitalMapper.findReviewByCode(code);
+    }
+
+    public List<ReviewDTO> findReviewByCode1(int code) {
+        return hospitalMapper.findReviewByCode1(code);
+    }
 }
