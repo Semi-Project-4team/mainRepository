@@ -109,6 +109,11 @@ public class MyPageController {
 
         System.out.println("petUpdate myPet = " + myPet);
 
+        if(myPet == null) {
+            myPageService.insertMyPetAlone(userEmail);
+            myPet = myPageService.findMyPetAlone(userEmail);
+        }
+
         model.addAttribute("myPet", myPet);
 
         return "/hospital/myPage/petUpdate";

@@ -29,4 +29,6 @@ public interface MyPageMapper {
     void updateMyPet(PetDTO petDTO);
 
     void insertMyPet(PetDTO newPet);
+
+    void insertMyPetAlone(String userEmail);
 }
