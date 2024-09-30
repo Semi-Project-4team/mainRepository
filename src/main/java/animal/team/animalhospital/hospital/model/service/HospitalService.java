@@ -4,6 +4,7 @@ import animal.team.animalhospital.hospital.model.dao.HospitalMapper;
 import animal.team.animalhospital.hospital.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -45,11 +46,17 @@ public class HospitalService {
         hospitalMapper.updateHospital(hospital);
     }
 
-    public List<ReviewDTO> findReviewByCode(int code) {
-        return hospitalMapper.findReviewByCode(code);
-    }
 
     public List<ReviewDTO> findReviewByCode1(int code) {
         return hospitalMapper.findReviewByCode1(code);
+
+    public List<HospitalDTO> getHospitalsByEupmyeondong(int eupmyeondongCode) {
+        return hospitalMapper.getHospitalsByEupmyeondong(eupmyeondongCode);
+    }
+
+    @Transactional
+    public void deleteHospital(int code) {
+        hospitalMapper.deleteHospital(code);
+
     }
 }

@@ -10,6 +10,7 @@
         <result property="date" column="notice_date"/>
         <result property="views" column="notice_views"/>
         <result property="text" column="notice_text"/>
+        <result property="status" column="notice_status"/>
     </resultMap>
 
     <select id="findAllNotice" resultMap="noticeResultMap">
@@ -20,6 +21,10 @@
             notice_views
         FROM
             tbl_notice
+        WHERE
+            notice_status = 'Y'
+        ORDER BY
+            notice_code DESC
     </select>
 
     <select id="selectNoticeByCode" parameterType="int" resultMap="noticeResultMap">
@@ -32,7 +37,7 @@
         FROM
             tbl_notice
         WHERE
-            notice_code = #{ noticeCode }
+            notice_code = #{noticeCode}
     </select>
 
     <insert id="insertNotice" parameterType="animal.team.animalhospital.hospital.model.dto.NoticeDTO"
@@ -60,7 +65,7 @@
         FROM
             tbl_notice
         WHERE
-            notice_code = 1
+            notice_code = #{noticeCode}
     </select>
 
     <!-- 조회수 증가 -->
@@ -85,12 +90,13 @@
             notice_code = #{code}
     </update>
 
-    <delete id="deleteNotice" parameterType="int">
-        DELETE
-        FROM
-        tbl_notice
+    <update id="deleteNotice" parameterType="int">
+        UPDATE
+            tbl_notice
+        SET
+            notice_status = 'N'
         WHERE
-        notice_code = #{code}
-    </delete>
+            notice_code = #{code}
+    </update>
 
 </mapper>
