@@ -58,7 +58,14 @@ public class HospitalController {
     @GetMapping("/info/detail/{code}")
     public String detailHospital(@PathVariable("code") int code, Model model) {
         HospitalDTO hospital = hospitalService.findByHospitalCode(code);
+
+        // 나의 person_code, 병원 hospital_code
+        List<ReviewDTO> reviewList = hospitalService.findReviewByCode1(code);
+
+        System.out.println("reviewList = " + reviewList);
+
         model.addAttribute("hospital", hospital); // 모델에 추가
+        model.addAttribute("reviewList", reviewList);
         return "/hospital/info/detail"; // 뷰 이름
     }
 

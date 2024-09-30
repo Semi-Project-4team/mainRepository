@@ -30,6 +30,16 @@
         <result property="status" column="hospital_status"/>
     </resultMap>
 
+    <resultMap id="reviewResultMap" type="animal.team.animalhospital.hospital.model.dto.ReviewDTO">
+        <result property="personCode" column="person_code"/>
+        <result property="hospitalCode" column="hospital_code"/>
+        <result property="reviewWriteDate" column="review_write_date"/>
+        <result property="reviewModifyDate" column="review_modify_date"/>
+        <result property="reviewScore" column="review_score"/>
+        <result property="reviewPhoto" column="review_photo"/>
+        <result property="reviewExplanation" column="review_explanation"/>
+    </resultMap>
+
     <resultMap id="mainSubjectMap" type="animal.team.animalhospital.hospital.model.dto.MainSubjectDTO">
         <id property="subjectCode" column="subject_code"/>
         <result property="personCode" column="person_code"/>
@@ -75,6 +85,20 @@
         eupmyeondong_code = #{eupmyeondongCode}
     </select>
 
+    <select id="findReviewByCode1" parameterType="int" resultMap="reviewResultMap">
+        SELECT
+            person_code,
+            hospital_code,
+            review_write_date,
+            review_modify_date,
+            review_score,
+            review_photo,
+            review_explanation
+        FROM
+        tbl_person_review
+        WHERE
+            hospital_code = #{hospitalCode};
+    </select>
 
     <select id="findByHospitalCode" resultMap="hospitalMap">
         select

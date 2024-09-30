@@ -7,7 +7,7 @@
     <style>
         body {
             margin-top: 100px;
-            font-family: Arial, sans-serif;
+            /*font-family: Arial, sans-serif;*/
             background-color: #f7f7f7;
             padding: 0;
         }
@@ -76,6 +76,16 @@
             gap: 10px;
         }
 
+        .button{
+            font-family: "Pretendard Variable", Pretendard, sans-serif;
+            color: white;
+            background: #58ccff;
+            font-size: large;
+            padding: 5px;
+            border: solid white;
+            border-radius: 10px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 width: 90%;
@@ -98,7 +108,43 @@
             .edit-button {
                 margin-top: 10px;
             }
+
+
         }
+
+        .hospital-review {
+            display: block; /* flex를 block으로 변경 */
+            margin: 20px auto;
+            padding: 20px;
+            width: 60%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hospital-review table {
+            width: 100%; /* 테이블이 박스의 전체 너비를 차지하도록 */
+            border-collapse: collapse; /* 테이블 셀 간격 제거 */
+        }
+
+        .hospital-review th, .hospital-review td {
+            padding: 12px 15px; /* 셀 내부에 여백 추가 */
+            text-align: left; /* 텍스트 왼쪽 정렬 */
+            border: 1px solid #ddd; /* 셀 경계선 추가 */
+        }
+
+        .hospital-review th {
+            color: white;
+            background-color: #58ccff; /* 헤더 셀에 배경색 추가 */
+            font-weight: bold;
+        }
+
+        .hospital-review td {
+            word-wrap: break-word; /* 긴 텍스트가 셀 안에서 줄 바꿈되도록 */
+        }
+
+
+
     </style>
     <link rel="stylesheet" href="/css/header.css">
 </head>
@@ -141,8 +187,34 @@
         <form sec:authorize="hasAnyAuthority('USER_PERSON')" th:action="@{/reserve/regist/{code}(code=${ hospital.hospitalCode})}" method="get">
             <button class="button"> 예약하기</button>
         </form>
-        <button onclick="location.href='../list'">목록으로</button>
+        <button class="button" onclick="location.href='../list'">목록으로</button>
     </div>
+
+
+
+</div>
+
+<div class="hospital-review">
+    <table>
+        <tr>
+            <th>개인번호</th>
+            <th>리뷰작성일자</th>
+            <th>리뷰수정일자</th>
+            <th>리뷰점수</th>
+            <th>리뷰사진</th>
+            <th>리뷰내용</th>
+        </tr>
+
+        <tr th:each="review : ${ reviewList }">
+            <td><a th:href="@{/review/detail/{personCode}/{hospitalCode}(personCode=${review.personCode}, hospitalCode=${review.hospitalCode})}" th:text="${review.personCode}"></a></td>
+            <td th:text="${ review.reviewWriteDate }"></td>
+            <td th:text="${ review.reviewModifyDate }"></td>
+            <td th:text="${ review.reviewScore }"></td>
+            <td th:text="${ review.reviewPhoto }"></td>
+            <td th:text="${ review.reviewExplanation }"></td>
+
+        </tr>
+    </table>
 </div>
 
 </body>
