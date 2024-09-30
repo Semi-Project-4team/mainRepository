@@ -44,4 +44,8 @@ public class HospitalService {
     public void updateHospital(HospitalDTO hospital) {
         hospitalMapper.updateHospital(hospital);
     }
+
+    public List<HospitalDTO> getHospitalsByEupmyeondong(int eupmyeondongCode) {
+        return hospitalMapper.getHospitalsByEupmyeondong(eupmyeondongCode);
+    }
 }

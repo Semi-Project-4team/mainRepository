@@ -32,4 +32,6 @@ public interface HospitalMapper {
     String findByHospitalEmail(String email);
 
     int updatePasswordHospital(HospitalDTO newUserInfo);
+
+    List<HospitalDTO> getHospitalsByEupmyeondong(int eupmyeondongCode);
 }

@@ -62,6 +62,15 @@
             tbl_hospital;
     </select>
 
+    <select id="getHospitalsByEupmyeondong" resultMap="hospitalMap">
+        select
+        *
+        from
+        tbl_hospital
+        where
+        eupmyeondong_code = #{eupmyeondongCode}
+    </select>
+
 
     <select id="findByHospitalCode" resultMap="hospitalMap">
         select
