@@ -41,6 +41,13 @@ public class HospitalController {
         return "/hospital/info/sidoAll";
     }
 
+    @GetMapping("/info/list/{eupmyeondongCode}")
+    public String getHospitalsByEupmyeondong(@PathVariable int eupmyeondongCode, Model model) {
+        List<HospitalDTO> hospitalList = hospitalService.getHospitalsByEupmyeondong(eupmyeondongCode);
+        model.addAttribute("hospitalList", hospitalList);
+        return "/hospital/info/list";
+    }
+
     @GetMapping("/info/list")
     public String hospitalList(Model model) {
         List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
