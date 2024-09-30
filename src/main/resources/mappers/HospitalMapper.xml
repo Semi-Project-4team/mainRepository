@@ -95,7 +95,7 @@
             review_photo,
             review_explanation
         FROM
-        tbl_person_review
+            tbl_person_review
         WHERE
             hospital_code = #{hospitalCode};
     </select>
