@@ -96,23 +96,37 @@
 
     <table>
         <tr>
-            <th>공지사항코드</th>
+            <th>번호</th>
             <th>공지사항이름</th>
             <th>공지사항작성날짜</th>
             <th>공지사항조회수</th>
         </tr>
-        <tr th:each="notice : ${ noticeList }">
-            <td th:text="${ notice.code }"></td>
+        </thead>
+        <tbody>
+        <tr th:each="notice, iter : ${ noticeList }">
+            <!-- 번호를 역순으로 표시 -->
+            <td th:text="${ noticeList.size() - iter.index }"></td>
             <td><a th:href="@{/notice/detail/{code}(code=${ notice.code })}" th:text="${ notice.name }"></a></td>
             <td th:text="${ notice.date }"></td>
             <td th:text="${ notice.views }"></td>
         </tr>
+        </tbody>
     </table>
 </div>
 
 <div class="button-container">
     <button onclick="location.href='/'">메인으로</button>
 </div>
+
+<script>
+    // 테이블 행을 역순으로 바꾸는 스크립트
+    document.addEventListener('DOMContentLoaded', function () {
+        let tableBody = document.querySelector('#noticeTable tbody');
+        let rows = Array.from(tableBody.querySelectorAll('tr'));
+        rows.reverse(); // 역순으로 배열을 뒤집음
+        rows.forEach(row => tableBody.appendChild(row)); // 역순으로 다시 테이블에 추가
+    });
+</script>
 
 </body>
 </html>

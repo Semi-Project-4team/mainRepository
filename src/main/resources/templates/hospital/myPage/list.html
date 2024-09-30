@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원 정보</title>
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin-top: 100px;
-      padding: 30px;
+      /*padding: 30px;*/
       background-color: #f7f7f7;
       color: #333;
-      margin-right: 200px;
-      margin-left: 200px;
+      margin: 100px auto 0 auto;
+      /*margin-right: 200px;*/
+      /*margin-left: 200px;*/
     }
 
     h3 {
@@ -21,10 +22,25 @@
       padding-bottom: 5px;
     }
 
+    .inner{
+      width: 80%;
+      margin: 0 auto;
+    }
+
     .container {
+      gap: 50px;
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;
+    }
+
+    .container > div{
+      width:calc(100% - 50px);
+    }
+
+    .container .update-button{
+      margin: 10px 0 0 0;
+      text-align: right;
     }
 
     table {
@@ -65,25 +81,12 @@
 
     .member-info-table {
       width: 100%; /* 회원 정보 테이블의 가로 너비를 60%로 설정 */
-      margin-right: 100px; /* 예약 내역 테이블과의 간격을 위해 우측 마진 추가 */
     }
 
     .reserve-table {
       width: 100%; /* 예약 내역 테이블의 가로 너비를 40%로 설정 */
     }
 
-    .pet-container {
-      border-style: solid;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      border-color: #d6d6d6;
-      display: flex;
-      justify-content: space-between;
-      width: 80%;
-      padding: 15px;
-    }
 
     .favorite-hospital-table {
       width: 100%; /* 테이블 전체 너비 설정 */
@@ -127,11 +130,10 @@
     .pet-container {
       display: flex;
       justify-content: space-between;
-      width: 80%;
       border: 1px solid #58ccff; /* Optional: Add a border */
       border-radius: 5px; /* Optional: Add rounded corners */
       padding: 15px; /* Optional: Add padding */
-      margin-bottom: 20px; /* Optional: Add bottom margin */
+      margin-bottom: 100px; /* Optional: Add bottom margin */
     }
 
     .pet-image-container {
@@ -167,7 +169,7 @@
     }
 
     .pet-info-container {
-      width: 80%; /* Ensure this takes up remaining space */
+      width: 90%;
     }
 
     .pet-table2 {
@@ -205,58 +207,61 @@
       background-color: #4ba3d4; /* Darker color on hover */
     }
 
+
+
   </style>
-  <link rel="stylesheet" href="/css/header.css">
+
 </head>
 <body>
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+<div class="inner">
 
 <div class="container">
-  <div>
-    <h3>회원 정보</h3>
-    <table class="member-info-table">
-      <tr>
-        <th>개인회원명</th>
-        <th>개인회원이메일</th>
-        <th>개인회원전화번호</th>
-      </tr>
+   <div>
+     <h3>회원 정보</h3>
+     <table class="member-info-table">
+       <tr>
+         <th>개인회원명</th>
+         <th>개인회원이메일</th>
+         <th>개인회원전화번호</th>
+       </tr>
 
-      <tr th:each="myInfo : ${ myInfoList }">
-        <td th:text="${ myInfo.name }"></td>
-        <td th:text="${ myInfo.email }"></td>
-        <td th:text="${ myInfo.phoneNumber }"></td>
-      </tr>
-    </table>
-  </div>
+       <tr th:each="myInfo : ${ myInfoList }">
+         <td th:text="${ myInfo.name }"></td>
+         <td th:text="${ myInfo.email }"></td>
+         <td th:text="${ myInfo.phoneNumber }"></td>
+       </tr>
+     </table>
 
-  <div>
-    <button onclick="location.href='/myPage/update'" >수정하기</button>
-  </div>
+     <div class="update-button">
+        <button onclick="location.href='/myPage/update'" >수정하기</button>
+     </div>
+   </div>
 
-  <div>
-    <h3>예약내역</h3>
-    <table class="reserve-table">
-      <tr>
-        <th>병원명</th>
-        <th>예약날짜</th>
-        <th>예약시간</th>
-      </tr>
-<!--      <tr th:each="myHospital : ${ myHospitalList }">-->
-<!--        <td th:text="${ myHospital.name }"></td>-->
-<!--        <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveDate }"></td>-->
-<!--        <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveTime }"></td>-->
-<!--      </tr>-->
-      <tr th:each="myHospital, myIndex : ${ myHospitalList }"
-          th:data-index="${ myIndex }">
-        <td th:text="${ myHospital.name }"></td>
-<!--        <td th:each="myReserve : ${ myReserveList[myIndex][5] }" th:text="${ myReserve.reserveDate }"></td>-->
-        <td th:text="${ myReserveList[myIndex.index].reserveDate }"></td>
-        <td th:text="${ myReserveList[myIndex.index].reserveTime }"></td>
-<!--        <td th:text="${ myReserveList }"></td>-->
-      </tr>
-    </table>
-  </div>
+   <div>
+     <h3>예약내역</h3>
+     <table class="reserve-table">
+       <tr>
+         <th>병원명</th>
+         <th>예약날짜</th>
+         <th>예약시간</th>
+       </tr>
+        <!-- <tr th:each="myHospital : ${ myHospitalList }">-->
+        <!-- <td th:text="${ myHospital.name }"></td>-->
+        <!-- <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveDate }"></td>-->
+        <!-- <td th:each="myReserve : ${ myReserveList }" th:text="${ myReserve.reserveTime }"></td>-->
+        <!-- </tr>-->
+       <tr th:each="myHospital, myIndex : ${ myHospitalList }"
+           th:data-index="${ myIndex }">
+         <td th:text="${ myHospital.name }"></td>
+        <!--<td th:each="myReserve : ${ myReserveList[myIndex][5] }" th:text="${ myReserve.reserveDate }"></td>-->
+         <td th:text="${ myReserveList[myIndex.index].reserveDate }"></td>
+         <td th:text="${ myReserveList[myIndex.index].reserveTime }"></td>
+        <!-- <td th:text="${ myReserveList }"></td>-->
+       </tr>
+     </table>
+   </div>
 </div>
 <br>
 <br>
@@ -320,6 +325,11 @@
     </div>
   </div>
 </div>
+
+</div>
+
+<div th:insert="~{common/footer.html}"></div> <!-- 푸터 포함 -->
+
 
 <script>
   // 페이지 로드 후 모든 tr 요소에서 인덱스를 콘솔에 출력

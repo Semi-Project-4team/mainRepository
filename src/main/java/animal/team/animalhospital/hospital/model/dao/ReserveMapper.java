@@ -17,11 +17,13 @@ public interface ReserveMapper {
 
     void deleteReserve(int code);
 
-    void updateReserve(ReserveDTO reserve);
+//    void updateReserve(ReserveDTO reserve);
 
     void updateReserve1(ReserveDTO reserve);
 
     void resistNewReserve(int code);
 
     ReserveDTO findReserveByCode1(Map<String, Object> params);
+
+    void deleteReserve1(Map<String, Object> params);
 }

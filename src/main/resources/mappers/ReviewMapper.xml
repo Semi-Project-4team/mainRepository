@@ -43,6 +43,23 @@
         LIMIT 1
     </select>
 
+    <select id="findReviewByCode1" parameterType="int" resultMap="reviewResultMap">
+        SELECT
+            person_code,
+            hospital_code,
+            review_write_date,
+            review_modify_date,
+            review_score,
+            review_photo,
+            review_explanation
+        FROM
+            tbl_person_review
+        WHERE
+            person_code = #{personCode}
+            and hospital_code = #{hospitalCode}
+        LIMIT 1
+    </select>
+
     <insert id="registNewReview" parameterType="animal.team.animalhospital.hospital.model.dto.ReviewDTO"
             useGeneratedKeys="true" keyProperty="personCode">
         INSERT INTO tbl_person_review
@@ -67,12 +84,13 @@
             )
     </insert>
 
-    <delete id="deleteReview" parameterType="int">
+    <delete id="deleteReview1" parameterType="int">
         DELETE
         FROM
-        tbl_person_review
+            tbl_person_review
         WHERE
-        person_code = #{personCode}
+            person_code = #{personCode}
+        and hospital_code = #{hospitalCode}
     </delete>
 
     <update id="updateReview" parameterType="animal.team.animalhospital.hospital.model.dto.ReviewDTO">

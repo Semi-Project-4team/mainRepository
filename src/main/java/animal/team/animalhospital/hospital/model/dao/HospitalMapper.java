@@ -32,4 +32,12 @@ public interface HospitalMapper {
     String findByHospitalEmail(String email);
 
     int updatePasswordHospital(HospitalDTO newUserInfo);
+
+
+    List<ReviewDTO> findReviewByCode1(int code);
+
+    List<HospitalDTO> getHospitalsByEupmyeondong(int eupmyeondongCode);
+
+    void deleteHospital(int code);
+
 }

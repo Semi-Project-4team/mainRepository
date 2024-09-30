@@ -35,11 +35,17 @@ public class HospitalDTO implements UserDetails {
     private String introText;
     private String phoneNumber;
     private String photo;
+    private String status;
 
     public HospitalDTO() {
     }
 
-    public HospitalDTO(int hospitalCode, String subjectCode, String eupmyeondongCode, int userCode, String name, String permitNumber, String email, String password, String informationCollection, LocalTime startTime, LocalTime endTime, LocalTime lunchStartTime, LocalTime lunchEndTime, String detailAddress, String introText, String phoneNumber, String photo) {
+    public HospitalDTO(int hospitalCode, String subjectCode, String eupmyeondongCode,
+                       int userCode, String name, String permitNumber, String email,
+                       String password, String informationCollection, LocalTime startTime,
+                       LocalTime endTime, LocalTime lunchStartTime, LocalTime lunchEndTime,
+                       String detailAddress, String introText, String phoneNumber, String photo,
+                       String status) {
         this.hospitalCode = hospitalCode;
         this.subjectCode = subjectCode;
         this.eupmyeondongCode = eupmyeondongCode;
@@ -57,6 +63,7 @@ public class HospitalDTO implements UserDetails {
         this.introText = introText;
         this.phoneNumber = phoneNumber;
         this.photo = photo;
+        this.status = status;
     }
 
     public LocalTime getStartTime() {
@@ -155,6 +162,14 @@ public class HospitalDTO implements UserDetails {
         this.email = email;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return List.of();
@@ -234,6 +249,7 @@ public class HospitalDTO implements UserDetails {
                 ", introText='" + introText + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", photo='" + photo + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

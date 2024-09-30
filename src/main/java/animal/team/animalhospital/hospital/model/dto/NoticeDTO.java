@@ -13,17 +13,19 @@ public class NoticeDTO {
     private LocalDate date;
     private int views;
     private String text;
+    private String status;
 
     public NoticeDTO() {
     }
 
-    public NoticeDTO(int code, String name, LocalDate date, int views, String text) {
+    public NoticeDTO(int code, String name, LocalDate date, int views, String text, String status) {
 
         this.code = code;
         this.name = name;
         this.date = date;
         this.views = views;
         this.text = text;
+        this.status = status;
     }
 
     public int getCode() {
@@ -66,14 +68,23 @@ public class NoticeDTO {
         this.text = text;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "noticeDTO{" +
+        return "NoticeDTO{" +
                 "code=" + code +
                 ", name='" + name + '\'' +
                 ", date=" + date +
                 ", views=" + views +
                 ", text='" + text + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
