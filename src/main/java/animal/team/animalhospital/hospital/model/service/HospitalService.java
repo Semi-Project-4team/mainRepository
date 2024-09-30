@@ -50,6 +50,8 @@ public class HospitalService {
     public List<ReviewDTO> findReviewByCode1(int code) {
         return hospitalMapper.findReviewByCode1(code);
 
+    }
+
     public List<HospitalDTO> getHospitalsByEupmyeondong(int eupmyeondongCode) {
         return hospitalMapper.getHospitalsByEupmyeondong(eupmyeondongCode);
     }
@@ -57,6 +59,7 @@ public class HospitalService {
     @Transactional
     public void deleteHospital(int code) {
         hospitalMapper.deleteHospital(code);
-
     }
 }
+
+
