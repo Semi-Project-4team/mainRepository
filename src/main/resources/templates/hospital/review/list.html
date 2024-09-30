@@ -85,7 +85,7 @@
             <th>리뷰내용</th>
         </tr>
         <tr th:each="review : ${ reviewList }">
-            <td><a th:href="@{/review/detail/{code}(code=${ review.personCode })}" th:text="${review.personCode}"></a></td>
+            <td><a th:href="@{/review/detail/{personCode}/{hospitalCode}(personCode=${review.personCode}, hospitalCode=${review.hospitalCode})}" th:text="${review.personCode}"></a></td>
             <td th:text="${ review.hospitalCode }"></td>
             <td th:text="${ review.reviewWriteDate }"></td>
             <td th:text="${ review.reviewModifyDate }"></td>

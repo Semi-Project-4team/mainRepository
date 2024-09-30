@@ -2,6 +2,7 @@ package animal.team.animalhospital.hospital.model.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ReviewDTO {
@@ -9,9 +10,9 @@ public class ReviewDTO {
     private int personCode;
     private int hospitalCode;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date reviewWriteDate;
+    private LocalDate reviewWriteDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date reviewModifyDate;
+    private LocalDate reviewModifyDate;
     private int reviewScore;
     private String reviewPhoto;
     private String reviewExplanation;
@@ -19,7 +20,7 @@ public class ReviewDTO {
     public ReviewDTO() {
     }
 
-    public ReviewDTO( int personCode, int hospitalCode, Date reviewWriteDate, Date reviewModifyDate, int reviewScore, String reviewPhoto, String reviewExplanation) {
+    public ReviewDTO( int personCode, int hospitalCode, LocalDate reviewWriteDate, LocalDate reviewModifyDate, int reviewScore, String reviewPhoto, String reviewExplanation) {
         this.personCode = personCode;
         this.hospitalCode = hospitalCode;
         this.reviewWriteDate = reviewWriteDate;
@@ -48,19 +49,19 @@ public class ReviewDTO {
         this.hospitalCode = hospitalCode;
     }
 
-    public Date getReviewWriteDate() {
+    public LocalDate getReviewWriteDate() {
         return reviewWriteDate;
     }
 
-    public void setReviewWriteDate(Date reviewWriteDate) {
+    public void setReviewWriteDate(LocalDate reviewWriteDate) {
         this.reviewWriteDate = reviewWriteDate;
     }
 
-    public Date getReviewModifyDate() {
+    public LocalDate getReviewModifyDate() {
         return reviewModifyDate;
     }
 
-    public void setReviewModifyDate(Date reviewModifyDate) {
+    public void setReviewModifyDate(LocalDate reviewModifyDate) {
         this.reviewModifyDate = reviewModifyDate;
     }
 
