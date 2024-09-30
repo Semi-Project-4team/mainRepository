@@ -59,7 +59,37 @@
         <result property="phoneNumber" column="hospital_phone_number"/>
         <result property="photo" column="hospital_photo"/>
     </resultMap>
-<!--    <insert id="insertMyPet"></insert>-->
+    <insert id="insertMyPetAlone" parameterType="string">
+        INSERT INTO
+            tbl_pet
+            (
+                pet_person_code,
+                person_code,
+                pet_name,
+                pet_type,
+                pet_birth,
+                pet_vaccination,
+                pet_chip,
+                pet_profile,
+                pet_gender
+            )
+        VALUES
+            (null,
+            (SELECT
+                person_code
+            FROM
+                tbl_person
+            where
+                person_email = #{ userEmail }) ,
+            '동물이름' ,
+            '반려동물종' ,
+            '000000',
+            'Y',
+            '000000',
+            'photo',
+            '남');
+    </insert>
+    <!--    <insert id="insertMyPet"></insert>-->
 
     <select id="findMyInfo" resultMap="personMap">
         SELECT

@@ -65,4 +65,8 @@ public class MyPageService {
     public void updateMyInfo(PersonDTO person) {
         myPageMapper.updateMyInfo(person);
     }
+
+    public void insertMyPetAlone(String userEmail) {
+        myPageMapper.insertMyPetAlone(userEmail);
+    }
 }
