@@ -108,6 +108,12 @@ public class HospitalController {
         return "hospital/info/eupmyeondong";  // 템플릿 경로는 고정
     }
 
+    @PostMapping("/info/delete/{code}")
+    public String deleteHospital(@PathVariable("code") int code) {
+        hospitalService.deleteHospital(code);
+        return "redirect:/hospital/info/list";
+    }
+
     @GetMapping("/person/list")
     public String PersonList(Model model) {
         List<PersonDTO> personList = personService.findAllPerson();
@@ -157,4 +163,5 @@ public class HospitalController {
 
         return "hospital/favorite/list";
     }
+
 }

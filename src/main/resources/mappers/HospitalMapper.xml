@@ -27,6 +27,7 @@
         <result property="introText" column="hospital_intro_text"/>
         <result property="phoneNumber" column="hospital_phone_number"/>
         <result property="photo" column="hospital_photo"/>
+        <result property="status" column="hospital_status"/>
     </resultMap>
 
     <resultMap id="mainSubjectMap" type="animal.team.animalhospital.hospital.model.dto.MainSubjectDTO">
@@ -48,18 +49,21 @@
 
     <select id="findAllEupmyeondong" resultMap="eupmyeondongMap">
         select
-        *
+            *
         from
-        tbl_eupmyeondong
+            tbl_eupmyeondong
         where
-        sigungu_code = #{sogunguCode};
+            sigungu_code = #{sogunguCode};
+
     </select>
 
     <select id="findAllHospital" resultMap="hospitalMap">
         select
             *
         from
-            tbl_hospital;
+            tbl_hospital
+        where
+            hospital_status = 'Y';
     </select>
 
     <select id="getHospitalsByEupmyeondong" resultMap="hospitalMap">
@@ -151,7 +155,8 @@
                 hospital_detail_address,
                 hospital_intro_text,
                 hospital_phone_number,
-                hospital_photo
+                hospital_photo,
+                hospital_status
             )
             values
             (
@@ -170,7 +175,8 @@
                 #{ detailAddress },
                 #{ introText },
                 #{ phoneNumber },
-                #{ photo }
+                #{ photo },
+                'Y'
             )
     </insert>
 
@@ -199,6 +205,15 @@
             hospital_password = #{ password }
         where
             hospital_email = #{ email };
+    </update>
+
+    <update id="deleteHospital" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
+        UPDATE
+            tbl_hospital
+        SET
+            hospital_status = 'N'
+        WHERE
+            hospital_code = #{ hospitalCode }
     </update>
 
 </mapper>

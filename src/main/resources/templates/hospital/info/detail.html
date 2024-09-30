@@ -114,6 +114,10 @@
         <form sec:authorize="hasAnyAuthority('USER_HOSPITAL')" th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">
             <button class="edit-button" type="submit">동물병원 정보 수정하기</button>
         </form>
+        <form sec:authorize="hasAnyAuthority('USER_HOSPITAL')" th:action="@{/hospital/info/delete/{code}(code=${ hospital.hospitalCode})}" method="post">
+            <button class="edit-button" type="submit">병원 폐업</button>
+        </form>
+
     </div>
 
     <div class="info">
