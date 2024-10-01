@@ -216,4 +216,15 @@ public class UserService {
     }
 
 
+    public boolean isPersonSignCheck(String email) {
+        System.out.println("isPersonSignCheck email = " + email);
+
+        Integer result = null;
+
+        result = personMapper.isPersonSignCheck(email);
+
+        System.out.println("isPersonSignCheck result = " + result);
+
+        return result >= 1;
+    }
 }
