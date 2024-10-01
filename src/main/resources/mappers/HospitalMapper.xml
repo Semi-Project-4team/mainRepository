@@ -95,7 +95,7 @@
             review_photo,
             review_explanation
         FROM
-        tbl_person_review
+            tbl_person_review
         WHERE
             hospital_code = #{hospitalCode};
     </select>
@@ -166,6 +166,22 @@
             tbl_hospital
         where
             hospital_code = #{ code };
+    </select>
+
+    <select id="searchHospital" parameterType="String" resultMap="hospitalMap">
+        SELECT
+            *
+        FROM
+            tbl_eupmyeondong a
+        JOIN
+            tbl_hospital b
+            ON a.eupmyeondong_code = b.eupmyeondong_code
+        WHERE
+            (b.hospital_name LIKE CONCAT('%', #{ query }, '%')
+            OR
+            a.eupmyeondong_name LIKE CONCAT('%', #{ query }, '%'))
+            AND
+            b.hospital_status = 'Y';
     </select>
 
     <insert id="hospitalSignup" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">

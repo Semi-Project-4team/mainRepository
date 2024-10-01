@@ -69,6 +69,10 @@ public class HospitalService {
 
     public String findPhotoByCode(int code) {
         return hospitalMapper.findPhotoByCode(code);
+
+    public List<HospitalDTO> searchHospital(String query) {
+        return hospitalMapper.searchHospital(query);
+
     }
 }
 

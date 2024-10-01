@@ -18,12 +18,13 @@ public class ReserveDTO {
     private LocalDate reserveDate;
     private String reserveText;
     private String reserveInformationCollection;
+    private String reserveStatus;
 
     public ReserveDTO() {
     }
 
 
-    public ReserveDTO(int personCode, int hospitalCode, int petPersonCode, LocalTime reserveTime, LocalDate reserveDate, String reserveText, String reserveInformationCollection) {
+    public ReserveDTO(int personCode, int hospitalCode, int petPersonCode, LocalTime reserveTime, LocalDate reserveDate, String reserveText, String reserveInformationCollection, String reserveStatus) {
         this.personCode = personCode;
         this.hospitalCode = hospitalCode;
         this.petPersonCode = petPersonCode;
@@ -31,8 +32,9 @@ public class ReserveDTO {
         this.reserveDate = reserveDate;
         this.reserveText = reserveText;
         this.reserveInformationCollection = reserveInformationCollection;
-    }
+        this.reserveStatus = reserveStatus;
 
+    }
 
     public int getPersonCode() {
         return personCode;
@@ -90,6 +92,14 @@ public class ReserveDTO {
         this.reserveInformationCollection = reserveInformationCollection;
     }
 
+    public String getReserveStatus() {
+        return reserveStatus;
+    }
+
+    public void setReserveStatus(String reserveStatus) {
+        this.reserveStatus = reserveStatus;
+    }
+
     @Override
     public String toString() {
         return "ReserveDTO{" +
@@ -100,7 +110,7 @@ public class ReserveDTO {
                 ", reserveDate=" + reserveDate +
                 ", reserveText='" + reserveText + '\'' +
                 ", reserveInformationCollection='" + reserveInformationCollection + '\'' +
+                ", reserveStatus='" + reserveStatus + '\'' +
                 '}';
     }
-
 }

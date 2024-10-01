@@ -79,11 +79,23 @@
     <table>
         <tr th:each="eupmyeondong : ${eupmyeondongList}">
             <td>
-                <a th:href="@{'/hospital/info/list/' + ${eupmyeondong.eupmyeondongCode}}"
+                <a href="javascript:void(0);"
+                   th:onclick="'closePopup(' + ${eupmyeondong.eupmyeondongCode} + ')'"
                    th:text="${eupmyeondong.eupmyeondongName}"></a>
             </td>
         </tr>
     </table>
+
+    <script>
+        // 팝업 닫기 및 부모 창에서 이동
+        function closePopup(eupmyeondongCode) {
+            // 부모 창에서 병원 목록 페이지로 이동하는 함수 호출
+            opener.moveToHospitalList(eupmyeondongCode);
+
+            // 팝업창 닫기
+            window.close();
+        }
+    </script>
 
     <!--뒤로가기 버튼-->
     <div class="back-button">

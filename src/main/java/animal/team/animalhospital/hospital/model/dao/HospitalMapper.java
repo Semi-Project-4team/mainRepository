@@ -42,4 +42,6 @@ public interface HospitalMapper {
     void updateHospitalPhoto(Map<String, String> photoPaths);
 
     String findPhotoByCode(int code);
+  
+    List<HospitalDTO> searchHospital(String query);
 }
