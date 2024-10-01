@@ -17,4 +17,6 @@ public interface PetMapper {
     void updatePet(PetDTO pet);
 
     void deletePet(int code);
+
+    List<PetDTO> findPetsByPersonCode(int userCode);
 }

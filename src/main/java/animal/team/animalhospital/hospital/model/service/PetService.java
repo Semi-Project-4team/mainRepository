@@ -36,4 +36,8 @@ public class PetService {
     public void deletePet(int code) {
         petMapper.deletePet(code);
     }
+
+    public List<PetDTO> findPetsByPersonCode(int userCode) {
+        return petMapper.findPetsByPersonCode(userCode);
+    }
 }
