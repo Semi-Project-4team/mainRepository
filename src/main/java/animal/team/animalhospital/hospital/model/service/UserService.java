@@ -216,4 +216,28 @@ public class UserService {
     }
 
 
+    public boolean isPersonSignCheck(String email) {
+        System.out.println("isPersonSignCheck email = " + email);
+
+        Integer result = null;
+
+        result = personMapper.isPersonSignCheck(email);
+
+        System.out.println("isPersonSignCheck result = " + result);
+
+        return result >= 1;
+    }
+
+    public boolean isHospitalSignCheck(String email) {
+
+        System.out.println("isHospitalSignCheck email = " + email);
+
+        Integer result = null;
+
+        result = hospitalMapper.isHospitalSignCheck(email);
+
+        System.out.println("isHospitalSignCheck result = " + result);
+
+        return result >= 1;
+    }
 }
