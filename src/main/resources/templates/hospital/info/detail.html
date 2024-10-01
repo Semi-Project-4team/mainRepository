@@ -215,7 +215,10 @@
             <td th:text="${ review.reviewWriteDate }"></td>
             <td th:text="${ review.reviewModifyDate }"></td>
             <td th:text="${ review.reviewScore }"></td>
-            <td th:text="${ review.reviewPhoto }"></td>
+<!--            <td th:text="${ review.reviewPhoto }"></td>-->
+            <td>
+                <img th:src="${ review.reviewPhoto }" alt="리뷰 사진" class="review-image" height="200px" width="150px">
+            </td>
             <td th:text="${ review.reviewExplanation }"></td>
 
         </tr>
