@@ -170,13 +170,13 @@
     <!-- 제목과 수정 버튼을 flex로 묶어서 정렬 -->
     <div class="header-title">
         <h1><span th:text="${ hospital.name }"></span></h1>
-        <!--수정버튼-->
-        <form sec:authorize="hasAnyAuthority('USER_HOSPITAL')" th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">
-            <button class="edit-button" type="submit">동물병원 정보 수정하기</button>
-        </form>
-        <form sec:authorize="hasAnyAuthority('USER_HOSPITAL')" th:action="@{/hospital/info/delete/{code}(code=${ hospital.hospitalCode})}" method="post">
-            <button class="edit-button" type="submit">병원 폐업</button>
-        </form>
+<!--        &lt;!&ndash;수정버튼&ndash;&gt;-->
+<!--        <form sec:authorize="hasAnyAuthority('USER_HOSPITAL')" th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">-->
+<!--            <button class="edit-button" type="submit">동물병원 정보 수정하기</button>-->
+<!--        </form>-->
+<!--        <form sec:authorize="hasAnyAuthority('USER_HOSPITAL')" th:action="@{/hospital/info/delete/{code}(code=${ hospital.hospitalCode})}" method="post">-->
+<!--            <button class="edit-button" type="submit">병원 폐업</button>-->
+<!--        </form>-->
 
     </div>
 
