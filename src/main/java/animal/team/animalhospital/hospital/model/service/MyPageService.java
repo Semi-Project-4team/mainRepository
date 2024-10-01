@@ -75,6 +75,9 @@ public class MyPageService {
 
     public List<ReserveDTO> findHospitalReserve(String userEmail) { return myPageMapper.findHospitalReserve(userEmail);
     }
+
+    public List<PersonDTO> findProtector(String userEmail) { return myPageMapper.findProtector(userEmail);
+    }
 }
 
 

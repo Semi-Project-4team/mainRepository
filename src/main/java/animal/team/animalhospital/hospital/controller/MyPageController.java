@@ -56,6 +56,7 @@ public class MyPageController {
         for (HospitalDTO hospitalDTO : myHospitalList) {
             hospitalDTO.setUserCode(myInfoList.get(0).getPersonCode());
         }
+        System.out.println("myHospitalList = " + myHospitalList);
 
         model.addAttribute("myInfoList", myInfoList);
         model.addAttribute("myReserveList", myReserveList);
@@ -76,19 +77,21 @@ public class MyPageController {
 
         List<HospitalDTO> hospitalInfoList = myPageService.findHospitalInfo(userEmail);
         List<ReserveDTO> hospitalReserveList = myPageService.findHospitalReserve(userEmail);
-        List<PersonDTO> myInfoList = myPageService.findMyInfo(userEmail);
+        List<PersonDTO> protector = myPageService.findProtector(userEmail);
 
         System.out.println("hospitalInfoList = " + hospitalInfoList);
         System.out.println("hospitalReserveList = " + hospitalReserveList);
-        System.out.println("myInfoList = " + myInfoList);
+        System.out.println("protector = " + protector);
+
+        for (PersonDTO personDTO : protector) {
+            personDTO.setUserCode(hospitalInfoList.get(0).getUserCode());
+        }
 
         model.addAttribute("hospitalInfoList", hospitalInfoList);
         model.addAttribute("hospitalReserveList", hospitalReserveList);
-        model.addAttribute("myInfoList", myInfoList);
+        model.addAttribute("protector",protector);
 
         return ("/hospital/myPage/hospitalInfo");
-
-
     }
 
     @GetMapping("/update")
