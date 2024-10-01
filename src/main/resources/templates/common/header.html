@@ -15,7 +15,7 @@
         <div sec:authorize="isAuthenticated()">
             <a sec:authorize="hasAnyAuthority('USER_PERSON')">[개인회원]</a>
             <a sec:authorize="hasAnyAuthority('USER_HOSPITAL')">[기업회원]</a>
-            <label sec:authentication="">안녕하세요, [[${#authentication.name}]]님</label>
+            <label id="login-label" sec:authentication="">안녕하세요, [[${#authentication.name}]]님</label>
             <button sec:authorize="hasAnyAuthority('MASTER')" class="headerBtn" id="memberBtn"
                     onclick="location.href='/hospital/person/list'">회원관리</button>
             <button class="headerBtn" id="logoutBtn" onclick="location.href='/auth/logout'">로그아웃</button>
@@ -24,4 +24,5 @@
             <button sec:authorize="hasAnyAuthority('USER_HOSPITAL')" class="headerBtn" id="hospitalInfoBtn"
                     onclick="location.href='/myPage/hospitalInfo'">병원페이지</button>
         </div>
+    </div>
 </header>

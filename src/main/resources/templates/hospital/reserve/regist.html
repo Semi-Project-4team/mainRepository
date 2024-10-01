@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>신규 예약 등록</title>
+    <link rel="stylesheet" href="/css/header.css">
     <style>
+
         body {
-            font-family: Arial, sans-serif;
             margin-top: 100px;
             padding: 20px;
             background-color: #f9f9f9; /* 배경색 */
@@ -14,7 +15,7 @@
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #58ccff;
             margin-bottom: 30px;
         }
 
@@ -27,7 +28,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        label, select, input, textarea {
+        .reserve-label, select, input, textarea {
             display: block;
             width: 100%;
             margin-bottom: 20px;
@@ -79,13 +80,12 @@
                 padding: 15px;
             }
 
-            button {
+            .reserveBtn {
                 width: 100%;
                 margin-bottom: 10px;
             }
         }
     </style>
-    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
 
@@ -95,22 +95,22 @@
 <h1>신규 예약 등록</h1>
 
 <form th:action="@{/reserve/registform/{code}(code=${code})}" method="post">
-    <label for="petPersonCode">반려동물 이름:</label>
+    <label class="reserve-label" for="petPersonCode">반려동물 이름:</label>
     <select name="petPersonCode" id="petPersonCode"></select>
 
-    <label for="reserveTime">방문 시간:</label>
+    <label class="reserve-label" for="reserveTime">방문 시간:</label>
     <input type="time" name="reserveTime" id="reserveTime">
 
-    <label for="reserveDate">방문 날짜:</label>
+    <label class="reserve-label" for="reserveDate">방문 날짜:</label>
     <input type="date" name="reserveDate" id="reserveDate">
 
-    <label for="reserveInformationCollection">정보수집동의:</label>
+    <label class="reserve-label" for="reserveInformationCollection">정보수집동의:</label>
     <select name="reserveInformationCollection" id="reserveInformationCollection">
         <option value="Y">Y</option>
         <option value="N">N</option>
     </select>
 
-    <label for="contents">전달 사항:</label>
+    <label class="reserve-label" for="contents">전달 사항:</label>
     <textarea name="reserveText" id="contents" maxlength="100">abc</textarea>
 
     <div class="button-group">
