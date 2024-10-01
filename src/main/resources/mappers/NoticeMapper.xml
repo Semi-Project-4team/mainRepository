@@ -48,14 +48,16 @@
                 notice_name,
                 notice_date,
                 notice_views,
-                notice_text
+                notice_text,
+                notice_status
                 )
         VALUES
             (
             #{name},
-            #{date},
-            #{views},
-            #{text}
+            CURDATE(),
+            0,
+            #{text},
+            'Y'
             )
     </insert>
 
