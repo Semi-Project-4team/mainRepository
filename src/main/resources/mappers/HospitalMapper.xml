@@ -232,7 +232,6 @@
         UPDATE
             tbl_hospital
         SET
-            subject_code = #{subjectCode},
             hospital_name = #{name},
             hospital_start_time = #{startTime},
             hospital_end_time = #{endTime},
@@ -263,6 +262,7 @@
         WHERE
             hospital_code = #{ hospitalCode }
     </update>
+
     <update id="updateHospitalPhoto" parameterType="map">
         UPDATE
             tbl_hospital

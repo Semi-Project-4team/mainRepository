@@ -143,6 +143,20 @@
             word-wrap: break-word; /* 긴 텍스트가 셀 안에서 줄 바꿈되도록 */
         }
 
+        .image-container {
+            display: flex; /* Flexbox 사용 */
+            justify-content: flex-start; /* 사진을 왼쪽 정렬 (필요에 따라 center, space-between 등 사용 가능) */
+            flex-wrap: nowrap; /* 사진이 한 줄에만 위치하도록 설정 */
+            overflow-x: auto; /* 사진이 넘칠 경우 가로 스크롤 허용 */
+            padding: 10px;
+            gap: 10px; /* 사진 간 간격 */
+        }
+
+        #hospital-photo {
+            width: 400px;
+            height: auto;
+        }
+
 
 
     </style>
@@ -176,10 +190,10 @@
         <p><label>주소:</label> <span th:text="${ hospital.detailAddress }"></span></p>
         <p><label>소개:</label> <span th:text="${ hospital.introText }"></span></p>
         <p><label>전화번호:</label> <span th:text="${ hospital.phoneNumber }"></span></p>
-        <p><label>사진:</label></p>
-        <div>
+<!--        <p><label>사진:</label></p>-->
+        <div class="image-container">
             <div th:each="path : ${pathsArray}">
-                <img th:src="${path}" alt="병원 사진" style="max-width: 100%; height: auto;">
+                <img th:src="${path}" alt="병원 사진" id="hospital-photo">
             </div>
         </div>
     </div>
