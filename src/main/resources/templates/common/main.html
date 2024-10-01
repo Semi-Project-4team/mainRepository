@@ -62,10 +62,10 @@
     <!--병원찾기-->
     <div class="search-hospital">
         <br>
-        <button class="button" onclick="openPopup()">지역별 동물병원찾기</button>
+        <button class="local-button" onclick="openPopup()">지역별 동물병원찾기</button>
         <br>
         <br>
-        <button class="button" onclick="location.href='/hospital/info/list'">동물병원 전체목록</button>
+<!--        <button class="button" onclick="location.href='/hospital/info/list'">동물병원 전체목록</button>-->
 
         <script>
             // 팝업 열기
@@ -81,10 +81,11 @@
         </script>
 
         <br>
-        <br>
         <form action="/hospital/search" method="GET">
             <input class="searchInput" type="text" id="query" name="query" placeholder="지역 또는 병원이름을 직접 검색">
-            <button type="submit">검색</button>
+            <br>
+            <br>
+            <button class="search-button" type="submit">찾기</button>
         </form>
         <br>
     </div>
