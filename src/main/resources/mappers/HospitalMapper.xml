@@ -183,6 +183,14 @@
             AND
             b.hospital_status = 'Y';
     </select>
+    <select id="isHospitalSignCheck" resultType="int">
+        SELECT
+            count(hospital_email)
+        from
+            tbl_hospital
+        where
+            hospital_email = #{ email };
+    </select>
 
     <insert id="hospitalSignup" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
         INSERT INTO
