@@ -227,4 +227,17 @@ public class UserService {
 
         return result >= 1;
     }
+
+    public boolean isHospitalSignCheck(String email) {
+
+        System.out.println("isHospitalSignCheck email = " + email);
+
+        Integer result = null;
+
+        result = hospitalMapper.isHospitalSignCheck(email);
+
+        System.out.println("isHospitalSignCheck result = " + result);
+
+        return result >= 1;
+    }
 }

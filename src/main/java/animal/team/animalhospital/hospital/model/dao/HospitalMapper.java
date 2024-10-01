@@ -44,4 +44,6 @@ public interface HospitalMapper {
     String findPhotoByCode(int code);
   
     List<HospitalDTO> searchHospital(String query);
+
+    int isHospitalSignCheck(String email);
 }

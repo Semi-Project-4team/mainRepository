@@ -29,6 +29,14 @@ public class UserController {
                                @ModelAttribute HospitalDTO newUserInfo) {
         System.out.println(newUserInfo.toString());
         System.out.println(newUserInfo.getInformationCollection());
+
+        boolean isHospital = userService.isHospitalSignCheck(newUserInfo.getEmail());
+
+        if(isHospital)
+            return resultMV(mv, null, "Hospital");
+
+        System.out.println("isHospital = " + isHospital);
+
         Integer result = userService.hospitalSignup(newUserInfo);
 
         return resultMV(mv, result, "hospital");
