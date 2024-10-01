@@ -39,19 +39,13 @@
     <th>예약시간</th>
   </tr>
 
-  <tr>
-    <td th:each="pro : ${ protector }" th:text="${ pro.name }"></td>
-    <td th:each="hospitalReserve : ${ hospitalReserveList }" th:text="${ hospitalReserve.reserveDate }"></td>
-    <td th:each="hospitalReserve : ${ hospitalReserveList }" th:text="${ hospitalReserve.reserveTime }"></td>
+    <tr th:each="pro, myIndex : ${ protector }"
+      th:data-index="${ myIndex }">
+    <td th:text="${ pro.name }"></td>
+    <td th:text="${ hospitalReserveList[myIndex.index].reserveDate }"></td>
+    <td th:text="${ hospitalReserveList[myIndex.index].reserveTime }"></td>
   </tr>
 
-
-  <!--  <tr th:each="myInfo, myIndex : ${ myInfoList }"-->
-<!--      th:data-index="${ myIndex }">-->
-<!--    <td><a th:href="@{/reserve/detail/{personCode}/{userCode}(personCode=${myInfo.personCode}, userCode=${myInfo.userCode})}" th:text="${ myInfo.name }"></a></td>-->
-<!--    <td th:text="${ hospitalReserveList[myIndex.index].reserveDate }"></td>-->
-<!--    <td th:text="${ hospitalReserveList[myIndex.index].reserveTime }"></td>-->
-<!--  </tr>-->
 </table>
 </body>
 </html>
