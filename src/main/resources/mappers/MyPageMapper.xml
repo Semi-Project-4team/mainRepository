@@ -151,7 +151,6 @@
             a.person_email = #{ userEmail };
     </select>
 
-
     <delete id="deleteFavorite" parameterType="String">
         DELETE
         FROM
@@ -175,6 +174,19 @@
         WHERE
             a.person_email = #{ userEmail }
 <!--        and b.reserve_status = 'Y';-->
+    </select>
+
+    <select id="findProtector" resultMap="personMap">
+        SELECT
+            *
+        FROM
+            tbl_person c
+        JOIN
+            tbl_reserve b ON c.person_code = b.person_code
+        JOIN
+            tbl_hospital a ON a.hospital_code = b.hospital_code
+        WHERE
+            a.hospital_email = #{ userEmail }
     </select>
 
     <select id="findMyHospital" resultMap="hospitalMap">
@@ -233,9 +245,7 @@
 
     <select id="findHospitalReserve" resultMap="reserveMap">
         SELECT
-            a.person_name,
-            b.reserve_time,
-            b.reserve_date
+            *
         from
             tbl_reserve b
         join tbl_person a on b.person_code = a.person_code

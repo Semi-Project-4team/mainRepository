@@ -17,6 +17,7 @@ public class PersonDTO implements UserDetails {
     private String birth;
     private String phoneNumber;
     private String informationCollection;
+    private int userCode;
 
     // Getter and Setter methods (camelCase)
     public PersonDTO() {
@@ -113,6 +114,18 @@ public class PersonDTO implements UserDetails {
         this.informationCollection = informationCollection;
     }
 
+    public PersonDTO(int userCode) {
+        this.userCode = userCode;
+    }
+
+    public int getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(int userCode) {
+        this.userCode = userCode;
+    }
+
     @Override
     public String toString() {
         return "PersonDTO{" +
@@ -122,7 +135,8 @@ public class PersonDTO implements UserDetails {
                 ", password='" + password + '\'' +
                 ", birth='" + birth + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", InformationCollection='" + informationCollection + '\'' +
+                ", informationCollection='" + informationCollection + '\'' +
+                ", userCode=" + userCode +
                 '}';
     }
 }
