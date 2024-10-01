@@ -31,4 +31,8 @@ public interface MyPageMapper {
     void insertMyPet(PetDTO newPet);
 
     void insertMyPetAlone(String userEmail);
+
+    List<HospitalDTO> findHospitalInfo(String userEmail);
+
+    List<ReserveDTO> findHospitalReserve(String userEmail);
 }

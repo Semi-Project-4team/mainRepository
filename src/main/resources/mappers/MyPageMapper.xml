@@ -47,7 +47,7 @@
         <result property="subjectCode" column="subject_code"/>
         <result property="eupmyeondongCode" column="eupmyeondong_code"/>
         <result property="name" column="hospital_name"/>
-        <result property="permitNumber" column="permit_number"/>
+        <result property="permitNumber" column="hospital_permit_number"/>
         <result property="email" column="hospital_email"/>
         <result property="password" column="hospital_password"/>
         <result property="informationCollection" column="hospital_information_collection"/>
@@ -60,6 +60,7 @@
         <result property="phoneNumber" column="hospital_phone_number"/>
         <result property="photo" column="hospital_photo"/>
     </resultMap>
+
     <insert id="insertMyPetAlone" parameterType="string">
         INSERT INTO
             tbl_pet
@@ -221,5 +222,26 @@
                             person_email = #{ userEmail } );
     </select>
 
+    <select id="findHospitalInfo" resultMap="hospitalMap">
+        SELECT
+            *
+        FROM
+            tbl_hospital
+        where
+            hospital_email = #{ userEmail };
+    </select>
+
+    <select id="findHospitalReserve" resultMap="reserveMap">
+        SELECT
+            a.person_name,
+            b.reserve_time,
+            b.reserve_date
+        from
+            tbl_reserve b
+        join tbl_person a on b.person_code = a.person_code
+        join tbl_hospital c on b.hospital_code = c.hospital_code
+        where
+            hospital_email = #{ userEmail };
+    </select>
 
 </mapper>
