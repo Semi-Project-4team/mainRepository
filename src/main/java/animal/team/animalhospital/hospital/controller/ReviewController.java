@@ -157,7 +157,8 @@ public class ReviewController {
             // 서버측 로그 남기기
             System.out.println("[Failed] 단일 파일 업로드 실패!"); // System
         }
-        return "redirect:/review/list";
+        return "redirect:/hospital/info/detail" + "/" + newReview.getHospitalCode();
+
     }
 
     @PostMapping("/delete/{code}/{hospitalCode}")
