@@ -29,15 +29,14 @@
     <h2>리뷰 수정하기</h2>
 
 
-    <form th:action="@{/review/update}" th:object="${review}" method="post">
+    <form th:action="@{/review/update}" th:object="${review}" method="post" enctype="multipart/form-data">
 
         <!-- Hidden input for PersonCode -->
         <input type="hidden" th:field="*{personCode}" />
         <input type="hidden" th:field="*{hospitalCode}" />
 
-        파일: <input type="file" name="singleFile"><br>
-
-        <br>
+        <label for="singleReviewFile">리뷰수정사진:</label>
+        <input type="file" name="singleReviewFile" id="singleReviewFile">
 
         <label>리뷰점수: </label>
         <select name="reviewScore">
