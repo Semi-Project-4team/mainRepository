@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -98,12 +97,20 @@ public class ReserveController {
         ReserveDTO reserveDTO = new ReserveDTO();
         reserveDTO.setHospitalCode(code);
 
-//        model.addAttribute("code", code);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String userEmail = userDetails.getUsername(); // 이메일 추출
 
-//        ReserveDTO reserve = reserveService.registNewReserve(reserveDTO);
-//        reserveService.registNewReserve(reserveDTO);
+        int userCode = personService.findByPersonCode(userEmail);
+
+        // personCode에 해당하는 pet 목록 조회
+        List<PetDTO> petList = petService.findPetsByPersonCode(userCode);
+
+
         model.addAttribute("hospital", code);
         model.addAttribute("reserve", reserveService);
+        model.addAttribute("petList", petList);          // personCode에 해당하는 반려동물 목록
+
         return "/hospital/reserve/regist";
     }
 

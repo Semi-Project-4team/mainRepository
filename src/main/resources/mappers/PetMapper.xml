@@ -50,6 +50,16 @@
         pet_person_code = #{ petPersonCode }
     </select>
 
+    <select id="findPetsByPersonCode" resultMap="petResultMap">
+        SELECT
+            *
+        FROM
+            tbl_pet
+        WHERE
+            person_code = #{personCode}
+    </select>
+
+
 
 
 
