@@ -19,6 +19,9 @@
             <button sec:authorize="hasAnyAuthority('MASTER')" class="headerBtn" id="memberBtn"
                     onclick="location.href='/hospital/person/list'">회원관리</button>
             <button class="headerBtn" id="logoutBtn" onclick="location.href='/auth/logout'">로그아웃</button>
-            <button class="headerBtn" id="myPageBtn" onclick="location.href='/myPage/myInfo'">마이페이지</button>
+            <button sec:authorize="hasAnyAuthority('USER_PERSON')" class="headerBtn" id="myPageBtn"
+                    onclick="location.href='/myPage/myInfo'">마이페이지</button>
+            <button sec:authorize="hasAnyAuthority('USER_HOSPITAL')" class="headerBtn" id="hospitalInfoBtn"
+                    onclick="location.href='/myPage/hospitalInfo'">병원페이지</button>
         </div>
 </header>

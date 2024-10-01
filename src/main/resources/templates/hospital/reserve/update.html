@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/css/header.css">
+    <style>
+        .button{
+            background-color: #58ccff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -43,14 +55,14 @@
         <br>
 
         <!-- Submit and Reset buttons -->
-        <button type="submit">수정하기</button>
-        <button type="reset">초기화</button>
+        <button class="button" type="submit">수정하기</button>
+        <button class="button" type="reset">초기화</button>
     </form>
 
 
 
     <div>
-        <button onclick="history.back()">취소</button>
+        <button class="button" onclick="history.back()">취소</button>
     </div>
 
 

@@ -95,10 +95,11 @@
 <body>
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+
 <div class="form-container">
     <h1>동물병원 정보 수정하기</h1>
 
-    <form th:action="@{/hospital/info/update}" th:object="${hospital}" method="post">
+    <form th:action="@{/hospital/info/hospitalUpdate}" th:object="${hospital}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{hospitalCode}"/>
 
         <div class="form-group">
@@ -136,9 +137,14 @@
             <input type="text" id="introText" th:field="*{introText}" required />
         </div>
 
+<!--        <div class="form-group">-->
+<!--            <label for="photo">사진:</label>-->
+<!--            <input type="text" id="photo" th:field="*{photo}" required />-->
+<!--        </div>-->
+
         <div class="form-group">
-            <label for="photo">사진:</label>
-            <input type="text" id="photo" th:field="*{photo}" required />
+            <label for="multiHospitalFiles">사진:</label>
+            <input type="file" name="multiHospitalFiles" id="multiHospitalFiles" multiple>
         </div>
 
         <div class="form-group">

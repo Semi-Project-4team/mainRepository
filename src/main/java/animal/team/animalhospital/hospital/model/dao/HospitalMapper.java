@@ -2,7 +2,6 @@ package animal.team.animalhospital.hospital.model.dao;
 
 import animal.team.animalhospital.hospital.model.dto.*;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -40,4 +39,9 @@ public interface HospitalMapper {
 
     void deleteHospital(int code);
 
+    void updateHospitalPhoto(Map<String, String> photoPaths);
+
+    String findPhotoByCode(int code);
+  
+    List<HospitalDTO> searchHospital(String query);
 }

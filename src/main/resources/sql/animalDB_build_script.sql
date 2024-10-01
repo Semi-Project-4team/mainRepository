@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS tbl_reserve (
                                            reserve_date DATE NOT NULL COMMENT '방문날짜',
                                            reserve_text VARCHAR(100) NULL COMMENT '전달사항',
                                            reserve_information_collection VARCHAR(1)  NOT NULL COMMENT '정보수집동의',
+                                           reserve_status VARCHAR(10) NOT NULL DEFAULT 'Y' COMMENT '예약상태',
 
     -- 복합 기본키 설정
                                            PRIMARY KEY (person_code, hospital_code),
@@ -277,10 +278,11 @@ INSERT INTO
     reserve_time,
     reserve_date,
     reserve_text,
-    reserve_information_collection)
+    reserve_information_collection,
+    reserve_status)
 VALUES
-    (1,1,1,now(),now(),'hi','Y'),
-    (2,2,1,now(),now(),'qwe','Y');
+    (1,1,1,now(),now(),'hi','Y','Y'),
+    (2,2,1,now(),now(),'qwe','Y','Y');
 #     (3,3,1,now(),now(),'ert','Y');
 
 INSERT INTO
