@@ -126,10 +126,12 @@ public class ReserveController {
 
         System.out.println("userCode = " + userCode);
 
-
         newReserve.setPersonCode(userCode);
 
-        newReserve.setHospitalCode(hospitalCode);              // 병원코드 강제주입구문(임시)
+        newReserve.setHospitalCode(hospitalCode);
+
+        System.out.println("userCode = " + userCode);
+        System.out.println("hospitalCode = " + hospitalCode);
 
         System.out.println("newReserve = " + newReserve);
 
@@ -137,7 +139,7 @@ public class ReserveController {
 
 
 
-        return "redirect:/reserve/detail/" + newReserve.getPersonCode() + "/" + newReserve.getHospitalCode();
+        return "redirect:/reserve/detail/" + newReserve.getHospitalCode() + "/" + newReserve.getPersonCode() ;
     }
 
     @PostMapping("/delete/{code}/{hospitalCode}")
@@ -180,7 +182,7 @@ public class ReserveController {
 
         reserveService.updateReserve1(reserve);
 
-        return "redirect:/reserve/detail/" + reserve.getPersonCode() + "/" + reserve.getHospitalCode();
+        return "redirect:/reserve/detail/" + reserve.getHospitalCode() + "/" + reserve.getPersonCode();
     }
 
 
