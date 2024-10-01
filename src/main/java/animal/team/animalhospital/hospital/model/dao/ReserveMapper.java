@@ -23,7 +23,7 @@ public interface ReserveMapper {
 
     void resistNewReserve(int code);
 
-    ReserveDTO findReserveByCode1(Map<String, Object> params);
+    ReserveDTO findReserveByCode1(Map<String, Integer> params);
 
     void deleteReserve1(Map<String, Object> params);
 }

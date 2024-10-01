@@ -39,6 +39,7 @@
         <result property="reserveDate" column="reserve_date"/>
         <result property="reserveText" column="reserve_text"/>
         <result property="reserveInformationCollection" column="reserve_information_collection"/>
+        <result property="reserveStatus" column="reserve_status"/>
     </resultMap>
 
     <resultMap id="hospitalMap" type="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
@@ -163,7 +164,8 @@
         SELECT
             c.hospital_name,
             b.reserve_date,
-            b.reserve_time
+            b.reserve_time,
+            b.reserve_status
         FROM
             tbl_hospital c
         JOIN
@@ -171,7 +173,8 @@
         JOIN
             tbl_person a ON a.person_code = b.person_code
         WHERE
-            a.person_email = #{ userEmail };
+            a.person_email = #{ userEmail }
+<!--        and b.reserve_status = 'Y';-->
     </select>
 
     <select id="findMyHospital" resultMap="hospitalMap">
@@ -188,7 +191,7 @@
         JOIN
             tbl_person a ON a.person_code = b.person_code
         WHERE
-            a.person_email = #{ userEmail };
+            a.person_email = #{ userEmail }
     </select>
 
     <select id="findMyPet" resultMap="petMap">

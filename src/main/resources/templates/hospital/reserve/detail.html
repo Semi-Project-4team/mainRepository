@@ -97,19 +97,20 @@
         <p><label>방문날짜:</label> <span th:text="${reserve.reserveDate}"></span></p>
         <p><label>전달사항:</label> <span th:text="${reserve.reserveText}"></span></p>
         <p><label>정보수집동의:</label> <span th:text="${reserve.reserveInformationCollection}"></span></p>
+        <p><label>예약상태:</label> <span th:text="${reserve.reserveStatus}"></span></p>
     </div>
 
     <!-- Action buttons (수정하기, 삭제하기, 목록으로) -->
     <div class="action-buttons">
         <form th:action="@{/reserve/update/{personCode}/{hospitalCode}(personCode=${reserve.personCode}, hospitalCode=${reserve.hospitalCode})}" method="get">
-            <button type="submit" class="form-button">수정하기</button>
+            <button type="submit" class="form-button">예약수정</button>
         </form>
 
         <form th:action="@{/reserve/delete/{personCode}/{hospitalCode}(personCode=${reserve.personCode}, hospitalCode=${reserve.hospitalCode})}" method="post">
-            <button type="submit" class="form-button">삭제하기</button>
+            <button type="submit" class="form-button">예약취소</button>
         </form>
 
-        <button onclick="location.href='/reserve/list'">이전으로</button>
+        <button onclick="location.href='/hospital/info/list'">목록으로</button>
     </div>
 </div>
 

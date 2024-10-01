@@ -53,6 +53,10 @@ public class MyPageController {
         System.out.println("myPetList = " + myPetList);
         System.out.println("myHospitalList = " + myHospitalList);
 
+        for (HospitalDTO hospitalDTO : myHospitalList) {
+            hospitalDTO.setUserCode(myInfoList.get(0).getPersonCode());
+        }
+
         model.addAttribute("myInfoList", myInfoList);
         model.addAttribute("myReserveList", myReserveList);
         model.addAttribute("myHospitalList", myHospitalList);

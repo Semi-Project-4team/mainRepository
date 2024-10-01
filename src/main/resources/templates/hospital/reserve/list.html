@@ -92,6 +92,7 @@
             <th>방문날짜</th>
             <th>전달사항</th>
             <th>정보수집동의</th>
+            <th>예약상태</th>
         </tr>
         <tr th:each="reserve : ${ reserveList }">
             <td><a th:href="@{/reserve/detail/{personCode}/{hospitalCode}(personCode=${reserve.personCode}, hospitalCode=${reserve.hospitalCode})}" th:text="${reserve.personCode}"></a></td>
@@ -100,6 +101,7 @@
             <td th:text="${ reserve.reserveDate }"></td>
             <td th:text="${ reserve.reserveText }"></td>
             <td th:text="${ reserve.reserveInformationCollection }"></td>
+            <td th:text="${ reserve.reserveStatus }"></td>
         </tr>
     </table>
     <br>
