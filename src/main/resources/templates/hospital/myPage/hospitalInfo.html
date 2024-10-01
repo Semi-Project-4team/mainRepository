@@ -30,6 +30,18 @@
   </tr>
 </table>
 
+<!--수정버튼-->
+<div th:each="hospital : ${ hospitalInfoList }">
+<form th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">
+  <button class="edit-button" type="submit">동물병원 정보 수정하기</button>
+</form>
+
+<!--폐업버튼-->
+<form th:action="@{/hospital/info/delete/{code}(code=${ hospital.hospitalCode})}" method="post">
+  <button class="edit-button" type="submit">병원 폐업</button>
+</form>
+</div>
+
 
 <h3>예약 내역</h3>
 <table>
@@ -39,19 +51,13 @@
     <th>예약시간</th>
   </tr>
 
-  <tr>
-    <td th:each="pro : ${ protector }" th:text="${ pro.name }"></td>
-    <td th:each="hospitalReserve : ${ hospitalReserveList }" th:text="${ hospitalReserve.reserveDate }"></td>
-    <td th:each="hospitalReserve : ${ hospitalReserveList }" th:text="${ hospitalReserve.reserveTime }"></td>
+    <tr th:each="pro, myIndex : ${ protector }"
+      th:data-index="${ myIndex }">
+    <td th:text="${ pro.name }"></td>
+    <td th:text="${ hospitalReserveList[myIndex.index].reserveDate }"></td>
+    <td th:text="${ hospitalReserveList[myIndex.index].reserveTime }"></td>
   </tr>
 
-
-  <!--  <tr th:each="myInfo, myIndex : ${ myInfoList }"-->
-<!--      th:data-index="${ myIndex }">-->
-<!--    <td><a th:href="@{/reserve/detail/{personCode}/{userCode}(personCode=${myInfo.personCode}, userCode=${myInfo.userCode})}" th:text="${ myInfo.name }"></a></td>-->
-<!--    <td th:text="${ hospitalReserveList[myIndex.index].reserveDate }"></td>-->
-<!--    <td th:text="${ hospitalReserveList[myIndex.index].reserveTime }"></td>-->
-<!--  </tr>-->
 </table>
 </body>
 </html>

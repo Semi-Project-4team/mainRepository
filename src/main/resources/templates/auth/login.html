@@ -79,7 +79,7 @@
 <body>
 
 <div class="login-container">
-  <h1>로그인 페이지</h1>
+  <h1 onclick="location.href='/main'" style="cursor: pointer;">로그인 페이지</h1>
   <form th:action="@{/auth/login}" th:method="POST">
     <label for="user">아이디</label>
     <input type="text" id="user" name="username" placeholder="아이디를 입력하세요"/>
