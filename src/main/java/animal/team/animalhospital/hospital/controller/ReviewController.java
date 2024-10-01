@@ -192,9 +192,81 @@ public class ReviewController {
     }
 
     @PostMapping("/update")
-    public String updateReview(@ModelAttribute ReviewDTO review) {
+    public String updateReview(@RequestParam("singleReviewFile") MultipartFile singleReviewFile,
+                               RedirectAttributes rAttr,
+                                @ModelAttribute ReviewDTO review) throws IOException {
 
-        reviewService.updateReview1(review);
+        System.out.println("updateReview singleReviewFile = " + singleReviewFile);
+
+        Resource resource = resourceLoader.getResource("classpath:static/images/uploadedFiles");
+
+        String filePath = null;
+        if(!resource.exists()) {
+            // 경로가 존재하지 않을 때
+            String root = "src/main/resource/static/images/uploadedFiles";
+
+            File file = new File(root);
+            file.mkdirs();
+
+            filePath = file.getAbsolutePath();
+        } else {
+            // 경로가 이미 존재할 때
+            filePath = resourceLoader.getResource("classpath:static/images/uploadedFiles").getFile().getAbsolutePath();
+        }
+
+        System.out.println("filePath = " + filePath);
+
+        String originalFileName = singleReviewFile.getOriginalFilename();
+        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+
+        String savedName = UUID.randomUUID().toString().replace("-", "") + extension;
+
+        try {
+
+            singleReviewFile.transferTo(new File(filePath + "/" + savedName));
+
+//            String userEmail = userDetails.getUsername();
+//
+//            int userCode = personService.findByPersonCode(userEmail);
+//
+//            System.out.println("userCode = " + userCode);
+//
+//
+//            newReview.setPersonCode(userCode);
+//
+//            newReview.setHospitalCode(hospitalCode);
+//        newReview.setHospitalCode(9);              // 병원코드 강제주입구문(임시)
+
+            LocalDate currentDate = LocalDate.now();
+//            newReview.setReviewWriteDate(currentDate);
+//            newReview.setReviewModifyDate(currentDate);
+//            newReview.setReviewPhoto("/images/uploadedFiles/" + savedName);
+//
+//            reviewService.registNewReview(newReview);
+            review.setReviewPhoto("/images/uploadedFiles/" + savedName);
+
+            System.out.println("review = " + review);
+
+            reviewService.updateReview1(review);
+
+            rAttr.addFlashAttribute("message", "[Success] 단일 파일 업로드 성공!");
+            rAttr.addFlashAttribute("img", "static/images/uploadedFiles" + "/" + savedName);
+            // 서버측 로그 남기기
+            System.out.println("[Success] 단일 파일 업로드 성공!"); // System
+
+        } catch (IOException e) {
+
+            // 트랜잭션 처리 도중 예외가 발생할
+            new File(filePath + "/" + savedName).delete();
+
+            e.printStackTrace();
+
+            // 리다이렉트 후, 데이터 공유를 위한 RedirectAttributes에 값 저장.
+            rAttr.addFlashAttribute("message", "[Failed] 단일 파일 업로드 실패!"); // 브라우저
+
+            // 서버측 로그 남기기
+            System.out.println("[Failed] 단일 파일 업로드 실패!"); // System
+        }
 
 
         return "redirect:/review/detail/" + review.getPersonCode() + "/" + review.getHospitalCode();
