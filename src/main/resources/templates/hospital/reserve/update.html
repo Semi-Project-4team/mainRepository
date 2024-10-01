@@ -5,6 +5,59 @@
     <title>Title</title>
     <link rel="stylesheet" href="/css/header.css">
     <style>
+
+        body {
+            padding: 20px;
+            background-color: #f8f9f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+        }
+
+        .container .info{
+            margin: 10px 0;
+            display: flex;
+        }
+
+        .container .info label {
+            color: #58ccff;
+            font-weight: bold;
+            width: 100px;
+        }
+
+        .container .info input{
+            border: 1px solid #999;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .container .info select{
+            border: 1px solid #999;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .container .info textarea{
+            border: 1px solid #999;
+            border-radius: 5px;
+        }
+
+        .button-wrap{
+            display: flex;
+            justify-content: space-between;
+        }
+
+
         .button{
             background-color: #58ccff;
             color: white;
@@ -15,12 +68,17 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        button:hover {
+            background-color: #4da8cc; /* 버튼 호버 시 색상 */
+        }
     </style>
 </head>
 <body>
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
+<div class="container">
     <h2>예약 수정하기</h2>
 
 
@@ -31,40 +89,47 @@
         <input type="hidden" th:field="*{hospitalCode}" />
         <input type="hidden" th:field="*{petPersonCode}" />
 
-        <!-- Reserve Time input -->
-        <label for="reserveTime">예약 시간:</label>
-        <input type="time" id="reserveTime" th:field="*{reserveTime}" required />
+        <div class="info">
+            <!-- Reserve Time input -->
+            <label for="reserveTime">예약 시간:</label>
+            <input type="time" id="reserveTime" th:field="*{reserveTime}" required />
+        </div>
 
-        <!-- Reserve Date input -->
-        <label for="reserveDate">예약 날짜:</label>
-        <input type="date" id="reserveDate" th:field="*{reserveDate}" required />
+        <div class="info">
+            <!-- Reserve Date input -->
+            <label for="reserveDate">예약 날짜:</label>
+            <input type="date" id="reserveDate" th:field="*{reserveDate}" required />
+        </div>
 
+        <div class="info">
         <!-- Information Collection Agreement -->
-        <label for="reserveInformationCollection">정보수집동의:</label>
-        <select id="reserveInformationCollection" th:field="*{reserveInformationCollection}">
-            <option value="Y" th:selected="${reserve.reserveInformationCollection == 'Y'}">Y</option>
-            <option value="N" th:selected="${reserve.reserveInformationCollection == 'N'}">N</option>
-        </select>
+            <label for="reserveInformationCollection">정보수집동의:</label>
+            <select id="reserveInformationCollection" th:field="*{reserveInformationCollection}">
+                <option value="Y" th:selected="${reserve.reserveInformationCollection == 'Y'}">Y</option>
+                <option value="N" th:selected="${reserve.reserveInformationCollection == 'N'}">N</option>
+            </select>
+        </div>
 
         <!-- Textarea for additional notes -->
         <br>
-        <label for="contents">전달 사항:</label>
-        <br>
-        <textarea name="reserveText" id="contents" cols="30" rows="10"
+
+        <div class="info">
+            <label for="contents">전달 사항:</label>
+            <textarea name="reserveText" id="contents" cols="30" rows="10"
                   style="resize:none" maxlength="100" th:field="*{reserveText}"></textarea>
+        </div>
         <br>
 
+        <div class="button-wrap">
         <!-- Submit and Reset buttons -->
-        <button class="button" type="submit">수정하기</button>
-        <button class="button" type="reset">초기화</button>
+            <button class="button" type="submit">수정하기</button>
+            <button class="button" onclick="history.back()">취소</button>
+        </div>
     </form>
 
 
 
-    <div>
-        <button class="button" onclick="history.back()">취소</button>
-    </div>
 
-
+</div>
 </body>
 </html>
