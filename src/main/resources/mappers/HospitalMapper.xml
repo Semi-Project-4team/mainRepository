@@ -28,6 +28,7 @@
         <result property="phoneNumber" column="hospital_phone_number"/>
         <result property="photo" column="hospital_photo"/>
         <result property="status" column="hospital_status"/>
+        <result property="isAccountDrawal" column="hospital_isAccount_drawal"/>
     </resultMap>
 
     <resultMap id="reviewResultMap" type="animal.team.animalhospital.hospital.model.dto.ReviewDTO">

@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS tbl_person
     person_birth DATE NOT NULL COMMENT '개인회원생년월일',
     person_phone_number VARCHAR(20) NOT NULL COMMENT '개인회원전화번호',
     person_information_collection VARCHAR(1) NOT NULL COMMENT '정보수집동의확인',
+    person_isAccount_drawal VARCHAR(1) NOT NULL COMMENT '계정탈퇴여부',
 
     CONSTRAINT pk_person_code PRIMARY KEY (person_code)
 ) ENGINE=INNODB COMMENT '개인회원';
@@ -102,6 +103,7 @@ CREATE TABLE IF NOT EXISTS tbl_hospital
     hospital_phone_number varchar(20) NOT NULL COMMENT '병원전화번호', --
     hospital_photo varchar(255) COMMENT '병원사진',
     hospital_status varchar(10) NOT NULL COMMENT '병원상태', --
+    hospital_isAccount_drawal VARCHAR(1) NOT NULL COMMENT '계정탈퇴여부', --
     -- table level constraints
     CONSTRAINT pk_hospital_code PRIMARY KEY (hospital_code),
     CONSTRAINT fk_eupmyeondong_code FOREIGN KEY (eupmyeondong_code) REFERENCES tbl_eupmyeondong (eupmyeondong_code),
@@ -238,19 +240,20 @@ INSERT INTO tbl_hospital
     hospital_intro_text,
     hospital_phone_number,
     hospital_photo,
-    hospital_status
+    hospital_status,
+    hospital_isaccount_drawal
 )
 VALUES
     -- 예제 데이터 삽입 (시간 정보, 상세주소 추가)
-    (NULL, '1', 1, '눈편한병원', '123456789', 'eye@gmail.com', 'eye1234', 'Y', '08:00', '18:00', '12:00', '13:00', '전농동 130-128', '눈이 편해지는 병원입니다.', '02-000-0000', '/Users/eye.jpg', 'Y'),
-    (NULL, '2', 2, '피부케어병원', '987654321', 'skin1@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '갈현동 6-51', '피부를 건강하게!', '02-111-1111', '/Users/skin1.jpg', 'Y'),
-    (NULL, '3', 3, '피부케어병원', '123987456', 'skin2@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '서경로 31', '피부를 건강하게!', '02-222-2222', '/Users/skin2.jpg', 'Y'),
-    (NULL, '3', 4, '내과병원', '456123789', 'internal1@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '신길동 469-3', '내과 진료 전문 병원.', '02-333-3333', '/Users/internal1.jpg', 'Y'),
-    (NULL, '3', 5, '내과병원', '789456123', 'internal2@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '양평동 660-4', '내과 진료 전문 병원.', '02-444-4444', '/Users/internal2.jpg', 'Y'),
-    (NULL, '4', 6, '뼈튼튼병원', '321654987', 'orthopedics1@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '영등포동 660-4', '뼈 건강 전문 병원.', '02-555-5555', '/Users/ortho1.jpg', 'Y'),
-    (NULL, '4', 7, '뼈튼튼병원', '654789321', 'orthopedics2@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '망원동 660-4', '뼈 건강 전문 병원.', '02-666-6666', '/Users/ortho2.jpg', 'Y'),
-    (NULL, '5', 8, '튼튼이치과', '789321654', 'dental1@gmail.com', 'dental1234', 'Y', '09:00', '18:00', '12:00', '13:00', '마포동 660-4', '튼튼한 치아를 위해.', '02-777-7777', '/Users/dental1.jpg','N'),
-    (NULL, '6', 9, '소변건강병원', '456987321', 'urology1@gmail.com', 'urology1234', 'Y', '08:30', '17:00', '12:00', '13:00', '상암동 660-4', '비뇨기 건강 전문 병원.', '02-888-8888', '/Users/urology1.jpg', 'Y');
+    (NULL, '1', 1, '눈편한병원', '123456789', 'eye@gmail.com', 'eye1234', 'Y', '08:00', '18:00', '12:00', '13:00', '전농동 130-128', '눈이 편해지는 병원입니다.', '02-000-0000', '/Users/eye.jpg', 'Y', 'Y'),
+    (NULL, '2', 2, '피부케어병원', '987654321', 'skin1@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '갈현동 6-51', '피부를 건강하게!', '02-111-1111', '/Users/skin1.jpg', 'Y', 'Y'),
+    (NULL, '3', 3, '피부케어병원', '123987456', 'skin2@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '서경로 31', '피부를 건강하게!', '02-222-2222', '/Users/skin2.jpg', 'Y', 'Y'),
+    (NULL, '3', 4, '내과병원', '456123789', 'internal1@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '신길동 469-3', '내과 진료 전문 병원.', '02-333-3333', '/Users/internal1.jpg', 'Y', 'Y'),
+    (NULL, '3', 5, '내과병원', '789456123', 'internal2@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '양평동 660-4', '내과 진료 전문 병원.', '02-444-4444', '/Users/internal2.jpg', 'Y', 'Y'),
+    (NULL, '4', 6, '뼈튼튼병원', '321654987', 'orthopedics1@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '영등포동 660-4', '뼈 건강 전문 병원.', '02-555-5555', '/Users/ortho1.jpg', 'Y', 'Y'),
+    (NULL, '4', 7, '뼈튼튼병원', '654789321', 'orthopedics2@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '망원동 660-4', '뼈 건강 전문 병원.', '02-666-6666', '/Users/ortho2.jpg', 'Y', 'Y'),
+    (NULL, '5', 8, '튼튼이치과', '789321654', 'dental1@gmail.com', 'dental1234', 'Y', '09:00', '18:00', '12:00', '13:00', '마포동 660-4', '튼튼한 치아를 위해.', '02-777-7777', '/Users/dental1.jpg','N', 'Y'),
+    (NULL, '6', 9, '소변건강병원', '456987321', 'urology1@gmail.com', 'urology1234', 'Y', '08:30', '17:00', '12:00', '13:00', '상암동 660-4', '비뇨기 건강 전문 병원.', '02-888-8888', '/Users/urology1.jpg', 'Y', 'Y');
 #         (NULL, 7, 10, '수술전문병원', '321789654', 'surgery1@gmail.com', 'surgery1234', 'Y', '2024-01-01', '능동 660-4', '외과 수술 전문 병원.', '/Users'),
 #         (NULL, 7, 11, '수술전문병원', '987321654', 'surgery2@gmail.com', 'surgery1234', 'Y', '2024-01-01', '반송동 660-4', '외과 수술 전문 병원.', '/Users'),
 #         (NULL, 8, 12, '산부인과병원', '654123987', 'obgyn1@gmail.com', 'obgyn1234', 'Y', '2024-01-01', '기안동 660-4', '산부인과 진료 전문.', '/Users'),
@@ -262,11 +265,11 @@ VALUES
 #         (NULL, 13, 18, '눈건강병원', '123654987', 'eye2@gmail.com', 'eye1234', 'Y', '2024-01-01', '매교동 660-4', '눈 건강 진료.', '/Users');COMMIT;
 
 INSERT INTO
-    tbl_person (person_code, person_name, person_email, person_password, person_birth, person_phone_number, person_information_collection)
+    tbl_person (person_code, person_name, person_email, person_password, person_birth, person_phone_number, person_information_collection, person_isaccount_drawal)
 VALUES
-    (1, 'admin', 'admin', '$2a$10$MeOhW/3tL/yfSQiYkHwC0OH5w1wKrpcLXQK6a5Ir8V7ZyuQrDbxbG', now(), '010-0000-0000', 'Y'),
-    (2, '이나라', 'dlskfk0513@naver.com', 'dlskfk01', now(), '010-0000-0000', 'Y'),
-    (3, '백중윤', 'qorwnddbs@naver.com', 'qorwnddbs01', now(), '010-1111-1111', 'Y');
+    (1, 'admin', 'admin', '$2a$10$MeOhW/3tL/yfSQiYkHwC0OH5w1wKrpcLXQK6a5Ir8V7ZyuQrDbxbG', now(), '010-0000-0000', 'Y', 'Y'),
+    (2, '이나라', 'dlskfk0513@naver.com', 'dlskfk01', now(), '010-0000-0000', 'Y', 'Y'),
+    (3, '백중윤', 'qorwnddbs@naver.com', 'qorwnddbs01', now(), '010-1111-1111', 'Y', 'Y');
 #     (3, '빵빵이', 'bbang@naver.com', 'bbang', now(), '010-2222-2222', 'Y');
 
 INSERT INTO
