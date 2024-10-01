@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class HospitalService {
@@ -59,6 +60,15 @@ public class HospitalService {
     @Transactional
     public void deleteHospital(int code) {
         hospitalMapper.deleteHospital(code);
+    }
+
+    public void updateHospitalPhoto(Map<String, String> photoPaths) {
+//        String photoPathsAsString = photoPaths.toString();
+        hospitalMapper.updateHospitalPhoto(photoPaths);
+    }
+
+    public String findPhotoByCode(int code) {
+        return hospitalMapper.findPhotoByCode(code);
     }
 }
 
