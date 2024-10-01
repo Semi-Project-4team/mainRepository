@@ -53,6 +53,10 @@ public class MyPageController {
         System.out.println("myPetList = " + myPetList);
         System.out.println("myHospitalList = " + myHospitalList);
 
+        for (HospitalDTO hospitalDTO : myHospitalList) {
+            hospitalDTO.setUserCode(myInfoList.get(0).getPersonCode());
+        }
+
         model.addAttribute("myInfoList", myInfoList);
         model.addAttribute("myReserveList", myReserveList);
         model.addAttribute("myHospitalList", myHospitalList);
@@ -60,6 +64,31 @@ public class MyPageController {
         model.addAttribute("myPetList",myPetList);
 
         return "hospital/myPage/list";
+    }
+
+    @GetMapping("hospitalInfo")
+    public String hospitalInfoList(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
+        System.out.println("userEmail = " + userEmail);
+
+        List<HospitalDTO> hospitalInfoList = myPageService.findHospitalInfo(userEmail);
+        List<ReserveDTO> hospitalReserveList = myPageService.findHospitalReserve(userEmail);
+        List<PersonDTO> myInfoList = myPageService.findMyInfo(userEmail);
+
+        System.out.println("hospitalInfoList = " + hospitalInfoList);
+        System.out.println("hospitalReserveList = " + hospitalReserveList);
+        System.out.println("myInfoList = " + myInfoList);
+
+        model.addAttribute("hospitalInfoList", hospitalInfoList);
+        model.addAttribute("hospitalReserveList", hospitalReserveList);
+        model.addAttribute("myInfoList", myInfoList);
+
+        return ("/hospital/myPage/hospitalInfo");
+
+
     }
 
     @GetMapping("/update")

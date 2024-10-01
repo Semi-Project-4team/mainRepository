@@ -62,13 +62,19 @@ public class ReserveController {
                                  @PathVariable("hospitalCode") int hospitalCode,
                                  Model model) {
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("personCode", code);
-        params.put("hospitalCode", hospitalCode);
+        Map<String, Integer> params = new HashMap<>();
+        params.put("personCode", hospitalCode);
+        params.put("hospitalCode", code);
+
+        System.out.println("params = " + params);
 
         ReserveDTO reserve = reserveService.findReserveByCode1(params);
 
+        System.out.println("reserve = " + reserve);
+
         model.addAttribute("reserve", reserve);
+
+        System.out.println("test");
 
         return "/hospital/reserve/detail";
     }
@@ -120,10 +126,12 @@ public class ReserveController {
 
         System.out.println("userCode = " + userCode);
 
-
         newReserve.setPersonCode(userCode);
 
-        newReserve.setHospitalCode(hospitalCode);              // 병원코드 강제주입구문(임시)
+        newReserve.setHospitalCode(hospitalCode);
+
+        System.out.println("userCode = " + userCode);
+        System.out.println("hospitalCode = " + hospitalCode);
 
         System.out.println("newReserve = " + newReserve);
 
@@ -131,7 +139,7 @@ public class ReserveController {
 
 
 
-        return "redirect:/reserve/list";
+        return "redirect:/reserve/detail/" + newReserve.getHospitalCode() + "/" + newReserve.getPersonCode() ;
     }
 
     @PostMapping("/delete/{code}/{hospitalCode}")
@@ -145,7 +153,7 @@ public class ReserveController {
 
         reserveService.deleteReserve1(params);
 
-        return "redirect:/reserve/list";
+        return "redirect:/myPage/myInfo";
 
     }
 
@@ -157,7 +165,7 @@ public class ReserveController {
 
 
 
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Integer> params = new HashMap<>();
         params.put("personCode", code);
         params.put("hospitalCode", hospitalCode);
 
@@ -174,7 +182,7 @@ public class ReserveController {
 
         reserveService.updateReserve1(reserve);
 
-        return "redirect:/reserve/detail/" + reserve.getPersonCode() + "/" + reserve.getHospitalCode();
+        return "redirect:/reserve/detail/" + reserve.getHospitalCode() + "/" + reserve.getPersonCode();
     }
 
 

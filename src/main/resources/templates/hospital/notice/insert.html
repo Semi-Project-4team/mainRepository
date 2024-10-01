@@ -2,20 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>공지사항 신규등록</title>
     <link rel="stylesheet" href="/css/header.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .form-container {
+            width: 700px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 150px;
+        }
+
+        .form-container h1 {
+            color: #58ccff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .form-row label {
+            flex-basis: 30%;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .form-row input[type="text"],
+        .form-row input[type="date"],
+        .form-row input[type="number"] {
+            flex-basis: 120%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-row input[type="submit"] {
+            background-color: #58ccff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-row input[type="submit"]:hover {
+            background-color: #42b5e8;
+        }
+
+        /* 내용 부분은 더 큰 입력 필드 */
+        .form-row textarea {
+            flex-basis: 120%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            height: 150px;
+            resize: none;
+        }
+    </style>
 </head>
 <body>
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
-    <h3>공지사항 신규등록</h3>
+<div class="form-container">
+    <h1>공지사항 신규등록</h1>
     <form action="/notice/insert" method="post">
-        <label>제목: </label><input type="text" name="name"><br>
-        <label>작성날짜: </label><input type="date" name="date"><br>
-        <label>조회수: </label><input type="number" name="views"><br>
-        <label>내용: </label><input type="text" name="text"><br>
-        <input type="submit" value="등록">
+        <div class="form-row">
+            <label for="name">제목: </label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="form-row">
+            <label for="text">내용: </label>
+            <textarea id="text" name="text"></textarea>
+        </div>
+        <div class="form-row" style="justify-content: center;">
+            <input type="submit" value="등록">
+        </div>
     </form>
+</div>
+
 </body>
 </html>

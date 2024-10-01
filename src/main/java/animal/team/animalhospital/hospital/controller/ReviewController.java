@@ -146,7 +146,6 @@ public class ReviewController {
 
         } catch (IOException e) {
 
-
             // 트랜잭션 처리 도중 예외가 발생할
             new File(filePath + "/" + savedName).delete();
 
