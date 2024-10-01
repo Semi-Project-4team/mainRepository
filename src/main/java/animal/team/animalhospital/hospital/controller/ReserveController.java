@@ -62,13 +62,19 @@ public class ReserveController {
                                  @PathVariable("hospitalCode") int hospitalCode,
                                  Model model) {
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("personCode", code);
-        params.put("hospitalCode", hospitalCode);
+        Map<String, Integer> params = new HashMap<>();
+        params.put("personCode", hospitalCode);
+        params.put("hospitalCode", code);
+
+        System.out.println("params = " + params);
 
         ReserveDTO reserve = reserveService.findReserveByCode1(params);
 
+        System.out.println("reserve = " + reserve);
+
         model.addAttribute("reserve", reserve);
+
+        System.out.println("test");
 
         return "/hospital/reserve/detail";
     }
@@ -131,7 +137,7 @@ public class ReserveController {
 
 
 
-        return "redirect:/reserve/list";
+        return "redirect:/reserve/detail/" + newReserve.getPersonCode() + "/" + newReserve.getHospitalCode();
     }
 
     @PostMapping("/delete/{code}/{hospitalCode}")
@@ -145,7 +151,7 @@ public class ReserveController {
 
         reserveService.deleteReserve1(params);
 
-        return "redirect:/reserve/list";
+        return "redirect:/myPage/myInfo";
 
     }
 
@@ -157,7 +163,7 @@ public class ReserveController {
 
 
 
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Integer> params = new HashMap<>();
         params.put("personCode", code);
         params.put("hospitalCode", hospitalCode);
 

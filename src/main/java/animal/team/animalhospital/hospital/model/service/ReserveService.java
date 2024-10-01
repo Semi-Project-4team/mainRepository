@@ -53,7 +53,7 @@ public class ReserveService {
 //        reserveMapper.updateReserve(reserve);
 //    }
 
-    public ReserveDTO findReserveByCode1(Map<String, Object> params) {
+    public ReserveDTO findReserveByCode1(Map<String, Integer> params) {
         return reserveMapper.findReserveByCode1(params);
     }
 

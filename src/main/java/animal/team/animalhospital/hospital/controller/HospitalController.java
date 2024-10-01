@@ -3,12 +3,21 @@ package animal.team.animalhospital.hospital.controller;
 import animal.team.animalhospital.hospital.model.dto.*;
 import animal.team.animalhospital.hospital.model.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalTime;
+import java.util.*;
 
 @Controller
 @RequestMapping("/hospital")
@@ -26,6 +35,9 @@ public class HospitalController {
         this.petService = petService;
         this.favoriteService = favoriteService;
     }
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     @GetMapping(value="sidoList", produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -69,8 +81,30 @@ public class HospitalController {
     public String detailHospital(@PathVariable("code") int code, Model model) {
         HospitalDTO hospital = hospitalService.findByHospitalCode(code);
 
+        System.out.println("hospital = " + hospital);
+
+        if(hospital.getPhoto() != null){
+
+            String[] pathsArray = hospital.getPhoto().split(",");
+
+            for (String s : pathsArray) {
+                System.out.println("s = " + s);
+            }
+
+            model.addAttribute("pathsArray", pathsArray); // 모델에 추가
+        }
+
+
+//        for (int i = 0; i < pathsArray.length; i++) {
+//            pathsArray[i] = "/static" + pathsArray[i];
+//        }
+
+
         // 나의 person_code, 병원 hospital_code
         List<ReviewDTO> reviewList = hospitalService.findReviewByCode1(code);
+//        String hospitalPhoto = hospitalService.findPhotoByCode(code);
+
+//        System.out.println("detailHospital code = " + code);
 
         System.out.println("reviewList = " + reviewList);
 
@@ -179,6 +213,111 @@ public class HospitalController {
         model.addAttribute("favoriteList", favoriteList);
 
         return "hospital/favorite/list";
+    }
+
+//    @GetMapping("/info/hospitalUpdat")
+//    public String petUpdate(Model model) {
+//
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String userEmail = authentication.getName();
+//
+//        PetDTO myPet = myPageService.findMyPetAlone(userEmail);
+//
+//        System.out.println("petUpdate myPet = " + myPet);
+//
+//        if(myPet == null) {
+//            myPageService.insertMyPetAlone(userEmail);
+//            myPet = myPageService.findMyPetAlone(userEmail);
+//        }
+//
+//        model.addAttribute("myPet", myPet);
+//
+//        return "/hospital/myPage/petUpdate";
+//    }
+
+    @GetMapping("/info/hospitalUpdate")
+    public String hospitalUpdate() {
+        return null;
+    }
+
+    @PostMapping("/info/hospitalUpdate")
+    public String hospitalMultiUpdate(@RequestParam("hospitalCode") int hospitalCode,
+                                      @RequestParam List<MultipartFile> multiHospitalFiles,
+                                      RedirectAttributes rAttr) throws IOException {
+
+        System.out.println("hospitalCode = " + hospitalCode);
+
+        System.out.println("multiFiles = " + multiHospitalFiles);
+
+        Resource resource = resourceLoader.getResource("classpath:static/images/uploadedFiles");
+        System.out.println("resource 경로 확인 = " + resource);
+        String filePath = null;
+
+        if(!resource.exists()) {
+            String root = "src/main/resources/static/images/uploadedFiles";
+            File file = new File(root);
+            file.mkdirs();
+
+            filePath = file.getAbsolutePath();
+        } else {
+            filePath = resourceLoader.getResource("classpath:static/images/uploadedFiles").getFile().getAbsolutePath();
+        }
+
+//        List<FileDTO> files = new ArrayList<>();
+        List<String> savedFilesPaths = new ArrayList<>();
+
+        String photoPaths = "";
+
+        try {
+            for(int i = 0; i < multiHospitalFiles.size(); i++) {
+                System.out.println("i = " + i);
+
+                String originalFileName = multiHospitalFiles.get(i).getOriginalFilename();
+                System.out.println("originalFileName = " + originalFileName);
+
+                String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+                System.out.println("extension = " + extension);
+
+                String savedName = UUID.randomUUID().toString().replace("-", "") + extension;
+                System.out.println("savedName = " + savedName);
+
+                multiHospitalFiles.get(i).transferTo(new File(filePath + "/" + savedName));
+
+//                newPet.setPetProfile("/images/uploadedFiles/" + savedName);
+//                myPageService.updateMyPet(newPet);
+                photoPaths += "/images/uploadedFiles/" + savedName + ",";
+
+                savedFilesPaths.add("static/images/uploadedFiles/" + savedName);
+            }
+
+            System.out.println("photoPaths = " + photoPaths);
+
+            System.out.println("end");
+
+            Map<String, String> stringMap = new HashMap<>();
+
+            System.out.println("test1");
+            
+            stringMap.put("photoPaths", photoPaths);
+            stringMap.put("hospitalCode", String.valueOf(hospitalCode));
+
+            System.out.println("test2");
+            hospitalService.updateHospitalPhoto(stringMap);
+
+            System.out.println("test3");
+
+            rAttr.addFlashAttribute("message", "[Success] 다중 파일 업로드 성공!");
+            rAttr.addFlashAttribute("imgs", savedFilesPaths);
+            System.out.println("다중 파일 업로드 성공.");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            rAttr.addFlashAttribute("message", "[Failed] 다중 파일 업로드 실패!!");
+            System.out.println("다중 파일 업로드 실패.");
+        }
+
+        return "redirect:/hospital/info/detail/" + hospitalCode;
+
     }
 
 }

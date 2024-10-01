@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기 (기업) List</title>
+</head>
+<body>
+    <h1>List</h1>
+
+    <table>
+        <tr>
+            <th>Email</th>
+        </tr>
+        <tr th:each="result : ${ resultList }">
+            <td th:text="${ result.email }"></td>
+        </tr>
+    </table>
+</body>
+</html>

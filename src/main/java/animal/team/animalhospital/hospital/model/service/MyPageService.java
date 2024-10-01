@@ -69,4 +69,12 @@ public class MyPageService {
     public void insertMyPetAlone(String userEmail) {
         myPageMapper.insertMyPetAlone(userEmail);
     }
+
+    public List<HospitalDTO> findHospitalInfo(String userEmail) { return myPageMapper.findHospitalInfo(userEmail);
+    }
+
+    public List<ReserveDTO> findHospitalReserve(String userEmail) { return myPageMapper.findHospitalReserve(userEmail);
+    }
 }
+
+

@@ -159,6 +159,14 @@
         where
             hospital_email = #{ email };
     </select>
+    <select id="findPhotoByCode" resultType="String">
+        select
+            hospital_photo
+        from
+            tbl_hospital
+        where
+            hospital_code = #{ code };
+    </select>
 
     <select id="searchHospital" parameterType="String" resultMap="hospitalMap">
         SELECT
@@ -254,6 +262,14 @@
             hospital_status = 'N'
         WHERE
             hospital_code = #{ hospitalCode }
+    </update>
+    <update id="updateHospitalPhoto" parameterType="map">
+        UPDATE
+            tbl_hospital
+        SET
+            hospital_photo = #{ photoPaths }
+        WHERE
+            hospital_code = #{ hospitalCode };
     </update>
 
 </mapper>

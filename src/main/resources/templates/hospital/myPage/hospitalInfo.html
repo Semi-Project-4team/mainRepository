@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>병원페이지</title>
+</head>
+<body>
+<h3>병원 정보</h3>
+<table>
+  <tr>
+    <th>병원명</th>
+    <th>인가번호</th>
+    <th>진료시작</th>
+    <th>진료종료</th>
+    <th>점심시작</th>
+    <th>점심종료</th>
+    <th>주소</th>
+    <th>전화번호</th>
+  </tr>
+
+  <tr th:each="hospitalInfo : ${ hospitalInfoList }">
+    <td th:text="${ hospitalInfo.name }"></td>
+    <td th:text="${ hospitalInfo.permitNumber }"></td>
+    <td th:text="${ hospitalInfo.startTime }"></td>
+    <td th:text="${ hospitalInfo.endTime }"></td>
+    <td th:text="${ hospitalInfo.lunchStartTime }"></td>
+    <td th:text="${ hospitalInfo.lunchEndTime }"></td>
+    <td th:text="${ hospitalInfo.detailAddress }"></td>
+    <td th:text="${ hospitalInfo.phoneNumber }"></td>
+  </tr>
+</table>
+
+
+<h3>예약 내역</h3>
+<table>
+  <tr>
+    <th>보호자명</th>
+    <th>예약날짜</th>
+    <th>예약시간</th>
+  </tr>
+
+  <tr th:each="myInfo, myIndex : ${ myInfoList }"
+      th:data-index="${myIndex}">
+    <td th:text="${ myInfo.name }"></td>
+    <td th:text="${ hospitalReserveList[myIndex.index].reserveDate }"></td>
+    <td th:text="${ hospitalReserveList[myIndex.index].reserveTime }"></td>
+  </tr>
+</table>
+</body>
+</html>
