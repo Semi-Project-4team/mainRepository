@@ -31,4 +31,6 @@ public interface PersonMapper {
     String findByPersonEmail(String email);
 
     int updatePasswordPerson(PersonDTO newUserInfo);
+
+    int isPersonSignCheck(String email);
 }

@@ -42,9 +42,19 @@ public class UserController {
                                        @ModelAttribute PersonDTO newUserInfo) {
         System.out.println(newUserInfo.toString());
         System.out.println(newUserInfo.getInformationCollection());
+
+        boolean isPerson = userService.isPersonSignCheck(newUserInfo.getEmail());
+
+        if(isPerson)
+            return resultMV(mv, null, "Person");
+
+        System.out.println("isPerson = " + isPerson);
+
         Integer result = userService.personSignup(newUserInfo);
 
-        return resultMV(mv, result, "person");
+        System.out.println("result = " + result);
+
+        return resultMV(mv, result, "Person");
     }
 
     @GetMapping("/joinMembership")
@@ -59,12 +69,12 @@ public class UserController {
             message = "이미 해당 정보로 가입된 회원이 존재합니다.";
             System.out.println(message);
 
-            mv.setViewName("signup_" + user);
+            mv.setViewName("/user/signup" + user);
         } else if (result == 0) {
             message = "회원가입에 실패했습니다. 다시 시도해주세요.";
             System.out.println(message);
 
-            mv.setViewName("signup_" + user);
+            mv.setViewName("/user/signup" + user);
         } else if (result >= 1) {
             message = "회원가입이 성공적으로 완료되었습니다.";
             System.out.println(message);
@@ -74,8 +84,11 @@ public class UserController {
             message = "알 수 없는 오류가 발생했습니다. 다시 시도해보시거나 관리자에게 문의해주세요.";
             System.out.println(message);
 
-            mv.setViewName("signup_" + user);
+//            mv.setViewName("/user/signupPerson");
+            mv.setViewName("/user/signup" + user);
         }
+
+        mv.addObject("message", message);
 
         return mv;
     }

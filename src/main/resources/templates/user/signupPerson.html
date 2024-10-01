@@ -129,5 +129,13 @@
     </div>
 </form>
 
+<script th:inline="javascript">
+    /* 설명. 오류 메세지를 출력용 alert() */
+    const message = [[${ message }]];
+    if (message) {
+        alert(message);
+    }
+</script>
+
 </body>
 </html>

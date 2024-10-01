@@ -86,6 +86,15 @@
             person_email = #{ email };
     </select>
 
+    <select id="isPersonSignCheck" resultType="int">
+        SELECT
+            count(person_email)
+        from
+            tbl_person
+        where
+            person_email = #{ email };
+    </select>
+
     <insert id="personRegist" parameterType="animal.team.animalhospital.hospital.model.dto.PersonDTO">
         INSERT INTO
             tbl_person
