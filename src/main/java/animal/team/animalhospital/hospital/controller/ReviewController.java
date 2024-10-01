@@ -106,7 +106,7 @@ public class ReviewController {
 
         reviewService.registNewReview(newReview);
 
-        return "redirect:/review/list";
+        return "redirect:/hospital/info/detail/" + newReview.getHospitalCode();
 
     }
 
