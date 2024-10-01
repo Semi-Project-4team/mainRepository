@@ -149,6 +149,14 @@
             person_email = #{ userEmail };
     </update>
 
+    <update id="hospitalWithDrawal" parameterType="String">
+        UPDATE tbl_hospital
+        set
+            hospital_isaccount_drawal = 'N'
+        WHERE
+            hospital_email = #{ userEmail };
+    </update>
+
 
     <select id="findMyFavorite" resultMap="favoriteMap">
         SELECT

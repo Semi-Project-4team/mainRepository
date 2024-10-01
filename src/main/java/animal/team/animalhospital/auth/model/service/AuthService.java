@@ -34,7 +34,7 @@ public class AuthService implements UserDetailsService {
         System.out.println("hospital before return = " + hospitalFoundUser);
 
         if(!Objects.isNull(hospitalFoundUser)) {
-            if (hospitalFoundUser.getIsAccountDrawal() == "N") {
+            if (hospitalFoundUser.getIsAccountDrawal().charAt(0) == 'N') {
                 throw new UsernameNotFoundException("(기업) 탈퇴 혹은 정지된 계정입니다.");
             }
             return hospitalFoundUser;

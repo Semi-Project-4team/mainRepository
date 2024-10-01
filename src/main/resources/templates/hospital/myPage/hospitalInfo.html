@@ -59,5 +59,20 @@
   </tr>
 
 </table>
+
+<div>
+  <button onclick="confirmWithdrawal()">계정 탈퇴</button>
+</div>
+
+<script>
+  function confirmWithdrawal() {
+
+    var hospitalConfirmed = confirm('정말로 계정을 탈퇴하시겠습니까?');
+
+    if (hospitalConfirmed) {
+      location.href = '/myPage/hospitalWithDrawal';
+    }
+  }
+</script>
 </body>
 </html>

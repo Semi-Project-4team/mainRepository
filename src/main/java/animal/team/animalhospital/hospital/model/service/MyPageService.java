@@ -78,6 +78,11 @@ public class MyPageService {
 
     public List<PersonDTO> findProtector(String userEmail) { return myPageMapper.findProtector(userEmail);
     }
+
+    @Transactional
+    public void hospitalWithDrawal(String userEmail) {
+        myPageMapper.hospitalWithDrawal(userEmail);
+    }
 }
 
 
