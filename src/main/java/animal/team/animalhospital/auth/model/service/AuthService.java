@@ -33,7 +33,10 @@ public class AuthService implements UserDetailsService {
 
         System.out.println("hospital before return = " + hospitalFoundUser);
 
-        if(!Objects.isNull(hospitalFoundUser)){
+        if(!Objects.isNull(hospitalFoundUser)) {
+            if (hospitalFoundUser.getIsAccountDrawal() == "N") {
+                throw new UsernameNotFoundException("(기업) 탈퇴 혹은 정지된 계정입니다.");
+            }
             return hospitalFoundUser;
         }
 
@@ -45,7 +48,11 @@ public class AuthService implements UserDetailsService {
 
         if (Objects.isNull(personFoundUser)) {
             throw new UsernameNotFoundException("(개인) 회원 정보가 존재하지 않습니다.");
+        } else if(personFoundUser.getIsAccountDrawal().charAt(0) == 'N') {
+            System.out.println("test");
+            throw new UsernameNotFoundException("(개인) 탈퇴 혹은 정지된 계정입니다.");
         }
+
 //        } else if (Objects.isNull(hospitalFoundUser)) {
 //            throw new UsernameNotFoundException("(기업) 회원 정보가 존재하지 않습니다.");
 //        }

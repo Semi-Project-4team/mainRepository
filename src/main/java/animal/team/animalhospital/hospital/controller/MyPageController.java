@@ -4,10 +4,14 @@ import animal.team.animalhospital.hospital.model.dto.*;
 import animal.team.animalhospital.hospital.model.service.FavoriteService;
 import animal.team.animalhospital.hospital.model.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -221,6 +225,32 @@ public class MyPageController {
         }
 
         return "redirect:/myPage/myInfo";
+    }
+
+    @GetMapping("/userWithDrawal")
+//    public String userWithDrawal(HttpSecurity http) throws Exception {
+    public String userWithDrawal(RedirectAttributes rAttr,
+                                 Model model) throws Exception {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
+        myPageService.userWithDrawal(userEmail);
+
+//        http.logout(logout -> {
+//            logout.logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"));
+//            logout.deleteCookies("JSESSIONID");
+//            logout.invalidateHttpSession(true);
+//            logout.logoutSuccessUrl("/");
+//        }).csrf(csrf ->
+//                csrf.disable()
+//        );
+//        return http.build();
+
+
+        rAttr.addFlashAttribute("successMessage", "성공적으로 탈퇴했습니다.");
+
+        return "redirect:/auth/logout";
     }
 
 }

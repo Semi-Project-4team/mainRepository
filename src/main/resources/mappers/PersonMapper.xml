@@ -12,6 +12,7 @@
         <result property="birth" column="person_birth"/>
         <result property="phoneNumber" column="person_phone_number"/>
         <result property="informationCollection" column="person_information_collection"/>
+        <result property="isAccountDrawal" column="person_isAccount_drawal"/>
     </resultMap>
 
     <update id="updatePasswordPerson" parameterType="animal.team.animalhospital.hospital.model.dto.PersonDTO">
@@ -129,7 +130,8 @@
                 person_password,
                 person_birth,
                 person_phone_number,
-                person_information_collection
+                person_information_collection,
+                person_isAccount_drawal
             )
         values
             (
@@ -139,7 +141,8 @@
                 #{ password },
                 #{ birth },
                 #{ phoneNumber },
-                #{ informationCollection }
+                #{ informationCollection },
+                'Y'
             )
     </insert>
 </mapper>

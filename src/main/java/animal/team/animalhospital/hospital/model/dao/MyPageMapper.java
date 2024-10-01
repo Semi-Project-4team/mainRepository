@@ -37,4 +37,6 @@ public interface MyPageMapper {
     List<ReserveDTO> findHospitalReserve(String userEmail);
 
     List<PersonDTO> findProtector(String userEmail);
+
+    void userWithDrawal(String userEmail);
 }

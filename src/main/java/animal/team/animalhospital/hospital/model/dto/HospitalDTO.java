@@ -36,16 +36,12 @@ public class HospitalDTO implements UserDetails {
     private String phoneNumber;
     private String photo;
     private String status;
+    private String isAccountDrawal;
 
     public HospitalDTO() {
     }
 
-    public HospitalDTO(int hospitalCode, String subjectCode, String eupmyeondongCode,
-                       int userCode, String name, String permitNumber, String email,
-                       String password, String informationCollection, LocalTime startTime,
-                       LocalTime endTime, LocalTime lunchStartTime, LocalTime lunchEndTime,
-                       String detailAddress, String introText, String phoneNumber, String photo,
-                       String status) {
+    public HospitalDTO(int hospitalCode, String subjectCode, String eupmyeondongCode, int userCode, String name, String permitNumber, String email, String password, String informationCollection, LocalTime startTime, LocalTime endTime, LocalTime lunchStartTime, LocalTime lunchEndTime, String detailAddress, String introText, String phoneNumber, String photo, String status, String isAccountDrawal) {
         this.hospitalCode = hospitalCode;
         this.subjectCode = subjectCode;
         this.eupmyeondongCode = eupmyeondongCode;
@@ -64,6 +60,7 @@ public class HospitalDTO implements UserDetails {
         this.phoneNumber = phoneNumber;
         this.photo = photo;
         this.status = status;
+        this.isAccountDrawal = isAccountDrawal;
     }
 
     public LocalTime getStartTime() {
@@ -229,6 +226,14 @@ public class HospitalDTO implements UserDetails {
         this.photo = photo;
     }
 
+    public String getIsAccountDrawal() {
+        return isAccountDrawal;
+    }
+
+    public void setIsAccountDrawal(String isAccountDrawal) {
+        this.isAccountDrawal = isAccountDrawal;
+    }
+
     @Override
     public String toString() {
         return "HospitalDTO{" +
@@ -250,6 +255,7 @@ public class HospitalDTO implements UserDetails {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", photo='" + photo + '\'' +
                 ", status='" + status + '\'' +
+                ", isAccountDrawal='" + isAccountDrawal + '\'' +
                 '}';
     }
 }

@@ -331,6 +331,21 @@
 
 </div>
 
+<div>
+  <button onclick="confirmWithdrawal()">계정 탈퇴</button>
+</div>
+
+<script>
+  function confirmWithdrawal() {
+
+    var userConfirmed = confirm('정말로 계정을 탈퇴하시겠습니까?');
+
+    if (userConfirmed) {
+      location.href = '/myPage/userWithDrawal';
+    }
+  }
+</script>
+
 <div th:insert="~{common/footer.html}"></div> <!-- 푸터 포함 -->
 
 

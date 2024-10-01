@@ -91,6 +91,7 @@
             'photo',
             '남');
     </insert>
+
     <!--    <insert id="insertMyPet"></insert>-->
 
     <select id="findMyInfo" resultMap="personMap">
@@ -138,6 +139,14 @@
         WHERE
             person_code = #{ personCode }
             and pet_person_code = #{ petPersonCode };
+    </update>
+
+    <update id="userWithDrawal" parameterType="String">
+        UPDATE tbl_person
+        set
+            person_isaccount_drawal = 'N'
+        WHERE
+            person_email = #{ userEmail };
     </update>
 
 
