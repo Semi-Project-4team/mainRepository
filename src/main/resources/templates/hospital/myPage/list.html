@@ -241,6 +241,7 @@
 
    <div>
      <h3>예약내역</h3>
+
      <table class="reserve-table">
        <tr>
          <th>병원명</th>
@@ -255,7 +256,7 @@
         <!-- </tr>-->
        <tr th:each="myHospital, myIndex : ${ myHospitalList }"
            th:data-index="${ myIndex }">
-         <td th:text="${ myHospital.name }"></td>
+         <td><a th:href="@{/reserve/detail/{hospitalCode}/{userCode}(hospitalCode=${myHospital.hospitalCode}, userCode=${myHospital.userCode})}" th:text="${ myHospital.name }"></a></td>
         <!--<td th:each="myReserve : ${ myReserveList[myIndex][5] }" th:text="${ myReserve.reserveDate }"></td>-->
          <td th:text="${ myReserveList[myIndex.index].reserveDate }"></td>
          <td th:text="${ myReserveList[myIndex.index].reserveTime }"></td>
