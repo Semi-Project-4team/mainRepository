@@ -5,35 +5,101 @@
     <title>동물병원 전체보기</title>
     <style>
         body {
-            /*font-family: Arial, sans-serif;*/
-            /*margin-top: 100px;*/
             background-color: #f9f9f9; /* 배경색 */
         }
 
         h1 {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            color: #18a8f1;
+        }
+
+        .hospital-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .hospital-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            width: 48%;
+            box-sizing: border-box;
+            display: flex;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hospital-photo {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .hospital-photo img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%; /* 사진을 원 모양으로 */
+        }
+
+        .hospital-info {
+            flex: 2;
+        }
+
+        .hospital-info h3 {
+            margin: 0;
+            font-size: 18px;
             color: #333;
         }
 
-        table {
-            width: 60%;
-            border-collapse: collapse; /* 테이블 간격 제거 */
-            margin: 20px auto; /* 위쪽 여백 및 수평 중앙 정렬 */
+        .hospital-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
         }
 
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd; /* 셀 테두리 */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
-        th {
-            background-color: #58ccff; /* 헤더 배경색 */
-            color: white; /* 헤더 텍스트 색 */
+        .search-container input {
+            width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2; /* 짝수 행 배경색 */
+        .search-container button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #18a8f1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #45b8e5;
+        }
+
+        #mainBtn {
+            background-color: #18a8f1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #mainBtn:hover {
+            background-color: #45b8e5;
         }
 
         tr:hover {
@@ -41,7 +107,7 @@
         }
 
         a {
-            color: #58ccff; /* 링크 색상 */
+            color: #18a8f1; /* 링크 색상 */
             text-decoration: none; /* 링크 밑줄 제거 */
         }
 
@@ -50,7 +116,7 @@
         }
 
         #mainBtn {
-            background-color: #58ccff; /* 버튼 배경색 */
+            background-color: #18a8f1; /* 버튼 배경색 */
             color: white; /* 버튼 텍스트 색 */
             border: none; /* 테두리 제거 */
             padding: 10px 20px; /* 패딩 */
@@ -76,37 +142,30 @@
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
-<h1>동물병원 전체보기</h1>
+<h1>병원 찾기</h1>
 
-<table>
-    <tr>
-        <th>병원코드</th>
-        <th>병원명</th>
-<!--        <th>인가번호</th>-->
-        <th>진료시작</th>
-        <th>진료종료</th>
-        <th>점심시작</th>
-        <th>점심종료</th>
-        <th>주소</th>
-        <th>전화번호</th>
-    </tr>
-    <tr th:each="hospital : ${ hospitalList }">
-        <td th:text="${ hospital.hospitalCode }"></td>
-        <td><a th:href="@{/hospital/info/detail/{code}(code=${ hospital.hospitalCode })}" th:text="${ hospital.name }"></a></td>
-<!--        <td th:text="${ hospital.permitNumber }"></td>-->
-        <td th:text="${ hospital.startTime }"></td>
-        <td th:text="${ hospital.endTime }"></td>
-        <td th:text="${ hospital.lunchStartTime }"></td>
-        <td th:text="${ hospital.lunchEndTime }"></td>
-        <td th:text="${ hospital.detailAddress }"></td>
-        <td th:text="${ hospital.phoneNumber }"></td>
-    </tr>
-</table>
-<br>
+<div class="search-container">
+    <input type="text" placeholder="지역 또는 병원명을 검색">
+    <button type="submit">검색</button>
+</div>
+
+<div class="hospital-list">
+    <div class="hospital-card" th:each="hospital, iter : ${ hospitalList }">
+        <div class="hospital-photo">
+            <img th:src="${hospital.photo}" alt="병원 사진">
+        </div>
+        <div class="hospital-info">
+            <h3><a th:href="@{/hospital/info/detail/{code}(code=${ hospital.hospitalCode })}" th:text="${ hospital.name }"></a></h3>
+            <p th:text="${ hospital.startTime } + '~' + ${ hospital.endTime } + '(' + ${ hospital.lunchStartTime } + '~' + ${ hospital.lunchEndTime} + ')'"></p>
+            <p th:text="${ hospital.detailAddress }"></p>
+            <p th:text="${ hospital.phoneNumber }"></p>
+        </div>
+    </div>
+</div>
+
 <button id="mainBtn" onclick="location.href='/'">메인으로</button>
 
 <div th:insert="~{common/footer.html}"></div> <!-- 푸터 포함 -->
-
 
 </body>
 </html>
