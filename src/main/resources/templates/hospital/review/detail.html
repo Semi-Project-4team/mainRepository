@@ -5,48 +5,36 @@
     <title>리뷰 상세 정보</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin-top: 100px;
             background-color: #f9f9f9; /* 배경색 */
         }
 
-        h1 {
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
             text-align: center;
-            color: #333;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse; /* 테이블 간격 제거 */
-            margin-top: 20px; /* 위쪽 여백 */
+        .container p{
+            display: flex;
         }
 
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd; /* 셀 테두리 */
+        .container p em{
+            color: #58ccff;
+            font-weight: bold;
+            width: 100px;
+            font-style: normal;
         }
 
-        th {
-            background-color: #58ccff; /* 헤더 배경색 */
-            color: white; /* 헤더 텍스트 색 */
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2; /* 짝수 행 배경색 */
-        }
-
-        tr:hover {
-            background-color: #e0e0e0; /* 마우스 오버 색상 */
-        }
-
-        a {
-            color: #58ccff; /* 링크 색상 */
-            text-decoration: none; /* 링크 밑줄 제거 */
-        }
-
-        a:hover {
-            text-decoration: underline; /* 링크 호버 시 밑줄 */
+        .action-buttons{
+            display: flex;
+            justify-content: space-between;
         }
 
         button {
@@ -73,16 +61,18 @@
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
+<div class="container">
+
     <h2>리뷰 상세 정보</h2>
 
     <div>
-        <p>개인번호: <span th:text="${review.personCode}"></span></p>
-        <p>병원번호: <span th:text="${review.hospitalCode}"></span></p>
-        <p>리뷰작성날짜: <span th:text="${review.reviewWriteDate}"></span></p>
-        <p>리뷰수정날짜: <span th:text="${review.reviewModifyDate}"></span></p>
-        <p>리뷰점수: <span th:text="${review.reviewScore}"></span></p>
-        <p>리뷰사진: <span th:text="${review.reviewPhoto}"></span></p>
-        <p>리뷰내용: <span th:text="${review.reviewExplanation}"></span></p>
+        <p><em>개인번호:</em> <span th:text="${review.personCode}"></span></p>
+        <p><em>병원번호:</em> <span th:text="${review.hospitalCode}"></span></p>
+        <p><em>리뷰작성날짜:</em> <span th:text="${review.reviewWriteDate}"></span></p>
+        <p><em>리뷰수정날짜:</em> <span th:text="${review.reviewModifyDate}"></span></p>
+        <p><em>리뷰점수: </em><span th:text="${review.reviewScore}"></span></p>
+        <p><em>리뷰사진:</em> <span th:text="${review.reviewPhoto}"></span></p>
+        <p><em>리뷰내용:</em> <span th:text="${review.reviewExplanation}"></span></p>
     </div>
 
 
@@ -97,6 +87,7 @@
 
         <button onclick="location.href='/hospital/info/list'">병원목록</button>
     </div>
+</div>
 
 </body>
 </html>

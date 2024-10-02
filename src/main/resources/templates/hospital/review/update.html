@@ -6,6 +6,53 @@
     <link rel="stylesheet" href="/css/header.css">
 
     <style>
+
+        body {
+            padding: 20px;
+            background-color: #f8f9f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+        }
+
+        .container .info{
+            margin: 10px 0;
+            display: flex;
+        }
+
+        .container .info label {
+            color: #58ccff;
+            font-weight: bold;
+            width: 100px;
+        }
+
+        .container .info input{
+            border: 1px solid #999;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .container .info select{
+            border: 1px solid #999;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .container .info textarea{
+            border: 1px solid #999;
+            border-radius: 5px;
+        }
+
         button {
             background-color: #58ccff; /* 버튼 배경색 */
             color: white; /* 버튼 텍스트 색 */
@@ -19,12 +66,21 @@
             cursor: pointer; /* 커서 모양 */
             border-radius: 5px; /* 모서리 둥글게 */
         }
+        .button-wrap{
+            display: flex;
+            justify-content: space-between;
+        }
+        button:hover {
+            background-color: #4da8cc; /* 버튼 호버 시 색상 */
+        }
 
     </style>
 </head>
 <body>
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+
+<div class="container">
 
     <h2>리뷰 수정하기</h2>
 
@@ -35,37 +91,38 @@
         <input type="hidden" th:field="*{personCode}" />
         <input type="hidden" th:field="*{hospitalCode}" />
 
-        <label for="singleReviewFile">리뷰수정사진:</label>
-        <input type="file" name="singleReviewFile" id="singleReviewFile">
+        <div class="info">
+            <label for="singleReviewFile">리뷰수정사진:</label>
+            <input type="file" name="singleReviewFile" id="singleReviewFile">
+        </div>
 
-        <label>리뷰점수: </label>
-        <select name="reviewScore">
-            <option value="5"selected>5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="2">1</option>
-        </select>
-        <br>
+        <div class="info">
+            <label>리뷰점수: </label>
+            <select name="reviewScore">
+                <option value="5"selected>5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="2">1</option>
+            </select>
+        </div>
 
+        <div class="info">
+            <!-- Textarea for additional notes -->
+            <label for="contents">리뷰내용:</label>
+            <textarea name="reserveText" id="contents" cols="30" rows="10"
+                      style="resize:none" maxlength="100" th:field="*{reviewExplanation}"></textarea>
+        </div>
 
-        <!-- Textarea for additional notes -->
-        <br>
-        <label for="contents">리뷰내용:</label>
-        <br>
-        <textarea name="reserveText" id="contents" cols="30" rows="10"
-                  style="resize:none" maxlength="100" th:field="*{reviewExplanation}"></textarea>
-        <br>
-
-        <!-- Submit and Reset buttons -->
-        <button class="button" type="submit">수정하기</button>
-        <button class="button" type="reset">초기화</button>
+        <div class="button-wrap">
+            <!-- Submit and Reset buttons -->
+            <button class="button" type="submit">수정하기</button>
+            <button class="button" onclick="history.back()">취소</button>
+        </div>
     </form>
 
 
-    <div>
-        <button class="button" onclick="history.back()">취소</button>
-    </div>
+</div>
 
 
 </body>

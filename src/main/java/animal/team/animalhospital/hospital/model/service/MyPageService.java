@@ -83,6 +83,10 @@ public class MyPageService {
     public void hospitalWithDrawal(String userEmail) {
         myPageMapper.hospitalWithDrawal(userEmail);
     }
+  
+    public void userWithDrawal(String userEmail) {
+        myPageMapper.userWithDrawal(userEmail);
+    }
 }
 
 
