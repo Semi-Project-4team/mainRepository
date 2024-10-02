@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,11 +33,12 @@ public class ReserveService {
     }
 
     @Transactional
-    public void registNewReserve(ReserveDTO newReserve) {
+    public int registNewReserve(ReserveDTO newReserve) {
 
-        reserveMapper.registNewReserve(newReserve);
+        return   reserveMapper.registNewReserve(newReserve);
 
     }
+
 
 //    public String resistNewReserve(int code) {
 //        return reserveMapper.resistNewReserve(code);
@@ -64,4 +66,17 @@ public class ReserveService {
     public void deleteReserve1(Map<String, Object> params) {
         reserveMapper.deleteReserve1(params);
     }
+
+    public boolean isDuplicateReserve(ReserveDTO newReserve) {
+        // 파라미터 맵 생성
+        Map<String, Object> params = new HashMap<>();
+        params.put("hospitalCode", newReserve.getHospitalCode());
+        params.put("personCode", newReserve.getPersonCode());
+
+        // reserveMapper에 파라미터 전달
+        int count = reserveMapper.isDuplicateReserve(params); // 캐스팅 제거
+        System.out.println("중복 예약 확인: " + count); // 쿼리 결과를 출력
+        return count >= 1; // count가 0보다 크면 중복 예약이 있음
+    }
+
 }

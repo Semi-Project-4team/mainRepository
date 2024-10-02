@@ -13,7 +13,7 @@ public interface ReserveMapper {
 
     ReserveDTO findReserveByCode(int code);
 
-    void registNewReserve(ReserveDTO newReserve);
+    int registNewReserve(ReserveDTO newReserve);
 
     void deleteReserve(int code);
 
@@ -26,4 +26,6 @@ public interface ReserveMapper {
     ReserveDTO findReserveByCode1(Map<String, Integer> params);
 
     void deleteReserve1(Map<String, Object> params);
+
+    Integer isDuplicateReserve(Map<String, Object> params);
 }

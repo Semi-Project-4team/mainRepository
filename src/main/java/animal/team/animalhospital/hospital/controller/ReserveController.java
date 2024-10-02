@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -83,7 +84,6 @@ public class ReserveController {
     @GetMapping(value="nameList", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public List<PetDTO> findPetNameList() {
-        System.out.println("JavaScript 내장 함수인 fetch");
         return petService.findAllPet();
     }
 
@@ -116,38 +116,37 @@ public class ReserveController {
 
 
     @PostMapping("/registform/{code}")
-    public String registReserve(ReserveDTO newReserve,
-                                @PathVariable("code") int hospitalCode) {
+    public ModelAndView registReserve(ReserveDTO newReserve,
+                                      @PathVariable("code") int hospitalCode) {
 
-        System.out.println("hospitalCode123 = " + hospitalCode);
+        ModelAndView mv = new ModelAndView();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
         String userEmail = userDetails.getUsername();
-
-        System.out.println("userEmail = " + userEmail);
-        System.out.println("hospitalCode = " + hospitalCode);
 
         int userCode = personService.findByPersonCode(userEmail);
 
-        System.out.println("userCode = " + userCode);
-
         newReserve.setPersonCode(userCode);
-
         newReserve.setHospitalCode(hospitalCode);
 
-        System.out.println("userCode = " + userCode);
-        System.out.println("hospitalCode = " + hospitalCode);
+        // 중복 예약 체크
+        boolean isDuplicate = reserveService.isDuplicateReserve(newReserve);
 
-        System.out.println("newReserve = " + newReserve);
+        if (isDuplicate) {
+            return resultMV(mv, null, "[registReserve] 이미 해당 병원에 예약이 존재합니다.");
+        }
 
-        reserveService.registNewReserve(newReserve);
+        // 중복이 없으면 예약 진행
+        Integer result = reserveService.registNewReserve(newReserve);
 
 
+        System.out.println("result = " + result);
 
-        return "redirect:/reserve/detail/" + newReserve.getHospitalCode() + "/" + newReserve.getPersonCode() ;
+        return resultMV(mv, result, "예약이 완료되었습니다.");
     }
+
+
 
     @PostMapping("/delete/{code}/{hospitalCode}")
     public String deleteReserve(@PathVariable("code") int code,
@@ -192,12 +191,32 @@ public class ReserveController {
         return "redirect:/reserve/detail/" + reserve.getHospitalCode() + "/" + reserve.getPersonCode();
     }
 
+    private ModelAndView resultMV(ModelAndView mv, Integer result, String message) {
+//        String message = null;
+
+        if (result == null) {
+            message= "[resultMV] 이미 해당 병원에 예약이 존재합니다.";
+
+            mv.setViewName("/hospital/reserve/regist");
+        } else if (result == 0) {
+            message= "[resultMV] 예약에 실패했습니다. 다시 시도해주세요.";
+
+            mv.setViewName("/hospital/reserve/regist");
+
+        } else if (result >= 1){
+            message = "[resultMV] 예약이 성공적으로 완료되었습니다.";
+
+            mv.setViewName("redirect:/myPage/myInfo");
+
+        }
+        System.out.println("message = " + message);
 
 
+        System.out.println("최종result = " + result);
 
+        mv.addObject("message", message);
 
-
-
-
+        return mv;
+    }
 
 }

@@ -66,6 +66,7 @@
             width: 48%;
         }
 
+
         button:hover {
             background-color: #4da8cc;
         }
@@ -138,6 +139,15 @@
 <!--            });-->
 <!--        });-->
 <!--</script>-->
+
+<script th:inline="javascript">
+    /* 설명. 오류 메세지를 출력용 alert() */
+    const message = [[${ message }]];
+    if (message) {
+        alert(message);
+    }
+</script>
+
 
 </body>
 </html>
