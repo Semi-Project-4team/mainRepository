@@ -195,7 +195,7 @@ public class ReserveController {
 //        String message = null;
 
         if (result == null) {
-            message= "[resultMV] 이미 해당 병원에 예약이 존재합니다.";
+            message= "이미 예약한 병원입니다.";
 
             mv.setViewName("/hospital/reserve/regist");
         } else if (result == 0) {
