@@ -32,7 +32,7 @@
       text-align: center;
     }
 
-    label {
+    .editBtn {
       display: block;
       font-size: 14px;
       color: #333;
@@ -102,34 +102,34 @@
   <input type="hidden" name="petPersonCode" th:value="${myPet.petPersonCode}"/>
   <input type="hidden" name="personCode" th:value="${myPet.personCode}"/>
 
-  <label for="petName">이름</label>
+  <label class=editBtn for="petName">이름</label>
   <input type="text" name="petName" id="petName" th:value="${myPet.petName}"/>
 
-  <label for="petType">종류</label>
+  <label class=editBtn for="petType">종류</label>
   <input type="text" name="petType" id="petType" th:value="${myPet.petType}"/>
 
-  <label for="petBirth">생일</label>
+  <label class=editBtn for="petBirth">생일</label>
   <input type="text" name="petBirth" id="petBirth" th:value="${myPet.petBirth}"/>
 
-  <label>성별</label>
+  <label class=editBtn >성별</label>
   <div class="radio-group">
     <label><input type="radio" name="petGender" value="남" th:checked="${myPet.petGender == '수컷'}"> 수컷</label>
     <label><input type="radio" name="petGender" value="여" th:checked="${myPet.petGender == '암컷'}"> 암컷</label>
   </div>
 
-  <label>예방접종여부</label>
+  <label class=editBtn >예방접종여부</label>
   <div class="radio-group">
     <label><input type="radio" name="petVaccination" value="Y" th:checked="${myPet.petVaccination == '예'}"> 예</label>
     <label><input type="radio" name="petVaccination" value="N" th:checked="${myPet.petVaccination == '아니오'}"> 아니오</label>
   </div>
 
-  <label>내장칩여부</label>
+  <label class=editBtn >내장칩여부</label>
   <div class="radio-group">
     <label><input type="radio" name="petChip" value="Y" th:checked="${myPet.petChip == '예'}"> 예</label>
     <label><input type="radio" name="petChip" value="N" th:checked="${myPet.petChip == '아니오'}"> 아니오</label>
   </div>
 
-  <label for="singleProFile">프로필사진</label>
+  <label class=editBtn for="singleProFile">프로필사진</label>
   <input type="file" name="singleProFile" id="singleProFile"/>
 
   <button class="updateBtn" type="submit">수정하기</button>

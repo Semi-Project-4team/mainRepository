@@ -207,16 +207,16 @@
       background-color: #4ba3d4; /* Darker color on hover */
     }
 
-    .deleteUser{
+    .deleteUser {
       text-align: right;
     }
 
-    .deleteUser-button {
+    .deleteUserBtn {
       background-color: #666666;
-      margin-top: 70px;
-      margin-bottom: 50px;
+      margin-top: 20px;
+      margin-bottom: 30px;
     }
-    .deleteUser-button:hover {
+    .deleteUserBtn:hover {
       background-color: #951515;
     }
 
@@ -335,16 +335,17 @@
         <td th:text="${ myPet.petChip }"></td>
       </tr>
     </table>
+
     <div class="edit-button-container">
       <button class="edit-button" onclick="location.href='/myPage/petUpdate'">수정 및 등록</button>
     </div>
   </div>
 </div>
 
+<div class="deleteUser">
+  <button class="deleteUserBtn" onclick="confirmWithdrawal()">계정 탈퇴</button>
 </div>
 
-<div>
-  <button onclick="confirmWithdrawal()">계정 탈퇴</button>
 </div>
 
 <script>
