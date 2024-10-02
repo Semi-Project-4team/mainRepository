@@ -53,6 +53,7 @@
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin-top: 10px;
     }
 
     button:hover {
@@ -74,12 +75,23 @@
     .link-container a:hover {
       text-decoration: underline;
     }
+
+    img{
+      width: 200px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+      margin-top: 30px;
+      margin-bottom: 70px;
+    }
+
   </style>
 </head>
 <body>
 
 <div class="login-container">
-  <h1 onclick="location.href='/main'" style="cursor: pointer;">로그인 페이지</h1>
+<!--  <h1 onclick="location.href='/main'" style="cursor: pointer;">로그인 페이지</h1>-->
+  <img src="/images/logo.png" onclick="location.href='/main'"/>
   <form th:action="@{/auth/login}" th:method="POST">
     <label for="user">아이디</label>
     <input type="text" id="user" name="username" placeholder="아이디를 입력하세요"/>
