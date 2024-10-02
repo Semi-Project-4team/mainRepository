@@ -100,6 +100,23 @@ public class HospitalController {
         return "hospital/info/list";
     }
 
+    @GetMapping("/search/user")
+    public String searchUser(@RequestParam(value = "query", required = false) String query, Model model) {
+        List<PersonDTO> personList = hospitalService.searchUser(query);
+        List<HospitalDTO> hospitalList = hospitalService.searchUserHospital(query);
+
+        if (personList != null && !personList.isEmpty()) {
+            model.addAttribute("personList", personList);
+        } else {
+            model.addAttribute("hospitalList", hospitalList);
+        }
+
+        System.out.println("personList = " + personList);
+        System.out.println("hospitalList = " + hospitalList);
+
+        return "/hospital/person/list";
+    }
+
     @GetMapping("/info/detail/{code}")
     public String detailHospital(@PathVariable("code") int code, Model model) {
         HospitalDTO hospital = hospitalService.findByHospitalCode(code);
