@@ -93,7 +93,7 @@
 
 <h1>회원가입(기업)</h1>
 
-<form th:action="@{/user/signupHospital}" method="post" onsubmit="return signupForm()">
+<form th:action="@{/user/signupHospital}" method="post" onsubmit="return signupHospitalForm()">
     <div class="form-group">
         <label for="email">이메일 :</label>
         <input type="text" id="email" name="email"/>
@@ -250,7 +250,7 @@
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
     }
 
-    function signupForm() {
+    function signupHospitalForm() {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const sample2_address = document.getElementById("sample2_address").value;
