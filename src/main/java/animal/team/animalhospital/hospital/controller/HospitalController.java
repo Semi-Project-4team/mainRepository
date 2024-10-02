@@ -57,13 +57,29 @@ public class HospitalController {
     public String getHospitalsByEupmyeondong(@PathVariable int eupmyeondongCode, Model model) {
         List<HospitalDTO> hospitalList = hospitalService.getHospitalsByEupmyeondong(eupmyeondongCode);
         model.addAttribute("hospitalList", hospitalList);
+
+
+
         return "/hospital/info/list";
     }
 
     @GetMapping("/info/list")
     public String hospitalList(Model model) {
         List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
-        model.addAttribute("hospitalList", hospitalList); // 모델에 추가
+        model.addAttribute("hospitalList", hospitalList);
+
+        if (hospitalList.get(0).getPhoto() != null) {
+
+            String[] pathsArray = hospitalList.get(0).getPhoto().split(",");
+
+//            for (String s : pathsArray) {
+//                System.out.println("s = " + s);
+//            }
+
+            System.out.println("pathsArray[0] = " + pathsArray[0]);
+
+            model.addAttribute("thumbnail", pathsArray[0]); // 모델에 추가
+        }// 모델에 추가
         return "/hospital/info/list"; // 뷰 이름
     }
 
@@ -74,6 +90,17 @@ public class HospitalController {
 
         // 결과를 모델에 담기
         model.addAttribute("hospitalList", hospitalList);
+
+        List<String> pathsList = new ArrayList<>();
+
+        for (HospitalDTO hospitalDTO : hospitalList) {
+            pathsList.add(hospitalDTO.getPhoto().split(",")[0]);
+        }
+
+        System.out.println("pathsList = " + pathsList);
+        model.addAttribute("thumbnailList", pathsList); // 모델에 추가
+
+
         return "hospital/info/list";
     }
 

@@ -220,7 +220,12 @@
             (
                 null,
                 #{ subjectCode },
-                #{ eupmyeondongCode },
+                (SELECT
+                eupmyeondong_code
+                from
+                tbl_eupmyeondong
+                WHERE
+                eupmyeondong_name = #{ eupmyeondongCode }),
                 #{ name },
                 #{ permitNumber },
                 #{ email },
@@ -281,6 +286,33 @@
             hospital_photo = #{ photoPaths }
         WHERE
             hospital_code = #{ hospitalCode };
+    </update>
+
+    <update id="updateHospitalStatus" parameterType="map">
+        UPDATE
+            tbl_hospital
+        SET
+            hospital_status = #{ status }
+        WHERE
+            hospital_code = #{ hospitalCode }
+    </update>
+
+    <update id="updateHospitalDrawal">
+        UPDATE
+            tbl_hospital
+        SET
+            hospital_isAccount_drawal = #{ status }
+        WHERE
+            hospital_code = #{ hospitalCode }
+    </update>
+
+    <update id="updatePersonDrawal">
+        UPDATE
+            tbl_person
+        SET
+            person_isAccount_drawal = #{ status }
+        WHERE
+            person_code = #{ personCode }
     </update>
 
 </mapper>
