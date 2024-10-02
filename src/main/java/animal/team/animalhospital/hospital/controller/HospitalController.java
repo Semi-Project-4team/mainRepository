@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/hospital")
@@ -146,6 +148,7 @@ public class HospitalController {
 
     @PostMapping("/info/update")
     public String updateHospital(HospitalDTO hospital,
+                                 @RequestParam("sample3_address") String address,
                                  @RequestParam("hospitalCode") int hospitalCode,
                                  @RequestParam List<MultipartFile> multiHospitalFiles,
                                  RedirectAttributes rAttr) throws IOException {
@@ -204,8 +207,25 @@ public class HospitalController {
 
             System.out.println("test1");
 
+            // 지역 정규화
+            Pattern pattern = Pattern.compile("([가-힣]+동)\\s(\\d+-\\d+)");
+            Matcher matcher = pattern.matcher(address);
+
+            String addressDong = "";
+            String addressNum = "";
+
+//        System.out.println("matcher = " + matcher);
+//        System.out.println("pattern = " + pattern);
+
+            if (matcher.find()) {
+                addressDong = matcher.group(1); // "신길동"
+                addressNum = matcher.group(2);  // "469-3"
+            }
+
             stringMap.put("photoPaths", photoPaths);
             stringMap.put("hospitalCode", String.valueOf(hospitalCode));
+            stringMap.put("eupmyeondongCode", addressDong);
+            stringMap.put("detailAddress", addressDong + " " + addressNum);
 
             System.out.println("test2");
             hospitalService.updateHospitalPhoto(stringMap);
