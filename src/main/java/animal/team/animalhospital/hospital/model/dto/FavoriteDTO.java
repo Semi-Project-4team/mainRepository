@@ -3,13 +3,15 @@ package animal.team.animalhospital.hospital.model.dto;
 public class FavoriteDTO {
 
     private int personCode;
+    private int hospitalCode;
     private String favoriteName;
 
     public FavoriteDTO() {
     }
 
-    public FavoriteDTO(int personCode, String favoriteName) {
+    public FavoriteDTO(int personCode, int hospitalCode, String favoriteName) {
         this.personCode = personCode;
+        this.hospitalCode = hospitalCode;
         this.favoriteName = favoriteName;
     }
 
@@ -19,6 +21,14 @@ public class FavoriteDTO {
 
     public void setPersonCode(int personCode) {
         this.personCode = personCode;
+    }
+
+    public int getHospitalCode() {
+        return hospitalCode;
+    }
+
+    public void setHospitalCode(int hospitalCode) {
+        this.hospitalCode = hospitalCode;
     }
 
     public String getFavoriteName() {
@@ -33,6 +43,7 @@ public class FavoriteDTO {
     public String toString() {
         return "FavoriteDTO{" +
                 "personCode=" + personCode +
+                ", hospitalCode=" + hospitalCode +
                 ", favoriteName='" + favoriteName + '\'' +
                 '}';
     }
