@@ -41,7 +41,8 @@
             person_password,
             person_birth,
             person_phone_number,
-            person_information_collection
+            person_information_collection,
+            person_isAccount_drawal
         FROM
             tbl_person
     </select>

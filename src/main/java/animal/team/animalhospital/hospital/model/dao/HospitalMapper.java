@@ -46,4 +46,10 @@ public interface HospitalMapper {
     List<HospitalDTO> searchHospital(String query);
 
     int isHospitalSignCheck(String email);
+
+    void updateHospitalStatus(Map<String, String> request);
+
+    void updateHospitalDrawal(Map<String, String> hospitalStatus);
+
+    void updatePersonDrawal(Map<String, String> personStatus);
 }
