@@ -1,42 +1,138 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>반려동물 정보 수정</title>
+  <link rel="stylesheet" href="/css/header.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f8fb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #58ccff;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    input[type="text"], input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    input[type="text"]:focus, input[type="file"]:focus {
+      border-color: #58ccff;
+      outline: none;
+    }
+
+    .radio-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      gap:5px;
+    }
+
+    .radio-group label {
+      margin-right: 10px;
+      font-weight: normal;
+    }
+
+    .updateBtn {
+      background-color: #58ccff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      margin-top: 30px;
+    }
+
+    .updateBtn:hover {
+      background-color: #47b1e6;
+    }
+
+    @media (max-width: 400px) {
+      form {
+        width: 90%;
+      }
+    }
+
+  </style>
 </head>
+
+<div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+
 <body>
-<h1>회원 정보 수정</h1>
 <form action="/myPage/petUpdate" method="post" enctype="multipart/form-data">
+  <h1>반려동물 정보 수정</h1>
   <input type="hidden" name="petPersonCode" th:value="${myPet.petPersonCode}"/>
   <input type="hidden" name="personCode" th:value="${myPet.personCode}"/>
-  <label for="petName">이름:</label>
+
+  <label for="petName">이름</label>
   <input type="text" name="petName" id="petName" th:value="${myPet.petName}"/>
-  <br>
 
-  <label for="petType">종류:</label>
+  <label for="petType">종류</label>
   <input type="text" name="petType" id="petType" th:value="${myPet.petType}"/>
-  <br>
-  <label for="petBirth">생일:</label>
+
+  <label for="petBirth">생일</label>
   <input type="text" name="petBirth" id="petBirth" th:value="${myPet.petBirth}"/>
-  <br>
 
-  <label for="petVaccination">예방접종:</label>
-  <input type="text" name="petVaccination" id="petVaccination" th:value="${myPet.petVaccination}"/>
-  <br>
+  <label>성별</label>
+  <div class="radio-group">
+    <label><input type="radio" name="petGender" value="남" th:checked="${myPet.petGender == '수컷'}"> 수컷</label>
+    <label><input type="radio" name="petGender" value="여" th:checked="${myPet.petGender == '암컷'}"> 암컷</label>
+  </div>
 
-  <label for="petChip">내장칩:</label>
-  <input type="text" name="petChip" id="petChip" th:value="${myPet.petChip}"/>
-  <br>
+  <label>예방접종여부</label>
+  <div class="radio-group">
+    <label><input type="radio" name="petVaccination" value="Y" th:checked="${myPet.petVaccination == '예'}"> 예</label>
+    <label><input type="radio" name="petVaccination" value="N" th:checked="${myPet.petVaccination == '아니오'}"> 아니오</label>
+  </div>
 
-  <label for="singleProFile">프로필사진:</label>
+  <label>내장칩여부</label>
+  <div class="radio-group">
+    <label><input type="radio" name="petChip" value="Y" th:checked="${myPet.petChip == '예'}"> 예</label>
+    <label><input type="radio" name="petChip" value="N" th:checked="${myPet.petChip == '아니오'}"> 아니오</label>
+  </div>
+
+  <label for="singleProFile">프로필사진</label>
   <input type="file" name="singleProFile" id="singleProFile"/>
-  <br>
 
-  <label for="petGender">전화번호:</label>
-  <input type="text" name="petGender" id="petGender" th:value="${myPet.petGender}"/>
-  <br>
-  <button type="submit">수정하기</button>
+  <button class="updateBtn" type="submit">수정하기</button>
 </form>
-</body>
 </body>
 </html>
