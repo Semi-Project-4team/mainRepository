@@ -93,7 +93,7 @@
 
 <h1>회원가입(기업)</h1>
 
-<form th:action="@{/user/signupHospital}" method="post">
+<form th:action="@{/user/signupHospital}" method="post" onsubmit="return signupHospitalForm()">
     <div class="form-group">
         <label for="email">이메일 :</label>
         <input type="text" id="email" name="email"/>
@@ -248,6 +248,52 @@
         // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
         element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+    }
+
+    function signupHospitalForm() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const sample2_address = document.getElementById("sample2_address").value;
+        const name = document.getElementById("name").value;
+        const subjectCode = document.getElementById("subjectCode").value;
+        const permitNumber = document.getElementById("permitNumber").value;
+        const phoneNumber = document.getElementById("phoneNumber").value;
+        const option = document.getElementById("option").value;
+
+        if(!email) {
+            alert("이메일을 입력해주세요.")
+            return false;
+        }
+
+        if(!password) {
+            alert("비밀번호를 입력해주세요.")
+            return false;
+        }
+        if(!sample2_address) {
+            alert("주소를 입력해주세요.")
+            return false;
+        }
+        if(!name) {
+            alert("이름을 입력해주세요.")
+            return false;
+        }
+        if(!subjectCode) {
+            alert("진료과목을 입력해주세요.")
+            return false;
+        }
+        if(!permitNumber) {
+            alert("인허가번호를 입력해주세요.")
+            return false;
+        }
+        if(!phoneNumber) {
+            alert("전화번호를 입력해주세요.")
+            return false;
+        }
+        if(!option) {
+            alert("개인정보 수집란을 체크해주세요.")
+            return false;
+        }
+        return true; // 모든 검증 통과
     }
 </script>
 

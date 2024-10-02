@@ -31,6 +31,17 @@
         <result property="isAccountDrawal" column="hospital_isAccount_drawal"/>
     </resultMap>
 
+    <resultMap id="personMap" type="animal.team.animalhospital.hospital.model.dto.PersonDTO">
+        <id property="personCode" column="person_code"/>
+        <result property="name" column="person_name"/>
+        <result property="email" column="person_email"/>
+        <result property="password" column="person_password"/>
+        <result property="birth" column="person_birth"/>
+        <result property="phoneNumber" column="person_phone_number"/>
+        <result property="informationCollection" column="person_information_collection"/>
+        <result property="isAccountDrawal" column="person_isaccount_drawal"/>
+    </resultMap>
+
     <resultMap id="reviewResultMap" type="animal.team.animalhospital.hospital.model.dto.ReviewDTO">
         <result property="personCode" column="person_code"/>
         <result property="hospitalCode" column="hospital_code"/>
@@ -184,6 +195,33 @@
             AND
             b.hospital_status = 'Y';
     </select>
+
+    <select id="searchUser" parameterType="String" resultMap="personMap">
+        SELECT
+            *
+        FROM
+            tbl_person
+        WHERE
+        (person_name LIKE CONCAT('%', #{query}, '%')
+        OR
+        person_email LIKE CONCAT('%', #{query}, '%'))
+        AND
+        person_isaccount_drawal = 'Y';
+    </select>
+
+    <select id="searchUserHospital" parameterType="String" resultMap="hospitalMap">
+        SELECT
+        *
+        FROM
+        tbl_hospital
+        WHERE
+        (hospital_name LIKE CONCAT('%', #{query}, '%')
+        OR
+        hospital_code LIKE CONCAT('%', #{query}, '%'))
+        AND
+        hospital_isaccount_drawal = 'Y';
+    </select>
+
     <select id="isHospitalSignCheck" resultType="int">
         SELECT
             count(hospital_email)
@@ -283,7 +321,15 @@
         UPDATE
             tbl_hospital
         SET
-            hospital_photo = #{ photoPaths }
+            hospital_photo = #{ photoPaths },
+            eupmyeondong_code = (SELECT
+                                eupmyeondong_code
+                                from
+                                tbl_eupmyeondong
+                                WHERE
+                                eupmyeondong_name = #{ eupmyeondongCode }),
+            hospital_detail_address = #{ detailAddress }
+
         WHERE
             hospital_code = #{ hospitalCode };
     </update>

@@ -210,7 +210,8 @@ VALUES
     ('15', '동구', '5'),
     ('16', '북구', '5'),
     ('17', '성북구', '1'),
-    ('18', '은평구', '1');
+    ('18', '은평구', '1'),
+    ('19', '종로구', '1');
 
 INSERT INTO
     tbl_eupmyeondong (eupmyeondong_code, eupmyeondong_name, sigungu_code)
@@ -292,7 +293,10 @@ VALUES
     ('49', '정릉동', '17'),
 
     -- 은평구
-    ('50', '갈현동', '18');
+    ('50', '갈현동', '18'),
+
+    -- 종로구
+    ('51', '인사동', '19');
 
 
 INSERT INTO
@@ -332,20 +336,21 @@ VALUES
     (NULL, '2', 2, '피부케어병원', '987654321', 'skin1@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '갈현동 6-51', '피부를 건강하게!', '02-111-1111', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
     (NULL, '3', 3, '피부케어병원', '123987456', 'skin2@gmail.com', 'skin1234', 'Y', '09:00', '17:00', '12:00', '13:00', '서경로 31', '피부를 건강하게!', '02-222-2222', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
     (NULL, '3', 4, '내과병원', '456123789', 'internal1@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '신길동 469-3', '내과 진료 전문 병원.', '02-333-3333', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '3', 5, '내과병원', '789456123', 'internal2@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '양평동 660-4', '내과 진료 전문 병원.', '02-444-4444', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '4', 6, '뼈튼튼병원', '321654987', 'orthopedics1@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '영등포동 660-4', '뼈 건강 전문 병원.', '02-555-5555', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '4', 7, '뼈튼튼병원', '654789321', 'orthopedics2@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '망원동 660-4', '뼈 건강 전문 병원.', '02-666-6666', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '5', 8, '튼튼이치과', '789321654', 'dental1@gmail.com', 'dental1234', 'Y', '09:00', '18:00', '12:00', '13:00', '마포동 660-4', '튼튼한 치아를 위해.', '02-777-7777', '/images/dongpl-tradeMark.png', 'N', 'Y'),
-    (NULL, '6', 9, '소변건강병원', '456987321', 'urology1@gmail.com', 'urology1234', 'Y', '08:30', '17:00', '12:00', '13:00', '상암동 660-4', '비뇨기 건강 전문 병원.', '02-888-8888', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '1', 10, '수술전문병원', '321789654', 'surgery1@gmail.com', 'surgery1234', 'Y', '08:00', '17:00', '12:00', '13:00', '능동 660-4', '외과 수술 전문 병원.', '02-999-9999', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '2', 11, '수술전문병원', '987321654', 'surgery2@gmail.com', 'surgery1234', 'Y', '08:00', '17:00', '12:00', '13:00', '반송동 660-4', '외과 수술 전문 병원.', '02-999-9998', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '3', 12, '산부인과병원', '654123987', 'obgyn1@gmail.com', 'obgyn1234', 'Y', '09:00', '18:00', '12:00', '13:00', '기안동 660-4', '산부인과 진료 전문.', '02-888-8887', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '4', 13, '응급진료병원', '789654123', 'emergency1@gmail.com', 'emergency1234', 'Y', '00:00', '00:00', '12:00', '13:00', '신갈동 660-4', '응급 상황에 대비.', '02-777-7776', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '5', 14, '응급진료병원', '321456789', 'emergency2@gmail.com', 'emergency1234', 'Y', '00:00', '00:00', '12:00', '13:00', '상갈동 660-4', '응급 상황에 대비.', '02-777-7775', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '6', 15, '종양케어병원', '654789123', 'oncology1@gmail.com', 'oncology1234', 'Y', '09:00', '17:00', '12:00', '13:00', '구갈동 660-4', '종양 치료 전문.', '02-666-6664', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '1', 16, '재활병원', '987123456', 'rehab1@gmail.com', 'rehab1234', 'Y', '08:30', '17:30', '12:30', '13:30', '인계동 660-4', '재활 치료 전문 병원.', '02-555-5553', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '2', 17, '통증케어병원', '456321789', 'paincare1@gmail.com', 'paincare1234', 'Y', '09:00', '18:00', '12:00', '13:00', '지동 660-4', '통증 관리 전문.', '02-444-4442', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
-    (NULL, '3', 18, '눈건강병원', '123654987', 'eye2@gmail.com', 'eye1234', 'Y', '08:00', '17:00', '12:00', '13:00', '매교동 660-4', '눈 건강 진료.', '02-333-3331', '/images/dongpl-tradeMark.png', 'Y', 'Y');
+    (NULL, '3', 51, '내과병원', '789456123', 'internal2@gmail.com', 'internal1234', 'Y', '08:30', '18:30', '12:30', '13:30', '인사동 43', '내과 진료 전문 병원.', '02-444-4444', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '4', 51, '뼈튼튼병원', '321654987', 'orthopedics1@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '인사동 43', '뼈 건강 전문 병원.', '02-555-5555', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '4', 51, '뼈튼튼병원', '654789321', 'orthopedics2@gmail.com', 'ortho1234', 'Y', '08:00', '17:30', '12:00', '13:00', '인사동 43', '뼈 건강 전문 병원.', '02-666-6666', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '5', 51, '튼튼이치과', '789321654', 'dental1@gmail.com', 'dental1234', 'Y', '09:00', '18:00', '12:00', '13:00', '인사동 43', '튼튼한 치아를 위해.', '02-777-7777', '/images/dongpl-tradeMark.png', 'N', 'Y'),
+    (NULL, '6', 51, '소변건강병원', '456987321', 'urology1@gmail.com', 'urology1234', 'Y', '08:30', '17:00', '12:00', '13:00', '인사동 43', '비뇨기 건강 전문 병원.', '02-888-8888', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '1', 51, '수술전문병원', '321789654', 'surgery1@gmail.com', 'surgery1234', 'Y', '08:00', '17:00', '12:00', '13:00', '인사동 43', '외과 수술 전문 병원.', '02-999-9999', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '2', 51, '수술전문병원', '987321654', 'surgery2@gmail.com', 'surgery1234', 'Y', '08:00', '17:00', '12:00', '13:00', '인사동 43', '외과 수술 전문 병원.', '02-999-9998', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '3', 51, '산부인과병원', '654123987', 'obgyn1@gmail.com', 'obgyn1234', 'Y', '09:00', '18:00', '12:00', '13:00', '인사동 43', '산부인과 진료 전문.', '02-888-8887', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '4', 51, '응급진료병원', '789654123', 'emergency1@gmail.com', 'emergency1234', 'Y', '00:00', '00:00', '12:00', '13:00', '인사동 43', '응급 상황에 대비.', '02-777-7776', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '5', 51, '응급진료병원', '321456789', 'emergency2@gmail.com', 'emergency1234', 'Y', '00:00', '00:00', '12:00', '13:00', '인사동 43', '응급 상황에 대비.', '02-777-7775', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '6', 51, '종양케어병원', '654789123', 'oncology1@gmail.com', 'oncology1234', 'Y', '09:00', '17:00', '12:00', '13:00', '인사동 43', '종양 치료 전문.', '02-666-6664', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '1', 51, '재활병원', '987123456', 'rehab1@gmail.com', 'rehab1234', 'Y', '08:30', '17:30', '12:30', '13:30', '인사동 43', '재활 치료 전문 병원.', '02-555-5553', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '2', 51, '통증케어병원', '456321789', 'paincare1@gmail.com', 'paincare1234', 'Y', '09:00', '18:00', '12:00', '13:00', '인사동 43', '통증 관리 전문.', '02-444-4442', '/images/dongpl-tradeMark.png', 'Y', 'Y'),
+    (NULL, '3', 51, '눈건강병원', '123654987', 'eye2@gmail.com', 'eye1234', 'Y', '08:00', '17:00', '12:00', '13:00', '인사동 43', '눈 건강 진료.', '02-333-3331', '/images/dongpl-tradeMark.png', 'Y', 'Y');
+
 INSERT INTO
     tbl_person (person_code, person_name, person_email, person_password, person_birth, person_phone_number, person_information_collection, person_isaccount_drawal)
 VALUES

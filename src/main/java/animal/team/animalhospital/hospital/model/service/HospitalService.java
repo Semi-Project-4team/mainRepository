@@ -75,6 +75,12 @@ public class HospitalService {
         return hospitalMapper.searchHospital(query);
 
     }
+
+    public List<PersonDTO> searchUser(String query) { return hospitalMapper.searchUser(query);
+    }
+
+    public List<HospitalDTO> searchUserHospital(String query) { return hospitalMapper.searchUserHospital(query);
+    }
 }
 
 

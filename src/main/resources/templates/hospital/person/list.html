@@ -194,7 +194,14 @@
 </div>
 
 <br>
-<button onclick="location.href='/'">메인으로</button>
+<br>
+<form action="/hospital/search/user" method="GET">
+    <input class="searchInput" type="text" id="query" name="query">
+    <button class="search-button" type="submit">찾기</button>
+</form>
+
+<!--<br>-->
+<!--<button onclick="location.href='/'">메인으로</button>-->
 
 <!-- JavaScript -->
 <script>
