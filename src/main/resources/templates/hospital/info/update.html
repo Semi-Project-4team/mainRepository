@@ -46,7 +46,7 @@
             text-align: right; /* 라벨 텍스트 오른쪽 정렬 */
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="password"], input[type="file"] {
             width: 70%; /* 인풋창 너비 설정 */
             padding: 12px;
             border: 1px solid #ccc;
@@ -105,7 +105,7 @@
 <div class="form-container">
     <h1>동물병원 정보 수정하기</h1>
 
-    <form th:action="@{/hospital/info/update}" th:object="${hospital}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/hospital/info/update}" th:object="${hospital}" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
         <input type="hidden" th:field="*{hospitalCode}"/>
 
         <div class="form-group">
@@ -266,6 +266,16 @@
         // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
         element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+    }
+
+    function validateForm() {
+        const multiHospitalFiles = document.getElementById("multiHospitalFiles").files;
+
+        if (multiHospitalFiles.length === 0) {
+            alert("사진을 선택해 주세요.");
+            return false; // 폼 제출 방지
+        }
+        return true; // 모든 검증 통과
     }
 </script>
 </body>
