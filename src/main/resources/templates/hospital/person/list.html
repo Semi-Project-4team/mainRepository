@@ -141,7 +141,6 @@
             <th>점심종료시간</th>
             <th>소재지</th>
             <th>소개글</th>
-            <th>사진</th>
             <th>전화번호</th>
         </tr>
         <tr th:each="hospital : ${hospitalList}">
@@ -156,7 +155,6 @@
             <td th:text="${hospital.lunchEndTime}"></td>
             <td th:text="${hospital.detailAddress}"></td>
             <td th:text="${hospital.introText}"></td>
-            <td th:text="${hospital.photo}"></td>
             <td th:text="${hospital.phoneNumber}"></td>
         </tr>
     </table>

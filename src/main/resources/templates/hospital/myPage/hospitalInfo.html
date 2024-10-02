@@ -3,9 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <title>병원페이지</title>
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <style>
+    body {
+      /*padding: 30px;*/
+      background-color: #f7f7f7;
+      color: #333;
+      margin: 100px auto 0 auto;
+      /*margin-right: 200px;*/
+      /*margin-left: 200px;*/
+    }
+
+    h3 {
+      color: #58ccff;
+      /*border-bottom: 2px solid #58ccff;*/
+      padding-bottom: 5px;
+    }
+
+    hr {
+      border: 1px solid #58ccff;
+      margin-bottom: 20px;
+    }
+
+    .inner{
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .container {
+      gap: 50px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .container > div{
+      width:calc(100% - 50px);
+    }
+
+    .container .update-button{
+      margin: 10px 0 0 0;
+      text-align: right;
+    }
+
+    table {
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #58ccff;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    button {
+      background-color: #58ccff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #4ba3d4;
+    }
+
+    th, td {
+      padding: 12px; /* Cell padding */
+      text-align: left; /* Align text to the left */
+      border-bottom: 1px solid #ddd; /* Bottom border for cells */
+    }
+
+    th {
+      background-color: #58ccff; /* Header background color */
+      color: white; /* Header text color */
+    }
+
+    .edit-button-container {
+      text-align: right; /* Align button to the right */
+      margin-top: 10px; /* Space above the button */
+    }
+
+    .edit-button {
+      padding: 5px 10px;
+      background-color: #58ccff; /* Button color */
+      color: white; /* Button text color */
+      border: none; /* No border */
+      border-radius: 5px; /* Rounded corners */
+      cursor: pointer; /* Pointer cursor on hover */
+      transition: background-color 0.3s; /* Transition effect */
+    }
+
+    .edit-button:hover {
+      background-color: #4ba3d4; /* Darker color on hover */
+    }
+
+    .delete-container{
+      text-align: right;
+    }
+
+    .delete-button {
+      background-color: #666666;
+      margin-top: 100px;
+      margin-bottom: 50px;
+    }
+    .delete-button:hover {
+      background-color: #951515;
+    }
+
+    .info-edit{
+      text-align: right;
+    }
+
+    .info-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+
+  </style>
 </head>
 <body>
-<h3>병원 정보</h3>
+
+<div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+
+<div class="inner">
+  <div class="info-container">
+    <h3>병원 정보</h3>
+    <div class="button-container">
+      <form th:each="hospital : ${ hospitalInfoList }" th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">
+        <button class="edit-button" type="submit">동물병원 정보 수정하기</button>
+      </form>
+    </div>
+  </div>
+  <hr>
 <table>
   <tr>
     <th>병원명</th>
@@ -30,20 +182,15 @@
   </tr>
 </table>
 
-<!--수정버튼-->
-<div th:each="hospital : ${ hospitalInfoList }">
-<form th:action="@{/hospital/info/update/{code}(code=${ hospital.hospitalCode})}" method="get">
-  <button class="edit-button" type="submit">동물병원 정보 수정하기</button>
-</form>
 
 <!--폐업버튼-->
-<form th:action="@{/hospital/info/delete/{code}(code=${ hospital.hospitalCode})}" method="post">
-  <button class="edit-button" type="submit">병원 폐업</button>
-</form>
-</div>
+<!--<form th:action="@{/hospital/info/delete/{code}(code=${ hospital.hospitalCode})}" method="post">-->
+<!--  <button class="edit-button" type="submit">병원 폐업</button>-->
+<!--</form>-->
 
-
+  <br><br>
 <h3>예약 내역</h3>
+  <hr>
 <table>
   <tr>
     <th>보호자명</th>
@@ -60,9 +207,13 @@
 
 </table>
 
-<div>
-  <button onclick="confirmWithdrawal()">계정 탈퇴</button>
+<div class="delete-container">
+  <button class="delete-button" onclick="confirmWithdrawal()">계정 탈퇴</button>
 </div>
+
+</div>
+
+<div th:insert="~{common/footer.html}"></div> <!-- 푸터 포함 -->
 
 <script>
   function confirmWithdrawal() {
@@ -74,5 +225,6 @@
     }
   }
 </script>
+
 </body>
 </html>
