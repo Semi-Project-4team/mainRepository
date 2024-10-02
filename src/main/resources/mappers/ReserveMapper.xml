@@ -67,6 +67,16 @@
         LIMIT 1;
     </select>
 
+    <select id="isDuplicateReserve" resultType="int" parameterType="map">
+        SELECT
+            COUNT(*)
+        FROM
+            tbl_reserve
+        WHERE
+             person_code = #{personCode}
+        and  hospital_code = #{hospitalCode}
+    </select>
+
 
     <insert id="registNewReserve" parameterType="animal.team.animalhospital.hospital.model.dto.ReserveDTO"
             useGeneratedKeys="true" keyProperty="personCode">
