@@ -321,7 +321,15 @@
         UPDATE
             tbl_hospital
         SET
-            hospital_photo = #{ photoPaths }
+            hospital_photo = #{ photoPaths },
+            eupmyeondong_code = (SELECT
+                                eupmyeondong_code
+                                from
+                                tbl_eupmyeondong
+                                WHERE
+                                eupmyeondong_name = #{ eupmyeondongCode }),
+            hospital_detail_address = #{ detailAddress }
+
         WHERE
             hospital_code = #{ hospitalCode };
     </update>
