@@ -220,7 +220,12 @@
             (
                 null,
                 #{ subjectCode },
-                #{ eupmyeondongCode },
+                (SELECT
+                eupmyeondong_code
+                from
+                tbl_eupmyeondong
+                WHERE
+                eupmyeondong_name = #{ eupmyeondongCode }),
                 #{ name },
                 #{ permitNumber },
                 #{ email },

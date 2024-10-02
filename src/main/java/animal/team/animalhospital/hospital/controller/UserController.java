@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -26,7 +29,8 @@ public class UserController {
 
     @PostMapping("/signupHospital")
     public ModelAndView hospitalSignup(ModelAndView mv,
-                               @ModelAttribute HospitalDTO newUserInfo) {
+                               @ModelAttribute HospitalDTO newUserInfo,
+                                       @RequestParam("sample2_address") String address) {
         System.out.println(newUserInfo.toString());
         System.out.println(newUserInfo.getInformationCollection());
 
@@ -36,6 +40,29 @@ public class UserController {
             return resultMV(mv, null, "Hospital");
 
         System.out.println("isHospital = " + isHospital);
+
+        System.out.println("address = " + address);
+
+        /**/
+        Pattern pattern = Pattern.compile("([가-힣]+동)\\s(\\d+-\\d+)");
+        Matcher matcher = pattern.matcher(address);
+
+        String addressDong = "";
+        String addressNum = "";
+
+//        System.out.println("matcher = " + matcher);
+//        System.out.println("pattern = " + pattern);
+
+        if (matcher.find()) {
+            addressDong = matcher.group(1); // "신길동"
+            addressNum = matcher.group(2);  // "469-3"
+        }
+
+//        System.out.println("addressDong = " + addressDong);
+//        System.out.println("addressNum = " + addressNum);
+
+        newUserInfo.setEupmyeondongCode(addressDong);
+        newUserInfo.setDetailAddress(addressDong + " " + addressNum);
 
         Integer result = userService.hospitalSignup(newUserInfo);
 
