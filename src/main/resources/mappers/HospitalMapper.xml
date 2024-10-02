@@ -213,7 +213,8 @@
                 hospital_intro_text,
                 hospital_phone_number,
                 hospital_photo,
-                hospital_status
+                hospital_status,
+                hospital_isAccount_drawal
             )
             values
             (
@@ -233,6 +234,7 @@
                 #{ introText },
                 #{ phoneNumber },
                 #{ photo },
+                'Y',
                 'Y'
             )
     </insert>

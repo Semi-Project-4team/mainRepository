@@ -248,7 +248,33 @@ public class MyPageController {
 //        return http.build();
 
 
-        rAttr.addFlashAttribute("successMessage", "성공적으로 탈퇴했습니다.");
+        rAttr.addFlashAttribute("successMessage", "(개인) 성공적으로 탈퇴했습니다.");
+
+        return "redirect:/auth/logout";
+    }
+
+    @GetMapping("/hospitalWithDrawal")
+//    public String userWithDrawal(HttpSecurity http) throws Exception {
+    public String hospitalWithDrawal(RedirectAttributes rAttr,
+                                 Model model) throws Exception {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
+        myPageService.hospitalWithDrawal(userEmail);
+
+//        http.logout(logout -> {
+//            logout.logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"));
+//            logout.deleteCookies("JSESSIONID");
+//            logout.invalidateHttpSession(true);
+//            logout.logoutSuccessUrl("/");
+//        }).csrf(csrf ->
+//                csrf.disable()
+//        );
+//        return http.build();
+
+
+        rAttr.addFlashAttribute("successMessage", "(기업) 성공적으로 탈퇴했습니다.");
 
         return "redirect:/auth/logout";
     }

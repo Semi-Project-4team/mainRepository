@@ -39,4 +39,6 @@ public interface MyPageMapper {
     List<PersonDTO> findProtector(String userEmail);
 
     void userWithDrawal(String userEmail);
+
+    void hospitalWithDrawal(String userEmail);
 }
