@@ -65,6 +65,7 @@ public class UserController {
 //        System.out.println("addressDong = " + addressDong);
 //        System.out.println("addressNum = " + addressNum);
 
+        newUserInfo.setPhoto("/images/dongpl-tradeMark.png");
         newUserInfo.setEupmyeondongCode(addressDong);
         newUserInfo.setDetailAddress(addressDong + " " + addressNum);
 

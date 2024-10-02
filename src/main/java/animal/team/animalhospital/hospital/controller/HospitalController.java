@@ -68,18 +68,14 @@ public class HospitalController {
         List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
         model.addAttribute("hospitalList", hospitalList);
 
-        if (hospitalList.get(0).getPhoto() != null) {
+        List<String> pathsList = new ArrayList<>();
 
-            String[] pathsArray = hospitalList.get(0).getPhoto().split(",");
+        for (HospitalDTO hospitalDTO : hospitalList) {
+            pathsList.add(hospitalDTO.getPhoto().split(",")[0]);
+        }
 
-//            for (String s : pathsArray) {
-//                System.out.println("s = " + s);
-//            }
-
-            System.out.println("pathsArray[0] = " + pathsArray[0]);
-
-            model.addAttribute("thumbnail", pathsArray[0]); // 모델에 추가
-        }// 모델에 추가
+        System.out.println("pathsList = " + pathsList);
+        model.addAttribute("thumbnailList", pathsList); // 모델에 추가
         return "/hospital/info/list"; // 뷰 이름
     }
 
