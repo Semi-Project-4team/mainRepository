@@ -301,4 +301,13 @@
             hospital_code = #{ hospitalCode }
     </update>
 
+    <update id="updatePersonDrawal">
+        UPDATE
+            tbl_person
+        SET
+            person_isAccount_drawal = #{ status }
+        WHERE
+            person_code = #{ personCode }
+    </update>
+
 </mapper>

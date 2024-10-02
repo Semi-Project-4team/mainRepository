@@ -125,6 +125,20 @@
             <td th:text="${person.phoneNumber}"></td>
             <td th:text="${person.informationCollection}"></td>
             <td th:text="${person.isAccountDrawal}"></td>
+            <td>
+                <!--                <button onclick="updateStatus(`${ hospital.hospitalCode }`, 'Y')">활성화</button>-->
+                <!--                <button onclick="updateStatus(`${ hospital.hospitalCode }`, 'N')">비활성화</button>-->
+                <form action="/user/updatePersonStatus" method="post">
+                    <input type="hidden" name="status" value="Y">
+                    <input type="hidden" name="personCode" class="personCode" th:value="${person.personCode}" onclick="personCodeChange()">
+                    <button type="submit">활성화</button>
+                </form>
+                <form action="/user/updatePersonStatus" method="post">
+                    <input type="hidden" name="status" value="N">
+                    <input type="hidden" name="personCode" class="personCode" th:value="${person.personCode}" onclick="personCodeChange()">
+                    <button type="submit">비활성화</button>
+                </form>
+            </td>
         </tr>
     </table>
 </div>
@@ -206,6 +220,12 @@
         const hospitalCodeElement = document.getElementsByClassName('hospitalCode');
         let hospitalCode = parseInt(hospitalCodeElement.value, 10); // 숫자로 변환
         hospitalCodeElement.value = hospitalCode; // 변환된 숫자를 다시 입력 값으로 설정
+    }
+
+    function personCodeChange() {
+        const personCodeElement = document.getElementsByClassName('personCode');
+        let personCode = parseInt(personCodeElement.value, 10); // 숫자로 변환
+        personCodeElement.value = personCode; // 변환된 숫자를 다시 입력 값으로 설정
     }
 
     // function updateStatus(userId, isActive) {

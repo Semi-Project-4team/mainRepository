@@ -261,4 +261,11 @@ public class UserService {
         hospitalMapper.updateHospitalDrawal(hospitalStatus);
 
     }
+
+    public void updatePersonDrawal(Map<String, String> personStatus) {
+        System.out.println("personStatus = " + personStatus);
+
+        hospitalMapper.updatePersonDrawal(personStatus);
+
+    }
 }

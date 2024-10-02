@@ -257,4 +257,33 @@ public class UserController {
 
         return "redirect:/hospital/person/list";
     }
+
+    @PostMapping("/updatePersonStatus")
+    public String updatePersonStatus(@RequestParam("status") String status,
+                                       @RequestParam("personCode") String personCode) {
+//        int userId = (Integer) request.get("userId");
+//        boolean isActive = (Boolean) request.get("isActive");
+
+        // DB에서 userId에 해당하는 유저의 활성화 상태를 업데이트하는 로직
+//        userService.updateUserStatus(userId, isActive);
+
+        System.out.println("status = " + status);
+        System.out.println("personCode = " + personCode);
+
+        Map<String, String> personStatus = new HashMap<>();
+        personStatus.put("status", status);
+        personStatus.put("personCode", personCode);
+
+        userService.updatePersonDrawal(personStatus);
+
+//        if(Objects.equals(status, "Y")) {
+//            userService.updateHospitalStatus(hospitalStatus);
+//        } else if(Objects.equals(status, "N")) {
+//            userService.updateHospitalStatus(hospitalStatus);
+//        }
+
+        return "redirect:/hospital/person/list";
+    }
+
+
 }
