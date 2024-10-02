@@ -208,7 +208,8 @@ VALUES
     ('13', '대전시서구', '4'),
     ('14', '대전시중구', '4'),
     ('15', '동구', '5'),
-    ('16', '북구', '5');;
+    ('16', '북구', '5'),
+    ('17', '성북구', '1');
 
 INSERT INTO
     tbl_eupmyeondong (eupmyeondong_code, eupmyeondong_name, sigungu_code)
@@ -284,7 +285,11 @@ VALUES
     -- 북구
     ('46', '칠성동', '16'),
     ('47', '산격동', '16'),
-    ('48', '복현동', '16');
+    ('48', '복현동', '16'),
+
+    -- 성북구
+    ('49', '정릉동', '17');
+
 
 INSERT INTO
     tbl_main_subject (subject_code, subject_name)
