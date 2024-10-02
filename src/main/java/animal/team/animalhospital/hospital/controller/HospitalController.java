@@ -8,6 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -332,6 +333,27 @@ public class HospitalController {
         model.addAttribute("favoriteList", favoriteList);
 
         return "hospital/favorite/list";
+    }
+
+    @PostMapping("/favorite/insert/{hospitalCode}")
+    public String favoriteInsert(Model model,
+                                 @PathVariable("hospitalCode") int hospitalCode) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+
+        Map<String, String> stringMap = new HashMap<>();
+        stringMap.put("userEmail", userEmail);
+        stringMap.put("hospitalCode", String.valueOf(hospitalCode));
+
+        favoriteService.favoriteInsert(stringMap);
+
+//        List<FavoriteDTO> favoriteList = favoriteService.findAllFavorite();
+//
+//        model.addAttribute("favoriteList", favoriteList);
+
+        return "redirect:/myPage/myInfo";
+//        return "hospitalrefavorite/list";
     }
 
 //    @GetMapping("/info/hospitalUpdat")
