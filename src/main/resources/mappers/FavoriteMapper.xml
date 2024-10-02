@@ -9,6 +9,30 @@
         <result property="favoriteName" column="favorite_name"/>
     </resultMap>
 
+    <insert id="favoriteInsert" parameterType="map">
+        INSERT INTO
+        tbl_favorite (person_code, favorite_name)
+        VALUES
+        (
+            (
+            select
+            person_code
+            from
+            tbl_person
+            where
+            person_email = #{ userEmail }
+            ) ,
+            (
+            select
+            hospital_name
+            from
+            tbl_hospital
+            where
+            hospital_code = #{ hospitalCode }
+            )
+        );
+    </insert>
+
     <select id="findAllFavorite" resultMap="favoriteResultMap">
         SELECT
             person_code,
