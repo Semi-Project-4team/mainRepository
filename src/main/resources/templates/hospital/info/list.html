@@ -145,8 +145,10 @@
 <h1>병원 찾기</h1>
 
 <div class="search-container">
-    <input type="text" placeholder="지역 또는 병원명을 검색">
-    <button type="submit">검색</button>
+    <form action="/hospital/search" method="GET">
+        <input class="searchInput" type="text" id="query" name="query" placeholder="지역 또는 병원명 입력">
+        <button type="submit">검색</button>
+    </form>
 </div>
 
 <div class="hospital-list">
