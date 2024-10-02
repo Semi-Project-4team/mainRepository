@@ -45,9 +45,6 @@
         td {
             font-size: 16px;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2; /* 짝수 행 배경색 */
-        }
         a {
             color: #18a8f1; /* 링크 색상 */
             text-decoration: none;
@@ -79,9 +76,11 @@
     <h1>시/도</h1>
 
     <table>
-        <tr th:each="sido : ${sidoList}">
-            <td>
-                <a th:href="@{'/hospital/info/sigungu/' + ${sido.sidoCode}}" th:text="${sido.name}"></a>
+        <tr th:each="i : ${#numbers.sequence(0, sidoList.size() - 1, 3)}">
+            <!-- 3개의 항목을 한 줄에 배치 -->
+            <td th:each="j : ${#numbers.sequence(i, i + 2)}" th:if="${j < sidoList.size()}">
+                <a th:href="@{'/hospital/info/sigungu/' + ${sidoList[j].sidoCode}}"
+                   th:text="${sidoList[j].name}"></a>
             </td>
         </tr>
     </table>
