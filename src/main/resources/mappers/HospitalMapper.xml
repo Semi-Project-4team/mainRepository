@@ -281,4 +281,22 @@
             hospital_code = #{ hospitalCode };
     </update>
 
+    <update id="updateHospitalStatus" parameterType="map">
+        UPDATE
+            tbl_hospital
+        SET
+            hospital_status = #{ status }
+        WHERE
+            hospital_code = #{ hospitalCode }
+    </update>
+
+    <update id="updateHospitalDrawal">
+        UPDATE
+            tbl_hospital
+        SET
+            hospital_isAccount_drawal = #{ status }
+        WHERE
+            hospital_code = #{ hospitalCode }
+    </update>
+
 </mapper>
