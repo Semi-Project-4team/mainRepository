@@ -291,6 +291,9 @@ public class HospitalController {
 
         model.addAttribute("hospitalList", hospitalList);
         model.addAttribute("personList", personList);
+
+        System.out.println("personList = " + personList);
+        System.out.println("hospitalList = " + hospitalList);
         return "/hospital/person/list";
     }
 

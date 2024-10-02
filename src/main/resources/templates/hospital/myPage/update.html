@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원 정보 수정</title>
+  <link rel="stylesheet" href="/css/header.css">
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f8fb;
+      font-family: "Pretendard Variable", Pretendard, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #f4f8fb;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     h1 {
@@ -32,7 +34,7 @@
       text-align: center;
     }
 
-    label {
+    .update-label {
       display: block;
       font-size: 14px;
       color: #333;
@@ -55,18 +57,19 @@
       outline: none;
     }
 
-    button {
+    .editBtn {
+      font-family: "Pretendard Variable", Pretendard, sans-serif;
       background-color: #58ccff;
       color: white;
       padding: 12px 20px;
       border: none;
-      border-radius: 4px;
+      border-radius: 10px;
       cursor: pointer;
       width: 100%;
       font-size: 16px;
       font-weight: bold;
       transition: background-color 0.3s ease;
-      margin-top: 50px;
+      margin-top: 30px;
     }
 
     button:hover {
@@ -78,23 +81,27 @@
         width: 90%;
       }
     }
-
   </style>
+
+
 </head>
 <body>
+
+<div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
+
 
 <form action="/myPage/update" method="post">
   <h1>회원 정보 수정</h1>
   <input type="hidden" name="personCode" th:value="${updateMyInfo.personCode}"/>
   <input type="hidden" name="email" th:value="${updateMyInfo.email}"/>
 
-  <label for="name">이름</label>
+  <label class="update-label" for="name">이름</label>
   <input  type="text" name="name" id="name" th:value="${updateMyInfo.name}"/>
 
-  <label for="phoneNumber">전화번호</label>
+  <label class="update-label" for="phoneNumber">전화번호</label>
   <input type="text" name="phoneNumber" id="phoneNumber" th:value="${updateMyInfo.phoneNumber}"/>
 
-  <button type="submit">수정하기</button>
+  <button class="editBtn" type="submit">수정하기</button>
 </form>
 
 </body>
