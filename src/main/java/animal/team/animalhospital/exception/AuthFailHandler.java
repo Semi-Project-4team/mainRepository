@@ -25,7 +25,8 @@ public class AuthFailHandler extends SimpleUrlAuthenticationFailureHandler {
 
         if (exception instanceof BadCredentialsException) {
 
-            errorMessage = "[Auth-Failed] 아이디가 존재하지 않거나 비밀번호가 일치하지 않습니다.";
+//            errorMessage = "[Auth-Failed] 아이디가 존재하지 않거나 비밀번호가 일치하지 않습니다.";
+            errorMessage = "[Auth-Failed] 정지된 계정입니다. 문의바랍니다.";
         } else if (exception instanceof InternalAuthenticationServiceException) {
 
             errorMessage = "[Auth-Failed] 서버에서 오류가 발생되었습니다.";

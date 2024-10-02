@@ -5,6 +5,7 @@ import animal.team.animalhospital.hospital.model.dto.PersonDTO;
 import animal.team.animalhospital.hospital.model.dto.SignupDTO;
 import animal.team.animalhospital.hospital.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/user")
@@ -252,4 +256,60 @@ public class UserController {
         System.out.println("confirmPassword = " + confirmPassword);
         return false;
     }
+
+    @PostMapping("/updateHospitalStatus")
+    public String updateHospitalStatus(@RequestParam("status") String status,
+                                     @RequestParam("hospitalCode") String hospitalCode) {
+//        int userId = (Integer) request.get("userId");
+//        boolean isActive = (Boolean) request.get("isActive");
+
+        // DB에서 userId에 해당하는 유저의 활성화 상태를 업데이트하는 로직
+//        userService.updateUserStatus(userId, isActive);
+
+        System.out.println("status = " + status);
+        System.out.println("hospitalCode = " + hospitalCode);
+
+        Map<String, String> hospitalStatus = new HashMap<>();
+        hospitalStatus.put("status", status);
+        hospitalStatus.put("hospitalCode", hospitalCode);
+
+        userService.updateHospitalDrawal(hospitalStatus);
+
+//        if(Objects.equals(status, "Y")) {
+//            userService.updateHospitalStatus(hospitalStatus);
+//        } else if(Objects.equals(status, "N")) {
+//            userService.updateHospitalStatus(hospitalStatus);
+//        }
+
+        return "redirect:/hospital/person/list";
+    }
+
+    @PostMapping("/updatePersonStatus")
+    public String updatePersonStatus(@RequestParam("status") String status,
+                                       @RequestParam("personCode") String personCode) {
+//        int userId = (Integer) request.get("userId");
+//        boolean isActive = (Boolean) request.get("isActive");
+
+        // DB에서 userId에 해당하는 유저의 활성화 상태를 업데이트하는 로직
+//        userService.updateUserStatus(userId, isActive);
+
+        System.out.println("status = " + status);
+        System.out.println("personCode = " + personCode);
+
+        Map<String, String> personStatus = new HashMap<>();
+        personStatus.put("status", status);
+        personStatus.put("personCode", personCode);
+
+        userService.updatePersonDrawal(personStatus);
+
+//        if(Objects.equals(status, "Y")) {
+//            userService.updateHospitalStatus(hospitalStatus);
+//        } else if(Objects.equals(status, "N")) {
+//            userService.updateHospitalStatus(hospitalStatus);
+//        }
+
+        return "redirect:/hospital/person/list";
+    }
+
+
 }

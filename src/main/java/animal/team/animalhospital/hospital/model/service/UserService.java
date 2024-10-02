@@ -1,11 +1,9 @@
 package animal.team.animalhospital.hospital.model.service;
 
-import animal.team.animalhospital.hospital.controller.UserController;
 import animal.team.animalhospital.hospital.model.dao.HospitalMapper;
 import animal.team.animalhospital.hospital.model.dao.PersonMapper;
 import animal.team.animalhospital.hospital.model.dto.HospitalDTO;
 import animal.team.animalhospital.hospital.model.dto.PersonDTO;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -13,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.annotation.Target;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -31,6 +29,7 @@ public class UserService {
         this.personMapper = personMapper;
 //        this.userController = userController;
     }
+
 
     @Transactional
     public Integer hospitalSignup(HospitalDTO newUserInfo) {
@@ -239,5 +238,34 @@ public class UserService {
         System.out.println("isHospitalSignCheck result = " + result);
 
         return result >= 1;
+    }
+
+    public void updateHospitalStatus(Map<String, String> request) {
+//        // 유저 정보를 DB에서 가져와 상태를 변경
+//        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("유저를 찾을 수 없습니다."));
+//        user.setActive(isActive);
+//        userRepository.save(user); // 상태 저장
+//        System.out.println("userId = " + userId);
+//        System.out.println("isActive = " + isActive);
+
+        System.out.println("request = " + request);
+
+        hospitalMapper.updateHospitalStatus(request);
+
+
+    }
+
+    public void updateHospitalDrawal(Map<String, String> hospitalStatus) {
+        System.out.println("hospitalStatus = " + hospitalStatus);
+
+        hospitalMapper.updateHospitalDrawal(hospitalStatus);
+
+    }
+
+    public void updatePersonDrawal(Map<String, String> personStatus) {
+        System.out.println("personStatus = " + personStatus);
+
+        hospitalMapper.updatePersonDrawal(personStatus);
+
     }
 }
