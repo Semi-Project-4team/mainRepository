@@ -5,9 +5,8 @@
     <title>공지사항 상세 페이지</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             background-color: #f4f8fb;
-            margin-top: 100px;
+            margin-top: 150px;
             padding: 20px;
         }
 
@@ -15,6 +14,7 @@
             color: #18a8f1;
             text-align: center;
             margin-bottom: 20px;
+            font-size: 28px;
         }
 
         .container {
@@ -27,24 +27,27 @@
         }
 
         .notice-info p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #333;
+            font-size: 18px;  /* 폰트 크기 증가 */
+            line-height: 1.8;  /* 가독성을 위한 줄 간격 조정 */
+            color: #000000;   /* 글자 색상 적용 */
+            margin-left: 20px;
+            margin-right: 20px;
+            border-bottom: 2px solid #18a8f1;
         }
 
         .notice-info h3 {
-            font-size: 18px;
-            color: #18a8f1;
+            font-size: 20px;
+            color: black;
         }
 
         button {
             background-color: #18a8f1;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;  /* 버튼 크기 증가 */
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;  /* 폰트 크기 증가 */
             margin-top: 10px;
             display: inline-block;
         }
@@ -61,6 +64,7 @@
         .button-container form, .button-container button {
             display: inline-block;
             margin-right: 10px;
+            margin-left: 10px;
         }
 
         .button-container a {
@@ -77,7 +81,12 @@
             padding: 20px;
             background-color: #f4f8fb;
             border-radius: 8px;
+            font-size: 20px;
+            color: #000000;
+            margin-left: 10px;
         }
+
+
     </style>
     <link rel="stylesheet" href="/css/header.css">
 </head>
@@ -86,14 +95,10 @@
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
 <div class="container">
-    <h2>공지사항</h2>
+    <h2><span th:text="${ notice.name }"></span></h2>
 
     <div class="notice-info">
-        <p>공지사항코드: <span th:text="${ notice.code }"></span></p>
-        <p>공지사항이름: <span th:text="${ notice.name }"></span></p>
-        <p>공지사항작성날짜: <span th:text="${ notice.date }"></span></p>
-        <p>공지사항조회수: <span th:text="${ notice.views }"></span></p>
-        <h3>공지사항내용:</h3>
+        <p>작성일 <span th:text="${ notice.date }"></span> | 조회수 <span th:text="${ notice.views }"></span></p>
         <div class="notice-content">
             <span th:text="${ notice.text }"></span>
         </div>
