@@ -59,9 +59,23 @@ public class HospitalController {
 
     @GetMapping("/info/list/{eupmyeondongCode}")
     public String getHospitalsByEupmyeondong(@PathVariable int eupmyeondongCode, Model model) {
+        System.out.println("getHospitalsByEupmyeondong");
         List<HospitalDTO> hospitalList = hospitalService.getHospitalsByEupmyeondong(eupmyeondongCode);
         model.addAttribute("hospitalList", hospitalList);
 
+//        List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
+//        model.addAttribute("hospitalList", hospitalList);
+//
+        List<String> pathsList = new ArrayList<>();
+
+        for (HospitalDTO hospitalDTO : hospitalList) {
+            pathsList.add(hospitalDTO.getPhoto().split(",")[0]);
+        }
+
+        System.out.println("pathsList = " + pathsList);
+        model.addAttribute("thumbnailList", pathsList); // 모델에 추가
+
+        System.out.println("getHospitalsByEupmyeondong1");
 
 
         return "/hospital/info/list";
