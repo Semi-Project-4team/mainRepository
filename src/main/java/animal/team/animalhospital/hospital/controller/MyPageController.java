@@ -20,8 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -130,8 +132,17 @@ public class MyPageController {
 
 
     @PostMapping("/delete/{name}")
-    public String deleteFavorite(@PathVariable("name") String name) {
-        myPageService.deleteFavorite(name);
+    public String deleteFavorite(@PathVariable("name") String name,
+                                 @RequestParam("favoritePermitNumber") String favoritePermitNumber) {
+
+        System.out.println("name = " + name);
+        System.out.println("favoritePermitNumber = " + favoritePermitNumber);
+
+        Map<String, String> stringMap = new HashMap<>();
+        stringMap.put("name", name);
+        stringMap.put("favorite_permit_number", favoritePermitNumber);
+
+        myPageService.deleteFavorite(stringMap);
 
         return "redirect:/myPage/myInfo";
     }

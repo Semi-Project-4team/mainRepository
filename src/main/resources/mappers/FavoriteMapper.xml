@@ -7,11 +7,13 @@
     <resultMap id="favoriteResultMap" type="animal.team.animalhospital.hospital.model.dto.FavoriteDTO">
         <id property="personCode" column="person_code"/>
         <result property="favoriteName" column="favorite_name"/>
+        <result property="favoritePermitNumber" column="favorite_permit_number"/>
+        <result property="favoriteHospitalCode" column="favorite_hospital_code"/>
     </resultMap>
 
     <insert id="favoriteInsert" parameterType="map">
         INSERT INTO
-        tbl_favorite (person_code, hospital_code, favorite_name)
+            tbl_favorite (person_code, favorite_name, favorite_permit_number, favorite_hospital_code)
         VALUES
         (
             (
@@ -30,7 +32,10 @@
             tbl_hospital
             where
             hospital_code = #{ hospitalCode }
-            )
+            and hospital_permit_number = #{ permitNumber }
+            ) ,
+            #{ permitNumber } ,
+            #{ hospitalCode }
         );
     </insert>
 
@@ -41,6 +46,45 @@
             favorite_name
         FROM
             tbl_favorite
+    </select>
+    <select id="favoriteCount" resultType="java.lang.Integer">
+        select
+            count(person_code)
+        from
+            tbl_favorite
+        where
+            person_code = (select
+                                person_code
+                            from
+                                tbl_person
+                            where
+                                person_email = #{ userEmail });
+    </select>
+
+    <select id="favoriteExist" resultType="java.lang.Boolean">
+        SELECT
+            count(*)
+        from
+            tbl_favorite
+        where
+            person_code = (
+                        select
+                            person_code
+                        from
+                            tbl_person
+                        where
+                            person_email = #{ userEmail })
+        and
+            favorite_name = (
+                        select
+                            hospital_name
+                        from
+                            tbl_hospital
+                        where
+                            hospital_code = #{ hospitalCode }
+                            and hospital_permit_number = #{ permitNumber })
+        and
+            favorite_permit_number = #{ permitNumber }
     </select>
 
 </mapper>

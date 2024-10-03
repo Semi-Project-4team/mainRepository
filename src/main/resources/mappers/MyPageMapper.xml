@@ -18,6 +18,8 @@
         <id property="personCode" column="person_code"/>
         <result property="hospitalCode" column="hospital_code"/>
         <result property="favoriteName" column="favorite_name"/>
+        <result property="favoritePermitNumber" column="favorite_permit_number"/>
+        <result property="favoriteHospitalCode" column="favorite_hospital_code"/>
     </resultMap>
 
     <resultMap id="petMap" type="animal.team.animalhospital.hospital.model.dto.PetDTO">
@@ -160,18 +162,10 @@
 
 
     <select id="findMyFavorite" resultMap="favoriteMap">
-<!--        SELECT-->
-<!--            b.favorite_name-->
-<!--        FROM-->
-<!--            tbl_person a-->
-<!--        Join tbl_favorite b ON a.person_code = b.person_code-->
-<!--        where-->
-<!--            a.person_email = #{ userEmail };-->
-        SELECT DISTINCT
-            b.person_code,
-            b.hospital_code,
+        SELECT
             b.favorite_name,
-            c.hospital_photo
+            b.favorite_permit_number,
+            b.favorite_hospital_code
         FROM
             tbl_person a
         JOIN tbl_favorite b ON a.person_code = b.person_code
@@ -180,12 +174,13 @@
             a.person_email = #{ userEmail };
     </select>
 
-    <delete id="deleteFavorite" parameterType="String">
+    <delete id="deleteFavorite" parameterType="map">
         DELETE
         FROM
             tbl_favorite
         WHERE
             favorite_name = #{name}
+            and favorite_permit_number = #{ favorite_permit_number }
     </delete>
 
     <select id="findMyReserve" resultMap="reserveMap">

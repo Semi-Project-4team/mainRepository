@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
@@ -339,15 +340,45 @@ public class HospitalController {
     }
 
     @PostMapping("/favorite/insert/{hospitalCode}")
-    public String favoriteInsert(Model model,
-                                 @PathVariable("hospitalCode") int hospitalCode) {
+    public ModelAndView favoriteInsert(ModelAndView mv,
+                                 @PathVariable("hospitalCode") int hospitalCode,
+                                 @RequestParam("permitNumber") int permitNumber,
+                                 RedirectAttributes rAttr) {
+
+//        System.out.println("favoriteInsert permitNumber = " + permitNumber);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
 
+
+        int count = favoriteService.favoriteCount(userEmail);
+
+        if(count >= 3){
+//            System.out.println("count = " + count);
+//            System.out.println("favoriteInsert userEmail = " + userEmail);
+            mv.setViewName("redirect:/hospital/info/detail/" + hospitalCode);
+            System.out.println("즐겨찾기 항목이 가득 찼습니다. (3개)");
+            mv.addObject("message", "즐겨찾기 항목이 가득 찼습니다. (3개)");
+            return mv;
+        }
+
         Map<String, String> stringMap = new HashMap<>();
         stringMap.put("userEmail", userEmail);
         stringMap.put("hospitalCode", String.valueOf(hospitalCode));
+        stringMap.put("permitNumber", String.valueOf(permitNumber));
+
+        System.out.println("stringMap = " + stringMap);
+
+        boolean isExist = favoriteService.favoriteExist(stringMap);
+
+        if(isExist) {
+            System.out.println("isExist = " + isExist);
+            mv.setViewName("redirect:/hospital/info/detail/" + hospitalCode);
+            System.out.println("이미 즐겨찾기 한 병원입니다.");
+            mv.addObject("message", "이미 즐겨찾기 한 병원입니다.");
+            return mv;
+        }
+
 
         favoriteService.favoriteInsert(stringMap);
 
@@ -355,8 +386,10 @@ public class HospitalController {
 //
 //        model.addAttribute("favoriteList", favoriteList);
 
-        return "redirect:/myPage/myInfo";
+//        return "redirect:/myPage/myInfo";
+        mv.setViewName("redirect:/myPage/myInfo");
 //        return "hospitalrefavorite/list";
+        return mv;
     }
 
 //    @GetMapping("/info/hospitalUpdat")

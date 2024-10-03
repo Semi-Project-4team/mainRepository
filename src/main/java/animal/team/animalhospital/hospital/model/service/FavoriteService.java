@@ -36,4 +36,12 @@ public class FavoriteService {
     public void favoriteInsert(Map<String, String> stringMap) {
         favoriteMapper.favoriteInsert(stringMap);
     }
+
+    public int favoriteCount(String userEmail) {
+        return favoriteMapper.favoriteCount(userEmail);
+    }
+
+    public boolean favoriteExist(Map<String, String> stringMap) {
+        return favoriteMapper.favoriteExist(stringMap);
+    }
 }
