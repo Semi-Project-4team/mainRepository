@@ -16,7 +16,7 @@
 
     <resultMap id="favoriteMap" type="animal.team.animalhospital.hospital.model.dto.FavoriteDTO">
         <id property="personCode" column="person_code"/>
-        <result property="hospitalCode" column="hospital_code"/>
+<!--        <result property="hospitalCode" column="hospital_code"/>-->
         <result property="favoriteName" column="favorite_name"/>
         <result property="favoritePermitNumber" column="favorite_permit_number"/>
         <result property="favoriteHospitalCode" column="favorite_hospital_code"/>
@@ -170,7 +170,7 @@
         FROM
             tbl_person a
         JOIN tbl_favorite b ON a.person_code = b.person_code
-        JOIN tbl_hospital c ON b.favorite_name = c.hospital_name
+<!--        JOIN tbl_hospital c ON b.favorite_name = c.hospital_name-->
         where
             a.person_email = #{ userEmail };
     </select>
