@@ -163,6 +163,7 @@
 
     <select id="findMyFavorite" resultMap="favoriteMap">
         SELECT
+            b.person_code,
             b.favorite_name,
             b.favorite_permit_number,
             b.favorite_hospital_code
@@ -276,6 +277,17 @@
         join tbl_hospital c on b.hospital_code = c.hospital_code
         where
             hospital_email = #{ userEmail };
+    </select>
+
+    <select id="findHospitalPhoto" resultType="java.lang.String">
+        select
+            hospital_photo
+        from
+            tbl_hospital
+        where
+            hospital_name = #{ favoriteName }
+        and hospital_permit_number = #{ favoritePermitNumber }
+        and hospital_code = #{ favoriteHospitalCode };
     </select>
 
 </mapper>

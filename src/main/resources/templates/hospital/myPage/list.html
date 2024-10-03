@@ -287,7 +287,7 @@
     <td th:each="myFavorite : ${ myFavoriteList }">
       <div class="favorite-hospital-item">
         <a th:href="@{/hospital/info/detail/{name}(name=${myFavorite.favoriteHospitalCode})}">
-          <img src="사진경로" alt="병원 사진" class="hospital-image">
+          <img th:src="${myFavorite.photo}" alt="병원 사진" class="hospital-image">
         </a>
         <div class="hospital-name">
           <a th:href="@{/hospital/info/detail/{code}(code=${myFavorite.hospitalCode})}"
