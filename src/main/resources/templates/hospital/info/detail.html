@@ -212,6 +212,7 @@
             <button class="button"> 예약하기 </button>
         </form>
         <form sec:authorize="hasAnyAuthority('USER_PERSON')" th:action="@{/hospital/favorite/insert/{code}(code=${ hospital.hospitalCode})}" method="post">
+            <input type="hidden" name="permitNumber" th:value="${hospital.permitNumber}">
             <button class="button"> 즐겨찾기 </button>
         </form>
         <button class="button" onclick="location.href='../list'">목록으로</button>
@@ -378,5 +379,12 @@
     // });
 </script>
 
+<script th:inline="javascript">
+    /* 설명. 오류 메세지를 출력용 alert() */
+    const message = [[${ message }]];
+    if (message) {
+        alert(message);
+    }
+</script>
 </body>
 </html>

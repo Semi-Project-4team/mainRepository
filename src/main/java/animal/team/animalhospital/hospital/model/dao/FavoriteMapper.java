@@ -19,5 +19,9 @@ public interface FavoriteMapper {
 
     void deleteFavorite(int code);
 
-    void favoriteInsert(Map<String, String> stringMap);
+    boolean favoriteInsert(Map<String, String> stringMap);
+
+    int favoriteCount(String userEmail);
+
+    boolean favoriteExist(Map<String, String> stringMap);
 }

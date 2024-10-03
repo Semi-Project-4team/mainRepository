@@ -29,6 +29,7 @@
             tbl_hospital
             where
             hospital_code = #{ hospitalCode }
+            and hospital_permit_number = #{ permitNumber }
             )
         );
     </insert>
@@ -39,6 +40,43 @@
             favorite_name
         FROM
             tbl_favorite
+    </select>
+    <select id="favoriteCount" resultType="java.lang.Integer">
+        select
+            count(person_code)
+        from
+            tbl_favorite
+        where
+            person_code = (select
+                                person_code
+                            from
+                                tbl_person
+                            where
+                                person_email = #{ userEmail });
+    </select>
+
+    <select id="favoriteExist" resultType="java.lang.Boolean">
+        SELECT
+            count(*)
+        from
+            tbl_favorite
+        where
+            person_code = (
+                        select
+                            person_code
+                        from
+                            tbl_person
+                        where
+                            person_email = #{ userEmail })
+        and
+            favorite_name = (
+                        select
+                            hospital_name
+                        from
+                            tbl_hospital
+                        where
+                            hospital_code = #{ hospitalCode }
+                            and hospital_permit_number = #{ permitNumber })
     </select>
 
 </mapper>
