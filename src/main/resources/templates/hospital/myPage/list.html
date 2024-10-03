@@ -291,6 +291,7 @@
         </a>
         <div th:text="${ myFavorite.favoriteName }" class="hospital-name"></div> <!-- 병원이름, 사진과 버튼 사이 간격 추가 -->
         <form th:action="@{/myPage/delete/{name}(name=${myFavorite.favoriteName})}" method="post">
+          <input type="hidden" name="favoritePermitNumber" th:value="${myFavorite.favoritePermitNumber}">
           <button type="submit" class="delete-button">삭제</button>
         </form>
       </div>

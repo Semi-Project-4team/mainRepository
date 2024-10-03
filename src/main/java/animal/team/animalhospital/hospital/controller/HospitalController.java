@@ -364,6 +364,8 @@ public class HospitalController {
         stringMap.put("hospitalCode", String.valueOf(hospitalCode));
         stringMap.put("permitNumber", String.valueOf(permitNumber));
 
+        System.out.println("stringMap = " + stringMap);
+
         boolean isExist = favoriteService.favoriteExist(stringMap);
 
         if(isExist) {

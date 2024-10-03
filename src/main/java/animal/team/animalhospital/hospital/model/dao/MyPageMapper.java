@@ -4,6 +4,7 @@ import animal.team.animalhospital.hospital.model.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface MyPageMapper {
@@ -14,7 +15,7 @@ public interface MyPageMapper {
 
     List<PetDTO> findMyPet(String userEmail);
 
-    void deleteFavorite(String name);
+    void deleteFavorite(Map<String, String> name);
 
     List<ReserveDTO> findMyReserve(String userEmail);
 

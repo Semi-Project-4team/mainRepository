@@ -11,7 +11,7 @@
 
     <insert id="favoriteInsert" parameterType="map">
         INSERT INTO
-        tbl_favorite (person_code, favorite_name)
+            tbl_favorite (person_code, favorite_name, favorite_permit_number)
         VALUES
         (
             (
@@ -30,7 +30,8 @@
             where
             hospital_code = #{ hospitalCode }
             and hospital_permit_number = #{ permitNumber }
-            )
+            ) ,
+            #{ permitNumber }
         );
     </insert>
 
@@ -77,6 +78,8 @@
                         where
                             hospital_code = #{ hospitalCode }
                             and hospital_permit_number = #{ permitNumber })
+        and
+            favorite_permit_number = #{ permitNumber }
     </select>
 
 </mapper>

@@ -17,6 +17,7 @@
     <resultMap id="favoriteMap" type="animal.team.animalhospital.hospital.model.dto.FavoriteDTO">
         <id property="personCode" column="person_code"/>
         <result property="favoriteName" column="favorite_name"/>
+        <result property="favoritePermitNumber" column="favorite_permit_number"/>
     </resultMap>
 
     <resultMap id="petMap" type="animal.team.animalhospital.hospital.model.dto.PetDTO">
@@ -160,7 +161,8 @@
 
     <select id="findMyFavorite" resultMap="favoriteMap">
         SELECT
-            b.favorite_name
+            b.favorite_name,
+            b.favorite_permit_number
         FROM
             tbl_person a
         Join tbl_favorite b ON a.person_code = b.person_code
@@ -168,12 +170,13 @@
             a.person_email = #{ userEmail };
     </select>
 
-    <delete id="deleteFavorite" parameterType="String">
+    <delete id="deleteFavorite" parameterType="map">
         DELETE
         FROM
             tbl_favorite
         WHERE
             favorite_name = #{name}
+            and favorite_permit_number = #{ favorite_permit_number }
     </delete>
 
     <select id="findMyReserve" resultMap="reserveMap">

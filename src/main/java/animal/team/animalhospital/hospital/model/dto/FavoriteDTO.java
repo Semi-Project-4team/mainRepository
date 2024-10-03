@@ -4,13 +4,23 @@ public class FavoriteDTO {
 
     private int personCode;
     private String favoriteName;
+    private String favoritePermitNumber;
 
     public FavoriteDTO() {
     }
 
-    public FavoriteDTO(int personCode, String favoriteName) {
+    public FavoriteDTO(int personCode, String favoriteName, String favoritePermitNumber) {
         this.personCode = personCode;
         this.favoriteName = favoriteName;
+        this.favoritePermitNumber = favoritePermitNumber;
+    }
+
+    public String getFavoritePermitNumber() {
+        return favoritePermitNumber;
+    }
+
+    public void setFavoritePermitNumber(String favoritePermitNumber) {
+        this.favoritePermitNumber = favoritePermitNumber;
     }
 
     public int getPersonCode() {
@@ -34,6 +44,7 @@ public class FavoriteDTO {
         return "FavoriteDTO{" +
                 "personCode=" + personCode +
                 ", favoriteName='" + favoriteName + '\'' +
+                ", favoritePermitNumber='" + favoritePermitNumber + '\'' +
                 '}';
     }
 }
