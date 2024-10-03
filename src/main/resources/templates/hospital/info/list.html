@@ -154,7 +154,7 @@
 <div class="hospital-list">
     <div class="hospital-card" th:each="hospital, iter : ${ hospitalList }">
         <div class="hospital-photo">
-            <img th:src="${thumbnailList[iter.index]}" alt="병원 사진">
+            <img th:src="${thumbnailList[iter.index]}" alt="병원 사진" class="thumbnail">
         </div>
         <div class="hospital-info">
             <h3><a th:href="@{/hospital/info/detail/{code}(code=${ hospital.hospitalCode })}" th:text="${ hospital.name }"></a></h3>

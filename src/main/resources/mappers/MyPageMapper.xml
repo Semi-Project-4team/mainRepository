@@ -16,6 +16,7 @@
 
     <resultMap id="favoriteMap" type="animal.team.animalhospital.hospital.model.dto.FavoriteDTO">
         <id property="personCode" column="person_code"/>
+        <result property="hospitalCode" column="hospital_code"/>
         <result property="favoriteName" column="favorite_name"/>
     </resultMap>
 
@@ -159,11 +160,22 @@
 
 
     <select id="findMyFavorite" resultMap="favoriteMap">
-        SELECT
-            b.favorite_name
+<!--        SELECT-->
+<!--            b.favorite_name-->
+<!--        FROM-->
+<!--            tbl_person a-->
+<!--        Join tbl_favorite b ON a.person_code = b.person_code-->
+<!--        where-->
+<!--            a.person_email = #{ userEmail };-->
+        SELECT DISTINCT
+            b.person_code,
+            b.hospital_code,
+            b.favorite_name,
+            c.hospital_photo
         FROM
             tbl_person a
-        Join tbl_favorite b ON a.person_code = b.person_code
+        JOIN tbl_favorite b ON a.person_code = b.person_code
+        JOIN tbl_hospital c ON b.favorite_name = c.hospital_name
         where
             a.person_email = #{ userEmail };
     </select>
