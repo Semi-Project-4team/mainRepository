@@ -2,6 +2,7 @@ package animal.team.animalhospital.hospital.model.dao;
 
 import animal.team.animalhospital.hospital.model.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -56,4 +57,8 @@ public interface HospitalMapper {
     List<PersonDTO> searchUser(String query);
 
     List<HospitalDTO> searchUserHospital(String query);
+
+    List<HospitalDTO> findAllHospitalCount(@Param("offset") int offset, @Param("limit") int limit);
+
+    long countTotalHospitals();
 }

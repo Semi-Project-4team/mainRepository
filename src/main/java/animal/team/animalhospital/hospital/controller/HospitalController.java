@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.awt.print.Pageable;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
@@ -82,19 +83,32 @@ public class HospitalController {
     }
 
     @GetMapping("/info/list")
-    public String hospitalList(Model model) {
-        List<HospitalDTO> hospitalList = hospitalService.findAllHospital();
+    public String hospitalList(@RequestParam(defaultValue = "1") int page,
+                               @RequestParam(defaultValue = "10") int size,
+                               Model model) {
+        // 병원 리스트와 총 개수 가져오기
+        List<HospitalDTO> hospitalList = hospitalService.findAllHospitalCount(page, size);
+        long totalHospitals = hospitalService.getTotalHospitalCount();
+        int totalPages = (int) Math.ceil((double) totalHospitals / size);
+
         model.addAttribute("hospitalList", hospitalList);
+        model.addAttribute("thumbnailList", getThumbnailList(hospitalList)); // 썸네일 리스트
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("size", size);
 
+        System.out.println("page = " + page);
+        System.out.println("size = " + size);
+
+        return "/hospital/info/list"; // 뷰 이름
+    }
+
+    private List<String> getThumbnailList(List<HospitalDTO> hospitalList) {
         List<String> pathsList = new ArrayList<>();
-
         for (HospitalDTO hospitalDTO : hospitalList) {
             pathsList.add(hospitalDTO.getPhoto().split(",")[0]);
         }
-
-        System.out.println("pathsList = " + pathsList);
-        model.addAttribute("thumbnailList", pathsList); // 모델에 추가
-        return "/hospital/info/list"; // 뷰 이름
+        return pathsList;
     }
 
     @GetMapping("/search")
