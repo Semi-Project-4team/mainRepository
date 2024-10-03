@@ -151,6 +151,7 @@ CREATE TABLE IF NOT EXISTS tbl_favorite
     person_code INT NOT NULL COMMENT '개인코드',
     favorite_name VARCHAR(10) NOT NULL COMMENT '즐겨찾기이름',
     favorite_permit_number VARCHAR(15) NOT NULL COMMENT '즐겨찾기병원인가번호',
+    favorite_hospital_code INT COMMENT '즐겨찾기병원코드',
     CONSTRAINT fk_person_code3 FOREIGN KEY (person_code) REFERENCES tbl_person(person_code)
 ) ENGINE=INNODB COMMENT '즐겨찾기';
 
@@ -403,8 +404,8 @@ VALUES
 #     (3, 3, '모밀이', '갱얼쥐', '000000', 'Y', '000000', 'KHGFKF', '남');
 
 INSERT INTO
-    tbl_favorite (person_code, favorite_name, favorite_permit_number)
+    tbl_favorite (person_code, favorite_name, favorite_permit_number, favorite_hospital_code)
 VALUES
-    (1, '꼼이건강검진병원', '123123123'),
-    (2, '오곡이', '235435235');
+    (1, '꼼이건강검진병원', '123123123', '1'),
+    (2, '오곡이', '235435235', '2');
 #     (3, '모밀이병원');

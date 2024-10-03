@@ -18,6 +18,7 @@
         <id property="personCode" column="person_code"/>
         <result property="favoriteName" column="favorite_name"/>
         <result property="favoritePermitNumber" column="favorite_permit_number"/>
+        <result property="favoriteHospitalCode" column="favorite_hospital_code"/>
     </resultMap>
 
     <resultMap id="petMap" type="animal.team.animalhospital.hospital.model.dto.PetDTO">
@@ -162,7 +163,8 @@
     <select id="findMyFavorite" resultMap="favoriteMap">
         SELECT
             b.favorite_name,
-            b.favorite_permit_number
+            b.favorite_permit_number,
+            b.favorite_hospital_code
         FROM
             tbl_person a
         Join tbl_favorite b ON a.person_code = b.person_code

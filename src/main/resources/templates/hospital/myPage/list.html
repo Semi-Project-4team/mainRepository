@@ -286,7 +286,7 @@
   <tr>
     <td th:each="myFavorite : ${ myFavoriteList }">
       <div class="favorite-hospital-item">
-        <a th:href="@{/hospital/detail/{name}(name=${myFavorite.favoriteName})}">
+        <a th:href="@{/hospital/info/detail/{name}(name=${myFavorite.favoriteHospitalCode})}">
           <img src="사진경로" alt="병원 사진" class="hospital-image">
         </a>
         <div th:text="${ myFavorite.favoriteName }" class="hospital-name"></div> <!-- 병원이름, 사진과 버튼 사이 간격 추가 -->

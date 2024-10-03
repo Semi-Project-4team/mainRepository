@@ -5,14 +5,16 @@ public class FavoriteDTO {
     private int personCode;
     private String favoriteName;
     private String favoritePermitNumber;
+    private String favoriteHospitalCode;
 
     public FavoriteDTO() {
     }
 
-    public FavoriteDTO(int personCode, String favoriteName, String favoritePermitNumber) {
+    public FavoriteDTO(int personCode, String favoriteName, String favoritePermitNumber, String favoriteHospitalCode) {
         this.personCode = personCode;
         this.favoriteName = favoriteName;
         this.favoritePermitNumber = favoritePermitNumber;
+        this.favoriteHospitalCode = favoriteHospitalCode;
     }
 
     public String getFavoritePermitNumber() {
@@ -39,12 +41,21 @@ public class FavoriteDTO {
         this.favoriteName = favoriteName;
     }
 
+    public String getFavoriteHospitalCode() {
+        return favoriteHospitalCode;
+    }
+
+    public void setFavoriteHospitalCode(String favoriteHospitalCode) {
+        this.favoriteHospitalCode = favoriteHospitalCode;
+    }
+
     @Override
     public String toString() {
         return "FavoriteDTO{" +
                 "personCode=" + personCode +
                 ", favoriteName='" + favoriteName + '\'' +
                 ", favoritePermitNumber='" + favoritePermitNumber + '\'' +
+                ", favoriteHospitalCode='" + favoriteHospitalCode + '\'' +
                 '}';
     }
 }

@@ -7,11 +7,13 @@
     <resultMap id="favoriteResultMap" type="animal.team.animalhospital.hospital.model.dto.FavoriteDTO">
         <id property="personCode" column="person_code"/>
         <result property="favoriteName" column="favorite_name"/>
+        <result property="favoritePermitNumber" column="favorite_permit_number"/>
+        <result property="favoriteHospitalCode" column="favorite_hospital_code"/>
     </resultMap>
 
     <insert id="favoriteInsert" parameterType="map">
         INSERT INTO
-            tbl_favorite (person_code, favorite_name, favorite_permit_number)
+            tbl_favorite (person_code, favorite_name, favorite_permit_number, favorite_hospital_code)
         VALUES
         (
             (
@@ -31,7 +33,8 @@
             hospital_code = #{ hospitalCode }
             and hospital_permit_number = #{ permitNumber }
             ) ,
-            #{ permitNumber }
+            #{ permitNumber } ,
+            #{ hospitalCode }
         );
     </insert>
 
