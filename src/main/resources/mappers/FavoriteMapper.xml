@@ -24,7 +24,6 @@
             where
             person_email = #{ userEmail }
             ) ,
-            #{ hospitalCode },
             (
             select
             hospital_name
