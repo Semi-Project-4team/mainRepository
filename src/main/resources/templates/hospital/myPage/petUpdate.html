@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="/css/header.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
       background-color: #f4f8fb;
       margin: 0;
       padding: 0;
@@ -17,7 +16,7 @@
     }
 
     h1 {
-      color: #58ccff;
+      color: #18a8f1;
       font-size: 24px;
       text-align: center;
       margin-bottom: 20px;
@@ -26,10 +25,14 @@
     form {
       background-color: white;
       border-radius: 8px;
-      padding: 30px;
+      padding: 50px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      width: 350px;
+      width: 500px;
       text-align: center;
+    }
+
+    .item{
+      margin-bottom: 20px;
     }
 
     .editBtn {
@@ -42,11 +45,11 @@
     }
 
     input[type="text"], input[type="file"] {
+      box-sizing: border-box;
       width: 100%;
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 4px;
-      margin-bottom: 15px;
       font-size: 14px;
     }
 
@@ -57,18 +60,18 @@
 
     .radio-group {
       display: flex;
-      justify-content: space-between;
       margin-bottom: 15px;
       gap:5px;
     }
 
     .radio-group label {
-      margin-right: 10px;
+      text-align: left;
+      width: 50%;
       font-weight: normal;
     }
 
     .updateBtn {
-      background-color: #58ccff;
+      background-color: #18a8f1;
       color: white;
       padding: 12px 20px;
       border: none;
@@ -91,6 +94,47 @@
       }
     }
 
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .radio-group input[type="radio"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      border: 1px solid #d1d6db;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .radio-group input[type="radio"]:checked {
+      border: 5px solid #18a8f1; /* 테두리와 원 사이의 색상 */
+    }
+
+    .radio-group input[type="radio"]::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      visibility: hidden;
+    }
+
+    .radio-group input[type="radio"]:checked::before {
+      visibility: visible;
+    }
+
+
+
   </style>
 </head>
 
@@ -99,38 +143,55 @@
 <body>
 <form action="/myPage/petUpdate" method="post" enctype="multipart/form-data">
   <h1>반려동물 정보 수정</h1>
-  <input type="hidden" name="petPersonCode" th:value="${myPet.petPersonCode}"/>
-  <input type="hidden" name="personCode" th:value="${myPet.personCode}"/>
-
-  <label class=editBtn for="petName">이름</label>
-  <input type="text" name="petName" id="petName" th:value="${myPet.petName}"/>
-
-  <label class=editBtn for="petType">종류</label>
-  <input type="text" name="petType" id="petType" th:value="${myPet.petType}"/>
-
-  <label class=editBtn for="petBirth">생일</label>
-  <input type="text" name="petBirth" id="petBirth" th:value="${myPet.petBirth}"/>
-
-  <label class=editBtn >성별</label>
-  <div class="radio-group">
-    <label><input type="radio" name="petGender" value="남" th:checked="${myPet.petGender == '수컷'}"> 수컷</label>
-    <label><input type="radio" name="petGender" value="여" th:checked="${myPet.petGender == '암컷'}"> 암컷</label>
+  <div class="item">
+    <input type="hidden" name="petPersonCode" th:value="${myPet.petPersonCode}"/>
+    <input type="hidden" name="personCode" th:value="${myPet.personCode}"/>
   </div>
 
-  <label class=editBtn >예방접종여부</label>
-  <div class="radio-group">
-    <label><input type="radio" name="petVaccination" value="Y" th:checked="${myPet.petVaccination == '예'}"> 예</label>
-    <label><input type="radio" name="petVaccination" value="N" th:checked="${myPet.petVaccination == '아니오'}"> 아니오</label>
+  <div class="item">
+   <label class=editBtn for="petName">이름</label>
+    <input type="text" name="petName" id="petName" th:value="${myPet.petName}"/>
   </div>
 
-  <label class=editBtn >내장칩여부</label>
-  <div class="radio-group">
-    <label><input type="radio" name="petChip" value="Y" th:checked="${myPet.petChip == '예'}"> 예</label>
-    <label><input type="radio" name="petChip" value="N" th:checked="${myPet.petChip == '아니오'}"> 아니오</label>
+  <div class="item">
+    <label class=editBtn for="petType">종류</label>
+    <input type="text" name="petType" id="petType" th:value="${myPet.petType}"/>
   </div>
 
-  <label class=editBtn for="singleProFile">프로필사진</label>
-  <input type="file" name="singleProFile" id="singleProFile"/>
+  <div class="item">
+    <label class=editBtn for="petBirth">생일</label>
+    <input type="text" name="petBirth" id="petBirth" th:value="${myPet.petBirth}"/>
+  </div>
+
+  <div class="item">
+    <label class=editBtn >성별</label>
+    <div class="radio-group">
+      <label><input type="radio" name="petGender" value="남" th:checked="${myPet.petGender == '수컷'}"> 수컷</label>
+      <label><input type="radio" name="petGender" value="여" th:checked="${myPet.petGender == '암컷'}"> 암컷</label>
+    </div>
+  </div>
+
+  <div class="item">
+    <label class=editBtn >예방접종여부</label>
+    <div class="radio-group">
+      <label><input type="radio" name="petVaccination" value="Y" th:checked="${myPet.petVaccination == '예'}"> 예</label>
+      <label><input type="radio" name="petVaccination" value="N" th:checked="${myPet.petVaccination == '아니오'}"> 아니오</label>
+    </div>
+  </div>
+
+
+  <div class="item">
+    <label class=editBtn >내장칩여부</label>
+    <div class="radio-group">
+      <label><input type="radio" name="petChip" value="Y" th:checked="${myPet.petChip == '예'}"> 예</label>
+      <label><input type="radio" name="petChip" value="N" th:checked="${myPet.petChip == '아니오'}"> 아니오</label>
+    </div>
+  </div>
+
+  <div class="item">
+    <label class=editBtn for="singleProFile">프로필사진</label>
+    <input type="file" name="singleProFile" id="singleProFile"/>
+  </div>
 
   <button class="updateBtn" type="submit">수정하기</button>
 </form>

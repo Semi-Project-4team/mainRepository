@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <title>탭을 이용한 테이블 보기</title>
     <style>
+
         body {
+            background-color: #f9f9f9;
+
             margin-top: 100px;
         }
+
+        .personal-table{
+            margin: 0 200px;
+        }
+
+        .hospital-table{
+            margin: 0 40px;
+        }
+
+        .tab-wrap{
+            border-bottom: 1px solid #888;
+        }
+
 
         /* 탭 스타일 */
         .tab {
@@ -14,25 +30,36 @@
             margin-right: 10px;
             padding: 10px 50px;
             cursor: pointer;
-            background-color: #f9f9f9;
+            background-color: #fff;
             color: #333;
             border: 2px solid transparent;
             transition: background-color 0.3s, border-color 0.3s;
         }
 
         .tab:hover {
-            background-color: #e0f7ff;
+            color: #fff;
+            font-weight: 500;
             border-color: #18a8f1;
+            background-color: #18a8f1;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
         }
 
         .active-tab {
-            border-top-color: #18a8f1;
+            color: #fff;
+            font-weight: 500;
+            border-color: #18a8f1;
+            background-color: #18a8f1;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+
         }
 
         /* 테이블 컨테이너 */
         .table-container {
+            margin-bottom: 100px;
             display: none; /* 기본적으로 숨김 */
-            margin-top: 20px;
+            margin-top:50px;
             /*width: 70%;*/
         }
 
@@ -45,13 +72,13 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            font-family: Arial, sans-serif;
         }
 
         th, td {
+            background-color: white;
             padding: 12px;
             border: 1px solid #ddd;
-            text-align: left;
+            text-align: center;
         }
 
         th {
@@ -67,15 +94,21 @@
             background-color: #e0f7ff;
         }
 
+        .status-wrap{
+            justify-content: center;
+            display: flex;
+            gap: 5px;
+        }
+
         /* 메인 버튼 스타일 */
         button {
             background-color: #18a8f1;
             color: white;
-            padding: 10px 20px;
+            padding: 5px 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             transition: background-color 0.3s;
         }
 
@@ -91,24 +124,44 @@
         /*    width: 70%;*/
         /*}*/
         .searchBtn{
+            margin-bottom: 100px;
             text-align: center;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
         }
+
+        .searchBtn form{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .searchBtn input{
+            border: 1px solid #999;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
     </style>
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
 
 <div class="header-container" th:insert="~{common/header.html}"></div> <!-- 헤더 포함 -->
 
 <!-- 탭 네비게이션 -->
-<div>
+<div class="tab-wrap">
     <span id="personTab" class="tab active-tab" onclick="showTable('personTable', 'personTab')">일반회원 목록</span>
     <span id="hospitalTab" class="tab" onclick="showTable('hospitalTable', 'hospitalTab')">병원회원 목록</span>
 </div>
-<hr>
+
 
 <!-- 회원 테이블 -->
-<div id="personTable" class="table-container active-table">
+<div id="personTable" class="table-container active-table personal-table" >
     <table>
         <tr>
             <th>회원코드</th>
@@ -127,26 +180,27 @@
             <td th:text="${person.phoneNumber}"></td>
             <td th:text="${person.isAccountDrawal}"></td>
             <td>
-                <!--                <button onclick="updateStatus(`${ hospital.hospitalCode }`, 'Y')">활성화</button>-->
-                <!--                <button onclick="updateStatus(`${ hospital.hospitalCode }`, 'N')">비활성화</button>-->
-                <form action="/user/updatePersonStatus" method="post">
-                    <input type="hidden" name="status" value="Y">
-                    <input type="hidden" name="personCode" class="personCode" th:value="${person.personCode}" onclick="personCodeChange()">
-                    <button type="submit">활성화</button>
-                </form>
-                <br>
-                <form action="/user/updatePersonStatus" method="post">
-                    <input type="hidden" name="status" value="N">
-                    <input type="hidden" name="personCode" class="personCode" th:value="${person.personCode}" onclick="personCodeChange()">
-                    <button type="submit">비활성화</button>
-                </form>
+                <div class="status-wrap">
+                    <!--<button onclick="updateStatus(`${ hospital.hospitalCode }`, 'Y')">활성화</button>-->
+                    <!--<button onclick="updateStatus(`${ hospital.hospitalCode }`, 'N')">비활성화</button>-->
+                    <form action="/user/updatePersonStatus" method="post">
+                        <input type="hidden" name="status" value="Y">
+                        <input type="hidden" name="personCode" class="personCode" th:value="${person.personCode}" onclick="personCodeChange()">
+                        <button type="submit">활성화</button>
+                    </form>
+                    <form action="/user/updatePersonStatus" method="post">
+                        <input type="hidden" name="status" value="N">
+                        <input type="hidden" name="personCode" class="personCode" th:value="${person.personCode}" onclick="personCodeChange()">
+                        <button type="submit">비활성화</button>
+                    </form>
+                </div>
             </td>
         </tr>
     </table>
 </div>
 
 <!-- 병원 테이블 -->
-<div id="hospitalTable" class="table-container">
+<div id="hospitalTable" class="table-container hospital-table">
     <table>
         <tr>
             <th>병원코드</th>
@@ -179,31 +233,31 @@
             <td th:text="${hospital.phoneNumber}"></td>
             <td th:text="${hospital.isAccountDrawal}"></td>
             <td>
-<!--                <button onclick="updateStatus(`${ hospital.hospitalCode }`, 'Y')">활성화</button>-->
-<!--                <button onclick="updateStatus(`${ hospital.hospitalCode }`, 'N')">비활성화</button>-->
-                <form action="/user/updateHospitalStatus" method="post">
-                    <input type="hidden" name="status" value="Y">
-                    <input type="hidden" name="hospitalCode" class="hospitalCode" th:value="${hospital.hospitalCode}" onclick="hospitalCodeChange()">
-                    <button type="submit">활성화</button>
-                </form>
-                <br>
-                <form action="/user/updateHospitalStatus" method="post">
-                    <input type="hidden" name="status" value="N">
-                    <input type="hidden" name="hospitalCode" class="hospitalCode" th:value="${hospital.hospitalCode}" onclick="hospitalCodeChange()">
-                    <button type="submit">비활성화</button>
-                </form>
+                <div class="status-wrap">
+                    <!--<button onclick="updateStatus(`${ hospital.hospitalCode }`, 'Y')">활성화</button>-->
+                    <!--<button onclick="updateStatus(`${ hospital.hospitalCode }`, 'N')">비활성화</button>-->
+                    <form action="/user/updateHospitalStatus" method="post">
+                        <input type="hidden" name="status" value="Y">
+                        <input type="hidden" name="hospitalCode" class="hospitalCode" th:value="${hospital.hospitalCode}" onclick="hospitalCodeChange()">
+                        <button type="submit">활성화</button>
+                    </form>
+                    <br>
+                    <form action="/user/updateHospitalStatus" method="post">
+                        <input type="hidden" name="status" value="N">
+                        <input type="hidden" name="hospitalCode" class="hospitalCode" th:value="${hospital.hospitalCode}" onclick="hospitalCodeChange()">
+                        <button type="submit">비활성화</button>
+                    </form>
+                </div>
             </td>
         </tr>
     </table>
 </div>
 
-<br>
-<br>
 <div class="searchBtn">
-<form action="/hospital/search/user" method="GET">
-    <input class="searchInput" type="text" id="query" name="query">
-    <button class="search-button" type="submit">찾기</button>
-</form>
+    <form action="/hospital/search/user" method="GET">
+        <input class="searchInput" type="text" id="query" name="query">
+        <button class="search-button" type="submit">찾기</button>
+    </form>
 </div>
 
 <!--<br>-->
@@ -267,6 +321,8 @@
     //         });
     // }
 </script>
+<div th:insert="~{common/footer.html}"></div> <!-- 푸터 포함 -->
+
 
 </body>
 </html>
