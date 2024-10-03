@@ -185,6 +185,7 @@ public class HospitalController {
                                  @RequestParam("hospitalCode") int hospitalCode,
                                  @RequestParam List<MultipartFile> multiHospitalFiles,
                                  RedirectAttributes rAttr) throws IOException {
+        System.out.println("address1 = " + address);
         hospitalService.updateHospital(hospital);
 
         System.out.println("hospitalCode = " + hospitalCode);
@@ -241,7 +242,8 @@ public class HospitalController {
             System.out.println("test1");
 
             // 지역 정규화
-            Pattern pattern = Pattern.compile("([가-힣]+동)\\s(\\d+-\\d+)");
+            System.out.println("address2 = " + address);
+            Pattern pattern = Pattern.compile("([가-힣]+동)\\s(\\d+-?\\d*)");
             Matcher matcher = pattern.matcher(address);
 
             String addressDong = "";
@@ -253,6 +255,8 @@ public class HospitalController {
             if (matcher.find()) {
                 addressDong = matcher.group(1); // "신길동"
                 addressNum = matcher.group(2);  // "469-3"
+                System.out.println("addressDong = " + addressDong);
+                System.out.println("addressNum = " + addressNum);
             }
 
             stringMap.put("photoPaths", photoPaths);
@@ -260,7 +264,8 @@ public class HospitalController {
             stringMap.put("eupmyeondongCode", addressDong);
             stringMap.put("detailAddress", addressDong + " " + addressNum);
 
-            System.out.println("test2");
+            System.out.println("stringMap = " + stringMap);
+
             hospitalService.updateHospitalPhoto(stringMap);
 
             System.out.println("test3");

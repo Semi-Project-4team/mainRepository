@@ -48,7 +48,7 @@ public class UserController {
         System.out.println("address = " + address);
 
         /**/
-        Pattern pattern = Pattern.compile("([가-힣]+동)\\s(\\d+-\\d+)");
+        Pattern pattern = Pattern.compile("([가-힣]+동)\\s(\\d+-?\\d*)");
         Matcher matcher = pattern.matcher(address);
 
         String addressDong = "";
