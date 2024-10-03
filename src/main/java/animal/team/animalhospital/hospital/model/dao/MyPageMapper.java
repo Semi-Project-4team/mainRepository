@@ -42,4 +42,6 @@ public interface MyPageMapper {
     void userWithDrawal(String userEmail);
 
     void hospitalWithDrawal(String userEmail);
+
+    String findHospitalPhoto(Map<String, String> stringMap);
 }

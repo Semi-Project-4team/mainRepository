@@ -54,6 +54,16 @@ public class MyPageController {
         List<PetDTO> myPetList = myPageService.findMyPet(userEmail);
         List<HospitalDTO> myHospitalList = myPageService.findMyHospital(userEmail);
 
+
+        for (FavoriteDTO favoriteDTO : myFavoriteList) {
+            Map<String, String> stringMap = new HashMap<>();
+            stringMap.put("favoriteName", favoriteDTO.getFavoriteName());
+            stringMap.put("favoritePermitNumber", favoriteDTO.getFavoritePermitNumber());
+            stringMap.put("favoriteHospitalCode", favoriteDTO.getFavoriteHospitalCode());
+
+            favoriteDTO.setPhoto(myPageService.findHospitalPhoto(stringMap).split(",")[0]);
+        }
+
         System.out.println("myInfoList = " + myInfoList);
         System.out.println("myReserveList = " + myReserveList);
         System.out.println("myFavoriteList = " + myFavoriteList);

@@ -88,6 +88,10 @@ public class MyPageService {
     public void userWithDrawal(String userEmail) {
         myPageMapper.userWithDrawal(userEmail);
     }
+
+    public String findHospitalPhoto(Map<String, String> stringMap) {
+        return myPageMapper.findHospitalPhoto(stringMap);
+    }
 }
 
 
