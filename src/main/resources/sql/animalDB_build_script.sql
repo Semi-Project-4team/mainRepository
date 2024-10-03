@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS tbl_reserve (
 CREATE TABLE IF NOT EXISTS tbl_favorite
 (
     person_code INT NOT NULL COMMENT '개인코드',
+    hospital_code INT NOT NULL COMMENT '병원코드',
     favorite_name VARCHAR(10) NOT NULL COMMENT '즐겨찾기이름',
     favorite_permit_number VARCHAR(15) NOT NULL COMMENT '즐겨찾기병원인가번호',
     favorite_hospital_code INT COMMENT '즐겨찾기병원코드',

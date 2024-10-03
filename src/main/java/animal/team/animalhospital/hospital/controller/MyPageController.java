@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -69,6 +70,15 @@ public class MyPageController {
         model.addAttribute("myHospitalList", myHospitalList);
         model.addAttribute("myFavoriteList", myFavoriteList);
         model.addAttribute("myPetList",myPetList);
+
+//        List<String> pathsList = new ArrayList<>();
+//
+//        for (HospitalDTO hospitalDTO : myHospitalList) {
+//            pathsList.add(hospitalDTO.getPhoto().split(",")[0]);
+//        }
+//
+//        System.out.println("pathsList = " + pathsList);
+//        model.addAttribute("thumbnailList", pathsList); // 모델에 추가
 
         return "hospital/myPage/list";
     }

@@ -207,16 +207,16 @@
       background-color: #4ba3d4; /* Darker color on hover */
     }
 
-    .deleteUser{
+    .deleteUser {
       text-align: right;
     }
 
-    .deleteUser-button {
+    .deleteUserBtn {
       background-color: #666666;
-      margin-top: 70px;
-      margin-bottom: 50px;
+      margin-top: 20px;
+      margin-bottom: 30px;
     }
-    .deleteUser-button:hover {
+    .deleteUserBtn:hover {
       background-color: #951515;
     }
 
@@ -289,7 +289,10 @@
         <a th:href="@{/hospital/info/detail/{name}(name=${myFavorite.favoriteHospitalCode})}">
           <img src="사진경로" alt="병원 사진" class="hospital-image">
         </a>
-        <div th:text="${ myFavorite.favoriteName }" class="hospital-name"></div> <!-- 병원이름, 사진과 버튼 사이 간격 추가 -->
+        <div class="hospital-name">
+          <a th:href="@{/hospital/info/detail/{code}(code=${myFavorite.hospitalCode})}"
+             th:text="${ myFavorite.favoriteName }"></a>
+        </div> <!-- 병원이름, 사진과 버튼 사이 간격 추가 -->
         <form th:action="@{/myPage/delete/{name}(name=${myFavorite.favoriteName})}" method="post">
           <input type="hidden" name="favoritePermitNumber" th:value="${myFavorite.favoritePermitNumber}">
           <button type="submit" class="delete-button">삭제</button>
@@ -336,16 +339,17 @@
         <td th:text="${ myPet.petChip }"></td>
       </tr>
     </table>
+
     <div class="edit-button-container">
       <button class="edit-button" onclick="location.href='/myPage/petUpdate'">수정 및 등록</button>
     </div>
   </div>
 </div>
 
+<div class="deleteUser">
+  <button class="deleteUserBtn" onclick="confirmWithdrawal()">계정 탈퇴</button>
 </div>
 
-<div>
-  <button onclick="confirmWithdrawal()">계정 탈퇴</button>
 </div>
 
 <script>

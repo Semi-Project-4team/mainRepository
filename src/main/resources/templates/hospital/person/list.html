@@ -90,6 +90,9 @@
         /*hospitalTable {*/
         /*    width: 70%;*/
         /*}*/
+        .searchBtn{
+            text-align: center;
+        }
     </style>
     <link rel="stylesheet" href="/css/header.css">
 </head>
@@ -113,9 +116,8 @@
             <th>이메일</th>
             <th>생년월일</th>
             <th>전화번호</th>
-            <th>정보수집동의확인</th>
-            <th>일반회원탈퇴여부</th>
-            <th>회원탈퇴활성</th>
+            <th>회원활성여부</th>
+            <th>계정사용활성화</th>
         </tr>
         <tr th:each="person : ${personList}">
             <td th:text="${person.personCode}"></td>
@@ -123,7 +125,6 @@
             <td th:text="${person.email}"></td>
             <td th:text="${person.birth}"></td>
             <td th:text="${person.phoneNumber}"></td>
-            <td th:text="${person.informationCollection}"></td>
             <td th:text="${person.isAccountDrawal}"></td>
             <td>
                 <!--                <button onclick="updateStatus(`${ hospital.hospitalCode }`, 'Y')">활성화</button>-->
@@ -133,6 +134,7 @@
                     <input type="hidden" name="personCode" class="personCode" th:value="${person.personCode}" onclick="personCodeChange()">
                     <button type="submit">활성화</button>
                 </form>
+                <br>
                 <form action="/user/updatePersonStatus" method="post">
                     <input type="hidden" name="status" value="N">
                     <input type="hidden" name="personCode" class="personCode" th:value="${person.personCode}" onclick="personCodeChange()">
@@ -159,7 +161,8 @@
             <th>소재지</th>
             <th>소개글</th>
             <th>전화번호</th>
-            <th>병원회원탈퇴여부</th>
+            <th>회원활성여부</th>
+            <th>계정사용활성화</th>
         </tr>
         <tr th:each="hospital : ${hospitalList}">
             <td th:text="${hospital.hospitalCode}"></td>
@@ -183,6 +186,7 @@
                     <input type="hidden" name="hospitalCode" class="hospitalCode" th:value="${hospital.hospitalCode}" onclick="hospitalCodeChange()">
                     <button type="submit">활성화</button>
                 </form>
+                <br>
                 <form action="/user/updateHospitalStatus" method="post">
                     <input type="hidden" name="status" value="N">
                     <input type="hidden" name="hospitalCode" class="hospitalCode" th:value="${hospital.hospitalCode}" onclick="hospitalCodeChange()">
@@ -195,10 +199,12 @@
 
 <br>
 <br>
+<div class="searchBtn">
 <form action="/hospital/search/user" method="GET">
     <input class="searchInput" type="text" id="query" name="query">
     <button class="search-button" type="submit">찾기</button>
 </form>
+</div>
 
 <!--<br>-->
 <!--<button onclick="location.href='/'">메인으로</button>-->

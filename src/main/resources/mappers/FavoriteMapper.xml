@@ -24,6 +24,7 @@
             where
             person_email = #{ userEmail }
             ) ,
+            #{ hospitalCode },
             (
             select
             hospital_name
@@ -41,6 +42,7 @@
     <select id="findAllFavorite" resultMap="favoriteResultMap">
         SELECT
             person_code,
+            hospital_code,
             favorite_name
         FROM
             tbl_favorite
