@@ -384,7 +384,7 @@ VALUES
 INSERT INTO
     tbl_person_review
 VALUES
-    (1,1,now(),now(),5,'abcd','abcd');
+    (1,1,'2024-10-01' ,'2024-10-01',5,'/images/dongpl-tradeMark.png','병원이 친철하고 의사가 깨끗해요!');
 
 INSERT INTO
     tbl_notice (notice_name, notice_date, notice_views, notice_text, notice_status)
