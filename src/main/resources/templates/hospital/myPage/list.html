@@ -290,8 +290,7 @@
           <img th:src="${myFavorite.photo}" alt="병원 사진" class="hospital-image">
         </a>
         <div class="hospital-name">
-          <a th:href="@{/hospital/info/detail/{code}(code=${myFavorite.hospitalCode})}"
-             th:text="${ myFavorite.favoriteName }"></a>
+          <a th:text="${ myFavorite.favoriteName }"></a>
         </div> <!-- 병원이름, 사진과 버튼 사이 간격 추가 -->
         <form th:action="@{/myPage/delete/{name}(name=${myFavorite.favoriteName})}" method="post">
           <input type="hidden" name="favoritePermitNumber" th:value="${myFavorite.favoritePermitNumber}">

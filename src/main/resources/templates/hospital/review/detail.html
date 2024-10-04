@@ -71,7 +71,10 @@
         <p><em>리뷰작성날짜:</em> <span th:text="${review.reviewWriteDate}"></span></p>
         <p><em>리뷰수정날짜:</em> <span th:text="${review.reviewModifyDate}"></span></p>
         <p><em>리뷰점수: </em><span th:text="${review.reviewScore}"></span></p>
-        <p><em>리뷰사진:</em> <span th:text="${review.reviewPhoto}"></span></p>
+        <p><em>리뷰사진:</em>
+<!--            <span th:text="${review.reviewPhoto}"></span>-->
+            <img th:src="${review.reviewPhoto}" alt="reviewPhoto" width="400px" height="auto">
+        </p>
         <p><em>리뷰내용:</em> <span th:text="${review.reviewExplanation}"></span></p>
     </div>
 
