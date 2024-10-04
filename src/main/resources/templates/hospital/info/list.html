@@ -42,14 +42,15 @@
 
         .hospital-photo {
             flex: 1;
-            margin-right: 20px;
+            margin-right: 10px;
         }
 
         .hospital-photo img {
-            width: 100px;
+            width: 150px;
             height: 100px;
-            object-fit: cover;
-            border-radius: 10px; /* 사진을 원 모양으로 */
+            object-fit: scale-down;
+            justify-content: center;
+            border-radius: 10px;
         }
 
         .hospital-info {
@@ -130,7 +131,6 @@
             text-decoration: none; /* 텍스트 밑줄 제거 */
             display: flex; /* 버튼을 인라인 블록으로 표시 */
             font-size: 16px; /* 글자 크기 */
-            margin-top: 20px; /* 위쪽 여백 */
             cursor: pointer; /* 커서 모양 */
             border-radius: 5px; /* 모서리 둥글게 */
             justify-content: flex-end;
@@ -199,18 +199,27 @@
 
 <nav aria-label="pagination">
     <ul class="pagination justify-content-center">
+        <!-- 이전 버튼 -->
         <li class="page-item" th:if="${currentPage > 1}">
             <a class="page-link" th:href="@{/hospital/info/list(page=${currentPage - 1}, size=${size})}">이전</a>
         </li>
+
+        <!-- 페이지 번호 1 -->
         <li class="page-item" th:classappend="${currentPage == 1} ? 'active' : ''">
             <a class="page-link" th:href="@{/hospital/info/list(page=1, size=${size})}">1</a>
         </li>
-        <li class="page-item" th:classappend="${currentPage == 2} ? 'active' : ''">
+
+        <!-- 페이지 번호 2 -->
+        <li class="page-item" th:if="${totalPages >= 2}" th:classappend="${currentPage == 2} ? 'active' : ''">
             <a class="page-link" th:href="@{/hospital/info/list(page=2, size=${size})}">2</a>
         </li>
-        <li class="page-item" th:if="${totalPages >= 3}">
-            <a class="page-link" th:href="@{/hospital/info/list(page=3, size=${size})}" th:text="'3'"></a>
+
+        <!-- 페이지 번호 3 -->
+        <li class="page-item" th:if="${totalPages >= 3}" th:classappend="${currentPage == 3} ? 'active' : ''">
+            <a class="page-link" th:href="@{/hospital/info/list(page=3, size=${size})}">3</a>
         </li>
+
+        <!-- 다음 버튼 -->
         <li class="page-item" th:if="${currentPage < totalPages}">
             <a class="page-link" th:href="@{/hospital/info/list(page=${currentPage + 1}, size=${size})}">다음</a>
         </li>
