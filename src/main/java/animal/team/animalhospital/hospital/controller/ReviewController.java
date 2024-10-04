@@ -172,8 +172,8 @@ public class ReviewController {
 
         reviewService.deleteReview1(params);
 
-        return "redirect:/review/list";
-
+//        return "redirect:/review/list";
+        return "redirect:/hospital/info/detail/" + hospitalCode;
     }
 
     @GetMapping("/update/{code}/{hospitalCode}")

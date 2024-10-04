@@ -212,6 +212,7 @@
             tbl_hospital a ON a.hospital_code = b.hospital_code
         WHERE
             a.hospital_email = #{ userEmail }
+            and b.reserve_status = 'Y';
     </select>
 
     <select id="findMyHospital" resultMap="hospitalMap">
