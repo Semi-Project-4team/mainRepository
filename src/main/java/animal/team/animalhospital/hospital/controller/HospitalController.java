@@ -284,13 +284,15 @@ public class HospitalController {
 
             System.out.println("test3");
 
-            rAttr.addFlashAttribute("message", "[Success] 다중 파일 업로드 성공!");
+//            rAttr.addFlashAttribute("message", "[Success] 다중 파일 업로드 성공!");
+            rAttr.addFlashAttribute("message", "수정에 성공하였습니다!");
             rAttr.addFlashAttribute("imgs", savedFilesPaths);
             System.out.println("다중 파일 업로드 성공.");
         } catch (Exception e) {
             e.printStackTrace();
 
-            rAttr.addFlashAttribute("message", "[Failed] 다중 파일 업로드 실패!!");
+//            rAttr.addFlashAttribute("message", "[Failed] 다중 파일 업로드 실패!!");
+            rAttr.addFlashAttribute("message", "수정에 실패하였습니다!");
             System.out.println("다중 파일 업로드 실패.");
         }
         return "redirect:/hospital/info/detail/" + hospital.getHospitalCode();
