@@ -231,6 +231,16 @@
             hospital_email = #{ email };
     </select>
 
+    <select id="findAllHospitalCount" resultType="int" resultMap="hospitalMap">
+        SELECT * FROM tbl_hospital
+        ORDER BY hospital_code
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countTotalHospitals" resultType="long">
+        SELECT COUNT(*) FROM tbl_hospital
+    </select>
+
     <insert id="hospitalSignup" parameterType="animal.team.animalhospital.hospital.model.dto.HospitalDTO">
         INSERT INTO
             tbl_hospital

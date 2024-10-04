@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +81,14 @@ public class HospitalService {
     }
 
     public List<HospitalDTO> searchUserHospital(String query) { return hospitalMapper.searchUserHospital(query);
+    }
+
+    public List<HospitalDTO> findAllHospitalCount(int page, int size) {
+        return hospitalMapper.findAllHospitalCount((page - 1) * size, size);
+    }
+
+    public long getTotalHospitalCount() {
+        return hospitalMapper.countTotalHospitals();
     }
 }
 
