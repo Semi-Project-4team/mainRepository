@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,6 +39,14 @@
             justify-content: space-between;
             margin-right: 15%;
             margin-bottom: 20px;
+        }
+
+        .form-group-address{
+            justify-content: space-between;
+            display: flex;
+            width:100%;
+            align-items: center;
+
         }
 
         label {
@@ -85,6 +93,20 @@
         button:hover {
             background-color: #4bb0e0;
         }
+
+        .address-button {
+            color: white;
+            background: #18a8f1;
+            font-size: 15px;
+            padding: 5px;
+            border: solid white;
+            border-radius: 10px;
+        }
+
+        .address-button:hover {
+            background-color: #999;
+            font-weight: bolder;
+        }
     </style>
 </head>
 <body>
@@ -107,8 +129,12 @@
     <div class="form-group">
         <input type="hidden" id="sample2_postcode" placeholder="우편번호">
 
-        <input type="button" onclick="sample2_execDaumPostcode()" value="주소 찾기"><br>
-        <input type="text" id="sample2_address" name="sample2_address" placeholder="주소"><br>
+        <label>주소:</label>
+        <input type="button" onclick="sample2_execDaumPostcode()" value="주소 찾기" class="address-button">
+        <!--            <input type="text" id="detailAddress" th:field="*{detailAddress}" required />-->
+        <!--            /*@thymesVar id="detailAddress" type=""*/-->
+        <input type="text" id="sample3_address" name="sample3_address" th:placeholder="${detailAddress}" required><br>
+
 
         <input type="hidden" id="sample2_detailAddress" placeholder="상세주소">
         <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">

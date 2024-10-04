@@ -33,9 +33,16 @@
         }
 
         .form-group {
+            text-align: left;
             display: flex;
             align-items: center; /* 라벨과 인풋을 세로로 정렬 */
             margin-bottom: 15px;
+        }
+
+        .form-group-address{
+            width: 100%;
+            text-align: right;
+
         }
 
         label {
@@ -43,7 +50,7 @@
             font-weight: bold;
             width: 30%; /* 라벨 너비 설정 */
             margin-right: 10px;
-            text-align: right; /* 라벨 텍스트 오른쪽 정렬 */
+            text-align: left; /* 라벨 텍스트 오른쪽 정렬 */
         }
 
         input[type="text"], input[type="password"], input[type="file"] {
@@ -53,6 +60,8 @@
             border-radius: 6px;
             box-sizing: border-box;
             font-size: 16px;
+            text-align: center;
+
         }
 
         .modify-btn {
@@ -94,6 +103,20 @@
         .form-container::-webkit-scrollbar-thumb {
             background-color: #18a8f1;
             border-radius: 10px;
+        }
+
+        .address-button {
+            color: white;
+            background: #18a8f1;
+            font-size: 15px;
+            padding: 5px;
+            border: solid white;
+            border-radius: 10px;
+        }
+
+        .address-button:hover {
+            background-color: #999;
+            font-weight: bolder;
         }
     </style>
     <link rel="stylesheet" href="/css/header.css">
@@ -141,10 +164,12 @@
         <div class="form-group">
             <input type="hidden" id="sample2_postcode" placeholder="우편번호">
 
-            <input type="button" onclick="sample2_execDaumPostcode()" value="주소 찾기"><br>
+            <label>주소:</label>
+            <input type="button" onclick="sample2_execDaumPostcode()" value="주소 찾기" class="address-button">
 <!--            <input type="text" id="detailAddress" th:field="*{detailAddress}" required />-->
 <!--            /*@thymesVar id="detailAddress" type=""*/-->
             <input type="text" id="sample3_address" name="sample3_address" th:placeholder="${detailAddress}" required><br>
+
 
             <input type="hidden" id="sample2_detailAddress" placeholder="상세주소">
             <input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
