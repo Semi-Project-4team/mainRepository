@@ -33,6 +33,17 @@
 
     .item{
       margin-bottom: 20px;
+      text-align: left;
+
+    }
+
+    input[type="date"] {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
     }
 
     .editBtn {
@@ -160,7 +171,7 @@
 
   <div class="item">
     <label class=editBtn for="petBirth">생일</label>
-    <input type="text" name="petBirth" id="petBirth" th:value="${myPet.petBirth}"/>
+    <input type="date" name="petBirth" id="petBirth" th:value="${myPet.petBirth}"/>
   </div>
 
   <div class="item">
