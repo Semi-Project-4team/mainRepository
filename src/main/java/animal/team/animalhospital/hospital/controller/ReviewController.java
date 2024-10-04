@@ -139,7 +139,8 @@ public class ReviewController {
 
             reviewService.registNewReview(newReview);
 
-            rAttr.addFlashAttribute("message", "[Success] 단일 파일 업로드 성공!");
+//            rAttr.addFlashAttribute("message", "[Success] 단일 파일 업로드 성공!");
+            rAttr.addFlashAttribute("message", "수정에 성공하였습니다.");
             rAttr.addFlashAttribute("img", "static/images/uploadedFiles" + "/" + savedName);
             // 서버측 로그 남기기
             System.out.println("[Success] 단일 파일 업로드 성공!"); // System
@@ -152,7 +153,8 @@ public class ReviewController {
             e.printStackTrace();
 
             // 리다이렉트 후, 데이터 공유를 위한 RedirectAttributes에 값 저장.
-            rAttr.addFlashAttribute("message", "[Failed] 단일 파일 업로드 실패!"); // 브라우저
+//            rAttr.addFlashAttribute("message", "[Failed] 단일 파일 업로드 실패!"); // 브라우저
+            rAttr.addFlashAttribute("message", "수정에 실패하였습니다."); // 브라우저
 
             // 서버측 로그 남기기
             System.out.println("[Failed] 단일 파일 업로드 실패!"); // System

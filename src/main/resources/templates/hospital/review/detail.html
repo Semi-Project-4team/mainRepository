@@ -66,8 +66,8 @@
     <h2>리뷰 상세 정보</h2>
 
     <div>
-        <p><em>개인번호:</em> <span th:text="${review.personCode}"></span></p>
-        <p><em>병원번호:</em> <span th:text="${review.hospitalCode}"></span></p>
+<!--        <p><em>개인번호:</em> <span th:text="${review.personCode}"></span></p>-->
+<!--        <p><em>병원번호:</em> <span th:text="${review.hospitalCode}"></span></p>-->
         <p><em>리뷰작성날짜:</em> <span th:text="${review.reviewWriteDate}"></span></p>
         <p><em>리뷰수정날짜:</em> <span th:text="${review.reviewModifyDate}"></span></p>
         <p><em>리뷰점수: </em><span th:text="${review.reviewScore}"></span></p>
@@ -88,7 +88,8 @@
             <button type="submit" class="form-button">삭제하기</button>
         </form>
 
-        <button onclick="location.href='/hospital/info/list'">병원목록</button>
+<!--        <button onclick="location.href='/hospital/info/list'">병원목록</button>-->
+        <button onclick="history.back()">이전으로</button>
     </div>
 </div>
 
